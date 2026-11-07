@@ -15,8 +15,25 @@ Scope: the six Indian providers whose catalogue entry is `provisioning: console`
 | **Yotta Shakti** | Keycloak login works | Portal present (VM, Bare Metal, Subscribe) — **all catalogues empty** | n/a | No | "No Virtual Machines Profiles available"; "No Subscribe Profiles available" | **Account works, no entitlements — needs enablement** |
 | **Leapswitch** | WHMCS account | Store has dedicated servers, hosting, domains — **no GPU product** | n/a | No | GPU "Buy Now" lands on portal with no GPU product; L4 only via CloudPe (other brand) | **Sales / manual order** |
 | **Tata Communications (Vayu)** | Business/freemium signup (email OTP) | Quote builder: location → CPU series A–T | n/a | No | No GPU SKUs in the Vayu configuration flow; GPU page routes to "Schedule a conversation" | **Quote / sales** |
-| **NxtGen SpeedCloud** | Signup stops at **company details** (company name, date of registration, address, T&Cs) | n/a | n/a | No | Business onboarding, not instant | **Manual/business onboarding** |
+| **NxtGen SpeedCloud** | Company-details signup, but login works | Wizard exists (Create AI instance, 5 steps) | n/a | No | **0 virtual data centers and no way to create one**; 0 subscriptions → "Add GPU" stays disabled | **Console works, account unprovisioned** |
 | **Neysa** | No console host resolves (`console.neysa.ai` NXDOMAIN) | n/a | n/a | No | Pricing page + "Contact Sales" only | **Sales** |
+
+## NxtGen SpeedCloud — wizard exists, account is empty
+
+The login is real and the flow is the most modern of the six: **Create AI instance → Configure
+AI instance → AI platforms → AI services → Managed services → Review and deploy**, with a
+live charges panel (₹0), public-IP pricing (₹560/IP) and SSH-key/security-group setup.
+
+It cannot start, because the account has no project to run in:
+
+- **Virtual Data Centers (0)** — the VDC list is empty and the page offers **no create action**;
+  the project picker in the wizard opens an empty panel.
+- **Subscriptions** — none of the four tabs (instance / AI platform / OEM / project managed
+  services) has anything.
+- With no project selected, **"Add GPU" is disabled**, so no GPU catalogue is ever shown.
+
+So NxtGen behaves like Yotta: portal is functional, but the account is not provisioned.
+Getting a VDC appears to be an onboarding/sales step, not something the console lets you do.
 
 ## Cyfuture AI — the only one that gets to the launch button
 
@@ -73,5 +90,7 @@ Two catalogue-relevant observations:
 2. Add `api.notes` on the four sales-gated providers.
 3. Re-run the Cyfuture stock check weekly until an API or account with balance lets it be
    automated; only V100 in stock makes the rate card largely theoretical.
+5. Ask NxtGen what creates a VDC (self-serve missing vs sales) — until then its catalogue
+   entry should say the console exists but new accounts cannot provision.
 4. If Yotta's account can be enabled by sales, repeat the walkthrough — the portal is the
    most complete of the six (VM, bare metal, clusters, AI Lab, storage).
