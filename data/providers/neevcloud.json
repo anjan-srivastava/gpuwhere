@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "neevcloud",
+  "name": "NeevCloud",
+  "website": "https://www.neevcloud.com",
+  "gpu_page": "https://neevcloud.com/gpu-pricing",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": true,
+    "soc2": true,
+    "iso27001": true
+  },
+  "api": {
+    "type": "console+api",
+    "provisioning": "api",
+    "documented": true
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": 99.9,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": "Cheapest published H200; capacity unverified.",
+    "notes": "Official GPU AI Service lists T4, RTX 3090, A30, A6000, RTX 5090, RTX PRO 6000, A100, H100 and H200 with per-GPU INR rates and 1/3/6/12-month commitments. The GPU VM product line may differ; verify with sales."
+  },
+  "incidents_file": "incidents/neevcloud.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/neevcloud.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://neevcloud.com/gpu-ai-service",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://neevcloud.com/gpu-pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

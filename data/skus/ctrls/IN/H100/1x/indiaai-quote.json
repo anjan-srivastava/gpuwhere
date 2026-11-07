@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "ctrls/IN/H100/1x/indiaai-quote",
+  "provider": "ctrls",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "indiaai-quote",
+  "vram_gb_per_gpu": 80,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/jan/doc2025130492001.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.ctrls.com/blogs-gpu-as-a-service-powering-the-future-of-scalable-ai-ready-infrastructure/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "IndiaAI L1 H100 PCIe 1\u00d7 rate is \u20b9252/hr; commercial rate on request."
+}

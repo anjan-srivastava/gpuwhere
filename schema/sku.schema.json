@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/sku.schema.json",
+  "title": "SKU",
+  "type": "object",
+  "required": [
+    "id",
+    "provider",
+    "region",
+    "status",
+    "gpu",
+    "shape",
+    "gpus_per_vm",
+    "pricing",
+    "sources",
+    "confidence",
+    "verified_at"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "beta",
+        "deprecated",
+        "retired",
+        "unavailable"
+      ]
+    },
+    "gpu": {
+      "type": "string"
+    },
+    "gpu_variant": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "shape": {
+      "enum": [
+        "1x",
+        "2x",
+        "4x",
+        "8x"
+      ]
+    },
+    "gpus_per_vm": {
+      "enum": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "variant": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "form_factor": {
+      "enum": [
+        "sxm",
+        "nvl",
+        "pcie",
+        "generic"
+      ]
+    },
+    "vram_gb_per_gpu": {
+      "type": "number"
+    },
+    "vcpus": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ram_gb": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "disk_gb": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "disk_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interconnect": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "ib_gbps": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "pricing": {
+      "type": "object",
+      "required": [
+        "on_demand"
+      ],
+      "properties": {
+        "on_demand": {
+          "$ref": "#/$defs/price"
+        },
+        "spot": {
+          "$ref": "#/$defs/spot"
+        },
+        "committed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/committed"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pricing_status": {
+      "enum": [
+        "published",
+        "quote_only",
+        "not_published",
+        "unavailable"
+      ]
+    },
+    "billing_model": {
+      "enum": [
+        "hourly",
+        "monthly",
+        null
+      ]
+    },
+    "residency": {
+      "enum": [
+        "india",
+        "outside-india"
+      ],
+      "description": "Whether the package runs in an Indian region (data residency)"
+    },
+    "price_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "availability": {
+      "type": "object",
+      "properties": {
+        "last_observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "available_vms": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "available_gpus": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "spot_available_vms": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "spot_available_gpus": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$defs": {
+    "price": {
+      "type": "object",
+      "required": [
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "usd_per_gpu_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "usd_per_vm_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "native": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "spot": {
+      "type": "object",
+      "required": [
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "usd_per_gpu_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "usd_per_vm_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "notice_sec": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "native": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "committed": {
+      "type": "object",
+      "required": [
+        "term_months",
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "term_months": {
+          "type": "integer"
+        },
+        "usd_per_gpu_hr": {
+          "type": "number"
+        },
+        "usd_per_vm_hr": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "feed",
+            "api",
+            "page",
+            "quote",
+            "tracker",
+            "status_page",
+            "postmortem",
+            "community"
+          ]
+        },
+        "fetched_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

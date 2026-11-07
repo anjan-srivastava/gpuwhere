@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "e2e-networks",
+  "name": "E2E Networks",
+  "website": "https://www.e2enetworks.com",
+  "gpu_page": "https://www.e2enetworks.com/gpus",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN-DEL",
+    "IN-CHE"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": true,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "rest+console",
+    "provisioning": "api",
+    "documented": true
+  },
+  "billing": {
+    "granularity": "minute",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": 0.07,
+    "file_usd_per_gb_mo": 0.16,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": 0.03,
+    "mountable": true
+  },
+  "reliability": {
+    "sla_pct": 99.9,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": "H200 capacity frequently unavailable; verify before planning.",
+    "notes": "Official pricing lists B200 (180GB), H200, H100, RTX PRO 6000, A100 80/40GB, A40, L40S, V100, A30, L4 and T4. B200 is sold as 180GB on E2E; NVIDIA hardware is 192GB. Console/API GPU plans return empty while the account is unvalidated."
+  },
+  "incidents_file": "incidents/e2e-networks.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/e2e-networks.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

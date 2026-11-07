@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "verda",
+  "name": "Verda (DataCrunch)",
+  "website": "https://verda.com",
+  "gpu_page": "https://verda.com/pricing",
+  "country": "FI",
+  "status": "active",
+  "regions": [
+    "EU-FI"
+  ],
+  "compliance": {
+    "meity": false,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console+api",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Finnish GPU cloud formerly DataCrunch; Finland/Iceland data centres; on-demand and spot instance prices. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
+  },
+  "incidents_file": "incidents/verda.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://verda.com/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

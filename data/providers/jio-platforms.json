@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "jio-platforms",
+  "name": "Jio Platforms",
+  "website": "https://www.jio.com/business",
+  "gpu_page": "https://www.jio.com/enterprisecloud/services/ai-cloud/gpu-compute/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "Jio AI Cloud GPUs are sold on reserved terms through sales; no self-serve ordering."
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Jio AI Cloud lists H200 NVL, H200 SXM, MI300X, H100 NVL and L4. Commercial rates are not published; IndiaAI L1 reference rates are in the channel file."
+  },
+  "incidents_file": "incidents/jio-platforms.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.jio.com/enterprisecloud/services/ai-cloud/gpu-compute/ai-workbench/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.jio.com/enterprisecloud/services/ai-cloud/gpu-compute/gpu-vm-amd/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/jan/doc2025130492001.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

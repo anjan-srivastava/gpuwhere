@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-NOI/H200/2x/n-h200-56-564",
+  "provider": "acecloud",
+  "region": "IN-NOI",
+  "status": "active",
+  "gpu": "H200",
+  "gpu_variant": "h200-nvl",
+  "form_factor": "nvl",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "n-h200-56-564",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 56,
+  "ram_gb": 564,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.37,
+      "usd_per_vm_hr": 10.74
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 4.3,
+        "usd_per_vm_hr": 8.59
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 4.08,
+        "usd_per_vm_hr": 8.16
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 3.87,
+        "usd_per_vm_hr": 7.73
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h200-nvl/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.H200.56.564.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

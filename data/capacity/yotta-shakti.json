@@ -1,0 +1,89 @@
+{
+  "$schema": "../../schema/capacity.schema.json",
+  "provider": "yotta-shakti",
+  "as_of": "2026-11-07",
+  "facility": {
+    "power_mw": null,
+    "gpu_power_mw": null,
+    "notes": "Facility MW is not specific to the GPU fleet unless stated.",
+    "source": null
+  },
+  "pools": [
+    {
+      "gpu": "H100",
+      "region": "IN",
+      "form_factor": "sxm",
+      "total_gpus": 8000,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": {
+        "url": "https://shakticloud.ai/",
+        "kind": "page",
+        "fetched_at": "2026-11-07"
+      },
+      "notes": "shakticloud.ai: '8,000+ H100 GPUs' — a lower bound. Same page: 'B200s coming soon'."
+    },
+    {
+      "gpu": "B200",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "B300",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "L40S",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (3 host packages); fleet size not published."
+    }
+  ],
+  "notes": "Yotta's own homepage states the H100 fleet as a lower bound; L40S/B200 fleet sizes are not published there. NVIDIA's customer story claims '16,000+ H100' (vendor source, older); the first-party figure is used.",
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "indiaai_empanelled": {
+    "total": 17408,
+    "by_gpu": {
+      "H100": 8192,
+      "L40S": 1024,
+      "B200": 8192
+    },
+    "source": {
+      "url": "https://compute.indiaai.gov.in/files/empanelled-gpus.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    "notes": "GPUs empanelled for the IndiaAI Mission (offered under the tender; some may not yet be operational). Not installed-fleet capacity. Listed as 'Yotta Data Services Pvt. Ltd.'."
+  }
+}

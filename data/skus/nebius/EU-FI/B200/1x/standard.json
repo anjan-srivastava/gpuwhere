@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "nebius/EU-FI/B200/1x/standard",
+  "provider": "nebius",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "B200",
+  "gpu_variant": "b200-sxm",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 192,
+  "vcpus": 20,
+  "ram_gb": 224,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 8.5,
+      "usd_per_vm_hr": 8.5
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://nebius.com/prices",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: NVIDIA HGX B200. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. No spot price for this platform in this region at the last snapshot; spot prices are dynamic and are read from the official spot-price API.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "nebius",
+  "name": "Nebius",
+  "website": "https://nebius.com",
+  "gpu_page": "https://nebius.com/prices",
+  "country": "NL",
+  "status": "active",
+  "regions": [
+    "EU-FI"
+  ],
+  "compliance": {
+    "meity": false,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console+api",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": 0.053,
+    "file_usd_per_gb_mo": 0.08,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": 0.0147,
+    "mountable": true,
+    "shared": true,
+    "notes": "Block volumes $0.053/GiB-mo without replication ($0.071 erasure-coded, $0.118 3x mirrored); shared filesystem $0.08/GiB-mo (WEKA $0.10); S3-compatible object storage $0.0147/GiB-mo standard."
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "AI cloud headquartered in Amsterdam with EU (Finland, France) and US regions; one published price list. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
+  },
+  "incidents_file": "incidents/nebius.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://nebius.com/prices",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

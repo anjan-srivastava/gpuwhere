@@ -1,0 +1,75 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "tata-communications",
+  "name": "Tata Communications",
+  "website": "https://www.tatacommunications.com",
+  "gpu_page": "https://www.tatacommunications.com/cloud/cloud-ai/gpu",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": true,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "console",
+    "documented": null
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": null,
+    "inter_node_ib": "3.2 Tb/s InfiniBand (H200 SXM)"
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": 0.0158
+  },
+  "reliability": {
+    "sla_pct": 99.9,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Official Vayu AI Cloud page and price list cover H100 SXM, H200 SXM/NVL, L40S and L4. Listed prices are per instance/hour; per-GPU values divide by GPU count."
+  },
+  "incidents_file": "incidents/tata-communications.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/cloud/cloud-ai/gpu",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://compute.indiaai.gov.in/pricelist",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

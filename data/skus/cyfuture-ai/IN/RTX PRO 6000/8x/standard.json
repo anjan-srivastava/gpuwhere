@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/RTX PRO 6000/8x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "form_factor": "pcie",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 256,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.73,
+      "usd_per_vm_hr": 21.85,
+      "native": {
+        "inr_per_vm_hr": 2052.0,
+        "inr_per_gpu_hr": 256.5,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.58,
+        "usd_per_vm_hr": 20.63
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.43,
+        "usd_per_vm_hr": 19.42
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 2.28,
+        "usd_per_vm_hr": 18.21
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8RTX PRO 6000.128v.1024m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 1024 GB; the table lists 256 vCPU / 512 GB (table used).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

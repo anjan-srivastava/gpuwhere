@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/L40S/1x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 16,
+  "ram_gb": 256,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.32,
+      "usd_per_vm_hr": 1.32,
+      "native": {
+        "inr_per_vm_hr": 124.0,
+        "inr_per_gpu_hr": 124.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 0.79,
+        "usd_per_vm_hr": 0.79
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 0.72,
+        "usd_per_vm_hr": 0.72
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 0.65,
+        "usd_per_vm_hr": 0.65
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "gpu_variant": "l40s-pcie",
+  "pricing_status": "published",
+  "price_note": null,
+  "notes": "Provider plan: 1L40S.16v.256m. Rates are INR per instance-hour; USD at the ECB reference rate.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

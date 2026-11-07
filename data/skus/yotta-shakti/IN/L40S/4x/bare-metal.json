@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/L40S/4x/bare-metal",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "bare-metal",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 128,
+  "ram_gb": 1024,
+  "disk_gb": 7680,
+  "disk_type": "data",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.53,
+      "usd_per_vm_hr": 10.14,
+      "native": {
+        "inr_per_vm_hr": 952.0,
+        "inr_per_gpu_hr": 238.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.13,
+        "usd_per_vm_hr": 8.52
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.93,
+        "usd_per_vm_hr": 7.71
+      },
+      {
+        "term_months": 24,
+        "usd_per_gpu_hr": 1.72,
+        "usd_per_vm_hr": 6.9
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 4 x L40S (192 GB GPU Memory). Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹98/GPU-hr; page lists ₹238 (page used).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

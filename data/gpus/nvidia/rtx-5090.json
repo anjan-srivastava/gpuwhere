@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-5090",
+  "supplier": "nvidia",
+  "name": "RTX 5090",
+  "architecture": "Blackwell",
+  "generation": "Blackwell",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-5090-pcie",
+      "name": "RTX 5090",
+      "subtitle": "PCIe \u00b7 32 GB GDDR7",
+      "form_factor": "pcie",
+      "vram_gb": 32,
+      "memory_type": "GDDR7",
+      "memory_generation": "GDDR7",
+      "memory_bandwidth_gbps": 1792,
+      "tdp_w": 575,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 128,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 104.8,
+        "tf32_tensor_tflops_dense": 104.8,
+        "tf32_tensor_tflops_sparse": 209.6,
+        "bf16_tensor_tflops_dense": 209.5,
+        "bf16_tensor_tflops_sparse": 419,
+        "fp16_tensor_tflops_dense": 209.5,
+        "fp16_tensor_tflops_sparse": 419,
+        "fp8_tensor_tflops_dense": 419,
+        "fp8_tensor_tflops_sparse": 838,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": 1676,
+        "fp4_tops_sparse": 3352,
+        "int8_tops_dense": 419,
+        "int8_tops_sparse": 838
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "fp4",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "fp4",
+          "int8"
+        ],
+        "notes": "Consumer Blackwell card; no NVLink; no MIG."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

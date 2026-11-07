@@ -1,0 +1,92 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-a4000",
+  "supplier": "nvidia",
+  "name": "RTX A4000",
+  "architecture": "Ampere",
+  "generation": "Ampere",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-a4000-pcie",
+      "name": "RTX A4000",
+      "subtitle": "PCIe \u00b7 16 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 448,
+      "tdp_w": 140,
+      "interconnect": {
+        "type": "pcie",
+        "version": 4,
+        "bandwidth_gbps": null,
+        "notes": "PCIe 4.0 x16; NVLink not listed in the datasheet."
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 19.2,
+        "tf32_tensor_tflops_dense": null,
+        "tf32_tensor_tflops_sparse": null,
+        "bf16_tensor_tflops_dense": 76.7,
+        "bf16_tensor_tflops_sparse": 153.4,
+        "fp16_tensor_tflops_dense": 76.7,
+        "fp16_tensor_tflops_sparse": 153.4,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": null,
+        "int8_tops_sparse": null
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "MIG not listed."
+      },
+      "features": [
+        "tf32",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "Ampere third-generation Tensor Cores; no native FP8 or FP4."
+      },
+      "notes": "Datasheet publishes 'Tensor performance 153.4 TFLOPS' with sparsity (footnote 4) without naming the precision; recorded as FP16/BF16 sparse with dense = half, the same convention as rtx-a5000. 48 RT Cores (37.4 RT TFLOPS), 192 Tensor Cores, 6,144 CUDA cores.",
+      "sources": [
+        {
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs21/rtx-a4000/nvidia-rtx-a4000-datasheet.pdf",
+          "kind": "datasheet",
+          "fetched_at": "2026-11-07"
+        }
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs21/rtx-a4000/nvidia-rtx-a4000-datasheet.pdf",
+      "kind": "datasheet",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.nvidia.com/en-us/design-visualization/rtx-a4000/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install jsonschema
+      - name: Schema validation
+        run: python scripts/validate.py
+      - name: Build the published artifact
+        run: python scripts/export_api.py
+      - name: Tests (data contract, scrapers, HTTP surface)
+        run: python -m unittest discover -s tests -v
+      - name: Freshness (informational on PRs)
+        run: python scripts/check_freshness.py --warn-only

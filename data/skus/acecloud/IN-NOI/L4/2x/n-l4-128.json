@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-NOI/L4/2x/n-l4-128",
+  "provider": "acecloud",
+  "region": "IN-NOI",
+  "status": "active",
+  "gpu": "L4",
+  "gpu_variant": "l4-pcie",
+  "form_factor": "pcie",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "n-l4-128",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 32,
+  "ram_gb": 128,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.87,
+      "usd_per_vm_hr": 1.74,
+      "native": {
+        "published_month_usd": 1268.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 0.82,
+        "usd_per_vm_hr": 1.65
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 0.78,
+        "usd_per_vm_hr": 1.56
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-l4-24gb/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.L4.128. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

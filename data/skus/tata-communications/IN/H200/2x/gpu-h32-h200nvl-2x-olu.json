@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "tata-communications/IN/H200/2x/gpu-h32-h200nvl-2x-olu",
+  "provider": "tata-communications",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H200",
+  "gpu_variant": "h200-nvl",
+  "form_factor": "nvl",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "gpu-h32-h200nvl-2x-olu",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 32,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 4.64,
+      "usd_per_vm_hr": 9.28,
+      "native": {
+        "inr_per_vm_hr": 872.0,
+        "inr_per_gpu_hr": 436.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 4.51,
+        "usd_per_vm_hr": 9.03
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 4.0,
+        "usd_per_vm_hr": 8.01
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 3.56,
+        "usd_per_vm_hr": 7.12
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 3.38,
+        "usd_per_vm_hr": 6.75
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 3.2,
+        "usd_per_vm_hr": 6.41
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: GPU.H32.H200NVL.2X.OLU. VM. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

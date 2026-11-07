@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/H200/4x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "H200",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "standard",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 120,
+  "ram_gb": 1500,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": 4,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.29,
+      "usd_per_vm_hr": 21.16
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.93,
+      "usd_per_vm_hr": 3.72,
+      "notice_sec": null
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 4.87,
+        "usd_per_vm_hr": 19.48
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-06"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-06",
+  "form_factor": "sxm",
+  "gpu_variant": "h200-sxm"
+}

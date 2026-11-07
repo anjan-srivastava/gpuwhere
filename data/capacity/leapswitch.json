@@ -1,0 +1,113 @@
+{
+  "$schema": "../../schema/capacity.schema.json",
+  "provider": "leapswitch",
+  "as_of": null,
+  "facility": {
+    "power_mw": null,
+    "gpu_power_mw": null,
+    "notes": "Facility MW is not specific to the GPU fleet unless stated.",
+    "source": null
+  },
+  "pools": [
+    {
+      "gpu": "A100",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "A40",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "H200",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "L4",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "RTX A4000",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "RTX A5000",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "RTX A6000",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    },
+    {
+      "gpu": "RTX PRO 6000",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": null,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": null,
+      "notes": "Offered (1 host packages); fleet size not published."
+    }
+  ],
+  "notes": "Fleet size and facility power are not published.",
+  "sources": [],
+  "confidence": "low",
+  "verified_at": "2026-11-07"
+}

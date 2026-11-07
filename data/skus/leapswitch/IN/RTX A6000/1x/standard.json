@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "leapswitch/IN/RTX A6000/1x/standard",
+  "provider": "leapswitch",
+  "region": "IN",
+  "status": "active",
+  "gpu": "RTX A6000",
+  "gpu_variant": "rtx-a6000-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 8,
+  "ram_gb": 16,
+  "disk_gb": 500,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.46,
+      "usd_per_vm_hr": 0.46,
+      "native": {
+        "inr_per_vm_hr": 43.42,
+        "inr_per_gpu_hr": 43.42,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06",
+        "published_month_inr": 31700.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: A6000 VM. Cart plan 'A6000 VM' (AMD EPYC); price per VM per month, excl. GST; 10 TB bandwidth. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

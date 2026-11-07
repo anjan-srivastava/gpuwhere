@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "tata-communications/IN/H200/8x/standard",
+  "provider": "tata-communications",
+  "region": "IN",
+  "status": "retired",
+  "gpu": "H200",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 192,
+  "ram_gb": 2048,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.42,
+      "usd_per_vm_hr": 43.36,
+      "native": {
+        "inr_per_gpu_hr": 515.25
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 5.27,
+        "usd_per_vm_hr": 42.16
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 4.68,
+        "usd_per_vm_hr": 37.44
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 4.16,
+        "usd_per_vm_hr": 33.28
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "nvl",
+  "gpu_variant": "h200-nvl",
+  "notes": "Retired 2026-11-07 by pricing refresh: superseded by the tata-communications scraper's H200 8x package(s) from the current official source."
+}

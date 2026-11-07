@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-a6000",
+  "supplier": "nvidia",
+  "name": "RTX A6000",
+  "architecture": "Ampere",
+  "generation": "Ampere",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-a6000-pcie",
+      "name": "RTX A6000",
+      "subtitle": "PCIe \u00b7 48 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 48,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 768,
+      "tdp_w": 300,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 112.5,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 38.7,
+        "tf32_tensor_tflops_dense": 77.4,
+        "tf32_tensor_tflops_sparse": 154.8,
+        "bf16_tensor_tflops_dense": 154.8,
+        "bf16_tensor_tflops_sparse": 309.6,
+        "fp16_tensor_tflops_dense": 154.8,
+        "fp16_tensor_tflops_sparse": 309.6,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 309.6,
+        "int8_tops_sparse": 619.4
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/design-visualization/rtx-a6000/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

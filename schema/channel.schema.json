@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/channel.schema.json",
+  "title": "Channel",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "type",
+    "country",
+    "status",
+    "verified_at",
+    "sources"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "subsidy",
+        "marketplace"
+      ]
+    },
+    "country": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "beta",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "administrator": {
+      "type": "string"
+    },
+    "portal": {
+      "type": "string"
+    },
+    "subsidy_pct_max": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "currency": {
+      "type": "string"
+    },
+    "empanelled_providers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gpu",
+          "shape",
+          "inr_per_gpu_hr"
+        ],
+        "properties": {
+          "provider": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gpu": {
+            "type": "string"
+          },
+          "form_factor": {
+            "enum": [
+              "sxm",
+              "nvl",
+              "pcie",
+              "generic"
+            ]
+          },
+          "shape": {
+            "enum": [
+              "1x",
+              "2x",
+              "4x",
+              "8x"
+            ]
+          },
+          "inr_per_gpu_hr": {
+            "type": "number"
+          },
+          "reserved_1mo_inr_per_gpu_hr": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reserved_6mo_inr_per_gpu_hr": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "reserved_12mo_inr_per_gpu_hr": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "feed",
+            "api",
+            "page",
+            "quote",
+            "tracker",
+            "status_page",
+            "postmortem",
+            "community"
+          ]
+        },
+        "fetched_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

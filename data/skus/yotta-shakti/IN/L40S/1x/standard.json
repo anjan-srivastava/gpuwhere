@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/L40S/1x/standard",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 28,
+  "ram_gb": 240,
+  "disk_gb": 100,
+  "disk_type": "root",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.46,
+      "usd_per_vm_hr": 1.46,
+      "native": {
+        "inr_per_vm_hr": 137.0,
+        "inr_per_gpu_hr": 137.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 1.17,
+        "usd_per_vm_hr": 1.17
+      },
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 1.13,
+        "usd_per_vm_hr": 1.13
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.11,
+        "usd_per_vm_hr": 1.11
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.08,
+        "usd_per_vm_hr": 1.08
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: VM – 1 x L40S On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹74,001/month for the 1-month term; page lists ₹80,221 (page used).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

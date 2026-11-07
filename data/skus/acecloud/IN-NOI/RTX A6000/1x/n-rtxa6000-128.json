@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-NOI/RTX A6000/1x/n-rtxa6000-128",
+  "provider": "acecloud",
+  "region": "IN-NOI",
+  "status": "active",
+  "gpu": "RTX A6000",
+  "gpu_variant": "rtx-a6000-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "n-rtxa6000-128",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 24,
+  "ram_gb": 128,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.26,
+      "usd_per_vm_hr": 1.26,
+      "native": {
+        "published_month_usd": 918.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.2,
+        "usd_per_vm_hr": 1.2
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.13,
+        "usd_per_vm_hr": 1.13
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/noida/rtx-a6000-48gb/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.RTXA6000.128. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

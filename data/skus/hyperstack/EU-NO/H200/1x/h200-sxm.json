@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "hyperstack/EU-NO/H200/1x/h200-sxm",
+  "provider": "hyperstack",
+  "region": "EU-NO",
+  "status": "active",
+  "gpu": "H200",
+  "gpu_variant": "h200-sxm",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "h200-sxm",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 22,
+  "ram_gb": 225,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.99,
+      "usd_per_vm_hr": 3.99
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.hyperstack.cloud/gpu-pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: NVIDIA H200 SXM. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

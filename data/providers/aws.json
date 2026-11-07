@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "aws",
+  "name": "Amazon Web Services",
+  "website": "https://aws.amazon.com",
+  "gpu_page": "https://aws.amazon.com/ec2/instance-types/accelerated-computing/",
+  "country": "US",
+  "status": "active",
+  "regions": [
+    "IN-BOM",
+    "IN-HYD"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": true,
+    "iso27001": true
+  },
+  "api": {
+    "type": "rest+cli+console+terraform",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Global hyperscaler; India regions Asia Pacific (Mumbai) ap-south-1 and Asia Pacific (Hyderabad) ap-south-2."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": "EFA on P-series"
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Included as a global provider with GPUs in Indian regions (AGENTS.md P2 'global burst'). Linux on-demand prices from AWS's public pricing JSON; spot and Savings Plans not included."
+  },
+  "incidents_file": "incidents/aws.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

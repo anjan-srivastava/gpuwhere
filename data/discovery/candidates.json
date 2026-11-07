@@ -1,0 +1,155 @@
+{
+  "updated_at": "2026-11-07",
+  "notes": "Watchlist for scrapers/discover_providers.py. Inclusion rule (AGENTS.md): GPUs in Indian data centres AND (API/Console provisioning, any size) OR (Sales-led with evidence of seriousness: IndiaAI empanelment, published fleet size, or public rate card). Resellers/MSPs that do not operate their own GPU capacity are tracked here, not added as providers.",
+  "candidates": [
+    {
+      "id": "esds",
+      "name": "ESDS Software Solution",
+      "kind": "candidate",
+      "urls": [
+        "https://www.esds.co.in/"
+      ],
+      "notes": "eNlight cloud; third-party sources say older GPUs (V100/T4), limited H100."
+    },
+    {
+      "id": "rackbank",
+      "name": "RackBank Datacenters",
+      "kind": "candidate",
+      "urls": [
+        "https://www.rackbank.com/",
+        "https://www.rackbank.com/llms.txt"
+      ],
+      "notes": "AI data-centre park in Raipur; directory lists H100/MI300X/A100/L40 in Mumbai, no list pricing."
+    },
+    {
+      "id": "inhosted-ai",
+      "name": "inhosted.ai (NetForChoice)",
+      "kind": "candidate",
+      "urls": [
+        "https://inhosted.ai/"
+      ],
+      "notes": "India GPU cloud launched by NetForChoice; H100/A100/H200 per launch coverage."
+    },
+    {
+      "id": "zenocloud",
+      "name": "ZenoCloud",
+      "kind": "candidate",
+      "urls": [
+        "https://zenocloud.io/gpu-servers"
+      ],
+      "notes": "Mumbai GPU servers with INR pricing per third-party listing."
+    },
+    {
+      "id": "novacore",
+      "name": "NovaCore Innovations",
+      "kind": "candidate",
+      "urls": [],
+      "notes": "Reported as an India GPU cloud deploying Blackwell; official domain not yet confirmed."
+    },
+    {
+      "id": "nxtra-airtel",
+      "name": "Nxtra by Airtel",
+      "kind": "candidate",
+      "urls": [
+        "https://www.nxtra.in/"
+      ],
+      "notes": "Airtel data-centre arm; no GPU-as-a-service evidence found yet."
+    },
+    {
+      "id": "aws",
+      "name": "Amazon Web Services (Mumbai, Hyderabad)",
+      "kind": "added",
+      "urls": [
+        "https://aws.amazon.com/ec2/instance-types/accelerated-computing/"
+      ],
+      "notes": "Added 2026-11-07 (scrapers/pricing_aws.py)."
+    },
+    {
+      "id": "oracle-oci",
+      "name": "Oracle Cloud Infrastructure (Mumbai, Hyderabad)",
+      "kind": "global",
+      "urls": [
+        "https://www.oracle.com/cloud/compute/gpu/"
+      ],
+      "notes": "Self-serve API; per-region GPU availability to confirm."
+    },
+    {
+      "id": "cms-computers",
+      "name": "CMS Computers India",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI-empanelled; AWS MSP (Trainium/Inferentia) plus H100."
+    },
+    {
+      "id": "locuz",
+      "name": "Locuz Enterprise Solutions",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI-empanelled systems integrator / AWS MSP."
+    },
+    {
+      "id": "orient-technologies",
+      "name": "Orient Technologies",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI-empanelled systems integrator / AWS MSP."
+    },
+    {
+      "id": "vensysco",
+      "name": "Vensysco Technologies (+ Appsquadz)",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI-empanelled systems integrator / AWS MSP."
+    },
+    {
+      "id": "ishan-infotech",
+      "name": "Ishan Infotech",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI-empanelled as 'CSP: Google Cloud Platform'."
+    },
+    {
+      "id": "ntt-gdc",
+      "name": "NTT Global Data Centers (Netmagic)",
+      "kind": "reseller",
+      "urls": [],
+      "notes": "IndiaAI consortium with Neysa; GPU capacity is Neysa's (catalogued) in NTT data centres."
+    },
+    {
+      "id": "google-cloud",
+      "name": "Google Cloud (Mumbai asia-south1, Delhi asia-south2)",
+      "kind": "global",
+      "urls": [
+        "https://cloud.google.com/compute/docs/gpus/gpu-regions-zones"
+      ],
+      "notes": "QUALIFIES: GPU zones in asia-south1/2 and a documented API. Not added yet: regional GPU prices load dynamically and the machine-readable Cloud Billing Catalog API needs an API key."
+    },
+    {
+      "id": "ovhcloud-mumbai",
+      "name": "OVHcloud Mumbai GPU instances",
+      "kind": "candidate",
+      "urls": [
+        "https://www.ovhcloud.com/en-in/public-cloud/regions-availability/"
+      ],
+      "notes": "OVHcloud (catalogued as outside India) has a Mumbai data centre. If GPU flavours become available in Mumbai, add an India region to pricing_ovh.py."
+    },
+    {
+      "id": "scaleway",
+      "name": "Scaleway (Paris)",
+      "kind": "global",
+      "urls": [
+        "https://www.scaleway.com/en/pricing/gpu/"
+      ],
+      "notes": "European GPU cloud; pricing page returns 403 to automated clients (not bypassed). Outside India."
+    },
+    {
+      "id": "genesis-cloud",
+      "name": "Genesis Cloud (Norway/Iceland)",
+      "kind": "global",
+      "urls": [
+        "https://www.genesiscloud.com/pricing"
+      ],
+      "notes": "European GPU cloud; TLS handshake failed for automated fetch. Outside India."
+    }
+  ]
+}

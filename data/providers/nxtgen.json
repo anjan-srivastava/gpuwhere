@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "nxtgen",
+  "name": "NxtGen",
+  "website": "https://nxtgen.com",
+  "gpu_page": "https://speedcloud.nxtgen.com/aiinstances.html",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": true
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "console",
+    "documented": null
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": null,
+    "inter_node_ib": "400 Gb/s GPU Direct"
+  },
+  "storage": {
+    "block_usd_per_gb_mo": 0.0332,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": 0.0253,
+    "mountable": true
+  },
+  "reliability": {
+    "sla_pct": 99.95,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Official SpeedCloud AI rate card lists H200 SXM, H100 NVL, L40S and MI325X. B200 is sold as 1,024–4,096 GPU clusters, not individual GPUs."
+  },
+  "incidents_file": "incidents/nxtgen.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://speedcloud.nxtgen.com/aiinstances.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://compute.indiaai.gov.in/pricelist",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

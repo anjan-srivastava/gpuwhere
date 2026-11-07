@@ -1,0 +1,211 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/a100",
+  "supplier": "nvidia",
+  "name": "A100",
+  "architecture": "Ampere",
+  "generation": "Ampere",
+  "status": "active",
+  "variants": [
+    {
+      "id": "a100-sxm4-80gb",
+      "name": "A100 SXM4 80GB",
+      "subtitle": "SXM4 \u00b7 80 GB HBM2e",
+      "form_factor": "sxm",
+      "vram_gb": 80,
+      "memory_type": "HBM2e",
+      "memory_generation": "HBM2e",
+      "memory_bandwidth_gbps": 2039,
+      "tdp_w": 400,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 600,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 9.7,
+        "fp64_tensor_tflops": 19.5,
+        "fp32_tflops": 19.5,
+        "tf32_tensor_tflops_dense": 156,
+        "tf32_tensor_tflops_sparse": 312,
+        "bf16_tensor_tflops_dense": 312,
+        "bf16_tensor_tflops_sparse": 624,
+        "fp16_tensor_tflops_dense": 312,
+        "fp16_tensor_tflops_sparse": 624,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 624,
+        "int8_tops_sparse": 1248
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 10,
+        "notes": "Up to 7 MIG slices of 10 GB."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "nvswitch",
+        "mig",
+        "sparsity"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "tdp_note": "400 W standard; 500 W CTS SKU.",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4; FP16/BF16/TF32 Tensor Cores only."
+      }
+    },
+    {
+      "id": "a100-pcie-80gb",
+      "name": "A100 PCIe 80GB",
+      "subtitle": "PCIe \u00b7 80 GB HBM2e",
+      "form_factor": "pcie",
+      "vram_gb": 80,
+      "memory_type": "HBM2e",
+      "memory_generation": "HBM2e",
+      "memory_bandwidth_gbps": 1935,
+      "tdp_w": 300,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 600,
+        "notes": "2-way NVLink bridge."
+      },
+      "compute": {
+        "fp64_tflops": 9.7,
+        "fp64_tensor_tflops": 19.5,
+        "fp32_tflops": 19.5,
+        "tf32_tensor_tflops_dense": 156,
+        "tf32_tensor_tflops_sparse": 312,
+        "bf16_tensor_tflops_dense": 312,
+        "bf16_tensor_tflops_sparse": 624,
+        "fp16_tensor_tflops_dense": 312,
+        "fp16_tensor_tflops_sparse": 624,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 624,
+        "int8_tops_sparse": 1248
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 10,
+        "notes": "Up to 7 MIG slices of 10 GB."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "mig",
+        "sparsity"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4; FP16/BF16/TF32 Tensor Cores only."
+      }
+    },
+    {
+      "id": "a100-sxm4-40gb",
+      "name": "A100 SXM4 40GB",
+      "subtitle": "SXM4 \u00b7 40 GB HBM2e",
+      "form_factor": "sxm",
+      "vram_gb": 40,
+      "memory_type": "HBM2e",
+      "memory_generation": "HBM2e",
+      "memory_bandwidth_gbps": 1555,
+      "tdp_w": 400,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 600,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 9.7,
+        "fp64_tensor_tflops": 19.5,
+        "fp32_tflops": 19.5,
+        "tf32_tensor_tflops_dense": 156,
+        "tf32_tensor_tflops_sparse": 312,
+        "bf16_tensor_tflops_dense": 312,
+        "bf16_tensor_tflops_sparse": 624,
+        "fp16_tensor_tflops_dense": 312,
+        "fp16_tensor_tflops_sparse": 624,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 624,
+        "int8_tops_sparse": 1248
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 5,
+        "notes": "Up to 7 MIG slices of 5 GB."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "nvswitch",
+        "mig",
+        "sparsity"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4; FP16/BF16/TF32 Tensor Cores only."
+      },
+      "sources": [],
+      "confidence": "medium",
+      "tdp_note": "400 W standard."
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/a100/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neysa/IN-BOM/H100/2x/standard",
+  "provider": "neysa",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-sxm5",
+  "form_factor": "sxm",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "standard",
+  "vram_gb_per_gpu": 80,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": 100,
+  "disk_type": "instance",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 4.39,
+      "usd_per_vm_hr": 8.78
+    },
+    "committed": [
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 2.44,
+        "usd_per_vm_hr": 4.88
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "'Starts at' per-GPU rate; 100 GB disk included (50 GB OS + 50 GB data).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

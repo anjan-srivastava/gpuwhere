@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/B200/1x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "B200",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 180,
+  "vcpus": 32,
+  "ram_gb": 400,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 7.99,
+      "usd_per_vm_hr": 7.99,
+      "native": {
+        "inr_list_per_vm_hr": 759.05
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 7.27,
+        "usd_per_vm_hr": 7.27
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.e2enetworks.com/gpus/nvidia-b200",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "gpu_variant": "b200-sxm",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹759.05/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed. Committed (3+ month) and spot rates are INR-only in the feed; USD converted at the ECB reference rate. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
+  "pricing_status": "published",
+  "price_note": null,
+  "billing_model": "hourly",
+  "residency": "india"
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/V100/1x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "V100",
+  "gpu_variant": "v100-sxm2-32gb",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 32,
+  "vcpus": 8,
+  "ram_gb": 120,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.5,
+      "usd_per_vm_hr": 1.5,
+      "native": {
+        "inr_list_per_vm_hr": 100
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹100/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

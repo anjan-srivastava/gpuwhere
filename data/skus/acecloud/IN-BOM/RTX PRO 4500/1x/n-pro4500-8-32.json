@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-BOM/RTX PRO 4500/1x/n-pro4500-8-32",
+  "provider": "acecloud",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "RTX PRO 4500",
+  "gpu_variant": "rtx-pro-4500-blackwell",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "n-pro4500-8-32",
+  "vram_gb_per_gpu": 32,
+  "vcpus": 8,
+  "ram_gb": 32,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.97,
+      "usd_per_vm_hr": 0.97
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 0.78,
+        "usd_per_vm_hr": 0.78
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 0.74,
+        "usd_per_vm_hr": 0.74
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 0.7,
+        "usd_per_vm_hr": 0.7
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/mumbai/rtx-pro-4500/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.PRO4500.8.32.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

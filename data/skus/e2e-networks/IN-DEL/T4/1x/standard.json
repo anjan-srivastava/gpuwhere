@@ -1,0 +1,55 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/T4/1x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "T4",
+  "gpu_variant": "t4-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 16,
+  "vcpus": 12,
+  "ram_gb": 50,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.45,
+      "usd_per_vm_hr": 0.45,
+      "native": {
+        "inr_list_per_vm_hr": 30
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹30/hr. INR is E2E's billing currency.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

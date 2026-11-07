@@ -1,0 +1,157 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/h200",
+  "supplier": "nvidia",
+  "name": "H200",
+  "architecture": "Hopper",
+  "generation": "Hopper",
+  "status": "active",
+  "variants": [
+    {
+      "id": "h200-sxm",
+      "name": "H200 SXM",
+      "subtitle": "SXM \u00b7 141 GB HBM3e",
+      "form_factor": "sxm",
+      "vram_gb": 141,
+      "memory_type": "HBM3e",
+      "memory_generation": "HBM3e",
+      "memory_bandwidth_gbps": 4800,
+      "tdp_w": 700,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 4,
+        "bandwidth_gbps": 900,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 34,
+        "fp64_tensor_tflops": 67,
+        "fp32_tflops": 67,
+        "tf32_tensor_tflops_dense": 494.5,
+        "tf32_tensor_tflops_sparse": 989,
+        "bf16_tensor_tflops_dense": 989.5,
+        "bf16_tensor_tflops_sparse": 1979,
+        "fp16_tensor_tflops_dense": 989.5,
+        "fp16_tensor_tflops_sparse": 1979,
+        "fp8_tensor_tflops_dense": 1979,
+        "fp8_tensor_tflops_sparse": 3958,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 1979,
+        "int8_tops_sparse": 3958
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 18,
+        "notes": "Up to 7 MIG slices of 18 GB."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "confidential-computing",
+        "nvlink",
+        "nvswitch",
+        "mig",
+        "sparsity",
+        "dpx"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3 and E5M2 are native; no FP4."
+      }
+    },
+    {
+      "id": "h200-nvl",
+      "name": "H200 NVL",
+      "subtitle": "PCIe NVL \u00b7 141 GB HBM3e",
+      "form_factor": "nvl",
+      "vram_gb": 141,
+      "memory_type": "HBM3e",
+      "memory_generation": "HBM3e",
+      "memory_bandwidth_gbps": 4800,
+      "tdp_w": 600,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 4,
+        "bandwidth_gbps": 900,
+        "notes": "2- or 4-way NVLink bridge."
+      },
+      "compute": {
+        "fp64_tflops": 30,
+        "fp64_tensor_tflops": 60,
+        "fp32_tflops": 60,
+        "tf32_tensor_tflops_dense": 417.5,
+        "tf32_tensor_tflops_sparse": 835,
+        "bf16_tensor_tflops_dense": 835.5,
+        "bf16_tensor_tflops_sparse": 1671,
+        "fp16_tensor_tflops_dense": 835.5,
+        "fp16_tensor_tflops_sparse": 1671,
+        "fp8_tensor_tflops_dense": 1670.5,
+        "fp8_tensor_tflops_sparse": 3341,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 1670.5,
+        "int8_tops_sparse": 3341
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 16.5,
+        "notes": "Up to 7 MIG slices of 16.5 GB."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "confidential-computing",
+        "nvlink",
+        "mig",
+        "sparsity",
+        "dpx"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3 and E5M2 are native; no FP4."
+      }
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/h200/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

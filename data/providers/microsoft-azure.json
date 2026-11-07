@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "microsoft-azure",
+  "name": "Microsoft Azure",
+  "website": "https://azure.microsoft.com",
+  "gpu_page": "https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/",
+  "country": "US",
+  "status": "active",
+  "regions": [
+    "IN-PNQ",
+    "IN-MAA",
+    "IN-BOM",
+    "IN-JAM",
+    "IN-NAG"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": true,
+    "iso27001": true
+  },
+  "api": {
+    "type": "rest+cli+console+terraform",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Global hyperscaler; India regions Central India (Pune), South India (Chennai), West India (Mumbai), and Jio India West (Jamnagar) / Jio India Central (Nagpur), which Azure runs in Jio data centres with access aimed at Jio-partnership customers."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": "InfiniBand on ND-series"
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": false,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Included as a global provider with GPUs in Indian regions (AGENTS.md P2 'global burst'). Prices from the public Azure Retail Prices API. Object storage (Blob) is not S3-compatible."
+  },
+  "incidents_file": "incidents/microsoft-azure.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://prices.azure.com/api/retail/prices",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

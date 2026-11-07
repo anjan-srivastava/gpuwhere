@@ -1,0 +1,42 @@
+name: refresh-pricing
+
+# Daily pricing refresh. Triggered by the Cloudflare Worker cron (repository_dispatch)
+# or manually from the Actions tab.
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [pricing]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-pricing
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema
+      - name: Scrape official sources
+        run: python scrapers/pricing_refresh.py --write --retire-superseded
+      - name: Validate before committing
+        run: |
+          python scripts/validate.py
+          python -m unittest discover -s tests -v
+      - name: Commit changes
+        run: |
+          git config user.name  "catalogue-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data reports
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "pricing refresh $(date -u +%F)"
+            git push
+          fi

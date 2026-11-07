@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/capacity.schema.json",
+  "title": "Capacity",
+  "type": "object",
+  "required": [
+    "provider",
+    "pools",
+    "sources",
+    "confidence",
+    "verified_at"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "as_of": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "facility": {
+      "type": "object",
+      "properties": {
+        "power_mw": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gpu_power_mw": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/source"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "pools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gpu",
+          "region"
+        ],
+        "properties": {
+          "gpu": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "form_factor": {
+            "enum": [
+              "sxm",
+              "nvl",
+              "pcie",
+              "generic",
+              null
+            ]
+          },
+          "total_gpus": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "rented_gpus": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "committed_gpus": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "free_gpus": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "power_mw": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "indiaai_empanelled": {
+      "type": "object",
+      "description": "GPUs empanelled under the IndiaAI Mission (offered, not necessarily operational). Never summed into installed capacity.",
+      "required": [
+        "total",
+        "by_gpu"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "by_gpu": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "feed",
+            "api",
+            "page",
+            "quote",
+            "tracker",
+            "status_page",
+            "postmortem",
+            "community"
+          ]
+        },
+        "fetched_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

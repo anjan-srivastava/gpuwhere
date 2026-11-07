@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neysa/IN-BOM/RTX PRO 6000/1x/quote",
+  "provider": "neysa",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "quote",
+  "vram_gb_per_gpu": 96,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": 100,
+  "disk_type": "instance",
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": "RTX Pro 6000 is listed with 'Price on request'.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "NVIDIA RTX Pro 6000 managed VM; pricing on request.",
+  "billing_model": null,
+  "residency": "india"
+}

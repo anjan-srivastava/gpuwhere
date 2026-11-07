@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "nxtgen/IN/L40S/1x/standard",
+  "provider": "nxtgen",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 64,
+  "ram_gb": 256,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.57,
+      "usd_per_vm_hr": 1.57,
+      "native": {
+        "inr_per_vm_hr": 147.0,
+        "inr_per_gpu_hr": 147.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 1.26,
+        "usd_per_vm_hr": 1.26
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.26,
+        "usd_per_vm_hr": 1.26
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.0,
+        "usd_per_vm_hr": 1.0
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": "2026-11-07T18:10:07Z",
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": "https://speedcloud.nxtgen.com/ (plan L1-Spark: orderable, count not shown)"
+  },
+  "sources": [
+    {
+      "url": "https://speedcloud.nxtgen.com/aiinstances.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://speedcloud.nxtgen.com/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "gpu_variant": "l40s-pcie",
+  "pricing_status": "published",
+  "price_note": null,
+  "notes": "Provider plan: L40S.1x. Rate card prices are INR per instance-hour for each term; USD at the ECB reference rate. Matching SpeedCloud plan 'L1-Spark' is listed as available.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/B200/8x/bare-metal",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "active",
+  "gpu": "B200",
+  "gpu_variant": "b200-sxm",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "bare-metal",
+  "vram_gb_per_gpu": 192,
+  "vcpus": 224,
+  "ram_gb": 2048,
+  "disk_gb": 30400,
+  "disk_type": "data",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.04,
+      "usd_per_vm_hr": 40.29,
+      "native": {
+        "inr_per_vm_hr": 3784.0,
+        "inr_per_gpu_hr": 473.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 5.04,
+        "usd_per_vm_hr": 40.29
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 5.04,
+        "usd_per_vm_hr": 40.29
+      },
+      {
+        "term_months": 24,
+        "usd_per_gpu_hr": 5.04,
+        "usd_per_vm_hr": 40.29
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 4.02,
+        "usd_per_vm_hr": 32.2
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 3.36,
+        "usd_per_vm_hr": 26.92
+      },
+      {
+        "term_months": 60,
+        "usd_per_gpu_hr": 2.97,
+        "usd_per_vm_hr": 23.76
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8 x HGX B200. Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹194/GPU-hr; page lists ₹473 (page used).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

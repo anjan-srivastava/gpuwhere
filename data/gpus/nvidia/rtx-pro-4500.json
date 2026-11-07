@@ -1,0 +1,91 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-pro-4500",
+  "supplier": "nvidia",
+  "name": "RTX PRO 4500",
+  "architecture": "Blackwell",
+  "generation": "Blackwell",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-pro-4500-blackwell",
+      "name": "RTX PRO 4500 Blackwell",
+      "subtitle": "PCIe \u00b7 32 GB GDDR7",
+      "form_factor": "pcie",
+      "vram_gb": 32,
+      "memory_type": "GDDR7",
+      "memory_generation": "GDDR7",
+      "memory_bandwidth_gbps": 896,
+      "tdp_w": 200,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 128,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": null,
+        "tf32_tensor_tflops_dense": null,
+        "tf32_tensor_tflops_sparse": null,
+        "bf16_tensor_tflops_dense": null,
+        "bf16_tensor_tflops_sparse": null,
+        "fp16_tensor_tflops_dense": null,
+        "fp16_tensor_tflops_sparse": null,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": 600,
+        "fp4_tops_sparse": 1200,
+        "int8_tops_dense": null,
+        "int8_tops_sparse": null
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 2,
+        "max_slice_memory_gb": 16,
+        "notes": "Up to 2\u00d7 16 GB MIG slices."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "fp4",
+        "mig",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "fp4",
+          "int8"
+        ],
+        "notes": "FP4 rate from NVIDIA AI TOPS headline; other precision peaks not recorded yet."
+      },
+      "sources": [],
+      "confidence": "low"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-4500/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "low",
+  "verified_at": "2026-11-07"
+}

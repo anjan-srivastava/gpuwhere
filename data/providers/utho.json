@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "utho",
+  "name": "Utho Cloud",
+  "website": "https://utho.com",
+  "gpu_page": "https://utho.com/ai-cloud",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "Utho's self-serve cloud covers CPU VMs; every GPU listing is 'price on request' (sales)."
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Official AI Cloud lists H200, RTX PRO 6000, A40, L4 and A5000 with indicative monthly prices; H100, A100, L40S and RTX 4090 are listed but quote-only. The public pricing page blocks automated access."
+  },
+  "incidents_file": "incidents/utho.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://utho.com/ai-cloud",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://utho.com/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

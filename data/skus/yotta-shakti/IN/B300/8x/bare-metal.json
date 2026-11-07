@@ -1,0 +1,73 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/B300/8x/bare-metal",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "active",
+  "gpu": "B300",
+  "gpu_variant": "b300-sxm",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "bare-metal",
+  "vram_gb_per_gpu": 288,
+  "vcpus": 256,
+  "ram_gb": 2048,
+  "disk_gb": 30720,
+  "disk_type": "data",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": [
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 11.24,
+        "usd_per_vm_hr": 89.95
+      },
+      {
+        "term_months": 24,
+        "usd_per_gpu_hr": 9.2,
+        "usd_per_vm_hr": 73.59
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 7.15,
+        "usd_per_vm_hr": 57.24
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 5.11,
+        "usd_per_vm_hr": 40.88
+      },
+      {
+        "term_months": 60,
+        "usd_per_gpu_hr": 4.05,
+        "usd_per_vm_hr": 32.37
+      }
+    ]
+  },
+  "pricing_status": "quote_only",
+  "price_note": "Bare metal offered on 1–5 year terms only; no monthly or hourly rate. 1-year ₹1056/GPU-hr, 2-year ₹864/GPU-hr, 3-year ₹672/GPU-hr, 4-year ₹480/GPU-hr, 5-year ₹380/GPU-hr.",
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8 x HGX B300. Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": null,
+  "residency": "india"
+}

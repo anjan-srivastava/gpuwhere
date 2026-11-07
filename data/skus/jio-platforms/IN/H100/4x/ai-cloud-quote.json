@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "jio-platforms/IN/H100/4x/ai-cloud-quote",
+  "provider": "jio-platforms",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-nvl",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "ai-cloud-quote",
+  "vram_gb_per_gpu": 94,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/jan/doc2025130492001.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "nvl",
+  "notes": "Jio H100 NVL 4\u00d7 appears in the IndiaAI L1 table; commercial rate not published."
+}

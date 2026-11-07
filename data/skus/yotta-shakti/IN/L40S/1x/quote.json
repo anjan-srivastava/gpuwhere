@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/L40S/1x/quote",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "retired",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "quote",
+  "vram_gb_per_gpu": 48,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/calculator/vm/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "VM calculator lists L40S 1×/2×; price not published in the static page. Retired 2026-11-07 by pricing refresh: superseded by the yotta-shakti scraper's L40S 1x package(s) from the current official source."
+}

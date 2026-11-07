@@ -1,0 +1,77 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "intel/gaudi2",
+  "supplier": "intel",
+  "name": "Gaudi 2",
+  "architecture": "Gaudi",
+  "generation": "Gaudi 2",
+  "status": "active",
+  "variants": [
+    {
+      "id": "gaudi2-oam",
+      "name": "Gaudi 2",
+      "subtitle": "96 GB HBM2E",
+      "form_factor": "generic",
+      "vram_gb": 96,
+      "memory_type": "HBM2E",
+      "memory_generation": "HBM2E",
+      "memory_bandwidth_gbps": null,
+      "tdp_w": null,
+      "interconnect": {
+        "type": "roce",
+        "version": 2,
+        "bandwidth_gbps": null,
+        "notes": "24 x 100 GbE RoCEv2 ports integrated on chip."
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": null,
+        "tf32_tensor_tflops_dense": null,
+        "tf32_tensor_tflops_sparse": null,
+        "bf16_tensor_tflops_dense": null,
+        "bf16_tensor_tflops_sparse": null,
+        "fp16_tensor_tflops_dense": null,
+        "fp16_tensor_tflops_sparse": null,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": null,
+        "int8_tops_sparse": null
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No partitioning published."
+      },
+      "features": [],
+      "precision": {
+        "native": [],
+        "notes": "Native data types not published on the official page reached; left empty rather than guessed."
+      },
+      "notes": "Official page publishes 7nm, 24 Tensor Processor Cores, dual matrix engines, 96 GB HBM2E, 48 MB SRAM, 24x100 GbE RoCEv2. Bandwidth, TDP, form factor and per-precision FLOPS not published there; intel.com product page redirected to a 404.",
+      "sources": [
+        {
+          "url": "https://habana.ai/products/gaudi2/",
+          "kind": "page",
+          "fetched_at": "2026-11-07"
+        }
+      ],
+      "confidence": "low"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://habana.ai/products/gaudi2/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "low",
+  "verified_at": "2026-11-07"
+}

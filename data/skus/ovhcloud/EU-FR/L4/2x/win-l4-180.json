@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "ovhcloud/EU-FR/L4/2x/win-l4-180",
+  "provider": "ovhcloud",
+  "region": "EU-FR",
+  "status": "active",
+  "gpu": "L4",
+  "gpu_variant": "l4-pcie",
+  "form_factor": "pcie",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "win-l4-180",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 45,
+  "ram_gb": 180,
+  "disk_gb": 400,
+  "disk_type": "nvme",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.71,
+      "usd_per_vm_hr": 3.42,
+      "native": {
+        "eur_per_vm_hr": 3.06,
+        "eur_per_gpu_hr": 1.53,
+        "fx_eur_usd": 1.1165,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 1.71,
+        "usd_per_vm_hr": 3.42
+      }
+    ]
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=IE",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.ovhcloud.com/en-ie/public-cloud/prices/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: win-l4-180. OVHcloud Public Cloud (Europe; also offered in other OVH regions). EUR excl. VAT, converted at the ECB reference rate. Outside India: no India data residency.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-BOM/L40S/4x/n-l40s-512",
+  "provider": "acecloud",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "n-l40s-512",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 64,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.27,
+      "usd_per_vm_hr": 9.09
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 1.82,
+        "usd_per_vm_hr": 7.27
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.73,
+        "usd_per_vm_hr": 6.91
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.64,
+        "usd_per_vm_hr": 6.54
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/mumbai/nvidia-l40s-48gb/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.L40S.512.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

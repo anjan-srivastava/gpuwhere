@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/A100/1x/a100-40gb",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-40gb",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "a100-40gb",
+  "vram_gb_per_gpu": 40,
+  "vcpus": 16,
+  "ram_gb": 115,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.98,
+      "usd_per_vm_hr": 1.98,
+      "native": {
+        "inr_list_per_vm_hr": 179
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.e2enetworks.com/gpus/nvidia-a100-40gb",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹179/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

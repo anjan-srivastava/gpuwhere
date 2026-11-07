@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schema/capacity.schema.json",
+  "provider": "e2e-networks",
+  "as_of": "Q2FY27",
+  "facility": {
+    "power_mw": null,
+    "gpu_power_mw": null,
+    "notes": "Facility MW is not specific to the GPU fleet unless stated.",
+    "source": null
+  },
+  "pools": [
+    {
+      "gpu": "B200",
+      "region": "IN",
+      "form_factor": "sxm",
+      "total_gpus": 1024,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": {
+        "url": "https://e2e-mainsite-ui.objectstore.e2enetworks.net/Investor_Resources/Investor_Presentations/Signed_E2E_Networks_IP_Q2_FY27_Final.pdf",
+        "kind": "page",
+        "fetched_at": "2026-11-07"
+      },
+      "notes": "E2E Q2FY27 investor presentation: 'including 1024 NVIDIA B200s'; 'Blackwell capacity now under multi-year contract' (count under contract not stated)."
+    },
+    {
+      "gpu": "H100/H200",
+      "region": "IN",
+      "form_factor": "sxm",
+      "total_gpus": 3000,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": {
+        "url": "https://e2e-mainsite-ui.objectstore.e2enetworks.net/Investor_Resources/Investor_Presentations/Signed_E2E_Networks_IP_Q2_FY27_Final.pdf",
+        "kind": "page",
+        "fetched_at": "2026-11-07"
+      },
+      "notes": "'nearly 3,000 Hopper' GPUs; H100/H200 split not published."
+    },
+    {
+      "gpu": "Other",
+      "region": "IN",
+      "form_factor": null,
+      "total_gpus": 1076,
+      "rented_gpus": null,
+      "committed_gpus": null,
+      "free_gpus": null,
+      "power_mw": null,
+      "source": {
+        "url": "https://e2e-mainsite-ui.objectstore.e2enetworks.net/Investor_Resources/Investor_Presentations/Signed_E2E_Networks_IP_Q2_FY27_Final.pdf",
+        "kind": "page",
+        "fetched_at": "2026-11-07"
+      },
+      "notes": "Derived: '~5100 GPUs live' minus the pools above; approximate. Mix (A100/L40S/L4/…) not published."
+    }
+  ],
+  "notes": "Installed fleet from E2E's Q2FY27 investor presentation (~5100 GPUs live, Delhi NCR and Chennai). Figures are rounded by E2E. JarvisLabs has been an E2E platform since Dec 2025; whether its fleet is included is not stated. IndiaAI allocation table lists active allocations on 2026-11-07: 4× H100 SXM (partial public snapshot; not summed into committed_gpus).",
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/investors/investor-presentations.md",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://e2e-mainsite-ui.objectstore.e2enetworks.net/Investor_Resources/Investor_Presentations/Signed_E2E_Networks_IP_Q2_FY27_Final.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "indiaai_empanelled": {
+    "total": 3401,
+    "by_gpu": {
+      "H100": 716,
+      "H200": 2304,
+      "L40S": 101,
+      "L4": 104,
+      "A100": 176
+    },
+    "source": {
+      "url": "https://compute.indiaai.gov.in/files/empanelled-gpus.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    "notes": "GPUs empanelled for the IndiaAI Mission (offered under the tender; some may not yet be operational). Not installed-fleet capacity. Listed as 'E2E Networks Ltd'."
+  }
+}

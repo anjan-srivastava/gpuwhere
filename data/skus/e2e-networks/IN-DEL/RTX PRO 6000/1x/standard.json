@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/RTX PRO 6000/1x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 32,
+  "ram_gb": 170,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.49,
+      "usd_per_vm_hr": 2.49,
+      "native": {
+        "inr_list_per_vm_hr": 236.55
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 2.32,
+        "usd_per_vm_hr": 2.32
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.e2enetworks.com/gpus/nvidia-rtx-pro-6000",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹236.55/hr. INR is E2E's billing currency. Committed (3+ month) and spot rates are INR-only in the feed; USD converted at the ECB reference rate.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

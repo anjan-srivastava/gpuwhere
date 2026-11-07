@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/MI325X/8x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "MI325X",
+  "gpu_variant": "mi325x-oam",
+  "form_factor": "generic",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 192,
+  "vcpus": 128,
+  "ram_gb": 1536,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.08,
+      "usd_per_vm_hr": 24.61,
+      "native": {
+        "inr_per_vm_hr": 2311.0,
+        "inr_per_gpu_hr": 288.88,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.22,
+        "usd_per_vm_hr": 17.75
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.83,
+        "usd_per_vm_hr": 14.61
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.51,
+        "usd_per_vm_hr": 12.05
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8xMI325.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 128 vCPU / 1536 GB (table used). Provider lists 192 GB VRAM per GPU; accelerator spec mi325x-oam is 256 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

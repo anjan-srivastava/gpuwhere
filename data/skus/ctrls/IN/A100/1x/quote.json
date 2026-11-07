@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "ctrls/IN/A100/1x/quote",
+  "provider": "ctrls",
+  "region": "IN",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "quote",
+  "vram_gb_per_gpu": 80,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.ctrls.com/blogs-gpu-as-a-service-powering-the-future-of-scalable-ai-ready-infrastructure/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "CtrlS lists A100/H100 GPU-as-a-Service; commercial rate and form factor on request."
+}

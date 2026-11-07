@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "nebius/EU-FI/RTX PRO 6000/1x/standard",
+  "provider": "nebius",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 24,
+  "ram_gb": 218,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.8,
+      "usd_per_vm_hr": 1.8
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://nebius.com/prices",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: NVIDIA RTX PRO 6000. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. No spot price for this platform in this region at the last snapshot; spot prices are dynamic and are read from the official spot-price API.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

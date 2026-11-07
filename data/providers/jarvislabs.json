@@ -1,0 +1,73 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "jarvislabs",
+  "name": "JarvisLabs.ai",
+  "website": "https://jarvislabs.ai",
+  "gpu_page": "https://jarvislabs.ai/pricing",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN1",
+    "IN2",
+    "EU1"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "cli+rest",
+    "provisioning": "api",
+    "documented": true
+  },
+  "billing": {
+    "granularity": "minute",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": 0.1,
+    "file_usd_per_gb_mo": 0.1,
+    "object_s3_compatible": false,
+    "object_usd_per_gb_mo": null,
+    "mountable": true
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": "Frequent 0-free H100/H200 containers; VM rows often show capacity.",
+    "notes": "Official pricing lists H200, H100, RTX PRO 6000, A100 80GB/40GB, A30 and L4 with on-demand and spot rates. The pricing page supports 1x/2x/4x/8x instance sizing."
+  },
+  "incidents_file": "incidents/jarvislabs.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/jarvislabs.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://jarvislabs.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "jl gpus --json",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

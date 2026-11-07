@@ -1,0 +1,65 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "jarvislabs/IN1/RTX PRO 6000/1x/standard",
+  "provider": "jarvislabs",
+  "region": "IN1",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 28,
+  "ram_gb": 160,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.19,
+      "usd_per_vm_hr": 2.19,
+      "native": {
+        "inr_per_gpu_hr_cli": 207.36
+      }
+    },
+    "spot": {
+      "usd_per_gpu_hr": 1.15,
+      "usd_per_vm_hr": 1.15,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": "2026-11-07T18:10:07Z",
+    "available_vms": 3,
+    "available_gpus": 3,
+    "spot_available_vms": 3,
+    "spot_available_gpus": 3,
+    "source": "jl gpus --json (workload=vm)"
+  },
+  "sources": [
+    {
+      "url": "jl gpus --json",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://jarvislabs.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "USD from jarvislabs.ai/pricing; `jl gpus --json` lists ₹207.36/GPU-hr on-demand, ₹109.35 spot.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

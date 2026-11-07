@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "tata-communications/IN/L40S/1x/gpu-e24-l40s-1x-olu",
+  "provider": "tata-communications",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "gpu-e24-l40s-1x-olu",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 24,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.41,
+      "usd_per_vm_hr": 2.41,
+      "native": {
+        "inr_per_vm_hr": 226.0,
+        "inr_per_gpu_hr": 226.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 2.33,
+        "usd_per_vm_hr": 2.33
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.08,
+        "usd_per_vm_hr": 2.08
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.84,
+        "usd_per_vm_hr": 1.84
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 1.75,
+        "usd_per_vm_hr": 1.75
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 1.66,
+        "usd_per_vm_hr": 1.66
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: GPU.E24.L40S.1X.OLU. VM. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

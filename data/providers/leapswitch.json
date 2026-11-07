@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "leapswitch",
+  "name": "Leapswitch",
+  "website": "https://www.leapswitch.com",
+  "gpu_page": "https://www.leapswitch.com/gpu-servers",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "console",
+    "documented": null
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": 99.9,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Official GPU page lists H200, RTX PRO 6000 and L4; A100 is available via the cart. Monthly list prices are converted at 730 hours."
+  },
+  "incidents_file": "incidents/leapswitch.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://leapswitch.com/gpu-cloud/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

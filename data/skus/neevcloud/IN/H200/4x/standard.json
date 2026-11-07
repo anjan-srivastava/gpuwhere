@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neevcloud/IN/H200/4x/standard",
+  "provider": "neevcloud",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H200",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "standard",
+  "vram_gb_per_gpu": 141,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.47,
+      "usd_per_vm_hr": 13.88,
+      "native": {
+        "inr_per_gpu_hr": 329.27
+      }
+    },
+    "committed": [
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 2.77,
+        "usd_per_vm_hr": 11.09
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://neevcloud.com/gpu-ai-service",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "gpu_variant": "h200-sxm"
+}

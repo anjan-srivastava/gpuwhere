@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "leapswitch/IN/H200/1x/standard",
+  "provider": "leapswitch",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H200",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 64,
+  "ram_gb": 240,
+  "disk_gb": 30,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 4.31,
+      "usd_per_vm_hr": 4.31,
+      "native": {
+        "inr_per_vm_hr": 404.38,
+        "inr_per_gpu_hr": 404.38,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06",
+        "published_month_inr": 295200.0,
+        "published_per": "gpu",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": []
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://leapswitch.com/gpu-cloud/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "Price per GPU per month, excl. GST. Form factor not published; SXM assumed. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "gpu_variant": "h200-sxm",
+  "pricing_status": "published",
+  "price_note": null,
+  "billing_model": "monthly",
+  "residency": "india"
+}

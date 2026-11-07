@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "tata-communications/IN/L40S/4x/gpu-bm-d128-l40s-4x-olu",
+  "provider": "tata-communications",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "gpu-bm-d128-l40s-4x-olu",
+  "vram_gb_per_gpu": 48,
+  "vcpus": 128,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.12,
+      "usd_per_vm_hr": 12.5,
+      "native": {
+        "inr_per_vm_hr": 1174.0,
+        "inr_per_gpu_hr": 293.5,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 3.04,
+        "usd_per_vm_hr": 12.15
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.69,
+        "usd_per_vm_hr": 10.77
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 2.4,
+        "usd_per_vm_hr": 9.58
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 2.27,
+        "usd_per_vm_hr": 9.08
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 2.16,
+        "usd_per_vm_hr": 8.62
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: GPU.BM.D128.L40S.4X.OLU. Bare metal. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

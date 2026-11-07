@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/A100/8x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 64,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.04,
+      "usd_per_vm_hr": 16.35,
+      "native": {
+        "inr_per_vm_hr": 1536.0,
+        "inr_per_gpu_hr": 192.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.0,
+        "usd_per_vm_hr": 16.01
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.96,
+        "usd_per_vm_hr": 15.66
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.87,
+        "usd_per_vm_hr": 14.97
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8xA100.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 64 vCPU / 512 GB (table used). Form factor not published; SXM assumed.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

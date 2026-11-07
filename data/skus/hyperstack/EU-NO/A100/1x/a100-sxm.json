@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "hyperstack/EU-NO/A100/1x/a100-sxm",
+  "provider": "hyperstack",
+  "region": "EU-NO",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "a100-sxm",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 24,
+  "ram_gb": 120,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.6,
+      "usd_per_vm_hr": 1.6
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.hyperstack.cloud/gpu-pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: NVIDIA A100 SXM. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neysa/IN-BOM/RTX PRO 6000/8x/bare-metal-quote",
+  "provider": "neysa",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "form_factor": "pcie",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "bare-metal-quote",
+  "vram_gb_per_gpu": 96,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": "8-GPU bare-metal node: price on request.",
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Page lists total node GPU memory as 768 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": null,
+  "residency": "india"
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "acecloud",
+  "name": "AceCloud",
+  "website": "https://acecloud.ai",
+  "gpu_page": "https://acecloud.ai/pricing/gpu/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN-NOI",
+    "IN-BOM"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "rest+cli+terraform",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Documented REST API at customer.acecloud.ai/api/v1, authenticated with API keys (X-Ace-Api-Key), plus an official `ace` CLI and an AceCloudAI Terraform provider."
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Published Noida INR plans for H200 NVL, H100 HGX, A100, RTX PRO 6000, RTX PRO 4500, L40S, L4, RTX 6000 Ada, RTX A6000, A30 and A2. Monthly list prices are converted at 730 hours; hourly billing is not offered for most GPU plans."
+  },
+  "incidents_file": "incidents/acecloud.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/acecloud.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/gpu/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://acecloud.ai/pricing/linux/inr/noida/nvidia-h200-nvl/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://acecloud.ai/pricing/linux/inr/noida/nvidia-h100-hgx/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.acecloud.ai/knowledge-base/cli/authentication",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    },
+    {
+      "url": "https://registry.terraform.io/providers/AceCloudAI/acecloud/latest/docs",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

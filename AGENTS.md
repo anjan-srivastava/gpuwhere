@@ -1,0 +1,238 @@
+# AGENTS.md — GPU Provider Catalog
+
+This file is the contract for any agent working in `gpu-catalog/`. Read it fully before changing data.
+
+## Mission
+
+Maintain a trustworthy, versioned, machine-readable catalogue of GPU providers in India, capturing:
+
+1. **Capability** — what GPU shapes they offer, where, at what price.
+2. **Reliability evidence** — SLA, incident history, capacity notes.
+3. **Availability over time** — hourly snapshots per shape, on-demand and spot, so graphs can be built and placement decisions made from evidence.
+
+It is a **provider catalogue**, not a monitoring system. Continuous uptime/latency telemetry is out of scope for now; incidents and availability history are in scope.
+
+## Non-negotiables
+
+1. **Never invent a price, spec, or measurement.** Every value traces to a source URL or an observation.
+2. Every provider/SKU file carries `verified_at` and `confidence`. Every availability line carries `source` and `confidence`.
+3. **Source precedence:** machine-readable feed > official API/CLI > official pricing page > official sales quote > third-party tracker. Never use a tracker as primary when an official source exists.
+4. **USD is canonical.** Keep a `native` object only when it helps audit an INR price.
+5. **Record conflicts.** Put the chosen value in the field and explain the conflict in `notes`, listing both sources.
+6. **Null means unknown.** Never guess; lower `confidence` instead.
+7. **No secrets, no scraping behind auth, no bypassing Terms of Service.**
+8. **PRs only.** A human reviews any change to `pricing`, `sla_pct`, or `confidence`.
+
+## Confidence
+
+| Level | Meaning |
+|---|---|
+| `high` | Official machine-readable feed/API within 7 days |
+| `medium` | Official page/docs within 30 days, or official quote |
+| `low` | Third-party tracker, older than 30 days, or conflicting sources |
+
+## Cadence
+
+| Data | Cadence |
+|---|---|
+| Availability (on-demand + spot, per shape) | **hourly** |
+| Pricing | **daily** |
+| Incidents | on observation |
+| Reliability summary | weekly |
+
+## Directory layout
+
+```
+gpu-catalog/
+  AGENTS.md
+  README.md
+  requirements.txt
+  schema/
+    provider.schema.json
+    sku.schema.json
+    availability.schema.json
+    incident.schema.json
+    channel.schema.json
+    capacity.schema.json
+    gpu.schema.json
+  data/
+    providers/<provider>.json
+    gpus/<supplier>/<family>.json
+    skus/<provider>/<region>/<gpu>/<shape>[/<variant>].json
+    incidents/<provider>.json
+    availability/<provider>.jsonl
+    capacity/<provider>.json
+    channels/<channel>.json
+  scrapers/
+    jarvislabs_availability.py
+  scripts/
+    serve_availability.py
+    validate.py
+```
+
+## Channels
+
+Subsidy and marketplace programmes are **not providers**. Model them in `data/channels/<channel>.json`:
+
+- `IndiaAI Mission` is a subsidy channel. It publishes L1 ceiling rates for empanelled CSPs and a subsidy for approved users. Keep its rates in the channel file; do not create an `indiaai-mission` provider or add it to provider comparisons.
+- A channel can carry `empanelled_providers` and a `rates` array with optional `provider` attribution where the source names the L1 bidder.
+- Channel rates are INR per GPU-hour before GST unless the source says otherwise.
+
+## Storage capability (where model weights live)
+
+Downloaded model weights are the main reason a GPU rental is useless without attachable storage. Record the **capability first**, the price second:
+
+- `storage.mountable` — block or file storage can be attached to a GPU VM while it runs, so weights live outside the instance. `true | false | null`; `null` means unverified, never "no".
+- `storage.shared` — file storage mountable on several nodes at once (multi-node training reading one copy of the weights).
+- `storage.persistent` — storage outlives a stop or terminate, so the model is not re-downloaded.
+- `block_usd_per_gb_mo`, `file_usd_per_gb_mo`, `object_usd_per_gb_mo`, `object_s3_compatible` — optional price/compat detail. A secondary capability's price is a fraction of GPU spend; it ranks and filters nothing.
+
+The providers page filters on `mountable`, shows a `Block/File` and `Shared FS` chip, and each provider page has a Storage section that leads with capability pills and states explicitly what is unverified. Object storage is **not** a substitute: it needs a download step before a job can read the weights.
+
+## Capacity vs availability
+
+Two different numbers. Never collapse them.
+
+- `data/capacity/<provider>.json` is **installed capacity**: `total_gpus` split into `rented_gpus`, `committed_gpus` and `free_gpus`, with an optional `power_mw` per pool and a `facility` block. It is a stock snapshot and carries `as_of`, `verified_at` and `confidence`.
+- `data/availability/<provider>.jsonl` is **observed free capacity**: hourly `available_gpus` / `available_vms` per shape. It answers "can I get one now?", not "how big is the fleet?".
+- Never label observed free GPUs as capacity in the API or UI. If a provider does not publish fleet size, leave `total_gpus` null and say so; do not infer total capacity from availability.
+- `power_mw` means power allocated to the GPU fleet unless `facility.power_mw` is explicitly the whole campus. Do not derive MW from a GPU TDP.
+
+## Accelerators vs host packages
+
+Two layers. Do not collapse them.
+
+- `data/gpus/<supplier>/<family>.json` is the **accelerator SKU**: VRAM, memory type/bandwidth, dense/sparse FLOPS by precision, native precision support, TDP, interconnect, MIG, features. Examples: `H100 SXM5 80GB`, `H100 NVL 94GB`, `L40S 48GB`.
+- `data/skus/...` is the **host package** a provider sells: accelerator SKU + 1/2/4/8 GPUs + vCPU + host RAM + disk + price. A provider can sell one accelerator SKU in several host packages.
+- Every SKU links to its accelerator with `gpu_variant` (`h100-sxm5`, `h100-nvl`, …). The GPU family stays in `gpu` (`H100`).
+- vCPU and host RAM belong to the package, not the GPU. Never rank accelerator models by vCPU, and do not compare vCPU across GPU models as if it were GPU capability.
+- FLOPS always carries a precision and a dense/sparse basis. Store dense and sparse separately. Do not mix FP8, FP16 and FP4 in one comparison column.
+- The common comparison basis is **dense FP16 TFLOPS**, because every accelerator in the catalogue supports FP16. Native precision support is listed separately; per-precision FP8/FP4 rates are not converted into FP16 equivalents.
+- Precision support is native hardware capability, not just a software flag. Record the native formats; do not claim a format that is only emulated.
+
+## Keys and granularity
+
+- Provider ID: lowercase slug (`e2e-networks`).
+- SKU key: `provider/region/gpu/shape[/variant]`, e.g. `e2e-networks/IN-DEL/H200/4x/standard`. A SKU is a **host package**, not an accelerator.
+- Accelerator SKU id: `supplier/variant`, e.g. `nvidia/h100-sxm5`. The family page is `supplier/family` (`nvidia/h100`). The GPUs tab lists accelerator SKUs, each with its own VRAM and FLOPS.
+- `gpu_variant` links each SKU to the accelerator variant. `gpu` remains the family name.
+- `form_factor`: `sxm | nvl | pcie | generic` on SKUs; accelerator specs also allow `oam`. Backfilled from provider pages; assume SXM where the provider does not publish a form factor, and note it.
+- Shape: `1x | 2x | 4x | 8x` (`gpus_per_vm` 1/2/4/8).
+- Availability is recorded **per shape**, per region, per provider.
+- If a provider offers multiple VM configs for the same shape, add a `variant` (`standard`, `highmem`, …). Otherwise omit it.
+
+## Inclusion rule
+
+A provider is catalogued when it has **GPUs in Indian data centres** and either:
+- **API or Console** provisioning (any size), or
+- **Sales** provisioning with evidence of seriousness: IndiaAI empanelment, a published fleet size, or a public rate card.
+
+Resellers and MSPs that do not operate their own GPU capacity (e.g. IndiaAI bidders marked "CSP: Google Cloud Platform", AWS MSPs) are tracked in `data/discovery/candidates.json`, not added as providers. Global clouds qualify for their Indian regions (Azure, AWS; Google Cloud pending a price source).
+
+**Data residency.** Every SKU carries `residency: india | outside-india` (derived from the region: `IN`, `IN-*`, `IN<n>` are India). Outside-India providers (OVHcloud, Nebius, Verda, Hyperstack, and JarvisLabs EU1) are catalogued as **burst options** for non-regulated workloads: they have no India data residency and are not MeitY-empanelled. The **providers page** carries two filters: **Region** (where GPUs run; default India, with per-location and Europe options) and **Provider** (Indian company vs global, from the provider `country`); its minimum prices and the price-vs-market index use only packages in that scope. The **GPUs page** is a hardware catalogue and is deliberately not region-scoped: it lists every accelerator SKU any catalogued provider sells, with the cheapest orderable price across all regions, so a GPU never disappears because nobody rents it in India today. Outside-India packages are tagged wherever shown, and non-Indian providers carry their flag and country code.
+
+`scrapers/discover_providers.py` (weekly) produces `reports/discovery-<date>.md`: IndiaAI empanelled bidders not yet known, evidence probes for every watchlist candidate (GPU models, prices, self-serve hints, India locations) and India-region GPU checks for global clouds. It never edits catalogue data; a human decides.
+
+## Provider file
+
+Identity + capability + reliability. No embedded SKUs.
+
+Required: `id`, `name`, `country`, `status`, `regions`, `billing`, `networking`, `storage`, `reliability`, `sources`, `confidence`, `verified_at`.
+
+`status ∈ {active, beta, deprecated, retired}`.
+
+`api.provisioning ∈ {api, console, sales}` records how a customer gets a GPU: `api` = documented provisioning API (also set `api.documented: true`), `console` = web console or order flow without a documented API, `sales` = no online ordering (explain in `api.notes`). The UI shows exactly these three labels. This is independent of pricing: whether on-demand rates are published is derived from the SKUs (`pricing_status`), never from this field.
+
+## SKU file
+
+One shape/config. Required: `id`, `provider`, `region`, `status`, `gpu`, `shape`, `gpus_per_vm`, `pricing`, `sources`, `confidence`, `verified_at`.
+
+Pricing:
+```json
+"pricing": {
+  "on_demand": { "usd_per_gpu_hr": 5.29, "usd_per_vm_hr": 21.16 },
+  "spot": { "usd_per_gpu_hr": 0.93, "usd_per_vm_hr": 3.72, "notice_sec": null },
+  "committed": [{ "term_months": 3, "usd_per_gpu_hr": 4.87, "usd_per_vm_hr": 19.48 }]
+}
+```
+
+`usd_per_vm_hr = usd_per_gpu_hr × gpus_per_vm`, unless the provider prices per VM.
+
+`billing_model` is `hourly` when the package can be rented and billed by the hour, `monthly` when the shortest commitment is a month (the price is still stored per GPU-hour, converted at 730 h, and says so in `notes`). Scrapers set it; the UI prefers hourly rates for "from"/minimum prices and only falls back to a monthly rate, tagged, when no hourly one exists.
+
+If a provider lists a GPU but does not publish a rate, keep the host package with null prices, `pricing_status: "quote_only"` and a `price_note`. Do not omit the offering and do not invent a rate. Published packages use `pricing_status: "published"`.
+
+## Availability records
+
+Append-only JSONL in `data/availability/<provider>.jsonl`, one object per line:
+
+```json
+{"ts":"2026-11-07T10:00:00Z","provider":"e2e-networks","region":"IN-DEL","gpu":"H200","shape":"4x","variant":"standard","available_gpus":0,"available_vms":0,"spot_available_gpus":0,"spot_available_vms":0,"total_gpus":null,"vms_derived":true,"observed_via":"api","source":"https://...","confidence":"high"}
+```
+
+Rules:
+- `ts` is ISO-8601 UTC.
+- `available_vms` may be derived as `floor(available_gpus / gpus_per_vm)`; set `vms_derived: true`.
+- Record **both on-demand and spot**.
+- `total_gpus` is optional; use it only if the provider publishes capacity.
+- Never rewrite history. Append only. Correct mistakes with a new line plus a note.
+
+## Incidents
+
+`data/incidents/<provider>.json` — human-curated, sparse, with count and details. `scope ∈ {gpu, region, api, storage, network}`. Include `source` and `confidence`. Incidents are the primary reliability hint until real telemetry exists.
+
+## Scrapers and probes
+
+- Scrapers read official feeds/APIs and append/normalise data. They must be idempotent per run and must not fabricate fields.
+- `scrapers/availability_refresh.py` is the hourly availability loop. Collectors (`scrapers/availability_<provider>.py`) return free GPUs per region/GPU/shape/variant keyed like SKU ids; `--write` appends to `data/availability/<provider>.jsonl` (skips a second run in the same UTC hour) and copies the latest values into each SKU's `availability` block. Only JarvisLabs (`jl gpus --json`) exposes a usable stock signal today; every other provider needs a customer account/API, listed in `NO_PUBLIC_SIGNAL` with the reason. `scrapers/jarvislabs_availability.py` is a shim for old cron jobs.
+- `scrapers/capacity_refresh.py` is the weekly installed-capacity loop. It also stores the official IndiaAI empanelled-GPU counts per provider as `indiaai_empanelled` (offered under the tender, not installed fleet; never summed into `total_gpus`), parsed by `scrapers/indiaai_common.py`. It scripts only first-party or government sources (E2E investor presentation PDF, shakticloud.ai fleet claim, IndiaAI allocation table) and keeps the quoted phrase in each pool's `notes`; extractors fail loudly when wording changes. Press-reported fleet sizes are not scripted.
+- `scrapers/pricing_refresh.py` is the daily pricing loop. One module per source (`scrapers/pricing_<provider>.py`) returns host packages exactly as published; `pricing_common.py` normalises them into SKU files. Dry-run by default; `--write` updates `data/skus/` and writes `reports/pricing-refresh-<date>.md`, where every pricing/confidence change is tagged REVIEW. `--retire-superseded` marks stale SKUs `status: "retired"` only when the run covers the same region/GPU/shape; other stale SKUs are listed for a human. Retired SKUs are not served.
+- Scraped providers: E2E (feed), JarvisLabs (`jl` CLI + page), Azure (Retail Prices API), AWS (public pricing JSON), Krutrim (docs + GPU page), OVHcloud (public catalogue API), Nebius/Verda/Hyperstack (pricing pages), AceCloud, Yotta (pricing page; its calculator JSON disagrees and is only a cross-check), Neysa, NxtGen, Leapswitch, Cyfuture (pages), Tata (PDF; needs `pdftotext`). Their SKUs are scraper-owned: fix the scraper, not the file. NeevCloud and Utho return HTTP 403 to automated clients and CtrlS, Sify and Jio publish no rate card; those stay hand-curated.
+- **Spot prices.** Verda publishes spot on its pricing page (≈50% below on-demand) and it is scraped per package. Nebius publishes no spot rate card but a public, unauthenticated spot-price API (`https://api.nebius.cloud/billing/v1alpha1/spot-price`, see `docs.nebius.com/signup-billing/spot-prices`); `pricing_eu_pages.Nebius` reads it and stores the value as a `spot` observation with the API's snapshot time. Nebius spot is dynamic — it can change every 15 minutes — so the stored number is an observation, not a rate. OVHcloud, Hyperstack and JarvisLabs EU1 publish no spot rate and record none.
+- Provider-published USD is used when the source publishes it; INR-only prices are converted at the ECB daily reference rate, recorded in `pricing.*.native`. Monthly-only prices are converted at 730 h and say so in `notes`.
+- Raw snapshots go to `.cache/scrape/<provider>/<date>/` (not catalogue data). `--offline` re-parses them. Scrapers respect robots.txt, rate-limit to 1 request/s per host, back off on 429 and never work around 401/403.
+- **Never leave paid resources running.** Provision probes must delete their VMs and verify deletion.
+- Respect rate limits; back off on 429.
+
+## Validation and serving
+
+```bash
+uv run --with jsonschema python scripts/validate.py
+python scripts/serve_catalog.py --data-dir data --assets-dir assets --port 8080
+```
+
+The server exposes:
+- `GET /` — SKU and provider comparison tables with exact per-SKU pricing, deployed capacity, and live free availability.
+- `GET /api/catalog` — providers + accelerator SKUs + host packages + channels + capacities + latest availability.
+- `GET /api/keys` — available availability series.
+- `GET /api/availability?provider=&gpu=&shape=&variant=` — time series.
+- `GET /assets/logos/<provider>.png` — provider logos.
+
+## Priority
+
+| Priority | Providers |
+|---|---|
+| P0 | E2E Networks, JarvisLabs, NeevCloud |
+| P1 | Neysa, AceCloud, Yotta Shakti, Cyfuture AI, CtrlS, NxtGen, Tata Communications |
+| P2 | Sify, Jio Platforms, Utho, Leapswitch, IndiaAI channel (reference only), global burst providers later |
+
+## Definition of done for catalogue v0.1
+
+- 14 providers with capability, reliability summary, and incidents file; IndiaAI modelled as a channel.
+- Accelerator SKU files with native precision support, dense/sparse FLOPS, VRAM and MIG; host packages link via `gpu_variant`.
+- Capacity file per provider, with `total_gpus` explicitly null where fleet size is unpublished, and availability kept separate.
+- H100/H200 launch SKUs plus A100, L40S, L4, B200, MI325X, RTX PRO 6000 and the wider provider catalogue; 29 accelerator SKUs and 303 active host packages, including `quote_only` offerings with null prices.
+- Schema validation passing.
+- Hourly availability collection running for the launch candidates (on-demand + spot, per shape).
+- Dashboard serving `/api/availability` and rendering a chart.
+- Daily pricing refresh loop.
+- Weekly report in `reports/`.
+
+## What not to do
+
+- Do not guess prices, specs, or availability.
+- Do not overwrite high-confidence data with unverified sources.
+- Do not commit credentials or provider account IDs.
+- Do not leave VMs/filesystems/deployments running.
+- Do not use third-party data without attribution.
+- Do not merge price/SLA/confidence changes without human review.

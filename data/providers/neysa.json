@@ -1,0 +1,72 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "neysa",
+  "name": "Neysa",
+  "website": "https://neysa.ai",
+  "gpu_page": "https://neysa.ai/pricing/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN-BOM"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "console",
+    "documented": null
+  },
+  "billing": {
+    "granularity": "minute",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": 0.1,
+    "file_usd_per_gb_mo": 0.1,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": 0.1,
+    "mountable": true,
+    "shared": true
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Official pricing lists H200 SXM, H100 SXM, L40S and L4 on-demand. RTX PRO 6000 and B300 are on request; bare-metal 8x H200/H100/L40S/MI300X are reserved. vCPU/RAM are included but not published per plan."
+  },
+  "incidents_file": "incidents/neysa.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/neysa.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://neysa.ai/neysa-velocis/ai-cloud-architecture-and-design/",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

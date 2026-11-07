@@ -1,0 +1,81 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/a40",
+  "supplier": "nvidia",
+  "name": "A40",
+  "architecture": "Ampere",
+  "generation": "Ampere",
+  "status": "active",
+  "variants": [
+    {
+      "id": "a40-pcie",
+      "name": "A40",
+      "subtitle": "PCIe \u00b7 48 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 48,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 696,
+      "tdp_w": 300,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 112.5,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 37.4,
+        "tf32_tensor_tflops_dense": 74.8,
+        "tf32_tensor_tflops_sparse": 149.7,
+        "bf16_tensor_tflops_dense": 149.7,
+        "bf16_tensor_tflops_sparse": 299.4,
+        "fp16_tensor_tflops_dense": 149.7,
+        "fp16_tensor_tflops_sparse": 299.4,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 299.4,
+        "int8_tops_sparse": 598.8
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG; vGPU/time-slicing only."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/a40/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

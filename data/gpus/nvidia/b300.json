@@ -1,0 +1,101 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/b300",
+  "supplier": "nvidia",
+  "name": "B300",
+  "architecture": "Blackwell Ultra",
+  "generation": "Blackwell Ultra",
+  "status": "active",
+  "variants": [
+    {
+      "id": "b300-sxm",
+      "name": "B300 SXM",
+      "subtitle": "SXM \u00b7 288 GB HBM3e",
+      "form_factor": "sxm",
+      "vram_gb": 288,
+      "memory_type": "HBM3e",
+      "memory_generation": "HBM3e",
+      "memory_bandwidth_gbps": 8000,
+      "tdp_w": 1400,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 5,
+        "bandwidth_gbps": 1800,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 75,
+        "fp64_tensor_tflops": 150,
+        "fp32_tflops": 150,
+        "tf32_tensor_tflops_dense": 1875,
+        "tf32_tensor_tflops_sparse": 3750,
+        "bf16_tensor_tflops_dense": 3750,
+        "bf16_tensor_tflops_sparse": 7500,
+        "fp16_tensor_tflops_dense": 3750,
+        "fp16_tensor_tflops_sparse": 7500,
+        "fp8_tensor_tflops_dense": 7500,
+        "fp8_tensor_tflops_sparse": 15000,
+        "fp6_tflops_dense": 7500,
+        "fp6_tflops_sparse": 15000,
+        "fp4_tops_dense": 15000,
+        "fp4_tops_sparse": 30000,
+        "int8_tops_dense": 7500,
+        "int8_tops_sparse": 15000
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 41,
+        "notes": "Up to 7 MIG slices."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "fp6",
+        "fp4",
+        "confidential-computing",
+        "nvlink",
+        "nvswitch",
+        "mig",
+        "sparsity"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "fp6",
+          "fp4",
+          "int8"
+        ],
+        "notes": "FP4/FP6 are block-scaled Blackwell formats. Peak rates are vendor headline figures."
+      },
+      "sources": [],
+      "confidence": "low"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/gb300-nvl72/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://cyfuture.cloud/b300-gpu-server",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "low",
+  "verified_at": "2026-11-07"
+}

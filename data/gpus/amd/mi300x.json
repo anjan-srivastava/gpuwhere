@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "amd/mi300x",
+  "supplier": "amd",
+  "name": "MI300X",
+  "architecture": "CDNA 3",
+  "generation": "CDNA 3",
+  "status": "active",
+  "variants": [
+    {
+      "id": "mi300x-oam",
+      "name": "MI300X",
+      "subtitle": "OAM \u00b7 192 GB HBM3",
+      "form_factor": "oam",
+      "vram_gb": 192,
+      "memory_type": "HBM3",
+      "memory_generation": "HBM3",
+      "memory_bandwidth_gbps": 5300,
+      "tdp_w": 750,
+      "interconnect": {
+        "type": "infinity-fabric",
+        "version": null,
+        "bandwidth_gbps": 128,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 81.7,
+        "fp64_tensor_tflops": 163.4,
+        "fp32_tflops": 163.4,
+        "tf32_tensor_tflops_dense": 653.7,
+        "tf32_tensor_tflops_sparse": 1306.4,
+        "bf16_tensor_tflops_dense": 1300,
+        "bf16_tensor_tflops_sparse": 2610,
+        "fp16_tensor_tflops_dense": 1300,
+        "fp16_tensor_tflops_sparse": 2610,
+        "fp8_tensor_tflops_dense": 2610,
+        "fp8_tensor_tflops_sparse": 5220,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 2600,
+        "int8_tops_sparse": 5220
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "AMD GPU partitioning, not NVIDIA MIG."
+      },
+      "features": [
+        "rocm",
+        "infinity-fabric",
+        "fp8",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3/E5M2 are native; no FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "yotta-shakti/IN/H100/2x/standard",
+  "provider": "yotta-shakti",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H100",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "standard",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 52,
+  "ram_gb": 480,
+  "disk_gb": 100,
+  "disk_type": "root",
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.79,
+      "usd_per_vm_hr": 7.58,
+      "native": {
+        "inr_per_vm_hr": 712.0,
+        "inr_per_gpu_hr": 356.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 3.03,
+        "usd_per_vm_hr": 6.07
+      },
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 2.94,
+        "usd_per_vm_hr": 5.89
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.88,
+        "usd_per_vm_hr": 5.77
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 2.79,
+        "usd_per_vm_hr": 5.58
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "gpu_variant": "h100-sxm5",
+  "pricing_status": "published",
+  "price_note": null,
+  "notes": "Provider plan: VM – 2 x H100 On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹381,514/month for the 1-month term; page lists ₹416,100 (page used).",
+  "billing_model": "hourly",
+  "residency": "india"
+}

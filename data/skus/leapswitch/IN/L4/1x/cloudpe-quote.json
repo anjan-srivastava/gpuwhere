@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "leapswitch/IN/L4/1x/cloudpe-quote",
+  "provider": "leapswitch",
+  "region": "IN",
+  "status": "active",
+  "gpu": "L4",
+  "gpu_variant": "l4-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "cloudpe-quote",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 8,
+  "ram_gb": 32,
+  "disk_gb": 30,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": "Listed on the Leapswitch GPU page as 'On CloudPe' (deploy via CloudPe); no Leapswitch price.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://leapswitch.com/gpu-cloud/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "L4 is offered via CloudPe; price not listed on the Leapswitch GPU page.",
+  "billing_model": null,
+  "residency": "india"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "microsoft-azure/IN-NAG/A100/1x/nc24ads-a100-v4",
+  "provider": "microsoft-azure",
+  "region": "IN-NAG",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-pcie-80gb",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "nc24ads-a100-v4",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 24,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.14,
+      "usd_per_vm_hr": 5.14
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://prices.azure.com/api/retail/prices",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://azure.microsoft.com/pricing/details/virtual-machines/linux/#jioindiacentral",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: Standard_NC24ads_A100_v4. Azure region jioindiacentral. Linux pay-as-you-go; spot is evictable; reservations are 1/3-year totals. vCPU from the size name; host RAM not in the price API. Azure Jio India region (in Jio data centres; access aimed at Jio-partnership customers); no spot or reservation rates are listed.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "residency": "india"
+}

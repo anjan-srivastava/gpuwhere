@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "ctrls",
+  "name": "CtrlS",
+  "website": "https://www.ctrls.com",
+  "gpu_page": "https://www.ctrls.com/accelerated-cloud-platform-for-gpu-ai/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": true
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "No self-serve GPU ordering on ctrls.com; GPU capacity (incl. IndiaAI) is contracted through sales."
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "CtrlS GPUaaS/GPU Private Cloud references A100 and H100. IndiaAI L1 H100 PCIe 1x rate is ₹252/hr; no public commercial GPU rate card."
+  },
+  "incidents_file": "incidents/ctrls.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.ctrls.com/accelerated-cloud-platform-for-gpu-ai/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.ctrls.com/blogs-gpu-as-a-service-powering-the-future-of-scalable-ai-ready-infrastructure/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/jan/doc2025130492001.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

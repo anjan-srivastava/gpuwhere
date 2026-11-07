@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "sify/IN/H100/1x/sovereign-ai-quote",
+  "provider": "sify",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-nvl",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "sovereign-ai-quote",
+  "vram_gb_per_gpu": 94,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.sifytechnologies.com/wp-content/uploads/2026/02/SOVEREIGN-AI-IN-A-BOX.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "nvl",
+  "notes": "GPU model supported in Sify sovereign AI server configuration; cloud rate not published."
+}

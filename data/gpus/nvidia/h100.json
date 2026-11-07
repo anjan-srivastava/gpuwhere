@@ -1,0 +1,229 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/h100",
+  "supplier": "nvidia",
+  "name": "H100",
+  "architecture": "Hopper",
+  "generation": "Hopper",
+  "status": "active",
+  "variants": [
+    {
+      "id": "h100-sxm5",
+      "name": "H100 SXM5",
+      "subtitle": "SXM5 \u00b7 80 GB HBM3",
+      "form_factor": "sxm",
+      "vram_gb": 80,
+      "memory_type": "HBM3",
+      "memory_generation": "HBM3",
+      "memory_bandwidth_gbps": 3350,
+      "tdp_w": 700,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 4,
+        "bandwidth_gbps": 900,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 34,
+        "fp64_tensor_tflops": 67,
+        "fp32_tflops": 67,
+        "tf32_tensor_tflops_dense": 494.5,
+        "tf32_tensor_tflops_sparse": 989,
+        "bf16_tensor_tflops_dense": 989.5,
+        "bf16_tensor_tflops_sparse": 1979,
+        "fp16_tensor_tflops_dense": 989.5,
+        "fp16_tensor_tflops_sparse": 1979,
+        "fp8_tensor_tflops_dense": 1979,
+        "fp8_tensor_tflops_sparse": 3958,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 1979,
+        "int8_tops_sparse": 3958
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 10,
+        "notes": "Up to 7 MIG slices of 10 GB."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "confidential-computing",
+        "nvlink",
+        "nvswitch",
+        "mig",
+        "sparsity",
+        "dpx"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3 and E5M2 are native; no FP4."
+      }
+    },
+    {
+      "id": "h100-nvl",
+      "name": "H100 NVL",
+      "subtitle": "PCIe NVL \u00b7 94 GB HBM3",
+      "form_factor": "nvl",
+      "vram_gb": 94,
+      "memory_type": "HBM3",
+      "memory_generation": "HBM3",
+      "memory_bandwidth_gbps": 3900,
+      "tdp_w": 400,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 4,
+        "bandwidth_gbps": 600,
+        "notes": "2-way NVLink bridge."
+      },
+      "compute": {
+        "fp64_tflops": 30,
+        "fp64_tensor_tflops": 60,
+        "fp32_tflops": 60,
+        "tf32_tensor_tflops_dense": 417.5,
+        "tf32_tensor_tflops_sparse": 835,
+        "bf16_tensor_tflops_dense": 835.5,
+        "bf16_tensor_tflops_sparse": 1671,
+        "fp16_tensor_tflops_dense": 835.5,
+        "fp16_tensor_tflops_sparse": 1671,
+        "fp8_tensor_tflops_dense": 1670.5,
+        "fp8_tensor_tflops_sparse": 3341,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 1670.5,
+        "int8_tops_sparse": 3341
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 12,
+        "notes": "Up to 7 MIG slices of 12 GB."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "confidential-computing",
+        "nvlink",
+        "mig",
+        "sparsity",
+        "dpx"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "tdp_note": "350\u2013400 W configurable.",
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3 and E5M2 are native; no FP4."
+      }
+    },
+    {
+      "id": "h100-pcie",
+      "name": "H100 PCIe",
+      "subtitle": "PCIe \u00b7 80 GB HBM2e",
+      "form_factor": "pcie",
+      "vram_gb": 80,
+      "memory_type": "HBM2e",
+      "memory_generation": "HBM2e",
+      "memory_bandwidth_gbps": 2000,
+      "tdp_w": 350,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 4,
+        "bandwidth_gbps": 600,
+        "notes": "PCIe Gen5 x16; 2-way NVLink bridge."
+      },
+      "compute": {
+        "fp64_tflops": 26,
+        "fp64_tensor_tflops": 51,
+        "fp32_tflops": 51,
+        "tf32_tensor_tflops_dense": 378,
+        "tf32_tensor_tflops_sparse": 756,
+        "bf16_tensor_tflops_dense": 756.5,
+        "bf16_tensor_tflops_sparse": 1513,
+        "fp16_tensor_tflops_dense": 756.5,
+        "fp16_tensor_tflops_sparse": 1513,
+        "fp8_tensor_tflops_dense": 1513,
+        "fp8_tensor_tflops_sparse": 3026,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 1513,
+        "int8_tops_sparse": 3026
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 7,
+        "max_slice_memory_gb": 10,
+        "notes": "Up to 7 MIG slices of 10 GB."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "confidential-computing",
+        "nvlink",
+        "mig",
+        "sparsity",
+        "dpx"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 E4M3 and E5M2 are native; no FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/h100/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs22/data-center/h100/PB-11133-001_v01.pdf",
+      "kind": "datasheet",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

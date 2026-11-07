@@ -1,0 +1,83 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-6000-ada",
+  "supplier": "nvidia",
+  "name": "RTX 6000 Ada",
+  "architecture": "Ada Lovelace",
+  "generation": "Ada Lovelace",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-6000-ada-pcie",
+      "name": "RTX 6000 Ada",
+      "subtitle": "PCIe \u00b7 48 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 48,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 960,
+      "tdp_w": 300,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 64,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 91.1,
+        "tf32_tensor_tflops_dense": 182.1,
+        "tf32_tensor_tflops_sparse": 364.2,
+        "bf16_tensor_tflops_dense": 364,
+        "bf16_tensor_tflops_sparse": 728,
+        "fp16_tensor_tflops_dense": 364,
+        "fp16_tensor_tflops_sparse": 728,
+        "fp8_tensor_tflops_dense": 728.5,
+        "fp8_tensor_tflops_sparse": 1457,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 728.5,
+        "int8_tops_sparse": 1457
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 is native; no FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/design-visualization/rtx-6000/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

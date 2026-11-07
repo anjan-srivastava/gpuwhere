@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neysa/IN-BOM/B300/8x/bare-metal-quote",
+  "provider": "neysa",
+  "region": "IN-BOM",
+  "status": "active",
+  "gpu": "B300",
+  "gpu_variant": "b300-sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "bare-metal-quote",
+  "vram_gb_per_gpu": 288,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "pricing_status": "quote_only",
+  "price_note": "8-GPU bare-metal node: price on request.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "Page lists total node GPU memory as 2,304 GB.",
+  "billing_model": null,
+  "residency": "india"
+}

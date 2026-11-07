@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/Gaudi 2/8x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "Gaudi 2",
+  "gpu_variant": "gaudi2-oam",
+  "form_factor": "generic",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 152,
+  "ram_gb": 2304,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.04,
+      "usd_per_vm_hr": 8.36,
+      "native": {
+        "inr_per_vm_hr": 785.0,
+        "inr_per_gpu_hr": 98.12,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 0.83,
+        "usd_per_vm_hr": 6.65
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 0.7,
+        "usd_per_vm_hr": 5.61
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 0.59,
+        "usd_per_vm_hr": 4.76
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 8xGaudi2.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 152 vCPU / 2304 GB (table used).",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

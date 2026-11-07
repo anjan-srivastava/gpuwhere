@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "leapswitch/IN/RTX PRO 6000/1x/standard",
+  "provider": "leapswitch",
+  "region": "IN",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 64,
+  "ram_gb": 170,
+  "disk_gb": 30,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.95,
+      "usd_per_vm_hr": 1.95,
+      "native": {
+        "inr_per_vm_hr": 183.01,
+        "inr_per_gpu_hr": 183.01,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06",
+        "published_month_inr": 133600.0,
+        "published_per": "gpu",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": []
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://leapswitch.com/gpu-cloud/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "Price per GPU per month, excl. GST. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "pricing_status": "published",
+  "price_note": null,
+  "billing_model": "monthly",
+  "residency": "india"
+}

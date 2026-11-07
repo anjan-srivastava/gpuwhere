@@ -1,0 +1,88 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/a30",
+  "supplier": "nvidia",
+  "name": "A30",
+  "architecture": "Ampere",
+  "generation": "Ampere",
+  "status": "active",
+  "variants": [
+    {
+      "id": "a30-pcie",
+      "name": "A30",
+      "subtitle": "PCIe \u00b7 24 GB HBM2",
+      "form_factor": "pcie",
+      "vram_gb": 24,
+      "memory_type": "HBM2",
+      "memory_generation": "HBM2",
+      "memory_bandwidth_gbps": 933,
+      "tdp_w": 165,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 3,
+        "bandwidth_gbps": 200,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 10.3,
+        "fp64_tensor_tflops": 10.3,
+        "fp32_tflops": 10.3,
+        "tf32_tensor_tflops_dense": 82,
+        "tf32_tensor_tflops_sparse": 165,
+        "bf16_tensor_tflops_dense": 165,
+        "bf16_tensor_tflops_sparse": 330,
+        "fp16_tensor_tflops_dense": 165,
+        "fp16_tensor_tflops_sparse": 330,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 330,
+        "int8_tops_sparse": 660
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 4,
+        "max_slice_memory_gb": 6,
+        "notes": "Up to 4 MIG slices of 6 GB."
+      },
+      "features": [
+        "tf32",
+        "nvlink",
+        "mig",
+        "sparsity",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "int8"
+        ],
+        "notes": "No native FP8 or FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/a30/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

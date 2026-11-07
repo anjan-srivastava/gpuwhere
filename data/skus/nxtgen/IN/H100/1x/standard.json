@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "nxtgen/IN/H100/1x/standard",
+  "provider": "nxtgen",
+  "region": "IN",
+  "status": "unavailable",
+  "gpu": "H100",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 94,
+  "vcpus": 40,
+  "ram_gb": 80,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.63,
+      "usd_per_vm_hr": 2.63,
+      "native": {
+        "inr_per_vm_hr": 247.0,
+        "inr_per_gpu_hr": 247.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.11,
+        "usd_per_vm_hr": 2.11
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 2.11,
+        "usd_per_vm_hr": 2.11
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.68,
+        "usd_per_vm_hr": 1.68
+      }
+    ]
+  },
+  "availability": {
+    "last_observed_at": "2026-11-07T18:10:07Z",
+    "available_vms": 0,
+    "available_gpus": 0,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": "https://speedcloud.nxtgen.com/ (plan N1-Pulse: SOLD OUT)"
+  },
+  "sources": [
+    {
+      "url": "https://speedcloud.nxtgen.com/aiinstances.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://speedcloud.nxtgen.com/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "form_factor": "nvl",
+  "gpu_variant": "h100-nvl",
+  "pricing_status": "published",
+  "price_note": null,
+  "notes": "Provider plan: H100NVL.1x. Rate card prices are INR per instance-hour for each term; USD at the ECB reference rate. SpeedCloud homepage marks the matching plan 'N1-Pulse' SOLD OUT.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

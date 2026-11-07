@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-NOI/A100/4x/n-a100-512",
+  "provider": "acecloud",
+  "region": "IN-NOI",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "form_factor": "sxm",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "n-a100-512",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 64,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.81,
+      "usd_per_vm_hr": 7.25,
+      "native": {
+        "published_month_usd": 5294.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 1.72,
+        "usd_per_vm_hr": 6.89
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 1.63,
+        "usd_per_vm_hr": 6.53
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-a100-80gb/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.A100.512. Hourly billing not offered for this flavour in Noida. AceCloud does not publish the A100 form factor; SXM assumed. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

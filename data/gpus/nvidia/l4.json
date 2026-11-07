@@ -1,0 +1,82 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/l4",
+  "supplier": "nvidia",
+  "name": "L4",
+  "architecture": "Ada Lovelace",
+  "generation": "Ada Lovelace",
+  "status": "active",
+  "variants": [
+    {
+      "id": "l4-pcie",
+      "name": "L4",
+      "subtitle": "PCIe \u00b7 24 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 24,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 300,
+      "tdp_w": 72,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 64,
+        "notes": "PCIe Gen4 x16."
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 30.3,
+        "tf32_tensor_tflops_dense": 60,
+        "tf32_tensor_tflops_sparse": 120,
+        "bf16_tensor_tflops_dense": 121,
+        "bf16_tensor_tflops_sparse": 242,
+        "fp16_tensor_tflops_dense": 121,
+        "fp16_tensor_tflops_sparse": 242,
+        "fp8_tensor_tflops_dense": 242.5,
+        "fp8_tensor_tflops_sparse": 485,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 242.5,
+        "int8_tops_sparse": 485
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG; time-slicing only."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "sparsity",
+        "ecc"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 is native; no FP4."
+      }
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/l4/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

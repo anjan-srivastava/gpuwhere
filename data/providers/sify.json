@@ -1,0 +1,71 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "sify",
+  "name": "Sify Technologies",
+  "website": "https://www.sifytechnologies.com",
+  "gpu_page": "https://www.sifytechnologies.com/cloudinfinitai-gpu-as-a-service/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "CloudInfinit+AI GPUaaS has no public rate card or self-serve GPU ordering; contracted through sales."
+  },
+  "billing": {
+    "granularity": "hour",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Sify sovereign AI server configuration supports L4, L40S, H100/H200 NVL and RTX PRO 6000 Blackwell. Cloud GPU rate card is not published; GPUaaS is offered as VPI, VPE and EBM."
+  },
+  "incidents_file": "incidents/sify.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.sifytechnologies.com/cloud-services/sify-cloudinfinit-ai-services/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.sifytechnologies.com/wp-content/uploads/2026/02/SOVEREIGN-AI-IN-A-BOX.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "low",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": null
+  }
+}

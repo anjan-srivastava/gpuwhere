@@ -1,0 +1,68 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "microsoft-azure/IN-PNQ/T4/1x/nc4as-t4-v3",
+  "provider": "microsoft-azure",
+  "region": "IN-PNQ",
+  "status": "active",
+  "gpu": "T4",
+  "gpu_variant": "t4-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "nc4as-t4-v3",
+  "vram_gb_per_gpu": 16,
+  "vcpus": 4,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.58,
+      "usd_per_vm_hr": 0.58
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.18,
+      "usd_per_vm_hr": 0.18,
+      "notice_sec": null
+    },
+    "committed": [
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 0.34,
+        "usd_per_vm_hr": 0.34
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 0.22,
+        "usd_per_vm_hr": 0.22
+      }
+    ]
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://prices.azure.com/api/retail/prices",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://azure.microsoft.com/pricing/details/virtual-machines/linux/#centralindia",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: Standard_NC4as_T4_v3. Azure region centralindia. Linux pay-as-you-go; spot is evictable; reservations are 1/3-year totals. vCPU from the size name; host RAM not in the price API.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "residency": "india"
+}

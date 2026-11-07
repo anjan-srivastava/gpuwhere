@@ -1,0 +1,40 @@
+name: refresh-availability
+
+# Hourly availability collection. Triggered by the Cloudflare Worker cron
+# (repository_dispatch) or manually from the Actions tab.
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [availability]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-availability
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install jsonschema
+      - name: Collect free GPUs (providers with a public signal)
+        run: python scrapers/availability_refresh.py --write || true
+      - name: Freshness gate for availability
+        run: python scripts/check_freshness.py --warn-only
+      - name: Commit observations
+        run: |
+          git config user.name  "catalogue-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/availability data/skus
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "availability $(date -u +%FT%H:%MZ)"
+            git push
+          fi

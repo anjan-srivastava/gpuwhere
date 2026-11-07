@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "aws/IN-HYD/L4/1x/g6-16xlarge",
+  "provider": "aws",
+  "region": "IN-HYD",
+  "status": "active",
+  "gpu": "L4",
+  "gpu_variant": "l4-pcie",
+  "form_factor": "pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "g6-16xlarge",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 64,
+  "ram_gb": 274.9,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 4.08,
+      "usd_per_vm_hr": 4.08
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/Asia%20Pacific%20%28Hyderabad%29/Linux/index.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: g6.16xlarge. AWS Asia Pacific (Hyderabad), Linux on-demand (shared tenancy). Memory converted from GiB. Spot and Savings Plans not included from this source.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "residency": "india"
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/v100",
+  "supplier": "nvidia",
+  "name": "V100",
+  "architecture": "Volta",
+  "generation": "Volta",
+  "status": "active",
+  "variants": [
+    {
+      "id": "v100-sxm2-32gb",
+      "name": "V100 SXM2 32GB",
+      "subtitle": "SXM2 \u00b7 32 GB HBM2",
+      "form_factor": "sxm",
+      "vram_gb": 32,
+      "memory_type": "HBM2",
+      "memory_generation": "HBM2",
+      "memory_bandwidth_gbps": 900,
+      "tdp_w": 300,
+      "interconnect": {
+        "type": "nvlink",
+        "version": 2,
+        "bandwidth_gbps": 300,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": 7.8,
+        "fp64_tensor_tflops": 15.7,
+        "fp32_tflops": 15.7,
+        "tf32_tensor_tflops_dense": null,
+        "tf32_tensor_tflops_sparse": null,
+        "bf16_tensor_tflops_dense": null,
+        "bf16_tensor_tflops_sparse": null,
+        "fp16_tensor_tflops_dense": 125,
+        "fp16_tensor_tflops_sparse": null,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": null,
+        "int8_tops_sparse": null
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG."
+      },
+      "features": [
+        "nvlink",
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp64",
+          "fp32",
+          "fp16",
+          "int8"
+        ],
+        "notes": "Volta Tensor Cores; no TF32/BF16/FP8/FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/v100/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "krutrim-cloud/IN/A100/1x/console-price",
+  "provider": "krutrim-cloud",
+  "region": "IN",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "console-price",
+  "vram_gb_per_gpu": 80,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": []
+  },
+  "billing_model": null,
+  "pricing_status": "quote_only",
+  "price_note": "Krutrim offers NVIDIA A100 VMs on demand and reserved, but publishes the rate only in the console after sign-up; the public pricing doc lists CPU flavours only.",
+  "sources": [
+    {
+      "url": "https://www.olakrutrim.com/gpu-services",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.cloud.olakrutrim.com/basics/pricing/cpu-and-gpu.md",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Self-serve: console, Python SDK and Terraform provider. Multi-GPU and bare-metal sizes are offered but not published; form factor not published, SXM assumed.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "residency": "india"
+}

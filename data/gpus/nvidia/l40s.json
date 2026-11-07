@@ -1,0 +1,82 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/l40s",
+  "supplier": "nvidia",
+  "name": "L40S",
+  "architecture": "Ada Lovelace",
+  "generation": "Ada Lovelace",
+  "status": "active",
+  "variants": [
+    {
+      "id": "l40s-pcie",
+      "name": "L40S",
+      "subtitle": "PCIe \u00b7 48 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 48,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 864,
+      "tdp_w": 350,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 64,
+        "notes": "PCIe Gen4 x16."
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 91.6,
+        "tf32_tensor_tflops_dense": 183,
+        "tf32_tensor_tflops_sparse": 366,
+        "bf16_tensor_tflops_dense": 362.05,
+        "bf16_tensor_tflops_sparse": 733,
+        "fp16_tensor_tflops_dense": 362.05,
+        "fp16_tensor_tflops_sparse": 733,
+        "fp8_tensor_tflops_dense": 733,
+        "fp8_tensor_tflops_sparse": 1466,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 733,
+        "int8_tops_sparse": 1466
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG; time-slicing only."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "sparsity",
+        "ecc"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "int8"
+        ],
+        "notes": "FP8 is native; no FP4."
+      }
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/l40s/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

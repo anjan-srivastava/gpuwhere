@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "acecloud/IN-NOI/H100/8x/n-hgxh100-2000",
+  "provider": "acecloud",
+  "region": "IN-NOI",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-sxm5",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "n-hgxh100-2000",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 208,
+  "ram_gb": 2000,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.63,
+      "usd_per_vm_hr": 29.01,
+      "native": {
+        "published_month_usd": 21176.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 3.44,
+        "usd_per_vm_hr": 27.56
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 3.26,
+        "usd_per_vm_hr": 26.11
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h100-hgx/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: N.HGXH100.2000. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "monthly",
+  "residency": "india"
+}

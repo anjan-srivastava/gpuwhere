@@ -1,0 +1,96 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/rtx-pro-6000",
+  "supplier": "nvidia",
+  "name": "RTX PRO 6000",
+  "architecture": "Blackwell",
+  "generation": "Blackwell",
+  "status": "active",
+  "variants": [
+    {
+      "id": "rtx-pro-6000-blackwell",
+      "name": "RTX PRO 6000 Blackwell",
+      "subtitle": "PCIe \u00b7 96 GB GDDR7",
+      "form_factor": "pcie",
+      "vram_gb": 96,
+      "memory_type": "GDDR7",
+      "memory_generation": "GDDR7",
+      "memory_bandwidth_gbps": 1792,
+      "tdp_w": 600,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 128,
+        "notes": "PCIe Gen5 x16."
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 125,
+        "tf32_tensor_tflops_dense": 251.9,
+        "tf32_tensor_tflops_sparse": 503.8,
+        "bf16_tensor_tflops_dense": 503.8,
+        "bf16_tensor_tflops_sparse": 1007.6,
+        "fp16_tensor_tflops_dense": 503.8,
+        "fp16_tensor_tflops_sparse": 1007.6,
+        "fp8_tensor_tflops_dense": 1007.6,
+        "fp8_tensor_tflops_sparse": 2015.2,
+        "fp4_tops_dense": 2000,
+        "fp4_tops_sparse": 4000,
+        "int8_tops_dense": 1007.6,
+        "int8_tops_sparse": 2015.2
+      },
+      "mig": {
+        "supported": true,
+        "max_slices": 4,
+        "max_slice_memory_gb": 24,
+        "notes": "Up to 4\u00d7 24 GB or 2\u00d7 48 GB MIG slices."
+      },
+      "features": [
+        "transformer-engine",
+        "fp8",
+        "fp4",
+        "mig",
+        "sparsity",
+        "ecc"
+      ],
+      "notes": null,
+      "sources": [],
+      "confidence": "high",
+      "tdp_note": "400\u2013600 W server edition; 600 W workstation edition.",
+      "precision": {
+        "native": [
+          "fp32",
+          "tf32",
+          "bf16",
+          "fp16",
+          "fp8-e4m3",
+          "fp8-e5m2",
+          "fp4",
+          "int8"
+        ],
+        "notes": "FP4 is native; FP6 is not listed on the product page."
+      }
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/NVIDIA-RTX-Blackwell-PRO-GPU-Architecture-v1.0.pdf",
+      "kind": "datasheet",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.nvidia.com/datacenter/tesla/mig-user-guide/latest/supported-gpus.html",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07"
+}

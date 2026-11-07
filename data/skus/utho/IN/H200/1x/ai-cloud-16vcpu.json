@@ -1,0 +1,56 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "utho/IN/H200/1x/ai-cloud-16vcpu",
+  "provider": "utho",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H200",
+  "gpu_variant": "h200-sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "ai-cloud-16vcpu",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 16,
+  "ram_gb": 96,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.6,
+        "usd_per_vm_hr": 2.6
+      }
+    ]
+  },
+  "pricing_status": "quote_only",
+  "price_note": "Indicative \u20b9179,995/month reserved rate; contact sales. Not an on-demand list price.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://utho.com/ai-cloud",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "notes": "Reserved monthly pricing is indicative; not an on-demand list price."
+}

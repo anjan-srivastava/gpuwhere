@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/provider.schema.json",
+  "title": "Provider",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "country",
+    "status",
+    "regions",
+    "billing",
+    "networking",
+    "storage",
+    "reliability",
+    "sources",
+    "confidence",
+    "verified_at"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string",
+      "pattern": "^https://"
+    },
+    "gpu_page": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "Official page listing the provider's GPU offerings/pricing; UI links here"
+    },
+    "country": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "beta",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "regions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "properties": {
+        "meity": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "dpdp": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "soc2": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "iso27001": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "api": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "provisioning": {
+          "enum": [
+            "api",
+            "console",
+            "sales"
+          ],
+          "description": "How a customer gets a GPU: api = documented provisioning API, console = self-serve web console/order flow, sales = no self-serve GPU ordering"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documented": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "billing": {
+      "type": "object",
+      "required": [
+        "granularity",
+        "currency"
+      ],
+      "properties": {
+        "granularity": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "networking": {
+      "type": "object",
+      "required": [
+        "vpc",
+        "private_ip"
+      ],
+      "properties": {
+        "vpc": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "private_ip": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "outbound_tunnel": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "inter_node_ib": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "storage": {
+      "type": "object",
+      "properties": {
+        "block_usd_per_gb_mo": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "file_usd_per_gb_mo": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "object_s3_compatible": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "object_usd_per_gb_mo": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "mountable": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Block or file storage that can be attached to a GPU VM while it runs - where downloaded model weights live. null = not verified either way"
+        },
+        "shared": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "File storage mountable on several nodes at once (shared filesystem), so several workers can read the same weights"
+        },
+        "persistent": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Storage outlives the instance: survives a stop or terminate, so models need not be re-downloaded"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "reliability": {
+      "type": "object",
+      "properties": {
+        "sla_pct": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "incident_count_90d": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "downtime_min_90d": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "capacity_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "cpu_vm": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "incidents_file": {
+      "type": "string"
+    },
+    "availability": {
+      "type": "object",
+      "properties": {
+        "tracked": {
+          "type": "boolean"
+        },
+        "cadence": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "pricing_cadence": {
+      "type": "string"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "feed",
+            "api",
+            "page",
+            "quote",
+            "tracker",
+            "status_page",
+            "postmortem",
+            "community"
+          ]
+        },
+        "fetched_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

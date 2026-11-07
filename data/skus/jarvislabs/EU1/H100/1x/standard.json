@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "jarvislabs/EU1/H100/1x/standard",
+  "provider": "jarvislabs",
+  "region": "EU1",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-sxm5",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 16,
+  "ram_gb": 200,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.02,
+      "usd_per_vm_hr": 3.02,
+      "native": {
+        "inr_per_vm_hr": 283.5,
+        "inr_per_gpu_hr": 283.5,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "jl gpus --json",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://jarvislabs.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "No USD price published for this region; `jl gpus --json` INR converted at the ECB reference rate. CLI row has no workload_type.",
+  "availability": {
+    "last_observed_at": "2026-11-07T18:10:07Z",
+    "available_vms": 0,
+    "available_gpus": 0,
+    "spot_available_vms": 0,
+    "spot_available_gpus": 0,
+    "source": "jl gpus --json (workload=unspecified)"
+  },
+  "billing_model": "hourly",
+  "residency": "outside-india"
+}

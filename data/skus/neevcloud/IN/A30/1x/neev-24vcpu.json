@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neevcloud/IN/A30/1x/neev-24vcpu",
+  "provider": "neevcloud",
+  "region": "IN",
+  "status": "active",
+  "gpu": "A30",
+  "gpu_variant": "a30-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "neev-24vcpu",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 24,
+  "ram_gb": 192,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.16,
+      "usd_per_vm_hr": 1.16,
+      "native": {
+        "inr_per_gpu_hr": 110.22
+      }
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://neevcloud.com/gpu-ai-service",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "pcie",
+  "notes": "GPU AI Service per-GPU rate; reserved discounts available."
+}

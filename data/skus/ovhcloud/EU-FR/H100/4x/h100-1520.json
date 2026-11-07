@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "ovhcloud/EU-FR/H100/4x/h100-1520",
+  "provider": "ovhcloud",
+  "region": "EU-FR",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-pcie",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "h100-1520",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 120,
+  "ram_gb": 1520,
+  "disk_gb": 15560,
+  "disk_type": "nvme",
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 3.13,
+      "usd_per_vm_hr": 12.5,
+      "native": {
+        "eur_per_vm_hr": 11.2,
+        "eur_per_gpu_hr": 2.8,
+        "fx_eur_usd": 1.1165,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 2.97,
+        "usd_per_vm_hr": 11.88
+      }
+    ]
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=IE",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.ovhcloud.com/en-ie/public-cloud/prices/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: h100-1520. OVHcloud Public Cloud (Europe; also offered in other OVH regions). EUR excl. VAT, converted at the ECB reference rate. Outside India: no India data residency.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "../../../schema/gpu.schema.json",
+  "id": "nvidia/t4",
+  "supplier": "nvidia",
+  "name": "T4",
+  "architecture": "Turing",
+  "generation": "Turing",
+  "status": "active",
+  "variants": [
+    {
+      "id": "t4-pcie",
+      "name": "T4",
+      "subtitle": "PCIe \u00b7 16 GB GDDR6",
+      "form_factor": "pcie",
+      "vram_gb": 16,
+      "memory_type": "GDDR6",
+      "memory_generation": "GDDR6",
+      "memory_bandwidth_gbps": 320,
+      "tdp_w": 70,
+      "interconnect": {
+        "type": "pcie",
+        "version": null,
+        "bandwidth_gbps": 64,
+        "notes": null
+      },
+      "compute": {
+        "fp64_tflops": null,
+        "fp64_tensor_tflops": null,
+        "fp32_tflops": 8.1,
+        "tf32_tensor_tflops_dense": null,
+        "tf32_tensor_tflops_sparse": null,
+        "bf16_tensor_tflops_dense": null,
+        "bf16_tensor_tflops_sparse": null,
+        "fp16_tensor_tflops_dense": 65,
+        "fp16_tensor_tflops_sparse": null,
+        "fp8_tensor_tflops_dense": null,
+        "fp8_tensor_tflops_sparse": null,
+        "fp6_tflops_dense": null,
+        "fp6_tflops_sparse": null,
+        "fp4_tops_dense": null,
+        "fp4_tops_sparse": null,
+        "int8_tops_dense": 130,
+        "int8_tops_sparse": null
+      },
+      "mig": {
+        "supported": false,
+        "max_slices": null,
+        "max_slice_memory_gb": null,
+        "notes": "No MIG."
+      },
+      "features": [
+        "ecc"
+      ],
+      "precision": {
+        "native": [
+          "fp32",
+          "fp16",
+          "int8"
+        ],
+        "notes": "Turing Tensor Cores; no TF32/BF16/FP8/FP4."
+      },
+      "sources": [],
+      "confidence": "medium"
+    }
+  ],
+  "notes": null,
+  "sources": [
+    {
+      "url": "https://www.nvidia.com/en-us/data-center/t4/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07"
+}

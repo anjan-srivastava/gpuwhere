@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/incident.schema.json",
+  "title": "IncidentHistory",
+  "type": "object",
+  "required": [
+    "provider",
+    "updated_at",
+    "incidents"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "count_90d": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "downtime_min_90d": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "incidents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/incident"
+      }
+    }
+  },
+  "$defs": {
+    "incident": {
+      "type": "object",
+      "required": [
+        "id",
+        "started_at",
+        "scope",
+        "impact",
+        "source",
+        "confidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "started_at": {
+          "type": "string"
+        },
+        "resolved_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duration_min": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "gpu",
+            "region",
+            "api",
+            "storage",
+            "network"
+          ]
+        },
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gpu": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shape": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "impact": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "details": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

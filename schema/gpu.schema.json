@@ -1,0 +1,406 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/gpu.schema.json",
+  "title": "GPU",
+  "type": "object",
+  "required": [
+    "id",
+    "supplier",
+    "name",
+    "variants",
+    "sources",
+    "confidence",
+    "verified_at"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+/[a-z0-9-]+$"
+    },
+    "supplier": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "architecture": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "generation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "beta",
+        "deprecated",
+        "retired"
+      ]
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "form_factor",
+          "vram_gb"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "form_factor": {
+            "enum": [
+              "sxm",
+              "nvl",
+              "pcie",
+              "oam",
+              "generic"
+            ]
+          },
+          "vram_gb": {
+            "type": "number"
+          },
+          "memory_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "memory_generation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "memory_bandwidth_gbps": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "tdp_w": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "tdp_note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "interconnect": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "version": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "bandwidth_gbps": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "compute": {
+            "type": "object",
+            "properties": {
+              "fp64_tflops": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp64_tensor_tflops": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp32_tflops": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "tf32_tensor_tflops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "tf32_tensor_tflops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "bf16_tensor_tflops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "bf16_tensor_tflops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp16_tensor_tflops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp16_tensor_tflops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp8_tensor_tflops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp8_tensor_tflops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp6_tflops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp6_tflops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp4_tops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "fp4_tops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "int8_tops_dense": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "int8_tops_sparse": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "precision": {
+            "type": "object",
+            "properties": {
+              "native": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "fp64",
+                    "fp32",
+                    "tf32",
+                    "bf16",
+                    "fp16",
+                    "fp8-e4m3",
+                    "fp8-e5m2",
+                    "fp6",
+                    "fp4",
+                    "int8"
+                  ]
+                }
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "mig": {
+            "type": "object",
+            "required": [
+              "supported"
+            ],
+            "properties": {
+              "supported": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "max_slices": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "max_slice_memory_gb": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "profiles": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "confidence": {
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "verified_at": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": [
+        "url",
+        "kind"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "feed",
+            "api",
+            "page",
+            "datasheet",
+            "quote",
+            "tracker",
+            "status_page",
+            "postmortem",
+            "community"
+          ]
+        },
+        "fetched_at": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

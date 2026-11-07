@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "cyfuture-ai/IN/B300/2x/standard",
+  "provider": "cyfuture-ai",
+  "region": "IN",
+  "status": "active",
+  "gpu": "B300",
+  "gpu_variant": "b300-sxm",
+  "form_factor": "sxm",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "standard",
+  "vram_gb_per_gpu": 288,
+  "vcpus": 64,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": null,
+      "usd_per_vm_hr": null
+    },
+    "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 6.07,
+        "usd_per_vm_hr": 12.14
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 5.82,
+        "usd_per_vm_hr": 11.64
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 5.56,
+        "usd_per_vm_hr": 11.13
+      }
+    ]
+  },
+  "pricing_status": "quote_only",
+  "price_note": "Reserved only; no on-demand rate published. 1-month ₹1140/hr, 6-month ₹1093/hr, 12-month ₹1045/hr.",
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: 2B300.64v.512m. Rates are INR per instance-hour; USD at the ECB reference rate.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": null,
+  "residency": "india"
+}

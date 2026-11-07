@@ -1,0 +1,76 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "krutrim-cloud",
+  "name": "Krutrim Cloud",
+  "website": "https://www.olakrutrim.com",
+  "gpu_page": "https://www.olakrutrim.com/gpu-services",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": null,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console+api+sdk+terraform",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Web console, Python SDK, Terraform provider and API keys are documented at docs.cloud.olakrutrim.com."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "INR"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": true,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Ola's India-first cloud. GPU VMs (A100, H100) on demand and reserved, bare-metal GPU servers and fractional 'spliced' GPUs. GPU rates are shown in the console after sign-up; the public pricing doc lists CPU flavours only."
+  },
+  "incidents_file": "incidents/krutrim-cloud.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.olakrutrim.com/gpu-services",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://docs.cloud.olakrutrim.com/basics/pricing/cpu-and-gpu.md",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.olakrutrim.com/llms.txt",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "tata-communications/IN/H100/8x/gpu-bm-d224-h100sxm-8x-olu",
+  "provider": "tata-communications",
+  "region": "IN",
+  "status": "active",
+  "gpu": "H100",
+  "gpu_variant": "h100-sxm5",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "gpu-bm-d224-h100sxm-8x-olu",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 224,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 5.2,
+      "usd_per_vm_hr": 41.58,
+      "native": {
+        "inr_per_vm_hr": 3905.0,
+        "inr_per_gpu_hr": 488.12,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": [
+      {
+        "term_months": 3,
+        "usd_per_gpu_hr": 5.05,
+        "usd_per_vm_hr": 40.41
+      },
+      {
+        "term_months": 6,
+        "usd_per_gpu_hr": 4.48,
+        "usd_per_vm_hr": 35.86
+      },
+      {
+        "term_months": 12,
+        "usd_per_gpu_hr": 3.98,
+        "usd_per_vm_hr": 31.88
+      },
+      {
+        "term_months": 36,
+        "usd_per_gpu_hr": 3.77,
+        "usd_per_vm_hr": 30.2
+      },
+      {
+        "term_months": 48,
+        "usd_per_gpu_hr": 3.59,
+        "usd_per_vm_hr": 28.68
+      }
+    ]
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "notes": "Provider plan: GPU.BM.D224.H100SXM.8X.OLU. Bare metal. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}

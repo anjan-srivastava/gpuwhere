@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "yotta-shakti",
+  "name": "Yotta Shakti Cloud",
+  "website": "https://shakticloud.ai",
+  "gpu_page": "https://shakticloud.ai/pricing/",
+  "country": "IN",
+  "status": "active",
+  "regions": [
+    "IN"
+  ],
+  "compliance": {
+    "meity": true,
+    "dpdp": true,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console",
+    "provisioning": "console",
+    "documented": null
+  },
+  "billing": {
+    "granularity": "month",
+    "currency": "USD"
+  },
+  "networking": {
+    "vpc": true,
+    "private_ip": true,
+    "outbound_tunnel": true,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": 99.95,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "Shakti Cloud VM calculator lists H100 1x/2x/4x and L40S 1x/2x; 8x H100 bare metal is a separate offering. L40S price is quote-only."
+  },
+  "incidents_file": "incidents/yotta-shakti.json",
+  "availability": {
+    "tracked": true,
+    "cadence": "hourly",
+    "file": "availability/yotta-shakti.jsonl"
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://shakticloud.ai/pricing/calculator/vm/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://shakticloud.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

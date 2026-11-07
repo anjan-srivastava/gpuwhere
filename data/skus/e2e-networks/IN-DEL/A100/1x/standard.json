@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "e2e-networks/IN-DEL/A100/1x/standard",
+  "provider": "e2e-networks",
+  "region": "IN-DEL",
+  "status": "active",
+  "gpu": "A100",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "standard",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 16,
+  "ram_gb": 115,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "nvlink",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.1,
+      "usd_per_vm_hr": 2.1,
+      "native": {
+        "inr_list_per_vm_hr": 189
+      }
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.7,
+      "usd_per_vm_hr": 0.7,
+      "notice_sec": null,
+      "native": {
+        "inr_per_vm_hr": 66.0,
+        "inr_per_gpu_hr": 66.0,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": []
+  },
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://www.e2enetworks.com/gpus/nvidia-a100-80gb",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "form_factor": "sxm",
+  "gpu_variant": "a100-sxm4-80gb",
+  "pricing_status": "published",
+  "price_note": null,
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹189/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed.",
+  "billing_model": "hourly",
+  "residency": "india"
+}

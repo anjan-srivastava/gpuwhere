@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schema/capacity.schema.json",
+  "provider": "ovhcloud",
+  "as_of": null,
+  "facility": {
+    "power_mw": null,
+    "gpu_power_mw": null,
+    "notes": "Facility MW is not specific to the GPU fleet unless stated.",
+    "source": null
+  },
+  "pools": [],
+  "notes": "Fleet size not published.",
+  "sources": [],
+  "confidence": "low",
+  "verified_at": "2026-11-07"
+}

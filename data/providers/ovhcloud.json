@@ -1,0 +1,66 @@
+{
+  "$schema": "../../schema/provider.schema.json",
+  "id": "ovhcloud",
+  "name": "OVHcloud",
+  "website": "https://www.ovhcloud.com",
+  "gpu_page": "https://www.ovhcloud.com/en-ie/public-cloud/gpu/",
+  "country": "FR",
+  "status": "active",
+  "regions": [
+    "EU-FR"
+  ],
+  "compliance": {
+    "meity": false,
+    "dpdp": null,
+    "soc2": null,
+    "iso27001": null
+  },
+  "api": {
+    "type": "console+api",
+    "provisioning": "api",
+    "documented": true,
+    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+  },
+  "billing": {
+    "granularity": "second",
+    "currency": "EUR"
+  },
+  "networking": {
+    "vpc": null,
+    "private_ip": null,
+    "outbound_tunnel": null,
+    "inter_node_ib": null
+  },
+  "storage": {
+    "block_usd_per_gb_mo": null,
+    "file_usd_per_gb_mo": null,
+    "object_s3_compatible": null,
+    "object_usd_per_gb_mo": null
+  },
+  "reliability": {
+    "sla_pct": null,
+    "incident_count_90d": null,
+    "downtime_min_90d": null,
+    "capacity_notes": null,
+    "notes": "European cloud (France). Public Cloud GPU instances (H100/A100 PCIe, H200, L40S, L4) priced in EUR ex-VAT from the public order catalogue API. OVHcloud also has a Mumbai data centre; GPU availability there is not confirmed. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
+  },
+  "incidents_file": "incidents/ovhcloud.json",
+  "availability": {
+    "tracked": false,
+    "cadence": null,
+    "file": null
+  },
+  "pricing_cadence": "daily",
+  "sources": [
+    {
+      "url": "https://www.ovhcloud.com/en-ie/public-cloud/gpu/",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-07",
+  "capabilities": {
+    "cpu_vm": true
+  }
+}

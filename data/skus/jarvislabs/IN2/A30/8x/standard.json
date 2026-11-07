@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "jarvislabs/IN2/A30/8x/standard",
+  "provider": "jarvislabs",
+  "region": "IN2",
+  "status": "active",
+  "gpu": "A30",
+  "gpu_variant": "a30-pcie",
+  "form_factor": "pcie",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "standard",
+  "vram_gb_per_gpu": 24,
+  "vcpus": 128,
+  "ram_gb": 512,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.41,
+      "usd_per_vm_hr": 3.28,
+      "native": {
+        "inr_per_gpu_hr_cli": 38.88
+      }
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.29,
+      "usd_per_vm_hr": 2.32,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "pricing_status": "published",
+  "price_note": null,
+  "sources": [
+    {
+      "url": "jl gpus --json",
+      "kind": "api",
+      "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://jarvislabs.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-07"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-07",
+  "notes": "USD from jarvislabs.ai/pricing; `jl gpus --json` lists ₹38.88/GPU-hr on-demand, ₹27.54 spot.",
+  "availability": {
+    "last_observed_at": "2026-11-07T18:10:07Z",
+    "available_vms": 0,
+    "available_gpus": 0,
+    "spot_available_vms": 0,
+    "spot_available_gpus": 0,
+    "source": "jl gpus --json (workload=container)"
+  },
+  "billing_model": "hourly",
+  "residency": "india"
+}
