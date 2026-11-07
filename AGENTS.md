@@ -232,7 +232,7 @@ churn the CDN or git.
 - **24 accelerator families, 29 variants**, each with VRAM, native precision, dense/sparse FLOPS and MIG; every host package links via `gpu_variant`.
 - **435 host packages** — 415 active, 15 retired, 5 unavailable; 385 published and 50 `quote_only` with null prices. No package is missing `pricing_status`.
 - **Capacity:** 21 files, `total_gpus` null on every one (no provider publishes its fleet), availability kept separate and never inferred from it.
-- **Availability:** 2 of 21 providers (JarvisLabs, NxtGen), 102 observations; the other 12 are documented in `NO_PUBLIC_SIGNAL` with the blocker.
+- **Availability:** 2 of 21 providers (JarvisLabs, NxtGen), 102 observations; 12 more are documented in `NO_PUBLIC_SIGNAL` with their blocker, and the global burst providers have no availability collector yet.
 - **Pricing freshness:** 16 providers scraped from official sources, 5 hand-curated (NeevCloud, Utho, CtrlS, Sify, Jio).
 - **Gates:** strict schema validation, 30-test suite (data contract, integrity, quality budgets, scraper replay, HTTP surface), freshness check, static `/v1` export — all green and wired into CI.
 - **Published API:** `dist/` artifact with `schema_version`, `generated_at`, CORS/ETag/HEAD, plus the schemas themselves; Cloudflare Pages + Worker-cron setup documented in `ops/cloudflare/`.
@@ -242,7 +242,7 @@ churn the CDN or git.
 
 - Scheduled refresh is written but not deployed (the Cloudflare Worker cron needs a GitHub token).
 - Capacity remains unknown for every provider, and availability exists for two.
-- `disk_gb` is missing on most packages; 9% of packages lack vCPU counts.
+- `disk_gb` is missing on 89% of packages; 12% lack vCPU counts.
 - Hand-curated SKUs (5 providers) have no pull loop and can drift between reviews.
 - No time-series chart is rendered yet; availability is shown as a table.
 
