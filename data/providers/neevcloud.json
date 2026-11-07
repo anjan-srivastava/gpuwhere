@@ -34,7 +34,10 @@
     "block_usd_per_gb_mo": null,
     "file_usd_per_gb_mo": null,
     "object_s3_compatible": null,
-    "object_usd_per_gb_mo": null
+    "object_usd_per_gb_mo": null,
+    "mountable": true,
+    "persistent": true,
+    "notes": "Network Storage mounts into the GPU pod at /data and is retained when the pod is stopped or deleted (console, 2026-11-08); 100 GB free per year, billed hourly per GB above that."
   },
   "reliability": {
     "sla_pct": 99.9,
@@ -63,7 +66,7 @@
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "capabilities": {
     "cpu_vm": true
   }

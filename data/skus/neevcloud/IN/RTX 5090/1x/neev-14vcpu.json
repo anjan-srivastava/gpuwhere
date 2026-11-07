@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "neevcloud/IN/RTX 5090/1x/neev-14vcpu",
+  "provider": "neevcloud",
+  "region": "IN",
+  "status": "active",
+  "gpu": "RTX 5090",
+  "gpu_variant": "rtx-5090-pcie",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "neev-14vcpu",
+  "vram_gb_per_gpu": 32,
+  "vcpus": 14,
+  "ram_gb": 56,
+  "disk_gb": null,
+  "disk_type": null,
+  "interconnect": {
+    "type": "pcie",
+    "version": null,
+    "ib_gbps": null
+  },
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.07,
+      "usd_per_vm_hr": 1.07,
+      "native": {
+        "inr_per_gpu_hr": 100.73,
+        "fx_usd_inr": 93.9225,
+        "fx_date": "2026-11-06"
+      }
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "india",
+  "self_serve": true,
+  "price_note": null,
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  },
+  "sources": [
+    {
+      "url": "https://console.ai.neevcloud.com/gpu",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-08",
+  "form_factor": "pcie",
+  "notes": "Console rate per GPU-hour, Indore (as-south-1); 14 vCPU and 56 GB RAM per GPU, max 2 GPUs per pod. Added from the logged-in console: this is the config that has stock."
+}
