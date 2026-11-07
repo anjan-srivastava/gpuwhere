@@ -43,7 +43,7 @@
     "incident_count_90d": null,
     "downtime_min_90d": null,
     "capacity_notes": null,
-    "notes": "Official SpeedCloud AI rate card lists H200 SXM, H100 NVL, L40S and MI325X. B200 is sold as 1,024–4,096 GPU clusters, not individual GPUs."
+    "notes": "Official SpeedCloud AI rate card lists H200 SXM, H100 NVL, L40S and MI325X. B200 is sold as 1,024–4,096 GPU clusters, not individual GPUs. At the 2026-11-08 console audit a new account had 0 virtual data centres and 0 subscriptions, so no GPU could be provisioned; the console is reachable but not self-serve until onboarding creates a VDC."
   },
   "incidents_file": "incidents/nxtgen.json",
   "availability": {

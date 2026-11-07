@@ -2199,7 +2199,7 @@ document.querySelectorAll("#thead-providers th.sortable").forEach(th => {
 
 (async function () {
   applyTheme();
-  CATALOG = await firstJSON(["/v1/catalog.json", "/api/catalog"]);
+  CATALOG = await firstJSON(["/api/catalog", "/v1/catalog.json"]);
   CATALOG.allSkus = CATALOG.skus;
   applyScope();
   buildGPUIndex();
