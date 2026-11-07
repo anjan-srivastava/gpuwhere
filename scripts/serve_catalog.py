@@ -431,6 +431,8 @@ HTML = r"""<!doctype html>
   .sku-link:hover .row-title { color: var(--accent); text-decoration: underline; }
   .chip { display: inline-block; white-space: nowrap; font-family: var(--mono); font-size: 11px; padding: 1px 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--muted); font-weight: 400; margin: 0 4px 4px 0; }
   .chip-out { opacity: .45; border-style: dashed; }
+  .fnote { flex: 1 1 100%; order: 9; margin: 6px 0 0; font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+  .fnote span { text-decoration: underline dotted; cursor: help; }
   td.gpu-cell { min-width: 160px; max-width: 260px; line-height: 1.4; }
   td.feat-cell { white-space: normal; min-width: 110px; max-width: 170px; line-height: 1.7; }
   .cap-stack .meta { white-space: normal; max-width: 110px; margin-left: auto; text-align: right; }
@@ -764,7 +766,7 @@ function filterLabel(view, key, v) {
     vpc: () => "VPC", storage: () => "Mountable storage", object: () => "Object storage",
   })[key]();
 }
-function renderFilterBar(view, shown, total) {
+function renderFilterBar(view, shown, total, note = "") {
   const f = FILTERS[view], d = FILTER_DEFAULTS[view];
   let primary = "", more = "";
   if (view === "gpus") {
@@ -805,6 +807,7 @@ function renderFilterBar(view, shown, total) {
       ${MORE_OPEN[view] ? `<div class="fpanel" role="dialog" aria-label="More filters">${more}</div>` : ""}
     </span>
     ${hiddenChips}
+    ${note ? `<span class="fnote">${note}</span>` : ""}
     <span class="fmeta">${shown === total ? `${total}` : `${shown} of ${total}`} ${view === "gpus" ? "GPUs" : "providers"}${n ? ` <button class="fclear" data-clear="${view}">Clear${n > 1 ? " all" : ""}</button>` : ""}</span>`;
 }
 function onFilterEvent(e) {
@@ -1722,7 +1725,17 @@ function accessRank(r) {
 function renderProviders() {
   const all = CATALOG.providers.map(providerRow);
   let rows = all.filter(providerMatches);
-  renderFilterBar("providers", rows.length, all.length);
+  // With a GPU filter the list is availability-based, so say who sells the GPU but cannot
+  // serve it right now - otherwise "why is provider X missing?" is unanswerable.
+  const gpuFilter = FILTERS.providers.gpu;
+  const listedOnly = gpuFilter
+    ? all.filter(r => r.skus.some(s => s.gpu === gpuFilter && s.status !== "retired")
+        && !r.skus.some(s => s.gpu === gpuFilter && orderablePrice(s) != null))
+    : [];
+  const gpuNote = !gpuFilter ? "" : listedOnly.length
+    ? `${listedOnly.length} also list ${esc(gpuFilter)} but nothing is orderable now: <span title="${esc(listedOnly.map(r => r.p.name || r.p.id).join(", "))}">${esc(listedOnly.map(r => r.p.name || r.p.id).join(", "))}</span>`
+    : (rows.length ? "" : `No provider has an orderable ${esc(gpuFilter)} right now.`);
+  renderFilterBar("providers", rows.length, all.length, gpuNote);
   rows.sort((a, b) => {
     const key = SORT.providers.key, dir = SORT.providers.dir;
     const x = providerSortVal(a, key), y = providerSortVal(b, key);
