@@ -19,7 +19,7 @@
     "type": "console",
     "provisioning": "console",
     "documented": null,
-    "notes": "Self-serve GPU order from the client area cart (/cart/gpu-cloud-servers-inr): RTX A4000/A5000/A6000/A40/A100 VM plans billed monthly. No provisioning API."
+    "notes": "GPU ordering is self-serve but unlinked: the portal's Order menu lists dedicated servers, hosting and domains only, while service.leapswitch.com/cart/gpu-cloud-servers-inr exposes RTX A4000/A5000/A6000/A40/A100 VM plans (monthly) and completes to a cart with an Order button (A4000 1x = Rs 17,110/month incl. GST). Reachable by direct URL only. No provisioning API."
   },
   "billing": {
     "granularity": "hour",
