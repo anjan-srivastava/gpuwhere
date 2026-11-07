@@ -1,17 +1,22 @@
 {
   "provider": "acecloud",
-  "last_checked_at": "2026-11-08T23:55:00Z",
+  "last_checked_at": "2026-11-07T23:53:18Z",
   "access": "api",
   "login": "ok",
   "inventory": "not-exposed",
   "stock_recorded": false,
   "order_path": "self-serve",
   "blockers": "Console 'Create Instance' fails ('Unable to fetch instance'); trial quota (0/3 instances, 0/20 vCPU, 0/40 GB RAM) cannot fit any GPU flavour (16-28 vCPU)",
-  "notes": "Signed in to customer.acecloud.ai. The UI offers no GPU launch, but /api/v1/cloud/flavors returns 12 GPU flavours - Noida: H200 x3, L4 x2, L40S x2, RTX A6000 x2, RTX 6000 Ada x2, PRO 6000 x2, A2; Mumbai: H200 x3, L4 x2, PRO 4500 x2, PRO 6000 x3, RTX A6000, A2 x2. No stock/capacity endpoint, so flavours are a catalogue, not availability.",
+  "notes": "Signed in to customer.acecloud.ai (trial project, region ap-south-noi-1). The UI offers no GPU launch - 'Create Instance' errors with 'Unable to fetch instance' and the 'Spot Pricing - GPU' tab bounces to the dashboard. The console's own API (/api/v1/cloud/flavors) does list 12 GPU flavours: Noida - H200 x3, L4 x2, L40S x2, RTX A6000 x2, RTX 6000 Ada x2, PRO 6000 x2, A2 x1; Mumbai - H200 x3, L4 x2, PRO 4500 x2, PRO 6000 x3, RTX A6000 x1, A2 x2. No H100, A100, A30 or MI300X appears in either region, although the rate card carries them, so those rates are not orderable from this account. No stock/capacity endpoint exists: flavours are a catalogue, not availability.",
   "sources": [
     {
       "url": "https://customer.acecloud.ai/v1/en/dashboard",
       "kind": "page",
+      "fetched_at": "2026-11-08"
+    },
+    {
+      "url": "https://customer.acecloud.ai/api/v1/cloud/flavors",
+      "kind": "api",
       "fetched_at": "2026-11-08"
     },
     {
@@ -20,5 +25,5 @@
       "fetched_at": "2026-11-08"
     }
   ],
-  "confidence": "medium"
+  "confidence": "high"
 }
