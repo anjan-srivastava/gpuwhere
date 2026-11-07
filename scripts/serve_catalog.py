@@ -409,10 +409,11 @@ HTML = r"""<!doctype html>
   .provider-name { font-weight: 500; color: var(--strong); white-space: nowrap; }
   .provider-name:hover { text-decoration: underline; }
   .site-link { color: var(--accent); text-decoration: none; font-size: 11.5px; white-space: nowrap; }
+  /* The provider cell must stay a table cell (display:table-cell) or its row border breaks;
+     the flex layout lives on an inner wrapper instead. */
+  .prov-wrap { display: flex; align-items: flex-start; gap: 8px; min-width: 250px; }
+  .prov-wrap > .logo { flex: none; margin: 2px 0 0; }
   .prov-cell { display: flex; flex-direction: column; line-height: 1.35; min-width: 0; flex: 1 1 auto; }
-  /* Logo + name/tags as one flexible row: tags wrap inside the column instead of widening it. */
-  #tbody-providers td:first-child { display: flex; align-items: flex-start; gap: 8px; min-width: 250px; }
-  #tbody-providers td:first-child > .logo { flex: none; margin: 2px 0 0; }
   .taggroup { display: inline-flex; flex-wrap: nowrap; align-items: center; }
   /* Name + tags: wrap the tags to a second line instead of pushing the cell wider than the column. */
   .prov-cell > span:first-child { display: flex; flex-wrap: wrap; align-items: center; row-gap: 2px; min-width: 0; }
@@ -1739,7 +1740,7 @@ function renderProviders() {
     const slaCls = r.sla == null ? "muted" : r.sla >= 99.9 ? "ok" : "warn";
     return `
       <tr>
-        <td><img class="logo" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'"><span class="prov-cell"><span><a class="provider-name" href="#/provider/${esc(p.id)}">${esc(p.name || p.id)}</a><span class="taggroup">${accessTags(r.access)}${countryTag(p)}</span></span><span class="prov-sub">${p.website ? `<a class="site-link" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer" title="${esc(p.gpu_page ? "GPU offerings: " + p.gpu_page : p.website)}">${esc(siteHost(p.website))} ↗</a>` : ""}${r.regions ? `<span class="regions" title="Regions">${p.website ? " · " : ""}${esc(r.regions)}</span>` : ""}</span></span></td>
+        <td><div class="prov-wrap"><img class="logo" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'"><span class="prov-cell"><span><a class="provider-name" href="#/provider/${esc(p.id)}">${esc(p.name || p.id)}</a><span class="taggroup">${accessTags(r.access)}${countryTag(p)}</span></span><span class="prov-sub">${p.website ? `<a class="site-link" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer" title="${esc(p.gpu_page ? "GPU offerings: " + p.gpu_page : p.website)}">${esc(siteHost(p.website))} ↗</a>` : ""}${r.regions ? `<span class="regions" title="Regions">${p.website ? " · " : ""}${esc(r.regions)}</span>` : ""}</span></span></div></td>
         <td class="gpu-cell">${r.gpuModels.length ? r.gpuModels.slice(0, 4).map(g => `<span class="chip">${esc(g)}</span>`).join("") + (r.gpuModels.length > 4 ? `<span class="chip" title="${esc(r.gpuModels.join(", "))}">+${r.gpuModels.length - 4}</span>` : "") : `<span class="muted">—</span>`}</td>
         <td class="num">${priceIndexCell(r)}</td>
         <td class="feat-cell">${featureChips(r)}</td>

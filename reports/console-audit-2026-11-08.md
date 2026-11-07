@@ -78,16 +78,24 @@ Two catalogue-relevant observations:
 - **Cyfuture B300/H200/RTX PRO 6000** are catalogue packages that the console cannot launch
   today. Keep them (they are published rates) but a `note` that they are not in the
   self-serve console would stop the catalogue over-promising.
-- **Yotta** looks like a working console with an unprovisioned account. That is a
-  sales-onboarding step, not a UI issue — worth a line in its `api.notes`.
-- **Leapswitch / Tata / NxtGen / Neysa** confirm `console` → effectively `sales` for GPUs.
-  If the catalogue wants to be strict, `provisioning: sales` with `api.notes` would describe
-  reality better than `console` for these four.
+- **Yotta and NxtGen** look like working consoles with unprovisioned accounts. That is a
+  sales-onboarding step, not a UI issue.
+
+**Applied (2026-11-08):**
+
+- **Leapswitch stays `console`** — its client area has a real GPU cart
+  (`/cart/gpu-cloud-servers-inr`: RTX A4000/A5000/A6000/A40/A100 VMs, monthly, "setup within
+  minutes"). The marketing "Buy Now" link hides it; the cart URL is the self-serve path.
+- **Tata Communications, Neysa, Yotta Shakti and NxtGen are now `provisioning: sales`**, with
+  `api.notes` recording exactly what the console does and who has to enable the account.
+- **Cyfuture stock recorded** as 24 availability rows (A100, H100, L40S, MI300X, MI325X,
+  Gaudi 2 x 1x-8x = 0 available, `observed_via: console`, medium confidence). V100 is
+  available but the console publishes no count, so no number was written.
 
 ## Follow-ups
 
-1. Record the Cyfuture stock snapshot as an availability observation (manual, console).
-2. Add `api.notes` on the four sales-gated providers.
+1. ~~Record the Cyfuture stock snapshot~~ — done: 24 rows, V100 count unknown.
+2. ~~Add `api.notes` on the sales-gated providers~~ — done; four reclassified to `sales`.
 3. Re-run the Cyfuture stock check weekly until an API or account with balance lets it be
    automated; only V100 in stock makes the rate card largely theoretical.
 5. Ask NxtGen what creates a VDC (self-serve missing vs sales) — until then its catalogue

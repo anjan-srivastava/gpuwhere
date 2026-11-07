@@ -16,9 +16,10 @@
     "iso27001": null
   },
   "api": {
-    "type": "console",
-    "provisioning": "console",
-    "documented": null
+    "type": "sales",
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "No console host: console.neysa.ai does not resolve. GPU capacity is contracted through sales; the pricing page lists rates but there is no self-serve ordering (audited 2026-11-08)."
   },
   "billing": {
     "granularity": "minute",

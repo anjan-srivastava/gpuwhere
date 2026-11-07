@@ -17,8 +17,9 @@
   },
   "api": {
     "type": "console",
-    "provisioning": "console",
-    "documented": null
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "Shakti Cloud console (console.shakticloud.ai) works, but a new account has empty VM and Subscribe catalogues ('No Virtual Machines Profiles available') and no self-serve way to create entitlements; GPUs appear only after sales enablement (audited 2026-11-08)."
   },
   "billing": {
     "granularity": "month",
@@ -60,10 +61,15 @@
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
       "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://console.shakticloud.ai",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "capabilities": {
     "cpu_vm": true
   }

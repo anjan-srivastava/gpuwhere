@@ -17,8 +17,9 @@
   },
   "api": {
     "type": "console",
-    "provisioning": "console",
-    "documented": null
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "SpeedCloud portal (speedcloud-portal.nxtgen.com) works and has a full 'Create AI instance' wizard, but a new account has 0 virtual data centres with no create action and 0 subscriptions, so 'Add GPU' stays disabled. GPUs appear only after onboarding (audited 2026-11-08)."
   },
   "billing": {
     "granularity": "hour",
@@ -61,10 +62,15 @@
       "url": "https://compute.indiaai.gov.in/pricelist",
       "kind": "page",
       "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://speedcloud-portal.nxtgen.com/ai/portal/enterprise",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "capabilities": {
     "cpu_vm": true
   }

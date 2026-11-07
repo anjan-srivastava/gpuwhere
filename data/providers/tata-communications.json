@@ -17,8 +17,9 @@
   },
   "api": {
     "type": "console",
-    "provisioning": "console",
-    "documented": null
+    "provisioning": "sales",
+    "documented": null,
+    "notes": "Vayu Cloud is ordered through a quote builder (location -> CPU series A-T); no GPU SKUs surfaced in that flow and the GPU product page routes to 'Schedule a conversation'. GPU capacity is sales-led (audited 2026-11-08)."
   },
   "billing": {
     "granularity": "hour",
@@ -65,10 +66,15 @@
       "url": "https://compute.indiaai.gov.in/pricelist",
       "kind": "page",
       "fetched_at": "2026-11-07"
+    },
+    {
+      "url": "https://customer.tatacommunications.com/optimus_v2/products",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "capabilities": {
     "cpu_vm": null
   }
