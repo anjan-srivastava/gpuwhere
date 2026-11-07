@@ -571,7 +571,8 @@ HTML = r"""<!doctype html>
               <th class="num sortable" data-sort="vram">VRAM</th>
               <th class="num sortable" data-sort="flops" title="Dense FP16 Tensor FLOPS per GPU. Common basis across all accelerator SKUs.">FP16 dense</th>
               <th title="Key native formats that differ between GPUs (FP64, BF16, FP8, FP6, FP4). Hover a cell for the full native list.">Precision</th>
-              <th class="num sortable" data-sort="providers">Providers</th>
+              <th class="num sortable" data-sort="providers" title="Providers that can be ordered now (not retired, in stock, self-serve) out of those listing the GPU">Providers</th>
+              <th class="num sortable" data-sort="avail" title="GPUs observed available right now, summed over the latest observation per provider. Blank when no provider publishes stock.">Available now</th>
               <th class="num sortable" data-sort="price" title="Cheapest hourly on-demand price per GPU-hour across every provider and region. A cheaper monthly-commitment rate, or an outside-India cheapest provider, is noted below the price.">Price (on-demand /GPU-hr)</th>
               <th class="sortable" data-sort="updated">Updated</th>
             </tr>
@@ -1241,12 +1242,15 @@ function gpuRows() {
         familyName: entry ? entry.family.name : String(s.gpu).toUpperCase(),
         familyArch: entry ? entry.family.architecture : null,
         variant: entry ? entry.variant : null,
-        skus: [], providers: new Set(), prices: [], updated: ""
+        skus: [], providers: new Set(), orderable: new Set(), prices: [], updated: ""
       });
     }
     const g = map.get(id);
     g.skus.push(s);
     g.providers.add(s.provider);
+    if (orderablePrice(s) != null) g.orderable.add(s.provider);
+    const av = s.latest_availability;
+    if (av && av.available_gpus != null) { g.avail = (g.avail || 0) + av.available_gpus; g.availObs = (g.availObs || 0) + 1; }
     if (orderablePrice(s) != null) g.prices.push(orderablePrice(s));
     const upd = dateOnly(s.verified_at);
     if (upd > g.updated) g.updated = upd;
@@ -1255,7 +1259,10 @@ function gpuRows() {
     ...g,
     vram: g.variant ? g.variant.vram_gb : (g.skus[0] ? g.skus[0].vram_gb_per_gpu : null),
     fp16: fp16Dense(g.variant),
-    providerCount: g.providers.size,
+    providerCount: g.orderable.size,
+    providerTotal: g.providers.size,
+    availNow: g.avail == null ? null : g.avail,
+    availObs: g.availObs || 0,
     ...(() => {
       const b = bestOf(g.skus);
       // The headline is the cheapest hourly rate. Two things the headline alone hides:
@@ -1282,6 +1289,7 @@ function gpuSortVal(g, key) {
     case "vram": return g.vram == null ? -1 : g.vram;
     case "flops": return g.fp16 == null ? -1 : g.fp16;
     case "providers": return g.providerCount;
+    case "avail": return g.availObs ? g.availNow : null;
     case "price": return g.priceMin == null ? Infinity : g.priceMin;
     case "updated": return g.updated;
     default: return "";
@@ -1310,7 +1318,8 @@ function renderGPUs() {
         <td class="num">${g.vram == null ? unk() : `${g.vram} GB`}</td>
         <td class="num val">${g.fp16 == null ? unk() : fmtFlops(g.fp16)}</td>
         <td>${precisionCompact(g.variant)}</td>
-        <td class="num"><a class="sku-link" href="${href}">${g.providerCount}</a></td>
+        <td class="num" title="${g.providerTotal > g.providerCount ? `${g.providerTotal} providers list this GPU; ${g.providerCount} can be ordered now` : ""}"><a class="sku-link" href="${href}">${g.providerCount}${g.providerTotal > g.providerCount ? `<span class="muted"> / ${g.providerTotal}</span>` : ""}</a></td>
+        <td class="num" title="${g.availObs ? `${g.availObs} provider${g.availObs === 1 ? "" : "s"} publish stock for this GPU` : "No provider publishes stock for this GPU"}">${g.availObs ? g.availNow.toLocaleString() : unk("not published", "No provider publishes stock for this GPU")}</td>
         <td class="num strong">${priceRange(g)}${(() => {
           const parts = [];
           if (g.priceAltMonthly != null) parts.push(`or ${money(g.priceAltMonthly)} monthly`);
@@ -1629,11 +1638,15 @@ function marketMedians() {
   }
   const byKey = new Map();
   for (const [k, provs] of per) {
+    // A provider can price both markets: its cheapest hourly package feeds the hourly median,
+    // its cheapest monthly package feeds the monthly median.
     const hourly = [], monthly = [];
     for (const list of provs.values()) {
-      const b = bestOf(list);
-      if (b.v == null) continue;
-      (b.monthly ? monthly : hourly).push(b.v);
+      const ok = list.filter(s => orderablePrice(s) != null);
+      const h = ok.filter(s => billingOf(s) !== "monthly").sort((a, b) => priceOf(a) - priceOf(b))[0];
+      const m = ok.filter(s => billingOf(s) === "monthly").sort((a, b) => priceOf(a) - priceOf(b))[0];
+      if (h) hourly.push(priceOf(h));
+      if (m) monthly.push(priceOf(m));
     }
     const med = (a) => { if (!a.length) return null; const x = [...a].sort((p, q) => p - q), m = x.length >> 1; return x.length % 2 ? x[m] : (x[m - 1] + x[m]) / 2; };
     byKey.set(k, { hourly: med(hourly), nHourly: hourly.length, monthly: med(monthly), nMonthly: monthly.length });
@@ -1653,7 +1666,8 @@ function priceIndex(pid) {
     const b = bestOf(list), m = med.get(k);
     if (b.v == null || !m) continue;
     // compare like with like: hourly vs hourly market, monthly-only vs monthly market
-    const ref = b.monthly ? (m.nMonthly >= 3 ? m.monthly : (m.nHourly >= 3 ? m.hourly : null)) : (m.nHourly >= 3 ? m.hourly : null);
+    // Never price a monthly commitment against an hourly market.
+    const ref = b.monthly ? (m.nMonthly >= 3 ? m.monthly : null) : (m.nHourly >= 3 ? m.hourly : null);
     if (!ref) continue;
     if (b.monthly) monthlyBased = true;
     const entry = GPU_VARIANTS.get(k);
@@ -2065,7 +2079,7 @@ function spotlightData() {
   const gpus = gpuRows().map(g => ({
     title: g.name,
     sub: `${g.familyName}${g.variant ? ` · ${g.variant.vram_gb} GB ${g.variant.memory_type}` : ""}`,
-    meta: `${g.providerCount} ${g.providerCount === 1 ? "provider" : "providers"} · ${g.priceMin == null ? "no orderable price" : `from ${money(g.priceMin)}${g.priceMonthly ? " (monthly)" : ""}`}`,
+    meta: `${g.providerTotal} ${g.providerTotal === 1 ? "provider" : "providers"} · ${g.priceMin == null ? "no orderable price" : `from ${money(g.priceMin)}${g.priceMonthly ? " (monthly)" : ""}`}`,
     href: `#/gpu/${encodeURIComponent(g.id)}`,
     logo: null,
     glyph: "GPU",
