@@ -20,7 +20,7 @@
     "type": "rest+cli+terraform",
     "provisioning": "api",
     "documented": true,
-    "notes": "Documented REST API at customer.acecloud.ai/api/v1, authenticated with API keys (X-Ace-Api-Key), plus an official `ace` CLI and an AceCloudAI Terraform provider."
+    "notes": "Documented REST API at customer.acecloud.ai/api/v1, API keys (X-Ace-Api-Key), an `ace` CLI and an AceCloudAI Terraform provider. Console 'Create Instance' fails on a trial account, but the API lists GPU flavours in Noida and Mumbai (H200, L4, L40S, RTX A6000/6000 Ada, PRO 6000/4500, A2). No stock numbers are exposed anywhere; flavours are a catalogue, not availability."
   },
   "billing": {
     "granularity": "hour",
