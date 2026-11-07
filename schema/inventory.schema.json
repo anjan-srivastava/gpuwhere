@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/inventory.schema.json",
+  "title": "InventoryCheck",
+  "description": "Status of the last logged-in inventory check for one provider: whether we can see real stock, and when we last looked.",
+  "type": "object",
+  "required": ["provider", "access", "login", "inventory", "stock_recorded", "confidence"],
+  "properties": {
+    "provider": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "last_checked_at": { "type": ["string", "null"], "format": "date-time" },
+    "access": {
+      "enum": ["api", "cli", "console", "none"],
+      "description": "How the provider can be reached for inventory: documented API, CLI, web console, or nothing self-serve"
+    },
+    "login": {
+      "enum": ["ok", "blocked", "no-account", "not-needed", "unknown"],
+      "description": "State of our own access: ok = we can sign in, blocked = account exists but cannot authenticate/validate, no-account = we have none"
+    },
+    "inventory": {
+      "enum": ["visible", "empty", "not-exposed", "unknown"],
+      "description": "visible = real stock numbers per GPU; empty = catalogue/entitlements empty; not-exposed = you can order but stock is never shown; unknown = not looked"
+    },
+    "stock_recorded": { "type": "boolean", "description": "true when the check produced availability observations in data/availability" },
+    "order_path": {
+      "enum": ["self-serve", "sales", "none", "unknown"],
+      "description": "What it takes to actually get a GPU after the check"
+    },
+    "blockers": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url", "kind"],
+        "properties": {
+          "url": { "type": "string" },
+          "kind": { "enum": ["feed", "api", "page", "quote", "tracker", "status_page", "postmortem", "community"] },
+          "fetched_at": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "confidence": { "enum": ["high", "medium", "low"] }
+  },
+  "additionalProperties": false
+}

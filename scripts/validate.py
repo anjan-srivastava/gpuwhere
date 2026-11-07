@@ -45,6 +45,7 @@ def main() -> int:
         "channel": load(os.path.join(root, "schema/channel.schema.json")),
         "capacity": load(os.path.join(root, "schema/capacity.schema.json")),
         "gpu": load(os.path.join(root, "schema/gpu.schema.json")),
+        "inventory": load(os.path.join(root, "schema/inventory.schema.json")),
     }
 
     errors = 0
@@ -72,6 +73,8 @@ def main() -> int:
             check(load(path), schemas["capacity"], rel)
         elif "/gpus/" in path:
             check(load(path), schemas["gpu"], rel)
+        elif "/inventory/" in path:
+            check(load(path), schemas["inventory"], rel)
         elif "/channels/" in path:
             check(load(path), schemas["channel"], rel)
 

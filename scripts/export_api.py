@@ -46,7 +46,8 @@ def dump(path: Path, obj) -> int:
 
 
 def build(data: Path) -> tuple[dict, dict]:
-    providers = _load_json_dir(data / "providers")
+    inventory = {r.get("provider"): r for r in _load_json_dir(data / "inventory")}
+    providers = [dict(p, inventory_check=inventory.get(p.get("id"))) for p in _load_json_dir(data / "providers")]
     skus = _load_skus(str(data))
     gpus = _load_gpus(str(data))
     channels = _load_json_dir(data / "channels")

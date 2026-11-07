@@ -1,0 +1,19 @@
+{
+  "provider": "tata-communications",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "not-exposed",
+  "stock_recorded": false,
+  "order_path": "sales",
+  "blockers": "Vayu quote builder exposes CPU series only; no GPU SKUs",
+  "notes": "Login works; GPU capacity is a sales conversation.",
+  "sources": [
+    {
+      "url": "https://customer.tatacommunications.com/optimus_v2/products",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium"
+}

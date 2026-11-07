@@ -196,6 +196,7 @@ class Handler(BaseHTTPRequestHandler):
         availability = _load_availability(self.data_root)
         channels = _load_json_dir(os.path.join(self.data_root, "channels"))
         capacities = _load_json_dir(os.path.join(self.data_root, "capacity"))
+        inventory = {r.get("provider"): r for r in _load_json_dir(os.path.join(self.data_root, "inventory"))}
         gpus = _load_gpus(self.data_root)
         latest = _latest_availability(availability)
 
@@ -211,7 +212,7 @@ class Handler(BaseHTTPRequestHandler):
                 s["latest_availability"] = latest.get(key)
                 enriched.append(s)
             self._json({
-                "providers": providers,
+                "providers": [dict(p, inventory_check=inventory.get(p.get("id"))) for p in providers],
                 "skus": enriched,
                 "channels": channels,
                 "capacities": capacities,
@@ -1394,6 +1395,20 @@ function renderGPUAccelerator(entry) {
 
   const pkgRows = skus.slice().sort((a, b) => a.provider.localeCompare(b.provider) || (a.gpus_per_vm - b.gpus_per_vm) || String(a.variant || "").localeCompare(String(b.variant || "")));
 
+  // Providers that list this GPU but have nothing orderable right now, with the reason.
+  const orderableProviders = rows.filter(g => g.skus.some(s => orderablePrice(s) != null));
+  const blockedProviders = rows.filter(g => !g.skus.some(s => orderablePrice(s) != null)).map(g => {
+    const reasons = new Set();
+    for (const s of g.skus) {
+      if (s.status === "retired") continue;
+      if (outOfStock(s)) reasons.add("out of stock");
+      else if (s.self_serve === false) reasons.add("sales only");
+      else if (s.pricing_status === "quote_only") reasons.add("on request");
+      else reasons.add("no orderable package");
+    }
+    return { id: g.provider, name: (providerOf(g.provider).name || g.provider), why: [...reasons].join(", ") };
+  });
+
   $("count").textContent = `${rows.length} ${rows.length === 1 ? "provider" : "providers"}`;
   $("view-gpu-detail").innerHTML = `
     <a class="back" href="#/gpus">← All GPUs</a>
@@ -1449,7 +1464,7 @@ function renderGPUAccelerator(entry) {
     </section>
 
     <section>
-      <h2>Providers <span class="h2-note muted">— host packages for this GPU SKU</span></h2>
+      <h2>Providers <span class="h2-note muted">— ${orderableProviders.length} of ${rows.length} can serve this GPU now</span></h2>
       <div class="panel">
         ${rows.length ? `
         <div class="table-scroll"><table id="gpu-provider-table">
@@ -1507,6 +1522,9 @@ function renderGPUAccelerator(entry) {
           </tbody>
         </table></div>` : `<div class="note">No host package data yet.</div>`}
       </div>
+      ${blockedProviders.length ? `<div class="panel" style="margin-top:10px">
+        <div class="note" style="margin:0"><b>Listed but not orderable now</b> — ${blockedProviders.map(b => `<a class="provider-name" href="#/provider/${esc(b.id)}">${esc(b.name)}</a> <span class="muted">(${esc(b.why)})</span>`).join(" · ")}</div>
+      </div>` : ""}
     </section>
   `;
   enableDomSort($("gpu-provider-table"));
@@ -1767,9 +1785,17 @@ function renderProviders() {
     const cap = (r.capacity == null && r.power == null)
       ? unk("not published", "Fleet size not published by the provider") + iai
       : `<a class="cap-link cap-stack" href="#/provider/${esc(p.id)}/inventory" title="Deployed capacity and inventory.">${capLines.join("<br>")}</a>`;
-    const free = r.freeLive == null
+    const inv = p.inventory_check;
+    const invLabel = !inv || !inv.last_checked_at ? "no logged-in check"
+      : inv.inventory === "visible" ? `checked ${ago(inv.last_checked_at)}`
+      : inv.inventory === "empty" ? `checked ${ago(inv.last_checked_at)} · no inventory`
+      : inv.inventory === "not-exposed" ? `checked ${ago(inv.last_checked_at)} · no stock shown`
+      : `checked ${ago(inv.last_checked_at)} · unknown`;
+    const invTip = inv ? `Last logged-in inventory check: ${inv.last_checked_at || "never"} (${inv.inventory}). ${inv.blockers || inv.notes || ""}`.trim() : "No logged-in inventory check recorded";
+    const free = (r.freeLive == null
       ? unk("not published", "The provider doesn't publish stock. This is unknown, not zero.")
-      : `<a class="cap-link" href="#/provider/${esc(p.id)}/inventory" title="Latest observation: GPUs available to start right now. Availability, not installed capacity.">${r.freeLive.toLocaleString()}</a><span class="meta">${esc(ago(r.lastObserved))}</span>`;
+      : `<a class="cap-link" href="#/provider/${esc(p.id)}/inventory" title="Latest observation: GPUs available to start right now. Availability, not installed capacity.">${r.freeLive.toLocaleString()}</a><span class="meta">${esc(ago(r.lastObserved))}</span>`)
+      + `<span class="meta" title="${esc(invTip)}">${esc(invLabel)}</span>`;
     const slaCls = r.sla == null ? "muted" : r.sla >= 99.9 ? "ok" : "warn";
     return `
       <tr>
@@ -1933,7 +1959,38 @@ function renderProviderDetail(id) {
             </tr>`).join("")}
           </tbody>
         </table></div>
-        ${live.lastObserved ? `<div class="note">Last observed ${esc(live.lastObserved)}. Shapes share one physical pool; counted once per GPU + region.</div>` : ""}` : `<div class="note">No live availability observations yet. ${rel.capacity_notes ? esc(rel.capacity_notes) : ""}</div>`}
+        ${live.lastObserved ? `<div class="note">Last observed ${esc(live.lastObserved)}. Shapes share one physical pool; counted once per GPU + region.</div>` : ""}` : `<div class="note">${(() => {
+            const inv = p.inventory_check;
+            if (!inv) return `No stock observations, and no logged-in inventory check yet.${rel.capacity_notes ? " " + esc(rel.capacity_notes) : ""}`;
+            const when = inv.last_checked_at ? `${esc(inv.last_checked_at)} (${esc(ago(inv.last_checked_at))})` : "never";
+            const what = inv.inventory === "visible" ? "stock numbers were visible"
+              : inv.inventory === "empty" ? "the catalogue was empty for this account"
+              : inv.inventory === "not-exposed" ? "the provider exposes no stock numbers" : "the inventory could not be inspected";
+            return `No stock observations. Last logged-in check ${when} via ${esc(inv.access)}: ${what}.${inv.blockers ? " Blocker: " + esc(inv.blockers) + "." : ""}`;
+          })()}</div>`}
+      </div>
+    </section>
+
+    <section>
+      <h2>Inventory check <span class="h2-note muted">— logged in, did we see real stock?</span></h2>
+      <div class="panel">
+        ${(() => {
+          const inv = p.inventory_check;
+          if (!inv) return `<div class="note">No logged-in inventory check recorded yet.</div>`;
+          const yes = (v) => v === true ? `<span class="ok">yes</span>` : `<span class="muted">no</span>`;
+          return `<div class="badges" style="margin:0 0 8px">
+            <span class="pill ${inv.inventory === "visible" ? "ok" : inv.inventory === "unknown" ? "" : "warn"}">${esc(inv.inventory)}</span>
+            <span class="pill">${esc(inv.access)}</span>
+            <span class="pill">login: ${esc(inv.login)}</span>
+            <span class="pill">${esc(inv.order_path)}</span>
+          </div>
+          <div class="note" style="margin:0">
+            ${inv.last_checked_at ? `Last checked ${esc(inv.last_checked_at)} (${esc(ago(inv.last_checked_at))}).` : "Never checked while logged in."}
+            Stock recorded: ${yes(inv.stock_recorded)}.
+            ${inv.blockers ? `<div style="margin-top:6px">Blocker: ${esc(inv.blockers)}</div>` : ""}
+            ${inv.notes ? `<div style="margin-top:6px">${esc(inv.notes)}</div>` : ""}
+          </div>`;
+        })()}
       </div>
     </section>
 

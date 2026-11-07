@@ -1,0 +1,19 @@
+{
+  "provider": "cyfuture-ai",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "visible",
+  "stock_recorded": true,
+  "order_path": "self-serve",
+  "blockers": null,
+  "notes": "GPUaaS launcher lists 8 GPU types with OUT OF STOCK badges; only V100 orderable. Launch needs a prepaid 24h balance.",
+  "sources": [
+    {
+      "url": "https://cyfuture.ai/agent-page/gaas",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high"
+}

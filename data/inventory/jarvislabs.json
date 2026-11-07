@@ -1,0 +1,19 @@
+{
+  "provider": "jarvislabs",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "cli",
+  "login": "ok",
+  "inventory": "visible",
+  "stock_recorded": true,
+  "order_path": "self-serve",
+  "blockers": null,
+  "notes": "`jl gpus --json` returns free device counts per region/GPU; collected hourly.",
+  "sources": [
+    {
+      "url": "https://jarvislabs.ai/pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high"
+}

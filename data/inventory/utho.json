@@ -1,0 +1,13 @@
+{
+  "provider": "utho",
+  "last_checked_at": null,
+  "access": "none",
+  "login": "no-account",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "sales",
+  "blockers": "site blocks automated clients; console only",
+  "notes": "No self-service GPU inventory check yet.",
+  "sources": [],
+  "confidence": "low"
+}

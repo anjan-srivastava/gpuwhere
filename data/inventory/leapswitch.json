@@ -1,0 +1,19 @@
+{
+  "provider": "leapswitch",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "not-exposed",
+  "stock_recorded": false,
+  "order_path": "self-serve",
+  "blockers": "stock counts are never shown; the GPU cart is only reachable by direct URL",
+  "notes": "GPU cart sells A4000/A5000/A6000/A40/A100 monthly; no stock number per card.",
+  "sources": [
+    {
+      "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium"
+}

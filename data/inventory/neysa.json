@@ -1,0 +1,19 @@
+{
+  "provider": "neysa",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "none",
+  "login": "no-account",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "sales",
+  "blockers": "no console host (console.neysa.ai does not resolve)",
+  "notes": "Pricing page only; capacity via sales.",
+  "sources": [
+    {
+      "url": "https://neysa.ai/pricing/",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium"
+}

@@ -1,0 +1,19 @@
+{
+  "provider": "nxtgen",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "empty",
+  "stock_recorded": true,
+  "order_path": "sales",
+  "blockers": "new account has 0 virtual data centres and no create action; 0 subscriptions",
+  "notes": "Create AI instance wizard exists but 'Add GPU' stays disabled without a VDC.",
+  "sources": [
+    {
+      "url": "https://speedcloud-portal.nxtgen.com/ai/portal/enterprise",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium"
+}

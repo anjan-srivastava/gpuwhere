@@ -1,0 +1,19 @@
+{
+  "provider": "neevcloud",
+  "last_checked_at": "2026-11-08T21:30:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "visible",
+  "stock_recorded": true,
+  "order_path": "self-serve",
+  "blockers": null,
+  "notes": "GPU Pod list shows free/total per config (e.g. 16/23 RTX PRO 6000); 4 configs in stock, 6 Unavailable/Notify Me.",
+  "sources": [
+    {
+      "url": "https://console.ai.neevcloud.com/gpu",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high"
+}

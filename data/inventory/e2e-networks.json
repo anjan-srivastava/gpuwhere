@@ -1,0 +1,19 @@
+{
+  "provider": "e2e-networks",
+  "last_checked_at": null,
+  "access": "api",
+  "login": "blocked",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "self-serve",
+  "blockers": "MyAccount API needs a validated customer account (is_approved=false)",
+  "notes": "Pricing comes from the public feed; live GPU plans are empty until the account is validated.",
+  "sources": [
+    {
+      "url": "https://www.e2enetworks.com",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium"
+}

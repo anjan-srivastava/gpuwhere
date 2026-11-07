@@ -1,0 +1,13 @@
+{
+  "provider": "sify",
+  "last_checked_at": null,
+  "access": "none",
+  "login": "no-account",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "sales",
+  "blockers": "no self-service GPU console",
+  "notes": "Quote only.",
+  "sources": [],
+  "confidence": "low"
+}

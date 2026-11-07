@@ -19,6 +19,7 @@ SCHEMA_FILES = {
     "provider": "provider.schema.json",
     "sku": "sku.schema.json",
     "gpu": "gpu.schema.json",
+    "inventory": "inventory.schema.json",
     "capacity": "capacity.schema.json",
     "incident": "incident.schema.json",
     "channel": "channel.schema.json",
@@ -46,6 +47,10 @@ def sku_files() -> list[Path]:
 
 def gpu_files() -> list[Path]:
     return sorted((DATA / "gpus").glob("*/*.json"))
+
+
+def inventory_files() -> list[Path]:
+    return sorted((DATA / "inventory").glob("*.json"))
 
 
 def capacity_files() -> list[Path]:
@@ -78,7 +83,7 @@ def iter_records():
     """Yield (kind, path, record) for every JSON/JSONL record in data/."""
     for kind, files in (
         ("provider", provider_files()), ("sku", sku_files()), ("gpu", gpu_files()),
-        ("capacity", capacity_files()), ("incident", incident_files()), ("channel", channel_files()),
+        ("inventory", inventory_files()), ("capacity", capacity_files()), ("incident", incident_files()), ("channel", channel_files()),
     ):
         for f in files:
             yield kind, f, load_json(f)

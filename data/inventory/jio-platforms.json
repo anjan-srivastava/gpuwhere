@@ -1,0 +1,13 @@
+{
+  "provider": "jio-platforms",
+  "last_checked_at": null,
+  "access": "none",
+  "login": "no-account",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "sales",
+  "blockers": "reserved capacity via sales only",
+  "notes": "No public inventory surface.",
+  "sources": [],
+  "confidence": "low"
+}

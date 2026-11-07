@@ -1,0 +1,19 @@
+{
+  "provider": "krutrim-cloud",
+  "last_checked_at": null,
+  "access": "api",
+  "login": "no-account",
+  "inventory": "unknown",
+  "stock_recorded": false,
+  "order_path": "unknown",
+  "blockers": "needs an Ola Krutrim cloud account",
+  "notes": "API/SDK documented; inventory not yet queried.",
+  "sources": [
+    {
+      "url": "https://docs.olakrutrim.com",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "low"
+}

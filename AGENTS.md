@@ -53,6 +53,7 @@ gpu-catalog/
     incidents/<provider>.json
     availability/<provider>.jsonl   append-only
     capacity/<provider>.json
+    inventory/<provider>.json      logged-in stock-check status (one file per Indian provider)
     channels/<channel>.json
   scrapers/                   one pricing_<provider>.py per source + refresh loops
   scripts/
@@ -84,6 +85,17 @@ Downloaded model weights are the main reason a GPU rental is useless without att
 - `block_usd_per_gb_mo`, `file_usd_per_gb_mo`, `object_usd_per_gb_mo`, `object_s3_compatible` — optional price/compat detail. A secondary capability's price is a fraction of GPU spend; it ranks and filters nothing.
 
 The providers page filters on `mountable`, shows a `Block/File` and `Shared FS` chip, and each provider page has a Storage section that leads with capability pills and states explicitly what is unverified. Object storage is **not** a substitute: it needs a download step before a job can read the weights.
+
+## Inventory checks (logged-in truth)
+
+A catalogue of rates is not an inventory. `data/inventory/<provider>.json` records, for every Indian provider, the last time we actually signed in and looked at stock, and what we saw:
+
+- `access` — `api | cli | console | none`; `login` — `ok | blocked | no-account | not-needed | unknown`.
+- `inventory` — `visible` (real free/total numbers), `empty` (catalogue or entitlements empty), `not-exposed` (you can order but stock is never shown), `unknown`.
+- `stock_recorded` — whether the check produced rows in `data/availability/<provider>.jsonl`.
+- `order_path` — `self-serve | sales | none | unknown`; plus `blockers`, `notes`, `last_checked_at`.
+
+The providers page shows the check age under **Available now**, the provider page has an **Inventory check** section, and an availability section with no observations explains itself ("last checked …, the provider exposes no stock numbers") instead of a bare "none". A check is a dated observation: never infer stock from a rate card, and never record `visible` unless free/total numbers were on screen.
 
 ## Capacity vs availability
 
