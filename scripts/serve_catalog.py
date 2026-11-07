@@ -1740,7 +1740,7 @@ function renderProviders() {
     const slaCls = r.sla == null ? "muted" : r.sla >= 99.9 ? "ok" : "warn";
     return `
       <tr>
-        <td><div class="prov-wrap"><img class="logo" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'"><span class="prov-cell"><span><a class="provider-name" href="#/provider/${esc(p.id)}">${esc(p.name || p.id)}</a><span class="taggroup">${accessTags(r.access)}${countryTag(p)}</span></span><span class="prov-sub">${p.website ? `<a class="site-link" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer" title="${esc(p.gpu_page ? "GPU offerings: " + p.gpu_page : p.website)}">${esc(siteHost(p.website))} ↗</a>` : ""}${r.regions ? `<span class="regions" title="Regions">${p.website ? " · " : ""}${esc(r.regions)}</span>` : ""}</span></span></div></td>
+        <td><div class="prov-wrap"><img class="logo" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'"><span class="prov-cell"><span><a class="provider-name" href="#/provider/${esc(p.id)}">${esc(p.name || p.id)}</a><span class="taggroup">${accessTags(r.access)}${countryTag(p)}</span></span><span class="prov-sub">${p.website ? `<a class="site-link" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer" title="${esc(p.gpu_page ? "GPU offerings: " + p.gpu_page : p.website)}">${esc(siteHost(p.gpu_page || p.website))} ↗</a>` : ""}${r.regions ? `<span class="regions" title="Regions">${p.website ? " · " : ""}${esc(r.regions)}</span>` : ""}</span></span></div></td>
         <td class="gpu-cell">${r.gpuModels.length ? r.gpuModels.slice(0, 4).map(g => `<span class="chip">${esc(g)}</span>`).join("") + (r.gpuModels.length > 4 ? `<span class="chip" title="${esc(r.gpuModels.join(", "))}">+${r.gpuModels.length - 4}</span>` : "") : `<span class="muted">—</span>`}</td>
         <td class="num">${priceIndexCell(r)}</td>
         <td class="feat-cell">${featureChips(r)}</td>
@@ -1778,7 +1778,7 @@ function renderProviderDetail(id) {
       <img class="logo-lg" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'">
       <div style="flex:1">
         <h1>${esc(p.name || p.id)}${countryTag(p) ? ` <span style="font-size:12px;vertical-align:middle">${countryTag(p)}</span>` : ""}</h1>
-        ${p.website ? `<a class="site-url" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer">${esc(siteHost(p.website))} ↗</a>` : ""}
+        ${p.website ? `<a class="site-url" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer">${esc(siteHost(p.gpu_page || p.website))} ↗</a>` : ""}
         <div class="detail-sub">${esc((p.regions || []).join(", ") || "India")}${rel.sla_pct != null ? ` · ${rel.sla_pct}% SLA` : ""}</div>
       </div>
       <span class="pill ${p.status === "active" ? "ok" : p.status === "beta" ? "warn" : p.status === "deprecated" || p.status === "retired" ? "bad" : ""}">${esc(p.status || "—")}</span>
