@@ -430,6 +430,7 @@ HTML = r"""<!doctype html>
   .sku-link { color: inherit; }
   .sku-link:hover .row-title { color: var(--accent); text-decoration: underline; }
   .chip { display: inline-block; white-space: nowrap; font-family: var(--mono); font-size: 11px; padding: 1px 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--muted); font-weight: 400; margin: 0 4px 4px 0; }
+  .chip-out { opacity: .45; border-style: dashed; }
   td.gpu-cell { min-width: 160px; max-width: 260px; line-height: 1.4; }
   td.feat-cell { white-space: normal; min-width: 110px; max-width: 170px; line-height: 1.7; }
   .cap-stack .meta { white-space: normal; max-width: 110px; margin-left: auto; text-align: right; }
@@ -874,7 +875,9 @@ function providerMatches(r) {
   if (r.skus.length && !r.skus.some(s => regionInScope(s.region))) return false;
   if (f.pricing !== "all" && r.access.pricing !== f.pricing) return false;
   if (f.provisioning.length && !f.provisioning.includes(r.access.provisioning)) return false;
-  if (f.gpu && !r.skus.some(s => s.gpu === f.gpu && s.status !== "retired")) return false;
+  // A GPU filter is a "who can I rent this from now" question: out-of-stock and sales-only
+  // packages do not count.
+  if (f.gpu && !r.skus.some(s => s.gpu === f.gpu && orderablePrice(s) != null)) return false;
   if (f.hourly && !(r.access.hourly > 0)) return false;
   if (f.free && !(r.freeLive > 0)) return false;
   if (f.capacity && r.capacity == null) return false;
@@ -1581,6 +1584,7 @@ function providerRow(p) {
   const live = liveFreeOf(p.id);
   const rel = p.reliability || {};
   const gpuModels = [...new Set(skus.map(s => accelName(s)))].sort();
+  const gpuOrderable = new Set(skus.filter(s => orderablePrice(s) != null).map(s => accelName(s)));
   const updated = skus.map(s => dateOnly(s.verified_at)).sort().pop() || dateOnly(p.verified_at);
   const st = p.storage || {};
   return {
@@ -1588,6 +1592,7 @@ function providerRow(p) {
     name: (p.name || p.id).toLowerCase(),
     regions: (p.regions || []).join(", "),
     gpuModels,
+    gpuOrderable,
     gpus: gpuModels.join(", "),
     capVpc: !!(p.networking && p.networking.vpc),
     capMountable: st.mountable === true || st.block_usd_per_gb_mo != null || st.file_usd_per_gb_mo != null,
@@ -1756,7 +1761,16 @@ function renderProviders() {
     return `
       <tr>
         <td><div class="prov-wrap"><img class="logo" src="/assets/logos/${esc(p.id)}.png" alt="" onerror="this.style.visibility='hidden'"><span class="prov-cell"><span><a class="provider-name" href="#/provider/${esc(p.id)}">${esc(p.name || p.id)}</a><span class="taggroup">${accessTags(r.access)}${countryTag(p)}</span></span><span class="prov-sub">${p.website ? `<a class="site-link" href="${esc(refUrl(p.gpu_page || p.website))}" target="_blank" rel="noopener noreferrer" title="${esc(p.gpu_page ? "GPU offerings: " + p.gpu_page : p.website)}">${esc(siteHost(p.gpu_page || p.website))} ↗</a>` : ""}${r.regions ? `<span class="regions" title="Regions">${p.website ? " · " : ""}${esc(r.regions)}</span>` : ""}</span></span></div></td>
-        <td class="gpu-cell">${r.gpuModels.length ? r.gpuModels.slice(0, 4).map(g => `<span class="chip">${esc(g)}</span>`).join("") + (r.gpuModels.length > 4 ? `<span class="chip" title="${esc(r.gpuModels.join(", "))}">+${r.gpuModels.length - 4}</span>` : "") : `<span class="muted">—</span>`}</td>
+        <td class="gpu-cell">${r.gpuModels.length ? (() => {
+          const ordered = [...r.gpuModels].sort((a, b) => (r.gpuOrderable.has(b) ? 1 : 0) - (r.gpuOrderable.has(a) ? 1 : 0) || a.localeCompare(b));
+          const shown = ordered.slice(0, 4);
+          const rest = ordered.slice(4);
+          const chip = g => r.gpuOrderable.has(g)
+            ? `<span class="chip" title="Orderable now">${esc(g)}</span>`
+            : `<span class="chip chip-out" title="No orderable package right now (out of stock or sales only)">${esc(g)}</span>`;
+          const more = rest.length ? `<span class="chip chip-out" title="${esc(rest.join(", "))}">+${rest.length}</span>` : "";
+          return shown.map(chip).join("") + more;
+        })() : `<span class="muted">—</span>`}</td>
         <td class="num">${priceIndexCell(r)}</td>
         <td class="feat-cell">${featureChips(r)}</td>
         <td class="num">${cap}</td>

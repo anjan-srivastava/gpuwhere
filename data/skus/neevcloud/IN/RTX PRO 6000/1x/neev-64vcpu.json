@@ -30,7 +30,7 @@
     "committed": []
   },
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "Not in the Neev AI console's GPU Pod list (audited 2026-11-08), so it cannot be ordered from that catalogue. It may be offered through another product (VM Service) - unverified, which is why it is not counted as orderable.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
@@ -49,5 +49,6 @@
   "confidence": "high",
   "verified_at": "2026-11-07",
   "form_factor": "pcie",
-  "notes": "GPU AI Service per-GPU rate; reserved discounts available."
+  "notes": "GPU AI Service per-GPU rate; reserved discounts available.",
+  "self_serve": false
 }
