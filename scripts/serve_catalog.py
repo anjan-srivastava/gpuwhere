@@ -1114,7 +1114,7 @@ const priceOf = (s) => s.pricing && s.pricing.on_demand ? s.pricing.on_demand.us
 // marks them sold out (status "unavailable") or the latest observation shows 0 free GPUs.
 const latestObs = (s) => s.latest_availability || (s.availability && s.availability.last_observed_at ? s.availability : null);
 const outOfStock = (s) => s.status === "unavailable" || (latestObs(s) != null && latestObs(s).available_gpus === 0);
-const orderablePrice = (s) => s.status === "retired" || outOfStock(s) ? null : priceOf(s);
+const orderablePrice = (s) => s.status === "retired" || outOfStock(s) || s.self_serve === false ? null : priceOf(s);
 // hourly = rentable by the hour; monthly = shortest commitment is a month (price shown per GPU-hour).
 function billingOf(s) {
   if (s.billing_model) return s.billing_model;
@@ -1150,6 +1150,7 @@ function hostSpec(s) {
 }
 function priceCell(s, vm = false) {
   const v = vm ? vmOf(s) : priceOf(s);
+  if (v != null && s.self_serve === false) return `${money(v)}<br><span class="tag warn" title="${esc(s.price_note || "Listed by the provider but not orderable self-serve; sales enquiry required.")}">sales only</span>`;
   if (v != null && outOfStock(s)) return `<span title="Listed price; currently out of stock. Not counted in minimum prices."><span class="price-off">${money(v)}</span><br><span class="tag bad">${s.status === "unavailable" ? "SOLD OUT" : "OUT OF STOCK"}</span></span>`;
   if (v != null) return money(v) + (billingOf(s) === "monthly" ? `<br>${MONTHLY_TAG}` : "");
   if (s.pricing_status === "quote_only") return unk("on request", s.price_note || "Price on request");

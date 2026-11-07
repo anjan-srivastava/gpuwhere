@@ -238,6 +238,13 @@
         "string",
         "null"
       ]
+    },
+    "self_serve": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "true = orderable through the provider's self-serve path; false = listed but requires sales; null = not verified"
     }
   },
   "$defs": {

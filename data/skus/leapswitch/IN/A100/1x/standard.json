@@ -42,6 +42,7 @@
     "spot_available_gpus": null,
     "source": null
   },
+  "self_serve": true,
   "sources": [
     {
       "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",

@@ -36,6 +36,7 @@
     "spot_available_gpus": null,
     "source": null
   },
+  "self_serve": false,
   "sources": [
     {
       "url": "https://leapswitch.com/gpu-cloud/",

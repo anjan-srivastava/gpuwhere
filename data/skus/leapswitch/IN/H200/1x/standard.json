@@ -42,6 +42,7 @@
     "spot_available_gpus": null,
     "source": null
   },
+  "self_serve": false,
   "sources": [
     {
       "url": "https://leapswitch.com/gpu-cloud/",
@@ -55,7 +56,7 @@
   "notes": "Price per GPU per month, excl. GST. Form factor not published; SXM assumed. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "Listed on Leapswitch's GPU page but not offered in the self-serve GPU cart (which sells A4000/A5000/A6000/A40/A100 VMs); order through sales.",
   "billing_model": "monthly",
   "residency": "india"
 }

@@ -45,7 +45,8 @@
     ]
   },
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "Not in the Cyfuture console's GPU list (V100, MI300, L40S, A100, H100, Gaudi2, MI325 only); sales enquiry required.",
+  "self_serve": false,
   "sources": [
     {
       "url": "https://cyfuture.ai/pricing",

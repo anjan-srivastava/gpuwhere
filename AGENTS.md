@@ -158,6 +158,8 @@ Pricing:
 
 If a provider lists a GPU but does not publish a rate, keep the host package with null prices, `pricing_status: "quote_only"` and a `price_note`. Do not omit the offering and do not invent a rate. Published packages use `pricing_status: "published"`.
 
+`self_serve` is `true` when the package can be ordered through the provider's self-serve path (console/API cart), `false` when the provider lists it but it needs a sales conversation, and `null` when unverified. A `false` package keeps its published price for audit but is excluded from "from"/minimum prices and the price-vs-market index, and the UI tags it `sales only`; its `price_note` must say where the self-serve path stops.
+
 ## Availability records
 
 Append-only JSONL in `data/availability/<provider>.jsonl`, one object per line:

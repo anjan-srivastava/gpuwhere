@@ -40,6 +40,7 @@
   },
   "pricing_status": "quote_only",
   "price_note": "Reserved only; no on-demand rate published. 1-month ₹1140/hr, 6-month ₹1093/hr, 12-month ₹1045/hr.",
+  "self_serve": false,
   "sources": [
     {
       "url": "https://cyfuture.ai/pricing",

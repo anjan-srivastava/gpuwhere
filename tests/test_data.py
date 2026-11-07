@@ -218,6 +218,11 @@ class QualityBudgets(unittest.TestCase):
                and ((s.get("pricing") or {}).get("on_demand") or {}).get("usd_per_gpu_hr") is not None]
         self.assertEqual([], bad)
 
+    def test_not_self_serve_says_why(self):
+        """A package flagged non-self-serve must explain the path in price_note."""
+        bad = [s["id"] for s in self.skus if s.get("self_serve") is False and not s.get("price_note")]
+        self.assertEqual([], bad)
+
     def test_residency_matches_region(self):
         bad = []
         for s in self.skus:

@@ -33,6 +33,7 @@
   },
   "pricing_status": "published",
   "price_note": null,
+  "self_serve": true,
   "sources": [
     {
       "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
