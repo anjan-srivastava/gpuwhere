@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/L40S/2x/40cpu-120gb-96gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "L40S",
+  "gpu_variant": "l40s-pcie",
+  "form_factor": "pcie",
+  "shape": "2x",
+  "gpus_per_vm": 2,
+  "variant": "40cpu-120gb-96gb",
+  "vram_gb_per_gpu": 96,
+  "vcpus": 40,
+  "ram_gb": 120,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.94,
+      "usd_per_vm_hr": 3.88
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.97,
+      "usd_per_vm_hr": 1.94,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 2x L40S 48GB (2L40S.40V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 96 GB VRAM per GPU; accelerator spec l40s-pcie is 48 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

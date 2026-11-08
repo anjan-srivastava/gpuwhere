@@ -3,7 +3,7 @@
   "id": "hyperstack/EU-NO/RTX A4000/1x/a4000",
   "provider": "hyperstack",
   "region": "EU-NO",
-  "status": "active",
+  "status": "retired",
   "gpu": "RTX A4000",
   "gpu_variant": "rtx-a4000-pcie",
   "form_factor": "pcie",
@@ -30,12 +30,12 @@
     {
       "url": "https://www.hyperstack.cloud/gpu-pricing",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
-  "notes": "Provider plan: NVIDIA A4000. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: NVIDIA A4000. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-08 by pricing refresh: superseded by the hyperstack scraper's RTX A4000 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

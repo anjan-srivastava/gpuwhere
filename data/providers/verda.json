@@ -19,7 +19,7 @@
     "type": "console+api",
     "provisioning": "api",
     "documented": true,
-    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+    "notes": "Self-serve console with an API. The public instance-type catalogue (api.verda.com/v1/instance-types) lists every shape 1x/2x/4x/8x with instance-hour and spot prices; the marketing page only shows 1x, which is why the catalogue previously carried 10 one-GPU packages. Confidential-computing (' CC ') variants are a separate product and are not catalogued."
   },
   "billing": {
     "granularity": "second",
@@ -41,7 +41,7 @@
     "sla_pct": null,
     "incident_count_90d": null,
     "downtime_min_90d": null,
-    "capacity_notes": null,
+    "capacity_notes": "Per-shape availability is a boolean (can a VM of this size start now), not a count. At the 2026-11-08 snapshot only H200 8x and RTX PRO 6000 2x/4x were orderable on demand; H100 8x, L40S 8x and the rest of the RTX PRO 6000 range were spot-only, and A100/B200/B300/GB300 were 'Notify me'.",
     "notes": "Finnish GPU cloud formerly DataCrunch; Finland/Iceland data centres; on-demand and spot instance prices. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
   },
   "incidents_file": "incidents/verda.json",
@@ -59,7 +59,7 @@
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-09",
   "capabilities": {
     "cpu_vm": true
   }

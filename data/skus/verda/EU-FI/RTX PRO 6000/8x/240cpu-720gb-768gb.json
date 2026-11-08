@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/RTX PRO 6000/8x/240cpu-720gb-768gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "form_factor": "pcie",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "240cpu-720gb-768gb",
+  "vram_gb_per_gpu": 768,
+  "vcpus": 240,
+  "ram_gb": 720,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.73,
+      "usd_per_vm_hr": 21.8
+    },
+    "spot": {
+      "usd_per_gpu_hr": 1.36,
+      "usd_per_vm_hr": 10.9,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 8x RTX PRO 6000 96GB (8RTXPRO6000.240V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 768 GB VRAM per GPU; accelerator spec rtx-pro-6000-blackwell is 96 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

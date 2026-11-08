@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/B300/1x/30cpu-255gb-268gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "B300",
+  "gpu_variant": "b300-sxm",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "30cpu-255gb-268gb",
+  "vram_gb_per_gpu": 268,
+  "vcpus": 30,
+  "ram_gb": 255,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 11.69,
+      "usd_per_vm_hr": 11.69
+    },
+    "spot": {
+      "usd_per_gpu_hr": 5.84,
+      "usd_per_vm_hr": 5.84,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 1x B300 SXM6 268GB (1B300.30V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 268 GB VRAM per GPU; accelerator spec b300-sxm is 288 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

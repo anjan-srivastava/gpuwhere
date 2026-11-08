@@ -3,7 +3,7 @@
   "id": "verda/EU-FI/B200/1x/30cpu-170gb",
   "provider": "verda",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "B200",
   "gpu_variant": "b200-sxm",
   "form_factor": "sxm",
@@ -40,7 +40,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: 1x B200 SXM6 180GB (30 CPU, 170 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
+  "notes": "Provider plan: 1x B200 SXM6 180GB (30 CPU, 170 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB. Retired 2026-11-08 by pricing refresh: superseded by the verda scraper's B200 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "hyperstack/CA-1/RTX PRO 6000/4x/rtx-pro-6000-se-4x",
+  "provider": "hyperstack",
+  "region": "CA-1",
+  "status": "active",
+  "gpu": "RTX PRO 6000",
+  "gpu_variant": "rtx-pro-6000-blackwell",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "rtx-pro-6000-se-4x",
+  "vram_gb_per_gpu": 96,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 1.85,
+      "usd_per_vm_hr": 7.4
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://www.hyperstack.cloud/gpu-pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "medium",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: NVIDIA RTX Pro 6000 SE 4x. Billed per GPU-hour ($1.85); the 4x package is 4 × that rate. Region and shapes from the signed-in console (2026-11-09); the price list is global. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

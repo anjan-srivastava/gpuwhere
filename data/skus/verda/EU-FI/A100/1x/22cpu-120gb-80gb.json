@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/A100/1x/22cpu-120gb-80gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "A100",
+  "gpu_variant": "a100-sxm4-80gb",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "22cpu-120gb-80gb",
+  "vram_gb_per_gpu": 80,
+  "vcpus": 22,
+  "ram_gb": 120,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 2.32,
+      "usd_per_vm_hr": 2.32
+    },
+    "spot": {
+      "usd_per_gpu_hr": 1.16,
+      "usd_per_vm_hr": 1.16,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 1x A100 SXM4 80GB (1A100.22V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

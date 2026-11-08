@@ -7,7 +7,10 @@
   "country": "GB",
   "status": "active",
   "regions": [
-    "EU-NO"
+    "EU-NO",
+    "CA-1",
+    "CA-2",
+    "US-1"
   ],
   "compliance": {
     "meity": false,
@@ -19,7 +22,7 @@
     "type": "console+api",
     "provisioning": "api",
     "documented": true,
-    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+    "notes": "Self-serve console with a documented API. The price list is global, but products are region-specific: NORWAY-1 sells only RTX-A4000; CANADA-1 carries A100 PCIe/NVLink, H100 PCIe/NVLink, H200 SXM5, B200, B300, RTX A6000 and RTX PRO 6000 SE; CANADA-2 and US-1 sell only 8-GPU H100 SXM5, and US-1 also 8-GPU A100 SXM4. Verified 2026-11-09; earlier catalogue rows put every model in Norway, which was wrong."
   },
   "billing": {
     "granularity": "minute",
@@ -41,7 +44,7 @@
     "sla_pct": null,
     "incident_count_90d": null,
     "downtime_min_90d": null,
-    "capacity_notes": null,
+    "capacity_notes": "Publishes per-model, per-shape stock counts (console /api/core/stocks). At the 2026-11-08 snapshot: H100 PCIe-NVLink 8 GPUs (one 8x node) and L40 in Canada, A100 SXM4 two 8x nodes in the US, and nothing larger than RTX-A4000 in Norway.",
     "notes": "GPU cloud by NexGen Cloud; data centres in Norway, Canada and the US with one price list. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
   },
   "incidents_file": "incidents/hyperstack.json",
@@ -59,7 +62,7 @@
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-09",
   "capabilities": {
     "cpu_vm": true
   }

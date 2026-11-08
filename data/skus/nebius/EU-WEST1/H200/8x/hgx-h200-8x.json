@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "nebius/EU-WEST1/H200/8x/hgx-h200-8x",
+  "provider": "nebius",
+  "region": "EU-WEST1",
+  "status": "active",
+  "gpu": "H200",
+  "gpu_variant": "h200-sxm",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "hgx-h200-8x",
+  "vram_gb_per_gpu": 141,
+  "vcpus": 128,
+  "ram_gb": 1600,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 43.2,
+      "usd_per_vm_hr": 345.6
+    },
+    "spot": {
+      "usd_per_gpu_hr": 23.12,
+      "usd_per_vm_hr": 184.96,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://nebius.com/prices",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    },
+    {
+      "url": "https://api.nebius.cloud/billing/v1alpha1/spot-price?pageSize=100",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: NVIDIA HGX H200 8x. Per GPU-hour on-demand; vCPU/RAM are per GPU. Region and shape list from the signed-in capacity dashboard (2026-11-09); the price list is per platform. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 2.89 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-08T20:25:24.277750Z); preemptible and dynamic — an observation, not a rate card.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

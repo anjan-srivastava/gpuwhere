@@ -3,7 +3,7 @@
   "id": "nebius/EU-FI/H200/1x/standard",
   "provider": "nebius",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "H200",
   "gpu_variant": "h200-sxm",
   "form_factor": "sxm",
@@ -45,7 +45,7 @@
   ],
   "confidence": "high",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: NVIDIA HGX H200. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 2.90 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-07T20:28:37.306363Z); preemptible and dynamic — the price can change as often as every 15 minutes, so treat this as an observation, not a rate card.",
+  "notes": "Provider plan: NVIDIA HGX H200. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 2.90 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-07T20:28:37.306363Z); preemptible and dynamic — the price can change as often as every 15 minutes, so treat this as an observation, not a rate card. Retired 2026-11-09 by pricing refresh: Superseded: Nebius prices are per platform and the package is now tied to the provider's own region code (verified 2026-11-09); 'EU-FI' was a blanket label for every Nebius region.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

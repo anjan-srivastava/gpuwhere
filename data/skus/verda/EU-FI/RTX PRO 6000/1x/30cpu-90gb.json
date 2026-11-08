@@ -3,7 +3,7 @@
   "id": "verda/EU-FI/RTX PRO 6000/1x/30cpu-90gb",
   "provider": "verda",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "RTX PRO 6000",
   "gpu_variant": "rtx-pro-6000-blackwell",
   "form_factor": "pcie",
@@ -40,7 +40,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: 1x RTX PRO 6000 96GB (30 CPU, 90 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "notes": "Provider plan: 1x RTX PRO 6000 96GB (30 CPU, 90 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-08 by pricing refresh: superseded by the verda scraper's RTX PRO 6000 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

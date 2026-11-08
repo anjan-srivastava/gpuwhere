@@ -3,7 +3,7 @@
   "id": "hyperstack/EU-NO/A100/1x/a100-nvlink",
   "provider": "hyperstack",
   "region": "EU-NO",
-  "status": "active",
+  "status": "retired",
   "gpu": "A100",
   "gpu_variant": "a100-pcie-80gb",
   "form_factor": "pcie",
@@ -30,12 +30,12 @@
     {
       "url": "https://www.hyperstack.cloud/gpu-pricing",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
-  "notes": "Provider plan: NVIDIA A100 NVLink. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Listed as 'NVLink' (PCIe cards bridged with NVLink). Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: NVIDIA A100 NVLink. Per GPU-hour on-demand; vCPU and RAM are the published maximum per GPU. Hyperstack (NexGen Cloud) runs data centres in Norway, Canada and the US with one price list. Listed as 'NVLink' (PCIe cards bridged with NVLink). Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-09 by pricing refresh: Superseded: Hyperstack does not sell this product in Norway. The signed-in console (2026-11-09) lists only RTX-A4000 in NORWAY-1; this model is offered in Canada/US and is catalogued under its real region.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

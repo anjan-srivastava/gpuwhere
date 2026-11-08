@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/RTX A6000/4x/40cpu-240gb-192gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "RTX A6000",
+  "gpu_variant": "rtx-a6000-pcie",
+  "form_factor": "pcie",
+  "shape": "4x",
+  "gpus_per_vm": 4,
+  "variant": "40cpu-240gb-192gb",
+  "vram_gb_per_gpu": 192,
+  "vcpus": 40,
+  "ram_gb": 240,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 0.85,
+      "usd_per_vm_hr": 3.41
+    },
+    "spot": {
+      "usd_per_gpu_hr": 0.43,
+      "usd_per_vm_hr": 1.7,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 4x RTX A6000 48GB (4A6000.40V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 192 GB VRAM per GPU; accelerator spec rtx-a6000-pcie is 48 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

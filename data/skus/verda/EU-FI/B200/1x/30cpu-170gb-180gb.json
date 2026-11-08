@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "verda/EU-FI/B200/1x/30cpu-170gb-180gb",
+  "provider": "verda",
+  "region": "EU-FI",
+  "status": "active",
+  "gpu": "B200",
+  "gpu_variant": "b200-sxm",
+  "form_factor": "sxm",
+  "shape": "1x",
+  "gpus_per_vm": 1,
+  "variant": "30cpu-170gb-180gb",
+  "vram_gb_per_gpu": 180,
+  "vcpus": 30,
+  "ram_gb": 170,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 9.14,
+      "usd_per_vm_hr": 9.14
+    },
+    "spot": {
+      "usd_per_gpu_hr": 4.57,
+      "usd_per_vm_hr": 4.57,
+      "notice_sec": null
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://api.verda.com/v1/instance-types",
+      "kind": "api",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "high",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: 1x B200 SXM6 180GB (1B200.30V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Provider warning: Blackwell: Use \"Ubuntu 24.04 + CUDA 12.8 Open\" image type or install NVIDIA open drivers manually Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

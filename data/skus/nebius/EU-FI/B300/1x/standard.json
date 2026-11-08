@@ -3,7 +3,7 @@
   "id": "nebius/EU-FI/B300/1x/standard",
   "provider": "nebius",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "B300",
   "gpu_variant": "b300-sxm",
   "form_factor": "sxm",
@@ -35,7 +35,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: NVIDIA HGX B300. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. No spot price for this platform in this region at the last snapshot; spot prices are dynamic and are read from the official spot-price API.",
+  "notes": "Provider plan: NVIDIA HGX B300. Per GPU-hour on-demand; vCPU/RAM are per GPU. Nebius runs EU (Finland, France) and US regions and publishes one price list. Outside India: no India data residency; consider only for burst/non-regulated workloads. No spot price for this platform in this region at the last snapshot; spot prices are dynamic and are read from the official spot-price API. Retired 2026-11-09 by pricing refresh: Superseded: Nebius prices are per platform and the package is now tied to the provider's own region code (verified 2026-11-09); 'EU-FI' was a blanket label for every Nebius region.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

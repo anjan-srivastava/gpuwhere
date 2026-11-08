@@ -1,0 +1,48 @@
+{
+  "$schema": "../../../../schema/sku.schema.json",
+  "id": "hyperstack/CA-1/B300/8x/b300-sxm-8x",
+  "provider": "hyperstack",
+  "region": "CA-1",
+  "status": "active",
+  "gpu": "B300",
+  "gpu_variant": "b300-sxm",
+  "form_factor": "sxm",
+  "shape": "8x",
+  "gpus_per_vm": 8,
+  "variant": "b300-sxm-8x",
+  "vram_gb_per_gpu": 288,
+  "vcpus": null,
+  "ram_gb": null,
+  "disk_gb": null,
+  "disk_type": null,
+  "pricing": {
+    "on_demand": {
+      "usd_per_gpu_hr": 7.4,
+      "usd_per_vm_hr": 59.2
+    },
+    "committed": []
+  },
+  "billing_model": "hourly",
+  "pricing_status": "published",
+  "residency": "outside-india",
+  "price_note": null,
+  "self_serve": null,
+  "sources": [
+    {
+      "url": "https://www.hyperstack.cloud/gpu-pricing",
+      "kind": "page",
+      "fetched_at": "2026-11-08"
+    }
+  ],
+  "confidence": "low",
+  "verified_at": "2026-11-08",
+  "notes": "Provider plan: B300-SXM 8x. Not on the public price list: $7.4/GPU-hour is read from the signed-in console deploy page (2026-11-09) and needs re-checking. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "availability": {
+    "last_observed_at": null,
+    "available_vms": null,
+    "available_gpus": null,
+    "spot_available_vms": null,
+    "spot_available_gpus": null,
+    "source": null
+  }
+}

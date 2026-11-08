@@ -3,7 +3,7 @@
   "id": "verda/EU-FI/H100/1x/32cpu-170gb",
   "provider": "verda",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "H100",
   "gpu_variant": "h100-sxm5",
   "form_factor": "sxm",
@@ -40,7 +40,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: 1x H100 SXM5 80GB (32 CPU, 170 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "notes": "Provider plan: 1x H100 SXM5 80GB (32 CPU, 170 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-08 by pricing refresh: superseded by the verda scraper's H100 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

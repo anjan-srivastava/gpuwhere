@@ -3,7 +3,7 @@
   "id": "verda/EU-FI/RTX A6000/1x/10cpu-60gb",
   "provider": "verda",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "RTX A6000",
   "gpu_variant": "rtx-a6000-pcie",
   "form_factor": "pcie",
@@ -40,7 +40,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: 1x RTX A6000 48GB (10 CPU, 60 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "notes": "Provider plan: 1x RTX A6000 48GB (10 CPU, 60 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-08 by pricing refresh: superseded by the verda scraper's RTX A6000 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

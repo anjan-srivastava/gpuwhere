@@ -7,7 +7,15 @@
   "country": "NL",
   "status": "active",
   "regions": [
-    "EU-FI"
+    "EU-NORTH1",
+    "EU-WEST1",
+    "EU-WEST2",
+    "EU-SOUTH1",
+    "UK-SOUTH1",
+    "UK-SOUTH2",
+    "US-CENTRAL1",
+    "US-NORTH1",
+    "ME-WEST1"
   ],
   "compliance": {
     "meity": false,
@@ -19,7 +27,7 @@
     "type": "console+api",
     "provisioning": "api",
     "documented": true,
-    "notes": "Self-serve console and documented API. Outside India: no India data residency."
+    "notes": "Self-serve console and CLI with service-account keys. The price list is per platform; the capacity dashboard (verified 2026-11-09) shows which regions carry each platform and that every GPU platform is sold as a 1-GPU or 8-GPU preset. Region codes are the provider's own, uppercased; EU-NORTH1 is the Finnish region previously labelled EU-FI."
   },
   "billing": {
     "granularity": "second",
@@ -44,7 +52,7 @@
     "sla_pct": null,
     "incident_count_90d": null,
     "downtime_min_90d": null,
-    "capacity_notes": null,
+    "capacity_notes": "Capacity dashboard reports launchable VMs per platform, region and preset, capped by the account quota. At the 2026-11-08 snapshot only one 8-GPU H100 node was launchable (EU-NORTH1) and 8-GPU H200 existed only as preemptible capacity (EU-WEST1, EU-NORTH1); B300 showed no regular capacity anywhere.",
     "notes": "AI cloud headquartered in Amsterdam with EU (Finland, France) and US regions; one published price list. Burst option for non-regulated workloads: not MeitY-empanelled and data leaves India."
   },
   "incidents_file": "incidents/nebius.json",
@@ -62,7 +70,7 @@
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-09",
   "capabilities": {
     "cpu_vm": true
   }

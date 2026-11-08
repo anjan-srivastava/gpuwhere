@@ -3,7 +3,7 @@
   "id": "verda/EU-FI/A100/1x/22cpu-120gb",
   "provider": "verda",
   "region": "EU-FI",
-  "status": "active",
+  "status": "retired",
   "gpu": "A100",
   "gpu_variant": "a100-sxm4-80gb",
   "form_factor": "sxm",
@@ -40,7 +40,7 @@
   ],
   "confidence": "medium",
   "verified_at": "2026-11-07",
-  "notes": "Provider plan: 1x A100 SXM4 80GB (22 CPU, 120 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
+  "notes": "Provider plan: 1x A100 SXM4 80GB (22 CPU, 120 GB). Verda (formerly DataCrunch), Finland/Iceland data centres. Price per instance-hour; spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Retired 2026-11-08 by pricing refresh: superseded by the verda scraper's A100 1x package(s) from the current official source.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
