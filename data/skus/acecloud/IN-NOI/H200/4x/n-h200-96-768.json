@@ -53,16 +53,17 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h200-nvl/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "nvl",
   "gpu_variant": "h200-nvl",
   "pricing_status": "published",
-  "price_note": null,
-  "notes": "Provider plan: N.H200.96.768.",
+  "price_note": "AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
+  "notes": "Provider plan: N.H200.96.768. AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

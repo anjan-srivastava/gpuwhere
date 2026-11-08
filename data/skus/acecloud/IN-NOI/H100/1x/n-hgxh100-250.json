@@ -53,16 +53,17 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h100-hgx/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",
-  "price_note": null,
-  "notes": "Provider plan: N.HGXH100.250. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "price_note": "AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
+  "notes": "Provider plan: N.HGXH100.250. Hourly billing not offered for this flavour in Noida. AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "billing_model": "monthly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

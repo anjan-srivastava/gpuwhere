@@ -1,13 +1,13 @@
 {
   "provider": "acecloud",
-  "last_checked_at": "2026-11-07T23:53:18Z",
+  "last_checked_at": "2026-11-08T19:37:58Z",
   "access": "api",
   "login": "ok",
   "inventory": "not-exposed",
   "stock_recorded": false,
   "order_path": "self-serve",
   "blockers": "Console 'Create Instance' fails ('Unable to fetch instance'); trial quota (0/3 instances, 0/20 vCPU, 0/40 GB RAM) cannot fit any GPU flavour (16-28 vCPU)",
-  "notes": "Signed in to customer.acecloud.ai (trial project, ap-south-noi-1). The UI offers no GPU launch - 'Create Instance' errors with 'Unable to fetch instance' and the 'Spot Pricing - GPU' tab bounces to the dashboard. The console's own API (/api/v1/cloud/flavors) lists 12 GPU flavours: Noida - H200 x3, L4 x2, L40S x2, RTX A6000 x2, RTX 6000 Ada x2, PRO 6000 x2, A2 x1; Mumbai - H200 x3, L4 x2, PRO 4500 x2, PRO 6000 x3, RTX A6000 x1, A2 x2. Flavour objects carry only id/name/memory/disk/vcpus/swap/ephemeral/disabled/isPublic and extra_specs {gpu, isHourly, alias, requestedQuantity} - no stock count, and every availability-style endpoint 404s (/cloud/availability, /cloud/capacity, /cloud/spot-prices, /cloud/flavors/{id}/availability). 'disabled' is a catalogue flag, not capacity. No H100, A100, A30 or MI300X appears in either region although the rate card carries them, so those rates are not orderable from this account. Flavours are a catalogue, not availability.",
+  "notes": "Signed in to customer.acecloud.ai (CRN 41996, project ed46543a94, regions ap-south-noi-1, ap-south-mum-2 and us-east-at-2; the US region offers no GPU flavours). The console 'Create Instance' flow fails on this trial account ('Unable to fetch instance') and the trial quota (0/3 instances, 0/20 vCPU) could not fit a GPU flavour anyway. The console's flavour API is the orderable catalogue: Noida - H200 x3, L4 x2, L40S x2, RTX A6000 x2, RTX 6000 Ada x2, PRO 6000 x2, A2 x1; Mumbai - H200 x3, L4 x2, PRO 4500 x2, PRO 6000 x3, RTX A6000 x1, A2 x2. Every flavour is a single-GPU package. There is NO H100, A100 or A30 flavour in any region, and no multi-GPU H200/L4/L40S/PRO shape, so 74 of the 100 catalogue packages are rate-card only (self_serve false) and 26 are console-orderable. No endpoint exposes stock: /cloud/availability, /cloud/capacity, /cloud/spot-prices and /cloud/flavors/{id}/availability all 404, and a flavour object carries no count.",
   "sources": [
     {
       "url": "https://customer.acecloud.ai/v1/en/dashboard",

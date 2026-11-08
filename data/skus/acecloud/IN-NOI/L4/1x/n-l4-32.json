@@ -56,13 +56,14 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-l4-24gb/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "pcie",
   "notes": "Provider plan: N.L4.32. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "billing_model": "monthly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": true
 }
