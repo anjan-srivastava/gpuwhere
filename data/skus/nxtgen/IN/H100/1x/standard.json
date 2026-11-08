@@ -72,8 +72,9 @@
   "form_factor": "nvl",
   "gpu_variant": "h100-nvl",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "notes": "Provider plan: H100NVL.1x. Rate card prices are INR per instance-hour for each term; USD at the ECB reference rate. SpeedCloud homepage marks the matching plan 'N1-Pulse' SOLD OUT.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

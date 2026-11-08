@@ -69,5 +69,6 @@
     "source": null
   },
   "billing_model": null,
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

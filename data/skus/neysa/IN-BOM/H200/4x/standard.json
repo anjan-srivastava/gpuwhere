@@ -51,8 +51,9 @@
   "form_factor": "sxm",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "notes": "'Starts at' per-GPU rate; 100 GB disk included (50 GB OS + 50 GB data).",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

@@ -48,5 +48,6 @@
   "form_factor": "sxm",
   "notes": "Modelled on the 8x shape (one HGX node) so the offering is visible; not separately rentable.",
   "billing_model": null,
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

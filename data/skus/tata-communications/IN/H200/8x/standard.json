@@ -53,7 +53,7 @@
     "source": null
   },
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "sources": [
     {
       "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
@@ -65,5 +65,6 @@
   "verified_at": "2026-11-07",
   "form_factor": "nvl",
   "gpu_variant": "h200-nvl",
-  "notes": "Retired 2026-11-07 by pricing refresh: superseded by the tata-communications scraper's H200 8x package(s) from the current official source."
+  "notes": "Retired 2026-11-07 by pricing refresh: superseded by the tata-communications scraper's H200 8x package(s) from the current official source.",
+  "self_serve": false
 }

@@ -72,8 +72,9 @@
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "notes": "Provider plan: VM – 4 x H100 On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹763,028/month for the 1-month term; page lists ₹832,200 (page used).",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

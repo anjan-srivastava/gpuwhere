@@ -406,6 +406,34 @@ def package_to_sku(pkg: Package, variant: str, fx: Fx | None, today: str) -> dic
     return sku
 
 
+SALES_ONLY_NOTE = (
+    "No self-serve GPU ordering: this provider sells through sales, so the published rate is "
+    "a reference only. Excluded from minimum prices and the price-vs-market index."
+)
+
+_PROVISIONING: dict[str, str] = {}
+
+
+def provider_provisioning(data_dir: Path, provider: str) -> str | None:
+    """api | console | sales, read from the provider file (single source of truth)."""
+    if provider not in _PROVISIONING:
+        path = data_dir / "providers" / f"{provider}.json"
+        value = None
+        if path.exists():
+            value = ((json.loads(path.read_text()).get("api") or {}).get("provisioning"))
+        _PROVISIONING[provider] = value or ""
+    return _PROVISIONING[provider] or None
+
+
+def mark_sales_only(sku: dict, provisioning: str | None) -> dict:
+    """A provider with no self-serve path cannot produce a self-serve package."""
+    if provisioning == "sales":
+        sku["self_serve"] = False
+        if not sku.get("price_note"):
+            sku["price_note"] = SALES_ONLY_NOTE
+    return sku
+
+
 def assign_variants(pkgs: list[Package]) -> list[tuple[Package, str]]:
     """'standard' when a (region, gpu, shape) has one package; else the plan slug."""
     groups: dict[tuple, list[Package]] = {}

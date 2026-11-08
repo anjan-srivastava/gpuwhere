@@ -33,7 +33,7 @@
     ]
   },
   "pricing_status": "quote_only",
-  "price_note": "Indicative \u20b9179,995/month reserved rate; contact sales. Not an on-demand list price.",
+  "price_note": "Indicative ₹179,995/month reserved rate; contact sales. Not an on-demand list price.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
@@ -52,5 +52,6 @@
   "confidence": "high",
   "verified_at": "2026-11-07",
   "form_factor": "sxm",
-  "notes": "Reserved monthly pricing is indicative; not an on-demand list price."
+  "notes": "Reserved monthly pricing is indicative; not an on-demand list price.",
+  "self_serve": false
 }

@@ -27,7 +27,7 @@
     "committed": []
   },
   "pricing_status": "quote_only",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
@@ -46,5 +46,6 @@
   "confidence": "high",
   "verified_at": "2026-11-07",
   "form_factor": "pcie",
-  "notes": "VM calculator lists L40S 1×/2×; price not published in the static page. Retired 2026-11-07 by pricing refresh: superseded by the yotta-shakti scraper's L40S 1x package(s) from the current official source."
+  "notes": "VM calculator lists L40S 1×/2×; price not published in the static page. Retired 2026-11-07 by pricing refresh: superseded by the yotta-shakti scraper's L40S 1x package(s) from the current official source.",
+  "self_serve": false
 }

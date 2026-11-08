@@ -29,8 +29,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from pricing_common import (Context, assign_variants, diff, dump, merge,  # noqa: E402
-                            package_to_sku, retire, sku_path, utc_today)
+from pricing_common import (Context, assign_variants, diff, dump, mark_sales_only,  # noqa: E402
+                            merge, package_to_sku, provider_provisioning, retire, sku_path, utc_today)
 
 # provider id → module. Providers without a public, fetchable rate card are
 # listed in MANUAL with the reason; their SKUs stay human-curated.
@@ -108,6 +108,8 @@ def main() -> int:
         fx = ctx.fx if any(_needs_fx(p) for p in priced) else None
         for pkg, variant in assign_variants(priced):
             sku = package_to_sku(pkg, variant, fx, today)
+            # A provider with no self-serve path cannot sell a self-serve package.
+            sku = mark_sales_only(sku, provider_provisioning(data, pid))
             path = sku_path(data, sku)
             produced.add(path.resolve())
             covered.add((sku["region"], sku["gpu"], sku["shape"]))

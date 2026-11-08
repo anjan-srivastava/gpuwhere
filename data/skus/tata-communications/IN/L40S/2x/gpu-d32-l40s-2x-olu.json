@@ -55,7 +55,7 @@
     ]
   },
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "sources": [
     {
       "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
@@ -75,5 +75,6 @@
     "source": null
   },
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

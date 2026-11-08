@@ -54,5 +54,6 @@
   "form_factor": "generic",
   "notes": "Page lists total node GPU memory as 1,536 GB.",
   "billing_model": null,
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

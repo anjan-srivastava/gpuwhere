@@ -48,5 +48,6 @@
   "form_factor": "pcie",
   "notes": "NVIDIA RTX Pro 6000 managed VM; pricing on request.",
   "billing_model": null,
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

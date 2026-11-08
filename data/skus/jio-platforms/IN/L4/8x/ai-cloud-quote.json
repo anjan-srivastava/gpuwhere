@@ -27,7 +27,7 @@
     "committed": []
   },
   "pricing_status": "quote_only",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
@@ -51,5 +51,6 @@
   "confidence": "high",
   "verified_at": "2026-11-07",
   "form_factor": "pcie",
-  "notes": "L4 8\u00d7 appears in the IndiaAI L1 table; commercial rate not published."
+  "notes": "L4 8× appears in the IndiaAI L1 table; commercial rate not published.",
+  "self_serve": false
 }

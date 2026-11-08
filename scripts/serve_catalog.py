@@ -1397,6 +1397,9 @@ function renderGPUAccelerator(entry) {
 
   // Providers that list this GPU but have nothing orderable right now, with the reason.
   const orderableProviders = rows.filter(g => g.skus.some(s => orderablePrice(s) != null));
+  // Free GPUs actually reported for this accelerator; null everywhere else (unknown, not zero).
+  const stockOf = (g) => g.skus.reduce((n, s) => n + ((latestObs(s) && latestObs(s).available_gpus) || 0), 0);
+  const withStock = orderableProviders.filter(g => stockOf(g) > 0);
   const blockedProviders = rows.filter(g => !g.skus.some(s => orderablePrice(s) != null)).map(g => {
     const reasons = new Set();
     for (const s of g.skus) {
@@ -1464,7 +1467,7 @@ function renderGPUAccelerator(entry) {
     </section>
 
     <section>
-      <h2>Providers <span class="h2-note muted">— ${orderableProviders.length} of ${rows.length} can serve this GPU now</span></h2>
+      <h2>Providers <span class="h2-note muted">— ${orderableProviders.length} of ${rows.length} list ${esc(variant.name)} with an orderable price${withStock.length ? `, ${withStock.length} report free GPUs` : ""}</span></h2>
       <div class="panel">
         ${rows.length ? `
         <div class="table-scroll"><table id="gpu-provider-table">
@@ -1488,6 +1491,9 @@ function renderGPUAccelerator(entry) {
             }).join("")}
           </tbody>
         </table></div>` : `<div class="note">No provider sells this GPU SKU yet.</div>`}
+        ${orderableProviders.length && withStock.length < orderableProviders.length ? `<div class="note" style="margin:8px 0 0">${withStock.length
+          ? `Free GPUs are reported by ${withStock.length} of ${orderableProviders.length} (${withStock.map(g => esc(providerOf(g.provider).name || g.provider)).join(", ")}). The rest publish a rate but no stock numbers, so for them the price is verified and the availability is not.`
+          : `No provider reports free ${esc(variant.name)}: the rates above are verified, the availability is not.`}</div>` : ""}
       </div>
     </section>
 
@@ -1706,7 +1712,12 @@ function priceIndex(pid) {
 function priceIndexCell(r) {
   const pi = r.pindex;
   if (!pi) return unk("none in region");
-  if (pi.index == null) return r.access && r.access.pricing === "quote" ? unk("quote only") : unk("too few comparable", "Its GPU models are offered by fewer than 3 providers in this region, or have no orderable price");
+  if (pi.index == null) {
+    const anyOrderable = (r.skus || []).some(s => orderablePrice(s) != null);
+    const anySalesOnly = (r.skus || []).some(s => s.self_serve === false);
+    if (!anyOrderable && anySalesOnly) return unk("sales only", "Every package is sold through sales, so there is no self-serve price to compare");
+    return r.access && r.access.pricing === "quote" ? unk("quote only") : unk("too few comparable", "Its GPU models are offered by fewer than 3 providers in this region, or have no orderable price");
+  }
   const pct = Math.round((pi.index - 1) * 100);
   const cls = pct <= -5 ? "ok" : pct >= 5 ? "bad" : "muted";
   const label = Math.abs(pct) < 5 ? "≈ market" : `${pct > 0 ? "+" : "−"}${Math.abs(pct)}%`;

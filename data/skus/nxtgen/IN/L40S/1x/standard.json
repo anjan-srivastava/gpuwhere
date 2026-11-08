@@ -72,8 +72,9 @@
   "form_factor": "pcie",
   "gpu_variant": "l40s-pcie",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
   "notes": "Provider plan: L40S.1x. Rate card prices are INR per instance-hour for each term; USD at the ECB reference rate. Matching SpeedCloud plan 'L1-Spark' is listed as available.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }
