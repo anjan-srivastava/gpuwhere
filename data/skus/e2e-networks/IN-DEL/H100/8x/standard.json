@@ -28,11 +28,11 @@
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-h100.md",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "notes": "vCPU/RAM for this configuration are not published.",
   "availability": {
     "last_observed_at": null,

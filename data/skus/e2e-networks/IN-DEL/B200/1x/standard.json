@@ -46,21 +46,22 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-b200",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "sxm",
   "gpu_variant": "b200-sxm",
-  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹759.05/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed. Committed (3+ month) and spot rates are INR-only in the feed; USD converted at the ECB reference rate. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
+  "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹759.05/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed. Committed (3+ month) and spot rates are INR-only in the feed; USD converted at the ECB reference rate. The signed-in console (create-node, Delhi-NCR, 2026-11-09) lists no instance type for this GPU, and Chennai offers no GPU tab; the published rate is not self-serve. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "The signed-in console (create-node, Delhi-NCR, 2026-11-09) lists no instance type for this GPU, and Chennai offers no GPU tab; the published rate is not self-serve.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": false
 }

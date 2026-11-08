@@ -34,6 +34,21 @@ VARIANTS = {
 }
 
 
+# Self-serve truth from the signed-in console (myaccount.e2enetworks.com,
+# create-node wizard), checked 2026-11-09 on CRN 41996, Delhi-NCR. The wizard is
+# the only self-serve path; these GPUs get an instance type there and the rest do
+# not. B200, H200 and RTX PRO 6000 are on the rate card but absent from the GPU
+# list, and the Chennai location offers no GPU tab at all. Kept out of the feed
+# parser because it is an observation, not published data: re-check on audit.
+# TODO: re-verify if E2E launches GPU ordering in Chennai or new shapes.
+CONSOLE_SELF_SERVE = {"a100-80gb", "a100-40gb", "a30", "a40", "l4", "l40s", "t4", "v100"}
+CONSOLE_SALES_ONLY = {"b200", "h200", "rtx-pro-6000"}
+CONSOLE_SALES_NOTE = (
+    "The signed-in console (create-node, Delhi-NCR, 2026-11-09) lists no instance type for "
+    "this GPU, and Chennai offers no GPU tab; the published rate is not self-serve."
+)
+
+
 def scrape(ctx: Context) -> ScrapeResult:
     res = ScrapeResult()
     feed = json.loads(ctx.get(PROVIDER, FEED))
@@ -61,12 +76,18 @@ def scrape(ctx: Context) -> ScrapeResult:
         sources = [(FEED, "feed")]
         if row.get("url"):
             sources.append((row["url"], "page"))
+        self_serve = True if row["id"] in CONSOLE_SELF_SERVE else (
+            False if row["id"] in CONSOLE_SALES_ONLY else None)
+        if self_serve is False:
+            notes.append(CONSOLE_SALES_NOTE)
         res.packages.append(Package(
             provider=PROVIDER, region=REGION, accel=accel(variant), gpus=1,
             variant="a100-40gb" if row["id"] == "a100-40gb" else ("standard" if row["id"].startswith("a100") else None),
             on_demand=Price(usd, "USD"), spot=spot, committed=committed,
             vcpus=row.get("vcpus"), ram_gb=row.get("ramGB"), vram_gb=row.get("vramGB"),
             sources=sources, confidence="high", notes=notes,
+            self_serve=self_serve,
+            price_note=CONSOLE_SALES_NOTE if self_serve is False else None,
             native_extra={"inr_list_per_vm_hr": inr},
         ))
         # Each GPU page states which multi-GPU configurations exist

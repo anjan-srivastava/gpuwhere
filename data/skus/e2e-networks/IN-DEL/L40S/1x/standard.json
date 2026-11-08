@@ -40,21 +40,22 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-l40s",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "pcie",
   "gpu_variant": "l40s-pcie",
   "pricing_status": "published",
   "price_note": null,
   "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹102/hr. INR is E2E's billing currency.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": true
 }

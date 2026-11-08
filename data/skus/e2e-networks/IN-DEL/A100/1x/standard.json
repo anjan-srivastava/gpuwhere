@@ -51,21 +51,22 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-a100-80gb",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "sxm",
   "gpu_variant": "a100-sxm4-80gb",
   "pricing_status": "published",
   "price_note": null,
   "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹189/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed.",
   "billing_model": "hourly",
-  "residency": "india"
+  "residency": "india",
+  "self_serve": true
 }

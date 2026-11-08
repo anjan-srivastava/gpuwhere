@@ -56,5 +56,6 @@
   "confidence": "high",
   "verified_at": "2026-11-06",
   "form_factor": "sxm",
-  "gpu_variant": "h100-sxm5"
+  "gpu_variant": "h100-sxm5",
+  "notes": "Hand-set: the hourly feed no longer publishes H100 4x. The console create-node wizard (Delhi-NCR, 2026-11-09) returns 'No Instance Types Available' for H100, so orderability is unverified."
 }

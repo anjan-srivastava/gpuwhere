@@ -1,19 +1,29 @@
 {
   "provider": "e2e-networks",
-  "last_checked_at": null,
-  "access": "api",
-  "login": "blocked",
-  "inventory": "unknown",
+  "last_checked_at": "2026-11-08T19:20:00Z",
+  "access": "console",
+  "login": "ok",
+  "inventory": "not-exposed",
   "stock_recorded": false,
   "order_path": "self-serve",
-  "blockers": "MyAccount API needs a validated customer account (is_approved=false)",
-  "notes": "Pricing comes from the public feed; live GPU plans are empty until the account is validated.",
+  "blockers": null,
+  "notes": "Signed in to myaccount.e2enetworks.com (CRN 41996, project default-project-51989, account approved, 2000 infra credits). The create-node wizard for Delhi-NCR lists 8 GPU families and gives an instance type for A100 (16 vCPU / 115 GB, Rs 130,670 per month), A30 (16 / 90, Rs 65,700), A40 (Rs 70,080), L4 (Rs 35,770), L40S (Rs 74,460), T4 (Rs 21,900) and V100 (Rs 73,000). H100 returns 'No Instance Types Available'. B200, H200 and RTX PRO 6000 are on the public rate card but do not appear in the wizard at all. Switching the location to Chennai removes the GPU tab entirely (OS, CPU and Marketplace only). No free/total stock count is shown anywhere: the wizard exposes plans and prices, not availability.",
   "sources": [
     {
-      "url": "https://www.e2enetworks.com",
+      "url": "https://myaccount.e2enetworks.com/products/create-node",
       "kind": "page",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-09"
+    },
+    {
+      "url": "https://tir.e2enetworks.com/projects",
+      "kind": "page",
+      "fetched_at": "2026-11-09"
+    },
+    {
+      "url": "https://www.e2enetworks.com/pricing.json",
+      "kind": "feed",
+      "fetched_at": "2026-11-09"
     }
   ],
-  "confidence": "medium"
+  "confidence": "high"
 }

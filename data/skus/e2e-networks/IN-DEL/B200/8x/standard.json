@@ -37,11 +37,11 @@
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-b200.md",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-08"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-08",
   "form_factor": "sxm",
   "gpu_variant": "b200-sxm",
   "notes": "vCPU/RAM for this configuration are not published. Provider lists 180 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",

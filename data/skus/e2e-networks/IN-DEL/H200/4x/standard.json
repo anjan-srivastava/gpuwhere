@@ -45,7 +45,7 @@
     "source": null
   },
   "pricing_status": "published",
-  "price_note": null,
+  "price_note": "The signed-in console (create-node, Delhi-NCR, 2026-11-09) lists no instance type for this GPU, and Chennai offers no GPU tab; the published rate is not self-serve.",
   "sources": [
     {
       "url": "https://www.e2enetworks.com/pricing.json",
@@ -56,5 +56,7 @@
   "confidence": "high",
   "verified_at": "2026-11-06",
   "form_factor": "sxm",
-  "gpu_variant": "h200-sxm"
+  "gpu_variant": "h200-sxm",
+  "self_serve": false,
+  "notes": "Hand-set: the hourly feed no longer publishes H200 4x, and the console lists no H200 instance type."
 }

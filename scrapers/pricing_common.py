@@ -117,6 +117,9 @@ class Package:
     interconnect: dict | None = None
     status: str = "active"
     price_note: str | None = None            # why there is no on-demand price (quote_only)
+    # Can the package be ordered through the provider's self-serve path?
+    # None = unverified. False = listed but needs sales; excluded from min prices.
+    self_serve: bool | None = None
     billing: str | None = None               # "hourly" | "monthly"; None → from on_demand.unit
     notes: list[str] = dataclasses.field(default_factory=list)
     native_extra: dict = dataclasses.field(default_factory=dict)
@@ -390,6 +393,7 @@ def package_to_sku(pkg: Package, variant: str, fx: Fx | None, today: str) -> dic
         # India data residency: the package runs in an Indian region (codes "IN" / "IN-*").
         "residency": "india" if pkg.region == "IN" or pkg.region.startswith("IN-") or pkg.region.startswith("IN") and pkg.region[2:3].isdigit() else "outside-india",
         "price_note": pkg.price_note,
+        "self_serve": pkg.self_serve,
         "sources": [{"url": u, "kind": k, "fetched_at": today} for u, k in pkg.sources],
         "confidence": pkg.confidence,
         "verified_at": today,
@@ -431,9 +435,9 @@ def assign_variants(pkgs: list[Package]) -> list[tuple[Package, str]]:
 # block, hand-curated interconnect, ...) is preserved.
 OWNED = ["id", "provider", "region", "status", "gpu", "gpu_variant", "form_factor", "shape",
          "gpus_per_vm", "variant", "vram_gb_per_gpu", "vcpus", "ram_gb", "disk_gb", "disk_type",
-         "pricing", "billing_model", "pricing_status", "price_note", "residency", "sources", "confidence", "verified_at", "notes",
-         "interconnect"]
-KEEP_IF_NONE = {"vcpus", "ram_gb", "disk_gb", "disk_type", "interconnect", "notes"}
+         "pricing", "billing_model", "pricing_status", "price_note", "self_serve", "residency", "sources", "confidence",
+         "verified_at", "notes", "interconnect"]
+KEEP_IF_NONE = {"vcpus", "ram_gb", "disk_gb", "disk_type", "interconnect", "notes", "self_serve"}
 EMPTY_AVAILABILITY = {"last_observed_at": None, "available_vms": None, "available_gpus": None,
                       "spot_available_vms": None, "spot_available_gpus": None, "source": None}
 

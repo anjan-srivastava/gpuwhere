@@ -19,7 +19,8 @@
   "api": {
     "type": "rest+console",
     "provisioning": "api",
-    "documented": true
+    "documented": true,
+    "notes": "Self-serve create-node wizard at myaccount.e2enetworks.com (verified 2026-11-09, Delhi-NCR): an instance type is offered for A100, A30, A40, L4, L40S, T4 and V100; H100 returns 'No Instance Types Available'; B200, H200 and RTX PRO 6000 are on the rate card but absent from the wizard; the Chennai location has no GPU tab. TIR (tir.e2enetworks.com) is a separate AI platform and exposes no stock either. No free/total GPU counts are published anywhere, so availability is not recorded from this source."
   },
   "billing": {
     "granularity": "minute",
@@ -42,7 +43,7 @@
     "sla_pct": 99.9,
     "incident_count_90d": null,
     "downtime_min_90d": null,
-    "capacity_notes": "H200 capacity frequently unavailable; verify before planning.",
+    "capacity_notes": "H200 is on the rate card but the Delhi create-node wizard lists no instance type for it, and Chennai offers no GPU ordering (checked 2026-11-09); plan capacity before committing.",
     "notes": "Official pricing lists B200 (180GB), H200, H100, RTX PRO 6000, A100 80/40GB, A40, L40S, V100, A30, L4 and T4. B200 is sold as 180GB on E2E; NVIDIA hardware is 192GB. Console/API GPU plans return empty while the account is unvalidated."
   },
   "incidents_file": "incidents/e2e-networks.json",
@@ -60,7 +61,7 @@
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-09",
   "capabilities": {
     "cpu_vm": true
   }
