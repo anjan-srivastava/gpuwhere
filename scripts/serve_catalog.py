@@ -580,7 +580,11 @@ HTML_TEMPLATE = r"""<!doctype html>
   .count { color: var(--muted); font-size: 12px; white-space: nowrap; }
   main.wrap { padding: 40px 32px 64px; }
   .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .filters { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: -12px 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line-soft); }
+  .filters { margin: -12px 0 18px; padding-bottom: 14px; border-bottom: 1px solid var(--line-soft); }
+  .filters-body { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .filters-head { display: none; }
+  .mobile-toolbar { display: none; }
+  .filters-backdrop { display: none; }
   .fgroup { display: inline-flex; align-items: center; gap: 6px; }
   .flabel { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
   .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
@@ -771,23 +775,64 @@ HTML_TEMPLATE = r"""<!doctype html>
   .spotlight-foot { display: flex; gap: 16px; padding: 8px 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
   .spotlight-foot .kbd { margin-right: 3px; }
   @media (max-width: 760px) {
-    /* keep the decision columns; drop secondary ones instead of scrolling sideways */
-    #view-gpus th:nth-child(3), #view-gpus td:nth-child(3),
-    #view-gpus th:nth-child(4), #view-gpus td:nth-child(4),
-    #view-gpus th:nth-child(7), #view-gpus td:nth-child(7) { display: none; }
-    #view-providers th:nth-child(2), #view-providers td:nth-child(2),
-    #view-providers th:nth-child(4), #view-providers td:nth-child(4),
-    #view-providers th:nth-child(n+7), #view-providers td:nth-child(n+7) { display: none; }
-    .filters { margin-top: 0; }
-    .fmeta { margin-left: 0; width: 100%; }
-    .fpanel { left: auto; right: -40px; }
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .wrap { padding: 0 18px; }
-    .search-trigger { width: 150px; }
-    .search-trigger span { display: none; }
+    /* header: two rows instead of one overflowing row */
+    .bar { display: grid; grid-template-columns: 1fr auto auto auto; height: auto; padding: 10px 0; gap: 8px; }
+    .bar .grow, .bar .count { display: none; }
+    .brand { grid-column: 1; grid-row: 1; }
+    .api-btn { grid-column: 2; grid-row: 1; height: 34px; }
+    .gh-btn { grid-column: 3; grid-row: 1; width: 34px; height: 34px; }
+    .theme-btn { grid-column: 4; grid-row: 1; width: 34px; height: 34px; }
+    .tabs { grid-column: 1 / 3; grid-row: 2; }
+    .tabs button { min-height: 40px; padding: 8px 14px; }
+    .search-trigger { grid-column: 3 / 5; grid-row: 2; width: auto; height: 40px; justify-content: flex-start; padding: 0 10px; }
+    .search-trigger span { display: block; }
     .search-trigger .kbd { display: none; }
     .brand .slash, .brand .tagline { display: none; }
-    .count { display: none; }
+
+    /* tables become cards: no sideways scrolling */
+    .table-scroll { overflow: visible; background: none; }
+    table.cards, table.cards tbody { display: block; width: 100%; }
+    table.cards thead { display: none; }
+    table.cards tr { display: block; margin: 0 0 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+    table.cards tr:hover { background: var(--card); }
+    table.cards td { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 4px 0; border: 0; white-space: normal; text-align: right; }
+    table.cards td[data-label]::before { content: attr(data-label); flex: 0 0 auto; max-width: 45%; color: var(--muted); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; text-align: left; }
+    table.cards td:has(.row-sub) { display: block; text-align: right; }
+    table.cards td:has(.row-sub)::before { display: block; max-width: none; margin-bottom: 2px; }
+    table.cards td:first-child { display: block; padding: 0 0 9px; margin-bottom: 5px; border-bottom: 1px solid var(--line-soft); text-align: left; font-size: 15px; }
+    table.cards td:first-child::before { display: none; }
+    table.cards td:empty { display: none; }
+    table.cards .prov-wrap { min-width: 0; }
+    table.cards .prov-wrap, table.cards .prov-cell { max-width: 100%; }
+    table.cards .site-link { white-space: normal; overflow-wrap: anywhere; }
+    table.cards .taggroup { flex-wrap: wrap; row-gap: 4px; }
+    table.cards td:first-child .prov-sub, table.cards .regions { text-align: left; }
+    table.cards td.gpu-cell, table.cards td.feat-cell { display: flex; flex-wrap: wrap; gap: 4px 6px; justify-content: flex-start; }
+    table.cards td.gpu-cell::before, table.cards td.feat-cell::before { flex: 0 0 100%; margin-bottom: 2px; }
+    table.cards .pkg-line, table.cards .prov-sub { text-align: right; }
+
+    /* filters: one button, then a bottom sheet */
+    .mobile-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
+    .filters-toggle { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--fg); font: 500 13px var(--font); }
+    .filters-toggle svg { width: 15px; height: 15px; color: var(--muted); }
+    .filters-toggle .fcount { color: var(--accent); }
+    .mobile-count { color: var(--muted); font-size: 12px; }
+    .filters { display: none; }
+    .filters.open { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-height: 86vh; overflow-y: auto; margin: 0; padding: 16px 18px calc(18px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); border-radius: 16px 16px 0 0; box-shadow: 0 -24px 64px rgba(0, 0, 0, .28); }
+    .filters-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 14px; }
+    .filters-head b { font-size: 16px; color: var(--strong); }
+    .filters-done { height: 36px; padding: 0 16px; border: 1px solid var(--accent); border-radius: 999px; background: var(--accent); color: #fff; font: 500 13px var(--font); }
+    .filters-body { flex-direction: column; align-items: stretch; gap: 14px; }
+    .fgroup { display: flex; justify-content: space-between; width: 100%; gap: 12px; }
+    .fgroup .flabel { flex: 0 0 auto; padding-top: 6px; }
+    .fgroup .seg, .fgroup select { flex: 1 1 auto; }
+    .fmeta { margin-left: 0; width: 100%; justify-content: space-between; }
+    .fpanel { position: static; width: 100%; max-width: none; margin-top: 8px; padding: 8px 0 0; border: 0; background: transparent; box-shadow: none; }
+    .filters-backdrop.open { display: block; position: fixed; inset: 0; z-index: 55; background: rgba(0, 0, 0, .45); }
+    body.filters-open { overflow: hidden; }
+
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .wrap { padding: 0 18px; }
   }
 </style>
 </head>
@@ -813,10 +858,17 @@ HTML_TEMPLATE = r"""<!doctype html>
 </header>
 <main class="wrap">
   <div id="view-gpus">
+    <div class="mobile-toolbar">
+      <button class="filters-toggle" type="button" data-open-filters="gpus" aria-controls="filters-gpus" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        Filters <span class="fcount"></span>
+      </button>
+      <span class="mobile-count" id="mcount-gpus"></span>
+    </div>
     <div class="filters" id="filters-gpus"></div>
     <div class="panel">
       <div class="table-scroll">
-        <table>
+        <table class="cards">
           <thead>
             <tr id="thead-gpus">
               <th class="sortable" data-sort="id">GPU</th>
@@ -837,10 +889,17 @@ HTML_TEMPLATE = r"""<!doctype html>
   </div>
 
   <div id="view-providers" class="hidden">
+    <div class="mobile-toolbar">
+      <button class="filters-toggle" type="button" data-open-filters="providers" aria-controls="filters-providers" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+        Filters <span class="fcount"></span>
+      </button>
+      <span class="mobile-count" id="mcount-providers"></span>
+    </div>
     <div class="filters" id="filters-providers"></div>
     <div class="panel">
       <div class="table-scroll">
-        <table>
+        <table class="cards">
           <thead>
             <tr id="thead-providers">
               <th class="sortable" data-sort="name">Provider</th>
@@ -863,6 +922,7 @@ HTML_TEMPLATE = r"""<!doctype html>
   <div id="view-gpu-detail" class="hidden"></div>
   <div id="view-provider-detail" class="hidden"></div>
 </main>
+<div class="filters-backdrop" id="filters-backdrop"></div>
 <footer class="wrap">
   <span id="footer-count"></span> · Exact per-SKU prices. Capacity is installed fleet; availability counts are GPUs observed free at the last snapshot.
 </footer>
@@ -1052,6 +1112,8 @@ function renderFilterBar(view, shown, total, note = "") {
       <span class="fgroup" title="Where the GPUs physically run (data residency)"><span class="flabel">Region</span>${sel("shared", "region", regionOptions())}</span>
       <span class="fgroup" title="Indian company vs global company"><span class="flabel">Provider</span>${seg("shared", "origin", [["all", "All"], ["indian", "Indian"], ["global", "Global"]])}</span>`;
   $(`filters-${view}`).innerHTML = `
+    <div class="filters-head"><b>Filters</b><button type="button" class="filters-done" data-close-filters>Done</button></div>
+    <div class="filters-body">
     ${view === "providers" ? shared : ""}
     ${primary}
     <span class="fgroup fmore-wrap">
@@ -1060,7 +1122,12 @@ function renderFilterBar(view, shown, total, note = "") {
     </span>
     ${hiddenChips}
     ${note ? `<span class="fnote">${note}</span>` : ""}
-    <span class="fmeta">${shown === total ? `${total}` : `${shown} of ${total}`} ${view === "gpus" ? "GPUs" : "providers"}${n ? ` <button class="fclear" data-clear="${view}">Clear${n > 1 ? " all" : ""}</button>` : ""}</span>`;
+    <span class="fmeta">${shown === total ? `${total}` : `${shown} of ${total}`} ${view === "gpus" ? "GPUs" : "providers"}${n ? ` <button class="fclear" data-clear="${view}">Clear${n > 1 ? " all" : ""}</button>` : ""}</span>
+    </div>`;
+  const toggleCount = document.querySelector(`[data-open-filters="${view}"] .fcount`);
+  if (toggleCount) toggleCount.textContent = n ? `· ${n}` : "";
+  const mobileCount = document.getElementById(`mcount-${view}`);
+  if (mobileCount) mobileCount.textContent = `${shown} ${view === "gpus" ? "GPUs" : "providers"}`;
 }
 function onFilterEvent(e) {
   const el = e.target.closest("[data-f],[data-clear],[data-reset],[data-more]");
@@ -1103,6 +1170,7 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("keydown", e => {
   if (e.key !== "Escape") return;
+  closeFilters();
   for (const v of ["gpus", "providers"]) if (MORE_OPEN[v]) { MORE_OPEN[v] = false; v === "gpus" ? renderGPUs() : renderProviders(); }
 });
 document.addEventListener("change", e => { if (e.target.closest(".filters select")) onFilterEvent(e); });
@@ -1721,7 +1789,7 @@ function renderGPUAccelerator(entry) {
       <h2>Providers <span class="h2-note muted">— ${orderableProviders.length} of ${rows.length} list ${esc(variant.name)} with an orderable price${withStock.length ? `, ${withStock.length} report free GPUs` : ""}</span></h2>
       <div class="panel">
         ${rows.length ? `
-        <div class="table-scroll"><table id="gpu-provider-table">
+        <div class="table-scroll"><table id="gpu-provider-table" class="cards">
           <thead><tr>
             <th data-sort="provider">Provider</th>
             <th data-sort="regions">Regions</th>
@@ -1752,7 +1820,7 @@ function renderGPUAccelerator(entry) {
       <h2>Host packages <span class="h2-note muted">— exact vCPU, host RAM and price per package</span></h2>
       <div class="panel">
         ${pkgRows.length ? `
-        <div class="table-scroll"><table id="gpu-package-table">
+        <div class="table-scroll"><table id="gpu-package-table" class="cards">
           <thead><tr>
             <th data-sort="provider">Provider</th>
             <th data-sort="region">Region</th>
@@ -1822,7 +1890,7 @@ function renderGPUFamily(family) {
     <section>
       <h2>Accelerator SKUs</h2>
       <div class="panel">
-        <div class="table-scroll"><table id="gpu-variant-table">
+        <div class="table-scroll"><table id="gpu-variant-table" class="cards">
           <thead><tr>
             <th data-sort="name">GPU SKU</th>
             <th class="num" data-sort="vram" data-type="num">VRAM</th>
@@ -2142,7 +2210,7 @@ function renderProviderDetail(id) {
       <h2>Host packages & pricing</h2>
       <div class="panel">
         ${skus.length ? `
-        <div class="table-scroll"><table id="provider-sku-table">
+        <div class="table-scroll"><table id="provider-sku-table" class="cards">
           <thead><tr>
             <th data-sort="gpu">GPU SKU</th><th data-sort="shape">Shape</th><th data-sort="region">Region</th>
             <th class="num" data-sort="vcpus" data-type="num" title="Host vCPU and RAM for the whole VM; per-GPU share below">vCPU · RAM</th>
@@ -2182,7 +2250,7 @@ function renderProviderDetail(id) {
         ${capacity.indiaai.source ? `<a href="${esc(refUrl(capacity.indiaai.source.url))}" target="_blank" rel="noopener noreferrer">source ↗</a>` : ""}</span></div>` : ""}
       <div class="panel">
         ${capacity.pools.length ? `
-        <div class="table-scroll"><table id="provider-capacity-table">
+        <div class="table-scroll"><table id="provider-capacity-table" class="cards">
           <thead><tr>
             <th>GPU</th><th>Region</th>
             <th class="num">Total</th><th class="num">Rented</th><th class="num">Committed</th><th class="num" title="Provider-reported, or derived from total minus rented and committed; unrented stock, not availability">Unrented (reported)</th><th class="num">Power (MW)</th>
@@ -2210,7 +2278,7 @@ function renderProviderDetail(id) {
       <h2 style="margin-top:30px">Availability <span class="h2-note muted">— GPUs observed available, grouped by GPU + region</span></h2>
       <div class="panel">
         ${invRows.length ? `
-        <div class="table-scroll"><table id="provider-inventory-table">
+        <div class="table-scroll"><table id="provider-inventory-table" class="cards">
           <thead><tr><th>GPU</th><th>Region</th><th>Shapes</th><th class="num">Available</th></tr></thead>
           <tbody>
             ${invRows.map(r => `<tr>
@@ -2313,6 +2381,47 @@ function renderProviderDetail(id) {
 }
 
 /* ---------------- routing / view ---------------- */
+function openFilters(view) {
+  const panel = document.getElementById(`filters-${view}`);
+  if (!panel) return;
+  panel.classList.add("open");
+  document.getElementById("filters-backdrop").classList.add("open");
+  document.body.classList.add("filters-open");
+  document.querySelector(`[data-open-filters="${view}"]`)?.setAttribute("aria-expanded", "true");
+}
+function closeFilters() {
+  for (const v of ["gpus", "providers"]) document.getElementById(`filters-${v}`)?.classList.remove("open");
+  document.getElementById("filters-backdrop").classList.remove("open");
+  document.body.classList.remove("filters-open");
+  document.querySelectorAll("[data-open-filters]").forEach(b => b.setAttribute("aria-expanded", "false"));
+}
+document.addEventListener("click", (e) => {
+  const opener = e.target.closest("[data-open-filters]");
+  if (opener) { openFilters(opener.dataset.openFilters); return; }
+  if (e.target.closest("[data-close-filters]") || e.target.id === "filters-backdrop") closeFilters();
+});
+
+/* Card layout: mirror the table headers onto cells so CSS can label them. */
+function labelTables() {
+  document.querySelectorAll("main table.cards").forEach((table) => {
+    const heads = [...table.querySelectorAll("thead th")]
+      .map(th => (th.textContent || "").replace(/[↑↓]/g, "").trim());
+    table.querySelectorAll("tbody tr").forEach((tr) => {
+      [...tr.children].forEach((td, i) => {
+        if (heads[i]) td.dataset.label = heads[i];
+      });
+    });
+  });
+}
+let labelQueued = false;
+function queueLabels() {
+  if (labelQueued) return;
+  labelQueued = true;
+  requestAnimationFrame(() => { labelQueued = false; labelTables(); });
+}
+const mainEl = document.querySelector("main");
+if (mainEl) new MutationObserver(queueLabels).observe(mainEl, { childList: true, subtree: true });
+
 function showOnly(id) {
   for (const v of ["view-gpus", "view-providers", "view-gpu-detail", "view-provider-detail"]) {
     $(v).classList.toggle("hidden", v !== id);
@@ -2325,6 +2434,7 @@ function navigate(hash) {
   route();
 }
 function setView(name) {
+  closeFilters();
   navigate(name === "providers" ? "#/providers" : "#/gpus");
 }
 function route() {
