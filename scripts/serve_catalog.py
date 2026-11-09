@@ -140,9 +140,10 @@ def _api_keys() -> list[str]:
 def _render_api_docs() -> str:
     with open(os.path.join(SERVER_DIR, "api_docs.html"), encoding="utf-8") as fh:
         template = fh.read()
-    return (template.replace("__SITE_NAME__", SITE_NAME)
-                    .replace("__SITE_DOMAIN__", SITE_DOMAIN)
-                    .replace("__REPO_LINK__", docs_repo_link()))
+    return inject_web_analytics(
+        template.replace("__SITE_NAME__", SITE_NAME)
+                .replace("__SITE_DOMAIN__", SITE_DOMAIN)
+                .replace("__REPO_LINK__", docs_repo_link()))
 
 
 def _clean(value, max_len: int) -> str:
@@ -2609,6 +2610,10 @@ SITE_TAGLINE = "India GPU providers"
 SITE_DOMAIN = "gpuwhere.io"
 # Public source repository. Leave empty to hide the header link.
 SITE_REPO = "https://github.com/anjan-srivastava/gpuwhere"
+# Cloudflare Web Analytics site token (the browser beacon). Public by design.
+# Pages' automatic injection does not reach responses served by _worker.js, so the
+# beacon is embedded at build time instead. Leave empty to disable it.
+WEB_ANALYTICS_TOKEN = ""
 
 GITHUB_ICON = (
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
@@ -2637,11 +2642,25 @@ def docs_repo_link() -> str:
     return f'<a href="{SITE_REPO}" target="_blank" rel="noopener noreferrer">Source</a>'
 
 
-HTML = (HTML_TEMPLATE
-        .replace("__SITE_NAME__", SITE_NAME)
-        .replace("__SITE_TAGLINE__", SITE_TAGLINE)
-        .replace("__SITE_DOMAIN__", SITE_DOMAIN)
-        .replace("__REPO_LINK__", repo_link()))
+def web_analytics_snippet() -> str:
+    """The Cloudflare Web Analytics beacon, or nothing when no token is set."""
+    if not WEB_ANALYTICS_TOKEN:
+        return ""
+    config = json.dumps({"token": WEB_ANALYTICS_TOKEN})
+    return ('<script type="module" defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+            f"data-cf-beacon='{config}'></script>")
+
+
+def inject_web_analytics(html: str) -> str:
+    snippet = web_analytics_snippet()
+    return html.replace("</body>", f"{snippet}\n</body>") if snippet else html
+
+
+HTML = inject_web_analytics(HTML_TEMPLATE
+                            .replace("__SITE_NAME__", SITE_NAME)
+                            .replace("__SITE_TAGLINE__", SITE_TAGLINE)
+                            .replace("__SITE_DOMAIN__", SITE_DOMAIN)
+                            .replace("__REPO_LINK__", repo_link()))
 
 
 def main() -> None:

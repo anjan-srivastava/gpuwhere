@@ -46,6 +46,22 @@ class Branding(unittest.TestCase):
         finally:
             serve_catalog.SITE_REPO = saved
 
+    def test_web_analytics_beacon_is_conditional(self):
+        saved = serve_catalog.WEB_ANALYTICS_TOKEN
+        try:
+            serve_catalog.WEB_ANALYTICS_TOKEN = ""
+            self.assertEqual(serve_catalog.web_analytics_snippet(), "")
+            self.assertNotIn("cloudflareinsights",
+                             serve_catalog.inject_web_analytics("<html></body></html>"))
+            serve_catalog.WEB_ANALYTICS_TOKEN = "abc123"
+            snippet = serve_catalog.web_analytics_snippet()
+            self.assertIn("beacon.min.js", snippet)
+            self.assertIn('"token": "abc123"', snippet)
+            self.assertIn("beacon.min.js",
+                          serve_catalog.inject_web_analytics("<html></body></html>"))
+        finally:
+            serve_catalog.WEB_ANALYTICS_TOKEN = saved
+
 
 class Artifact(unittest.TestCase):
     @classmethod
