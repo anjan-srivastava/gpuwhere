@@ -85,7 +85,7 @@ def cloud_report(days: int, limit: int) -> None:
     if not all(ch.isalnum() or ch == "_" for ch in dataset):
         raise SystemExit("ANALYTICS_DATASET must be alphanumeric/underscore")
 
-    since = f"timestamp > now() - INTERVAL {int(days)} DAY"
+    since = f"timestamp > now() - INTERVAL '{int(days)}' DAY"
     where = f"{since}"
 
     def q(sql: str) -> list[dict]:
