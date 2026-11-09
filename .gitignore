@@ -1,5 +1,6 @@
 .cache/
 .tools/
+.wrangler/
 __pycache__/
 *.pyc
 dist/

@@ -17,6 +17,7 @@
 name = "gpuwhere-jobs"
 main = "worker.mjs"
 compatibility_date = "2026-11-01"
+account_id = "3f39b0def6194f4d9877bc0e6cfce578"
 
 [triggers]
 crons = ["0 0 * * *"]

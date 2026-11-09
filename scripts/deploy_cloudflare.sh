@@ -23,6 +23,10 @@ WRANGLER="${WRANGLER:-$ROOT/.tools/npm/node_modules/.bin/wrangler}"
 WRANGLER_SPEC="${WRANGLER_SPEC:-wrangler@4}"
 CHECK_ONLY=0
 
+if [[ -n "${CF_ACCOUNT_ID:-}" ]]; then
+  export CLOUDFLARE_ACCOUNT_ID="$CF_ACCOUNT_ID"
+fi
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --project) PROJECT="$2"; shift 2 ;;
@@ -74,13 +78,13 @@ fi
 # 4. Pages project ------------------------------------------------------------
 cd "$ROOT"
 log "ensuring Pages project '$PROJECT' (branch '$BRANCH')"
-if ! create_output="$("$WRANGLER" pages project create "$PROJECT" --production-branch "$BRANCH" 2>&1)"; then
-  if grep -qiE 'already exists|already taken' <<<"$create_output"; then
-    log "project '$PROJECT' already exists"
-  else
-    printf '%s\n' "$create_output" >&2
-    die "could not create the Pages project"
-  fi
+if ! "$WRANGLER" pages project list 2>/dev/null | grep -qE "[[:space:]]${PROJECT}[[:space:]]"; then
+  # --force keeps the classic Pages path instead of delegating to Workers static assets,
+  # which is what the project (with `_worker.js` and `_headers`) needs.
+  "$WRANGLER" pages project create "$PROJECT" --production-branch "$BRANCH" --force \
+    || die "could not create the Pages project"
+else
+  log "project '$PROJECT' already exists"
 fi
 
 # 5. Upload -------------------------------------------------------------------

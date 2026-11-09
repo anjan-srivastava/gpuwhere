@@ -31,6 +31,7 @@ WRANGLER_SPEC ?= wrangler@4
 
 CF_PROJECT ?= gpuwhere
 CF_BRANCH  ?= main
+CF_ACCOUNT_ID ?= 3f39b0def6194f4d9877bc0e6cfce578
 PORT       ?= 8080
 DAYS       ?= 7
 JOBS_URL   ?=
@@ -74,7 +75,7 @@ serve: ## Serve the catalogue at http://127.0.0.1:PORT
 	$(RUN) scripts/serve_catalog.py --port $(PORT)
 
 deploy: build tools ## Build and upload dist/ to Cloudflare Pages
-	CF_PROJECT=$(CF_PROJECT) CF_BRANCH=$(CF_BRANCH) WRANGLER=$(WRANGLER) ./scripts/deploy_cloudflare.sh
+	CF_PROJECT=$(CF_PROJECT) CF_BRANCH=$(CF_BRANCH) CF_ACCOUNT_ID=$(CF_ACCOUNT_ID) WRANGLER=$(WRANGLER) ./scripts/deploy_cloudflare.sh
 
 deploy-jobs: tools ## Deploy the separate jobs Worker (on-demand + schedule)
 	$(WRANGLER) deploy --config ops/cloudflare/wrangler.toml
