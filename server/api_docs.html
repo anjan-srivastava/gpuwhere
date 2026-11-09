@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>__SITE_NAME__ — API reference</title>
+<meta name="description" content="Authenticated JSON API for the __SITE_NAME__ GPU provider catalogue: providers, accelerators, host packages and observed availability." />
+<style>
+  :root {
+    --bg: #fbfaf7; --card: #ffffff; --ink: #141414; --fg: #34322e; --muted: #6d6a64;
+    --line: #e2dfd8; --soft: #f3f1ec; --accent: #d9480f; --accent-soft: #fff1ea;
+    --ok: #0f7b4d; --ok-soft: #e8f5ee; --warn: #a15c07; --warn-soft: #fdf3e3;
+    --font: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111214; --card: #16171a; --ink: #f4f4f5; --fg: #d4d4d8; --muted: #9a9aa3;
+      --line: #2a2b30; --soft: #1d1e22; --accent: #ff7a3d; --accent-soft: #2a1a12;
+      --ok: #34c77b; --ok-soft: #12261b; --warn: #f0a23b; --warn-soft: #2a2010;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.6 var(--font); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre, .mono { font-family: var(--mono); font-size: 13px; }
+  header { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 980px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; gap: 12px; }
+  .brand { color: var(--ink); font-weight: 600; letter-spacing: .02em; }
+  .brand span { color: var(--muted); font-weight: 400; }
+  .badge { margin-left: auto; border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; font-size: 12px; color: var(--muted); }
+  main { max-width: 980px; margin: 0 auto; padding: 40px 24px 96px; }
+  h1 { color: var(--ink); font-size: 34px; line-height: 1.15; margin: 0 0 10px; letter-spacing: -.01em; }
+  .lede { font-size: 17px; color: var(--muted); max-width: 720px; margin: 0 0 28px; }
+  h2 { color: var(--ink); font-size: 20px; margin: 44px 0 12px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { color: var(--ink); font-size: 16px; margin: 24px 0 6px; }
+  p { margin: 8px 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .card h3 { margin-top: 0; }
+  pre { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; margin: 10px 0; }
+  pre code { font-size: 12.5px; }
+  :not(pre) > code { background: var(--soft); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0 4px; font-size: 14px; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  td code { white-space: nowrap; }
+  .pill { display: inline-block; border-radius: 99px; padding: 1px 9px; font-size: 12px; border: 1px solid var(--line); color: var(--muted); }
+  .pill.get { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 35%, var(--line)); background: var(--ok-soft); }
+  .note { border-left: 3px solid var(--warn); background: var(--warn-soft); padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 14px 0; }
+  .note b { color: var(--warn); }
+  .try { display: flex; gap: 8px; margin: 10px 0; }
+  .try input { flex: 1; min-width: 0; font: 13px var(--mono); padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); }
+  .try button { font: 13px var(--font); padding: 9px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+  .try button:hover { filter: brightness(1.05); }
+  #out { min-height: 20px; white-space: pre-wrap; word-break: break-word; }
+  footer { max-width: 980px; margin: 0 auto; padding: 0 24px 64px; color: var(--muted); font-size: 13px; }
+  .muted { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="/">__SITE_NAME__ <span>/ API</span></a>
+    <span class="badge">v1 · private beta</span>
+  </div>
+</header>
+
+<main>
+  <h1>The __SITE_NAME__ API</h1>
+  <p class="lede">
+    A keyed, read-only JSON interface over the GPU provider catalogue: providers, accelerator
+    SKUs, host packages and the latest observed availability. The same data is published openly
+    at <a href="/v1/index.json"><code>/v1</code></a>; the keyed API exists so traffic can be
+    metered and abuse rate-limited.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Base URL</h3>
+      <pre><code>https://__SITE_DOMAIN__/api/v1</code></pre>
+      <p class="muted">Until the custom domain is attached, use<br /><code>https://&lt;project&gt;.pages.dev/api/v1</code>.</p>
+    </div>
+    <div class="card">
+      <h3>Authentication</h3>
+      <p>Send a key in either header:</p>
+      <pre><code>Authorization: Bearer &lt;key&gt;
+X-API-Key: &lt;key&gt;</code></pre>
+      <p class="muted">Keys are issued by the operator during the beta. Never ship a key in client-side code.</p>
+    </div>
+  </div>
+
+  <h2>Quick start</h2>
+  <pre><code>export GPU_ATLAS_KEY="paste-your-key"
+
+curl -s https://__SITE_DOMAIN__/api/v1/index \
+  -H "Authorization: Bearer $GPU_ATLAS_KEY"
+
+# one GPU family, one provider, orderable packages only
+curl -s "https://__SITE_DOMAIN__/api/v1/skus?gpu=H100&provider=e2e-networks&status=active" \
+  -H "X-API-Key: $GPU_ATLAS_KEY"</code></pre>
+
+  <h2>Endpoints</h2>
+  <table>
+    <thead><tr><th>Endpoint</th><th>Returns</th><th>Query parameters</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/index</code></td>
+        <td>Counts, artifact timestamp and the endpoint map.</td>
+        <td class="muted">—</td>
+      </tr>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/catalog</code></td>
+        <td>Everything in one document: providers, GPUs, SKUs, channels, capacity, latest availability.</td>
+        <td class="muted">—</td>
+      </tr>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/providers</code></td>
+        <td>Provider identity, regions, access path, storage and reliability.</td>
+        <td class="muted">—</td>
+      </tr>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/gpus</code></td>
+        <td>Accelerator families and variants with VRAM, precision, dense/sparse FLOPS and MIG.</td>
+        <td class="muted">—</td>
+      </tr>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/skus</code></td>
+        <td>Host packages with prices, status and the last observed availability.</td>
+        <td><code>provider</code>, <code>region</code>, <code>gpu</code>, <code>shape</code>, <code>variant</code>, <code>status</code>, <code>pricing_status</code></td>
+      </tr>
+      <tr>
+        <td><span class="pill get">GET</span> <code>/api/v1/availability/latest</code></td>
+        <td>Latest free-GPU observation per provider, region, GPU and shape.</td>
+        <td><code>provider</code>, <code>region</code>, <code>gpu</code>, <code>shape</code>, <code>variant</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="muted">
+    Filters are exact and case-insensitive. An unknown filter value returns an empty list, not an error.
+    <code>HEAD</code> works on every endpoint; <code>OPTIONS</code> answers CORS preflight.
+  </p>
+
+  <h3>Example response</h3>
+  <pre><code>{
+  "api_version": 1,
+  "schema_version": "1",
+  "generated_at": "2026-11-09T09:00:00Z",
+  "count": 2,
+  "filters": { "gpu": "H100", "provider": "e2e-networks" },
+  "skus": [
+    {
+      "id": "e2e-networks/IN-DEL/H100/8x/standard",
+      "provider": "e2e-networks",
+      "region": "IN-DEL",
+      "gpu": "H100",
+      "shape": "8x",
+      "gpus_per_vm": 8,
+      "pricing": { "on_demand": { "usd_per_gpu_hr": 2.49, "usd_per_vm_hr": 19.92 } },
+      "status": "active",
+      "pricing_status": "published"
+    }
+  ]
+}</code></pre>
+
+  <h2>Rate limits</h2>
+  <table>
+    <thead><tr><th>Surface</th><th>Budget</th><th>Keyed by</th></tr></thead>
+    <tbody>
+      <tr><td>Keyed API</td><td>60 requests / minute</td><td>API key (invalid keys fall back to IP)</td></tr>
+      <tr><td>Pages and assets</td><td>300 requests / minute</td><td>Client IP</td></tr>
+      <tr><td>Analytics beacon</td><td>120 events / minute</td><td>Client IP</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">
+    Limits are per Cloudflare location and deliberately approximate — they damp abuse, they are not a
+    billing meter. Over budget returns <code>429</code> with <code>Retry-After: 60</code>.
+  </p>
+
+  <h2>Errors</h2>
+  <table>
+    <thead><tr><th>Status</th><th>Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>401</code></td><td><code>unauthorized</code></td><td>Missing or invalid key. Send <code>WWW-Authenticate: Bearer</code>.</td></tr>
+      <tr><td><code>404</code></td><td><code>not_found</code></td><td>Unknown endpoint under <code>/api/v1/</code>.</td></tr>
+      <tr><td><code>405</code></td><td><code>method_not_allowed</code></td><td>Only <code>GET</code>, <code>HEAD</code> and <code>OPTIONS</code>.</td></tr>
+      <tr><td><code>429</code></td><td><code>rate_limited</code></td><td>Over the per-key budget; wait <code>Retry-After</code> seconds.</td></tr>
+      <tr><td><code>502</code></td><td><code>upstream_unavailable</code></td><td>The published artifact is missing. Rebuild and redeploy.</td></tr>
+      <tr><td><code>503</code></td><td><code>not_configured</code></td><td>No API keys are set on the deployment yet.</td></tr>
+    </tbody>
+  </table>
+  <p>Errors always carry <code>{"error": {"code", "message"}}</code> so clients can branch on the code.</p>
+
+  <h2>Try it</h2>
+  <p class="muted">The key stays in this tab and is sent only to this origin.</p>
+  <form class="try" id="try">
+    <input id="key" type="password" placeholder="paste your API key" autocomplete="off" />
+    <button type="submit">Call /api/v1/index</button>
+  </form>
+  <pre><code id="out" class="muted">No request yet.</code></pre>
+
+  <h2>Machine-readable spec</h2>
+  <p>
+    <a href="/api/openapi.json">/api/openapi.json</a> is an OpenAPI 3.1 document covering every
+    endpoint, the bearer scheme and the response envelope. The JSON Schemas the data validates
+    against live under <a href="/v1/index.json"><code>/v1/schema/</code></a>.
+  </p>
+
+  <h2>Analytics and privacy</h2>
+  <p>
+    The site counts pageviews, in-app route changes, link clicks and searches with a first-party
+    beacon. It sets no cookies, stores no IP addresses and does not build a cross-site profile.
+    A random session id lives in <code>sessionStorage</code> for the life of the tab; the referrer
+    is reduced to its hostname; the country comes from Cloudflare's edge. Do Not Track and Global
+    Privacy Control are honoured. Events are retained for 90 days in Workers Analytics Engine.
+  </p>
+
+  <div class="note">
+    <b>Open data.</b> The bulk catalogue at <code>/v1/*</code> is public and cacheable on purpose.
+    Keys gate the query API so it can be rate-limited and attributed — they are not a
+    confidentiality control.
+  </div>
+</main>
+
+<footer>
+  <p>__SITE_NAME__ · <a href="/">catalogue</a> · <a href="/api/openapi.json">OpenAPI</a></p>
+</footer>
+
+<script src="/assets/track.js?v=1"></script>
+<script>
+  if (window.TRACK) window.TRACK.pageview();
+  const form = document.getElementById("try");
+  const out = document.getElementById("out");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const key = document.getElementById("key").value.trim();
+    if (!key) { out.textContent = "Paste a key first."; return; }
+    out.textContent = "…";
+    try {
+      const res = await fetch("/api/v1/index", { headers: { Authorization: "Bearer " + key } });
+      const body = await res.text();
+      out.textContent = res.status + " " + res.statusText + "\n\n" + body;
+    } catch (err) {
+      out.textContent = "Request failed: " + err.message;
+    }
+  });
+</script>
+</body>
+</html>

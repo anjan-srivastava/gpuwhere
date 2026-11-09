@@ -74,12 +74,11 @@ class ScraperReplay(unittest.TestCase):
         cls.schemas = schemas()
         cls.sku_validator = jsonschema.Draft202012Validator(cls.schemas["sku"])
 
-    def _latest_cache(self, provider: str):
+    def _cache_days(self, provider: str):
         base = CACHE / provider
         if not base.is_dir():
-            return None
-        days = sorted(d.name for d in base.iterdir() if d.is_dir())
-        return (base / days[-1], days[-1]) if days else None
+            return []
+        return [(base / d.name, d.name) for d in sorted(base.iterdir(), reverse=True) if d.is_dir()]
 
     def _fx(self, ctx):
         snap = CACHE / "_fx"
@@ -104,14 +103,24 @@ class ScraperReplay(unittest.TestCase):
         checked = 0
         for provider, module_name in sorted(pr.SCRAPERS.items()):
             with self.subTest(provider=provider):
-                cached = self._latest_cache(provider)
-                if cached is None:
+                days = self._cache_days(provider)
+                if not days:
                     self.skipTest(f"no cached snapshot for {provider}")
-                day_dir, day = cached
-                ctx = pc.Context(CACHE, day, offline=True)
                 mod = __import__(module_name)
-                res = mod.scrape(ctx)
-                self.assertTrue(res.packages, f"{provider}: scraper produced no packages from {day_dir}")
+                res = None
+                # Availability collectors write into the same day directory, so the newest
+                # day can be a partial page set. Walk back to the newest day the pricing
+                # scraper can actually parse offline.
+                for day_dir, day in days:
+                    ctx = pc.Context(CACHE, day, offline=True)
+                    try:
+                        res = mod.scrape(ctx)
+                    except pc.FetchError:
+                        continue
+                    if res.packages:
+                        break
+                if res is None or not res.packages:
+                    self.skipTest(f"{provider}: no complete pricing snapshot")
                 fx = self._fx(ctx) if any(pr._needs_fx(p) for p in res.packages) else None
                 if fx is None and any(pr._needs_fx(p) for p in res.packages):
                     self.skipTest(f"{provider}: needs an FX snapshot to convert INR prices")

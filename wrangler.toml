@@ -1,0 +1,24 @@
+# Cloudflare Pages project configuration.
+#
+# `wrangler pages deploy` picks this file up when run from the repository root.
+# It makes the bindings and vars below the source of truth for the project.
+#
+# Secrets are not stored here:
+#   wrangler pages secret put API_KEYS --project-name gpu-atlas
+#
+# The scheduler Worker has its own config in ops/cloudflare/wrangler.toml.
+
+name = "gpu-atlas"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-11-01"
+
+# First-party pageview / click / search events from dist/_worker.js.
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "gpu_atlas_events"
+
+[vars]
+# Requests per minute, per Cloudflare location, per key (API) or IP (pages/events).
+PAGE_RATE_PER_MIN = "300"
+API_RATE_PER_MIN = "60"
+EVENT_RATE_PER_MIN = "120"

@@ -9,8 +9,11 @@ This script answers the other question: *is the data still being refreshed?*
 
 Thresholds (per AGENTS.md cadence):
   pricing      daily   -> fail when the newest verified_at is older than 3 days
-  availability hourly  -> fail when a tracked series is older than 6 hours
+  availability hourly  -> fail when a tracked (collector-backed) series is older than 6 hours
   capacity     weekly  -> fail when the newest as_of/verified_at is older than 14 days
+
+Series recorded by hand (a one-off console check, a burst provider with no collector)
+are reported but not gated: nothing can refresh them on an hourly schedule.
 """
 from __future__ import annotations
 
@@ -22,6 +25,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+
+sys.path.insert(0, str(ROOT / "scrapers"))
+from availability_refresh import COLLECTORS  # noqa: E402
+
+TRACKED_AVAILABILITY = set(COLLECTORS)
 
 
 def newest_dates(files, keys):
@@ -66,8 +74,12 @@ def check_availability(today):
     files = list((DATA / "availability").glob("*.jsonl"))
     if not files:
         return "WARN", "no availability series yet"
+    tracked = [f for f in files if f.stem in TRACKED_AVAILABILITY]
+    manual = len(files) - len(tracked)
+    if not tracked:
+        return "WARN", "no collector-backed availability series"
     worst = []
-    for f in files:
+    for f in tracked:
         last = None
         for line in f.read_text().splitlines():
             if line.strip():
@@ -82,7 +94,10 @@ def check_availability(today):
         return "WARN", "availability files have no timestamps"
     name, age = max(worst, key=lambda x: x[1])
     hours = age.total_seconds() / 3600
-    return ("OK" if hours <= 6 else "FAIL"), f"stalest series {name} {hours:.1f}h old"
+    detail = f"stalest tracked series {name} {hours:.1f}h old"
+    if manual:
+        detail += f" ({manual} manual series not gated)"
+    return ("OK" if hours <= 6 else "FAIL"), detail
 
 
 def main() -> int:

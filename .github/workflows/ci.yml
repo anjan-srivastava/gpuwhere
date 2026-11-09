@@ -16,10 +16,10 @@ jobs:
       - name: Install deps
         run: pip install jsonschema
       - name: Schema validation
-        run: python scripts/validate.py
+        run: make validate
       - name: Build the published artifact
-        run: python scripts/export_api.py
-      - name: Tests (data contract, scrapers, HTTP surface)
-        run: python -m unittest discover -s tests -v
+        run: make build
+      - name: Tests (data contract, scrapers, API, edge worker, HTTP surface)
+        run: make test
       - name: Freshness (informational on PRs)
         run: python scripts/check_freshness.py --warn-only

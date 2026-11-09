@@ -6,20 +6,32 @@ Usage:
 
 Routes:
     GET /                        GPUs tab / Providers tab / GPU detail / provider detail
+    GET /api/docs                API reference (same page as production)
+    GET /api/openapi.json        OpenAPI 3.1 spec
+    GET /api/v1/*                keyed API (API_KEYS; open when unset in dev)
+    POST /a                      analytics beacon sink (dev log)
     GET /api/catalog             providers + accelerator SKUs + host packages + channels + capacities
     GET /api/keys                availability series keys
     GET /api/availability        filtered availability time series
     GET /assets/logos/<id>.png   provider logos
 """
 from __future__ import annotations
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import argparse
 import hashlib
+import hmac
 import json
 import os
+import sys
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.parse import parse_qs, urlparse
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+SERVER_DIR = os.path.join(ROOT, "server")
 
 
 def _load_json_dir(path: str) -> list[dict]:
@@ -121,12 +133,40 @@ def _parse_ts(ts: str | None) -> datetime | None:
         return None
 
 
+def _api_keys() -> list[str]:
+    return [k.strip() for k in os.environ.get("API_KEYS", "").split(",") if k.strip()]
+
+
+def _render_api_docs() -> str:
+    with open(os.path.join(SERVER_DIR, "api_docs.html"), encoding="utf-8") as fh:
+        template = fh.read()
+    return template.replace("__SITE_NAME__", SITE_NAME).replace("__SITE_DOMAIN__", SITE_DOMAIN)
+
+
+def _clean(value, max_len: int) -> str:
+    if not isinstance(value, str):
+        return ""
+    return "".join(ch for ch in value if ch >= " " and ch != "\x7f").strip()[:max_len]
+
+
+def _filter(items: list[dict], query: dict, fields: tuple[str, ...]) -> list[dict]:
+    def want(name: str):
+        values = query.get(name) or [None]
+        return values[0].lower() if values[0] else None
+
+    wanted = {field: want(field) for field in fields}
+    return [item for item in items
+            if all(not value or str(item.get(field) or "").lower() == value
+                   for field, value in wanted.items())]
+
+
 class Handler(BaseHTTPRequestHandler):
     data_root = "data"
     assets_dir = "assets"
     dist_dir = "dist"
 
-    def _send(self, body: bytes, content_type: str, code: int = 200, *, cache: str = "no-store") -> None:
+    def _send(self, body: bytes, content_type: str, code: int = 200, *, cache: str = "no-store",
+              extra: dict[str, str] | None = None) -> None:
         etag = '"' + hashlib.sha1(body).hexdigest()[:16] + '"'
         if code == 200 and self.headers.get("If-None-Match") == etag:
             self.send_response(304)
@@ -142,6 +182,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", cache)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
+        for key, value in (extra or {}).items():
+            self.send_header(key, value)
         self.end_headers()
         if not getattr(self, "_head", False):
             self.wfile.write(body)
@@ -154,14 +196,68 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "If-None-Match")
+        self.send_header("Access-Control-Allow-Headers", "Authorization, X-API-Key, Content-Type, If-None-Match")
+        self.send_header("Access-Control-Max-Age", "86400")
         self.end_headers()
 
-    def _json(self, obj, code: int = 200) -> None:
-        self._send(json.dumps(obj).encode("utf-8"), "application/json", code)
+    _rate: dict[tuple[str, str, int], int] = {}
+
+    def _client_ip(self) -> str:
+        return (self.headers.get("CF-Connecting-IP")
+                or self.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+                or (self.client_address[0] if self.client_address else "unknown"))
+
+    def _allow(self, bucket: str, key: str, limit: int, period: int = 60) -> bool:
+        """Fixed-window limiter mirroring the edge worker (approximate, per process)."""
+        slot = int(time.time() // period)
+        cache_key = (bucket, key, slot)
+        count = self._rate.get(cache_key, 0) + 1
+        self._rate[cache_key] = count
+        if len(self._rate) > 5000:
+            self._rate = {k: v for k, v in self._rate.items() if k[2] >= slot - 1}
+        return count <= limit
+
+    def _api_auth(self) -> tuple[bool, str]:
+        keys = _api_keys()
+        if not keys:
+            return True, "dev-open"
+        header = self.headers.get("Authorization", "")
+        provided = header[7:].strip() if header.lower().startswith("bearer ") else ""
+        provided = provided or (self.headers.get("X-API-Key") or "").strip()
+        ok = any(hmac.compare_digest(key, provided) for key in keys)
+        return ok, (provided or "anonymous")
+
+    def _json(self, obj, code: int = 200, extra: dict[str, str] | None = None) -> None:
+        self._send(json.dumps(obj).encode("utf-8"), "application/json", code, extra=extra)
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
+
+        if not self._allow("page", self._client_ip(), int(os.environ.get("PAGE_RATE_PER_MIN", "300"))):
+            self._send(b"Too many requests\n", "text/plain; charset=utf-8", 429,
+                       extra={"Retry-After": "60"})
+            return
+
+        if parsed.path in ("/api", "/api/"):
+            self.send_response(302)
+            self.send_header("Location", "/api/docs")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            return
+
+        if parsed.path in ("/api/docs", "/api/docs/"):
+            self._send(_render_api_docs().encode("utf-8"), "text/html; charset=utf-8",
+                       cache="public, max-age=300")
+            return
+
+        if parsed.path == "/api/openapi.json":
+            with open(os.path.join(SERVER_DIR, "openapi.json"), "rb") as fh:
+                self._send(fh.read(), "application/json", cache="public, max-age=300")
+            return
+
+        if parsed.path == "/api/v1" or parsed.path.startswith("/api/v1/"):
+            self._handle_api(parsed)
+            return
 
         # Published artifact (Cloudflare Pages layout): serve it when an export exists.
         if parsed.path.startswith("/v1/"):
@@ -266,16 +362,158 @@ class Handler(BaseHTTPRequestHandler):
 
         self._json({"error": "not found"}, 404)
 
+    def _handle_api(self, parsed) -> None:
+        ok, actor = self._api_auth()
+        limit = int(os.environ.get("API_RATE_PER_MIN", "60"))
+        if not self._allow("api", actor if ok else self._client_ip(), limit):
+            self._json({"error": {"code": "rate_limited", "message": "Too many requests for this key."}},
+                       429, {"Retry-After": "60"})
+            return
+        if not ok:
+            self._json({"error": {"code": "unauthorized",
+                                  "message": "Send a valid key as `Authorization: Bearer <key>` or `X-API-Key: <key>`."}},
+                       401, {"WWW-Authenticate": 'Bearer realm="api"'})
+            return
+
+        sys.path.insert(0, HERE)
+        import export_api  # local import: export_api imports this module
+
+        catalog, split = export_api.build(Path(self.data_root))
+        endpoint = parsed.path[len("/api/v1"):].strip("/") or "index"
+        query = parse_qs(parsed.query)
+
+        if endpoint == "index":
+            schemas = sorted(p.name for p in (Path(ROOT) / "schema").glob("*.json"))
+            self._json({
+                "schema_version": catalog["schema_version"],
+                "generated_at": catalog["generated_at"],
+                "counts": catalog["counts"],
+                "resources": {
+                    "catalog": "/v1/catalog.json",
+                    "providers": "/v1/providers.json",
+                    "gpus": "/v1/gpus.json",
+                    "skus": "/v1/skus.json",
+                    "availability_latest": "/v1/availability/latest.json",
+                    "schemas": [f"/v1/schema/{name}" for name in schemas],
+                    "api_docs": "/api/docs",
+                    "openapi": "/api/openapi.json",
+                },
+                "api_version": 1,
+                "authenticated": True,
+                "api": {
+                    "base": "/api/v1",
+                    "docs": "/api/docs",
+                    "openapi": "/api/openapi.json",
+                    "rate_limit_per_min": limit,
+                    "endpoints": {
+                        "index": "/api/v1/index",
+                        "catalog": "/api/v1/catalog",
+                        "providers": "/api/v1/providers",
+                        "gpus": "/api/v1/gpus",
+                        "skus": "/api/v1/skus?provider=&region=&gpu=&shape=&variant=&status=",
+                        "availability_latest": "/api/v1/availability/latest?provider=&gpu=&shape=&variant=",
+                    },
+                },
+            })
+            return
+
+        if endpoint == "catalog":
+            self._json(catalog)
+            return
+        if endpoint in ("providers", "gpus"):
+            self._json(split[endpoint])
+            return
+        if endpoint == "skus":
+            fields = ("provider", "region", "gpu", "shape", "variant", "status", "pricing_status")
+            skus = _filter(split["skus"]["skus"], query, fields)
+            self._json({
+                "api_version": 1,
+                "schema_version": split["skus"]["schema_version"],
+                "generated_at": split["skus"]["generated_at"],
+                "count": len(skus),
+                "filters": {f: query.get(f, [""])[0] for f in fields if query.get(f, [""])[0]},
+                "skus": skus,
+            })
+            return
+        if endpoint == "availability/latest":
+            fields = ("provider", "region", "gpu", "shape", "variant")
+            observations = _filter(split["availability/latest"]["observations"], query, fields)
+            self._json({
+                "api_version": 1,
+                "schema_version": split["availability/latest"]["schema_version"],
+                "generated_at": split["availability/latest"]["generated_at"],
+                "count": len(observations),
+                "observations": observations,
+            })
+            return
+
+        self._json({"error": {"code": "not_found", "message": f"Unknown endpoint /api/v1/{endpoint}."},
+                    "endpoints": ["index", "catalog", "providers", "gpus", "skus", "availability/latest"]},
+                   404)
+
+    def do_POST(self) -> None:  # noqa: N802
+        parsed = urlparse(self.path)
+        if parsed.path != "/a":
+            self._json({"error": "not found"}, 404)
+            return
+        if not self._allow("event", self._client_ip(), int(os.environ.get("EVENT_RATE_PER_MIN", "120"))):
+            self._send(b"", "text/plain; charset=utf-8", 429, extra={"Retry-After": "60"})
+            return
+        try:
+            length = int(self.headers.get("Content-Length") or 0)
+        except ValueError:
+            length = 0
+        if length <= 0 or length > 4096:
+            self._send(b"", "text/plain; charset=utf-8", 204)
+            return
+        try:
+            event = json.loads(self.rfile.read(length))
+        except (ValueError, UnicodeDecodeError):
+            self._send(b"", "text/plain; charset=utf-8", 204)
+            return
+        if not isinstance(event, dict) or event.get("e") not in ("pageview", "click", "search"):
+            self._send(b"", "text/plain; charset=utf-8", 204)
+            return
+
+        target = _clean(event.get("t"), 400)
+        if target and not target.startswith("#/"):
+            try:
+                parsed_target = urlparse(target)
+                target = ((parsed_target.hostname or "") + (parsed_target.path or "")
+                          if parsed_target.scheme in ("http", "https") else "")
+            except ValueError:
+                target = ""
+        try:
+            referrer = (urlparse(str(event.get("r") or "")).hostname or "")[:120]
+        except ValueError:
+            referrer = ""
+
+        row = {
+            "ts": datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
+            "e": event["e"],
+            "p": _clean(event.get("p"), 200) or "/",
+            "l": _clean(event.get("l"), 120),
+            "t": target[:200],
+            "r": referrer,
+            "country": (self.headers.get("CF-IPCountry") or "")[:2],
+            "s": _clean(event.get("s"), 96),
+        }
+        log_path = os.environ.get("DEV_ANALYTICS_LOG") or os.path.join(ROOT, ".cache", "dev-analytics.jsonl")
+        os.makedirs(os.path.dirname(log_path) or ".", exist_ok=True)
+        with open(log_path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row) + "\n")
+        self._send(b"", "text/plain; charset=utf-8", 204)
+
     def log_message(self, fmt: str, *args) -> None:
         pass
 
 
-HTML = r"""<!doctype html>
+HTML_TEMPLATE = r"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GPUs.io — India GPU providers</title>
+<title>__SITE_NAME__ — __SITE_TAGLINE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -548,7 +786,7 @@ HTML = r"""<!doctype html>
 <body>
 <header>
   <div class="wrap bar">
-    <a class="brand" href="#/gpus"><b>GPUs.io</b><span class="slash">/</span><span class="tagline">India</span></a>
+    <a class="brand" href="#/gpus"><b>__SITE_NAME__</b><span class="slash">/</span><span class="tagline">India</span></a>
     <div class="grow"></div>
     <div class="tabs">
       <button id="tab-gpus" class="active" onclick="setView('gpus')">GPUs</button>
@@ -635,8 +873,11 @@ HTML = r"""<!doctype html>
   </div>
 </div>
 
+<script src="/assets/track.js?v=1"></script>
 <script>
 const $ = (id) => document.getElementById(id);
+// Analytics is a progressive enhancement: if /assets/track.js did not load, calls are no-ops.
+const TRACK = window.TRACK || { pageview() {}, click() {}, search() {} };
 let CATALOG = null;
 let VIEW = "gpus";
 let SORT = { gpus: { key: "id", dir: 1 }, providers: { key: "name", dir: 1 } };
@@ -1018,8 +1259,8 @@ const money = (v) => v == null ? unk("no price") : "$" + Number(v).toFixed(2);
 const num = (v) => v == null ? unk("not published") : v;
 const siteHost = (u) => String(u || "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 // Referral tag on every outbound link, so providers can attribute traffic back here.
-// Placeholder domain: change REFERRAL when the site gets its production host.
-const REFERRAL = "gpus.io";
+// SITE_DOMAIN lives in serve_catalog.py and is substituted into this template at import.
+const REFERRAL = "__SITE_DOMAIN__";
 function refUrl(url) {
   if (!url || !/^https?:\/\//i.test(url)) return url;
   try {
@@ -1320,7 +1561,7 @@ function renderGPUs() {
     const href = `#/gpu/${encodeURIComponent(g.id)}`;
     const sub = [g.familyName, g.variant ? `${g.variant.vram_gb} GB ${g.variant.memory_type}` : null].filter(Boolean).join(" · ");
     return `
-      <tr class="clickable" onclick="location.hash='#/gpu/${encodeURIComponent(g.id)}'">
+      <tr class="clickable" onclick="navigate('#/gpu/${encodeURIComponent(g.id)}')">
         <td><a class="sku-link" href="${href}"><span class="row-title">${esc(g.name)}</span><span class="row-sub">${esc(sub)}</span></a></td>
         <td class="num">${g.vram == null ? unk() : `${g.vram} GB`}</td>
         <td class="num val">${g.fp16 == null ? unk() : fmtFlops(g.fp16)}</td>
@@ -1584,7 +1825,7 @@ function renderGPUFamily(family) {
             <th class="num" data-sort="price" data-type="num">From</th>
           </tr></thead>
           <tbody>
-            ${variants.map(({ v, key, providers, min, best, fp16 }) => `<tr class="clickable" onclick="location.hash='#/gpu/${encodeURIComponent(key)}'">
+            ${variants.map(({ v, key, providers, min, best, fp16 }) => `<tr class="clickable" onclick="navigate('#/gpu/${encodeURIComponent(key)}')">
               <td><a class="sku-link" href="#/gpu/${encodeURIComponent(key)}"><span class="row-title">${esc(v.name)}</span><span class="row-sub">${esc((v.form_factor || "").toUpperCase())} · ${v.vram_gb} GB</span></a></td>
               <td class="num" data-v="${v.vram_gb}">${v.vram_gb} GB</td>
               <td data-v="${esc(v.memory_type || "")}">${v.memory_type ? esc(v.memory_type) : unk()}</td>
@@ -2067,12 +2308,17 @@ function showOnly(id) {
     $(v).classList.toggle("hidden", v !== id);
   }
 }
+function navigate(hash) {
+  if (location.hash === hash) { route(); return; }
+  // pushState (not location.hash) so the analytics beacon sees each route change.
+  history.pushState(null, "", hash);
+  route();
+}
 function setView(name) {
-  const target = name === "providers" ? "#/providers" : "#/gpus";
-  if (location.hash === target) route();
-  else location.hash = target;
+  navigate(name === "providers" ? "#/providers" : "#/gpus");
 }
 function route() {
+  TRACK.pageview();
   const hash = location.hash || "#/gpus";
   const g = hash.match(/^#\/gpu\/(.+)$/);
   const p = hash.match(/^#\/provider\/([^/]+)(\/inventory)?$/);
@@ -2168,6 +2414,24 @@ window.addEventListener("scroll", hideInfoTip, true);
 
 window.addEventListener("hashchange", route);
 
+// Route in-app links through pushState (so the analytics beacon sees each route change)
+// and record every link click. Capture phase, so a row onclick cannot double-navigate.
+document.addEventListener("click", (e) => {
+  const a = e.target.closest?.("a[href]");
+  if (!a) return;
+  const href = a.getAttribute("href") || "";
+  let target = href;
+  if (/^https?:/i.test(href)) {
+    try { const u = new URL(href); target = u.hostname + u.pathname; } catch (err) {}
+  }
+  TRACK.click((a.textContent || "").replace(/\s+/g, " ").trim(), target);
+  if (href.startsWith("#/") && !a.target && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
+    e.preventDefault();
+    e.stopPropagation();
+    navigate(href);
+  }
+}, true);
+
 /* ---------------- Spotlight search ---------------- */
 const spot = { open: false, index: 0, items: [] };
 function spotlightData() {
@@ -2244,8 +2508,10 @@ function moveSpotlight(delta) {
 function selectSpotlight(i) {
   const item = spot.items[i];
   if (!item) return;
+  const query = ($("spotlight-input")?.value || "").trim();
+  if (query) TRACK.search(query);
   closeSpotlight();
-  location.hash = item.href;
+  navigate(item.href);
 }
 function openSpotlight() {
   spot.open = true;
@@ -2326,6 +2592,17 @@ async function firstJSON(urls) { let last; for (const u of urls) { try { return 
 </body>
 </html>
 """
+
+# Rename the site here, once. Both the dev server and `scripts/export_api.py` render this
+# module's HTML, so the brand, page title and outbound referral tag stay in sync.
+SITE_NAME = "GPU Atlas"
+SITE_TAGLINE = "India GPU providers"
+SITE_DOMAIN = "gpuatlas.io"
+
+HTML = (HTML_TEMPLATE
+        .replace("__SITE_NAME__", SITE_NAME)
+        .replace("__SITE_TAGLINE__", SITE_TAGLINE)
+        .replace("__SITE_DOMAIN__", SITE_DOMAIN))
 
 
 def main() -> None:

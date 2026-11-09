@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Build the publishable static API (Cloudflare Pages / any static host).
+"""Build the publishable static site and API (Cloudflare Pages / any static host).
 
     python scripts/export_api.py                # writes dist/
-    python scripts/export_api.py --out dist --base-url https://gpus.io
 
-Output is deterministic apart from `generated_at`: the same data produces byte-identical
-files, so a rebuild without data changes is a no-op in git and on the CDN.
+Includes the UI, the open /v1 artifact, the keyed-API edge worker, the API reference
+page and the OpenAPI spec. Output is deterministic apart from `generated_at`: the same
+data produces byte-identical files, so a rebuild without data changes is a no-op in
+git and on the CDN.
 
 Layout:
     dist/index.html                 the UI, pointed at /v1/catalog.json
@@ -32,8 +33,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
-from serve_catalog import (HTML, _latest_availability, _load_availability, _load_gpus,  # noqa: E402
-                           _load_json_dir, _load_skus)
+from serve_catalog import (HTML, SITE_DOMAIN, SITE_NAME, _latest_availability,  # noqa: E402
+                           _load_availability, _load_gpus, _load_json_dir, _load_skus)
 
 SCHEMA_VERSION = "1"
 
@@ -104,12 +105,22 @@ HEADERS = """# Cloudflare Pages headers. Keep CORS open: this is a public catalo
 /v1/schema/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
+/api/openapi.json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=300
+  X-Content-Type-Options: nosniff
 /assets/*
   Cache-Control: public, max-age=604800
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 """
+
+
+def render_docs() -> str:
+    """The API reference page, with the site name/domain substituted in."""
+    template = (ROOT / "server" / "api_docs.html").read_text(encoding="utf-8")
+    return template.replace("__SITE_NAME__", SITE_NAME).replace("__SITE_DOMAIN__", SITE_DOMAIN)
 
 
 def main() -> int:
@@ -128,6 +139,12 @@ def main() -> int:
     (out / "index.html").write_text(HTML, encoding="utf-8")
     if Path(args.assets_dir).is_dir():
         shutil.copytree(args.assets_dir, out / "assets")
+
+    # Edge worker: keyed API, docs route and analytics ingest (Pages advanced mode).
+    shutil.copy2(ROOT / "server" / "api_worker.mjs", out / "_worker.js")
+    (out / "api" / "docs").mkdir(parents=True, exist_ok=True)
+    (out / "api" / "docs" / "index.html").write_text(render_docs(), encoding="utf-8")
+    shutil.copy2(ROOT / "server" / "openapi.json", out / "api" / "openapi.json")
 
     sizes = {"v1/catalog.json": dump(out / "v1" / "catalog.json", catalog)}
     for name, payload in split.items():
@@ -149,6 +166,8 @@ def main() -> int:
             "skus": "/v1/skus.json",
             "availability_latest": "/v1/availability/latest.json",
             "schemas": [f"/v1/schema/{s.name}" for s in schemas],
+            "api_docs": "/api/docs",
+            "openapi": "/api/openapi.json",
         },
     }
     sizes["v1/index.json"] = dump(out / "v1" / "index.json", index)
@@ -158,6 +177,8 @@ def main() -> int:
     for name, n in sorted(sizes.items()):
         print(f"  {name:32s} {n/1024:8.1f} KB")
     print(f"  {'assets/':32s} {sum(f.stat().st_size for f in (out/'assets').rglob('*') if f.is_file())/1024:8.1f} KB")
+    print(f"  {'_worker.js':32s} {(out/'_worker.js').stat().st_size/1024:8.1f} KB")
+    print(f"  {'api/docs/index.html':32s} {(out/'api'/'docs'/'index.html').stat().st_size/1024:8.1f} KB")
     return 0
 
 

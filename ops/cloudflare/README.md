@@ -1,22 +1,39 @@
 # Cloudflare setup (free tier)
 
-Two free Cloudflare products, no server:
+Five free Cloudflare products, two separate deployments, no server:
 
 | Piece | Product | Free allowance |
 |---|---|---|
-| Website + JSON API + schemas | **Pages** | unlimited requests, 500 builds/month |
-| Refresh schedule | **Worker Cron Triggers** | 100k requests/day, 5 cron triggers |
+| Site, open `/v1` artifact, API docs | **Pages** (direct upload) | unlimited requests, 500 builds/month |
+| Keyed API + analytics ingest (`_worker.js`) | **Pages Functions** | Workers free: 100k requests/day |
+| Event storage | **Workers Analytics Engine** | 100k writes/day, 90-day retention |
+| Jobs control plane | **Workers** (`gpu-atlas-jobs`) | 100k requests/day |
+| Optional schedule | **Worker Cron Triggers** | 5 cron triggers |
 
-The scrapers stay in Python; the Worker is only a clock that dispatches a GitHub Action,
-because a Worker cannot run Python. All three pieces are free for a public repo.
+The site and the jobs service are deployed separately (`make deploy` vs `make deploy-jobs`).
+The scrapers run as GitHub Actions jobs, which is free for public repositories.
 
-## 1. Pages — the published site
+## 1. Deploy from this directory
 
-* Connect the GitHub repository.
-* Build command: `python scripts/export_api.py`
-* Build output directory: `dist`
-  (Pages needs a Python build image; if the default image has no Python, commit `dist/`
-  from CI instead and point Pages at the repository root with no build step.)
+```bash
+make deploy          # build dist/ + `wrangler pages deploy`
+make whoami          # which account is wrangler using
+```
+
+`make deploy` downloads wrangler into `.tools/npm/` and uploads `dist/` directly; there is no
+Git integration or build image to configure. `wrangler.toml` at the repo root is the source of
+truth (project name, `pages_build_output_dir`, the `ANALYTICS` binding, rate-limit vars).
+
+Authenticate once:
+
+```bash
+.tools/npm/node_modules/.bin/wrangler login
+# or, for CI:
+export CLOUDFLARE_API_TOKEN=...   # Pages:Edit + Account:Read
+```
+
+The project is **`gpu-atlas`** → `https://gpu-atlas.pages.dev`. Attach `gpuatlas.io` in
+**Workers & Pages → gpu-atlas → Custom domains** when the domain is bought.
 
 Pages serves:
 
@@ -29,51 +46,107 @@ Pages serves:
 /v1/availability/latest.json
 /v1/index.json        endpoint directory
 /v1/schema/*.json     JSON Schemas
+/api/docs             API reference (HTML)
+/api/openapi.json     OpenAPI 3.1
+/api/v1/*             keyed JSON API
+/a                    analytics beacon ingest
 ```
 
-`dist/_headers` already sets `Access-Control-Allow-Origin: *` and cache policy for
-`/v1/*`, so browser consumers and `curl` both work.
+`dist/_headers` sets `Access-Control-Allow-Origin: *` and cache policy for `/v1/*`, so browser
+consumers and `curl` both work.
 
-The UI loads `/v1/catalog.json` first and falls back to `/api/catalog`, so the same page
-works on Pages (static) and against the local dev server.
-
-## 2. Worker — the scheduler
+## 2. API keys and rate limits
 
 ```bash
-cd ops/cloudflare
-npm create cloudflare@latest -- gpu-catalog-scheduler   # or add worker.js to an existing project
-wrangler secret put GITHUB_TOKEN   # fine-grained PAT: Actions = write, Contents = read
-wrangler secret put GITHUB_REPO    # owner/repo
-wrangler deploy
+make api-key
+.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpu-atlas
 ```
 
-`wrangler.toml`:
+* `API_KEYS` — comma-separated. Rotation: append, deploy, remove, redeploy.
+* The open bulk data at `/v1/*` stays public by design; keys gate `/api/v1/*` so it can be
+  metered (`usage data`) and rate-limited.
+* Budgets live in `wrangler.toml` vars: 60/min per API key, 300/min per IP for pages/assets,
+  120/min per IP for the beacon. The worker uses the Workers Rate Limiting binding if one is
+  ever bound, and a fixed-window Cache API counter otherwise (Pages Functions cannot declare
+  the binding yet). Both are approximate and per-location; `429` carries `Retry-After: 60`.
 
-```toml
-name = "gpu-catalog-scheduler"
-main = "worker.js"
-compatibility_date = "2026-01-01"
+## 3. Analytics
 
-[triggers]
-crons = ["5 * * * *", "15 4 * * *"]
+The worker writes one Analytics Engine data point per event:
+
+```
+blob1 event      pageview | click | search
+blob2 path       #/gpu/nvidia/h100, /api/docs, …
+blob3 label      link text
+blob4 target     outbound host+path, internal route, or search query
+blob5 referrer   hostname only
+blob6 country    ISO-2 from request.cf
+index1           random per-tab session id
 ```
 
-* `5 * * * *` → `refresh-availability.yml` (hourly)
-* `15 4 * * *` → `refresh-pricing.yml` (daily, 04:15 UTC)
+No cookies, no IP stored, DNT/GPC and `navigator.webdriver` respected. Retention is 90 days.
 
-The Worker calls GitHub's `workflow_dispatch` API; the workflow scrapes, validates, and
-commits. Pages then rebuilds on push.
+```bash
+export CF_ACCOUNT_ID=... CF_ANALYTICS_TOKEN=...   # Account Analytics:Read
+make analytics DAYS=7
+```
 
-## 3. Health
+`scripts/analytics_report.py` prints pageviews by day, top pages, referrers, countries,
+most-clicked links, searches and a recent click stream. The same dataset is queryable in the
+dashboard's Analytics Engine SQL editor.
 
-* Each refresh workflow runs `scripts/validate.py` and the test suite **before** committing,
-  so a parser break cannot publish bad data.
-* `python scripts/check_freshness.py` is the operational gate: it fails when pricing is
-  older than 3 days, availability older than 6 hours, or capacity older than 14 days.
-  Wire it into a second Worker cron later if you want alerts; today it runs at the end of
-  each refresh.
+## 4. Jobs Worker (separate deployment)
+
+`gpu-atlas-jobs` is its own Worker. It starts scraper jobs on demand and, optionally, on a
+configurable schedule. The scrapers run in GitHub Actions; this Worker is just the control
+plane.
+
+```bash
+make deploy-jobs
+
+WR=".tools/npm/node_modules/.bin/wrangler"
+$WR secret put JOB_TOKEN     --config ops/cloudflare/wrangler.toml   # bearer for /jobs /run /schedule
+$WR secret put GITHUB_TOKEN  --config ops/cloudflare/wrangler.toml   # Actions: write
+$WR secret put GITHUB_REPO   --config ops/cloudflare/wrangler.toml   # owner/repo
+```
+
+Endpoints:
+
+```
+GET  /health            public
+GET  /jobs              latest run per workflow          (bearer)
+POST /run?job=pricing   dispatch now                     (bearer)
+GET  /schedule          effective schedule               (bearer)
+PUT  /schedule          edit it at runtime               (bearer, KV bound)
+```
+
+Schedule defaults, in `ops/cloudflare/wrangler.toml`:
+
+* hourly tick `5 * * * *`;
+* availability every `AVAILABILITY_EVERY_HOURS` (default 1) while `AVAILABILITY_ENABLED`;
+* pricing at `PRICING_HOUR_UTC` (default 4) while `PRICING_ENABLED`;
+* `SCHEDULE_ENABLED=false` turns the clock off and leaves `/run` working.
+
+For runtime edits, create a KV namespace and bind it as `JOBS_CONFIG`:
+
+```bash
+$WR kv namespace create JOBS_CONFIG      # paste the id into wrangler.toml
+```
+
+Then `PUT /schedule` with `{"availability":{"every_hours":2},"pricing":{"hour_utc":6}}`
+(no redeploy). Without the binding the endpoint returns `409` and the vars are the source of
+truth. A KV guard key stops two ticks in the same window from dispatching twice.
+
+Local alternative: `make job JOB=pricing` runs the same script under a lock and logs to
+`reports/jobs/`.
+
+## 5. Health
+
+* `make check` runs schema validation, the Python suite, the edge-worker tests, the build and
+  the freshness gate.
+* Pages then rebuilds on the next `make deploy`; a no-op refresh produces byte-identical files.
 
 ## Cost
 
-Pages free, Workers free, GitHub Actions free for public repositories. The only paid
-dependency would be a private repo's Actions minutes — the workflows are ~1 minute each.
+Pages free, Pages Functions and Workers free tier, Analytics Engine free tier, GitHub Actions
+free for public repositories.

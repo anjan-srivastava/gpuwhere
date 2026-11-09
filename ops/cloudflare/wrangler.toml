@@ -1,0 +1,44 @@
+# GPU Atlas jobs Worker — separate from the Pages site deployment.
+#
+#   make deploy-jobs      deploy this Worker
+#   make run-job JOB=pricing
+#   make jobs             latest run per job
+#   make schedule         show the effective schedule
+#
+# Secrets:
+#   wrangler secret put JOB_TOKEN      # bearer token for /jobs, /run, /schedule
+#   wrangler secret put GITHUB_TOKEN   # fine-grained PAT, Actions: write
+#   wrangler secret put GITHUB_REPO    # owner/repo
+#
+# Scheduling is opt-in. The hourly tick below calls scheduled(); the vars decide
+# whether and when a job is dispatched. Bind JOBS_CONFIG (KV) to edit the
+# schedule at runtime with PUT /schedule instead of redeploying.
+
+name = "gpu-atlas-jobs"
+main = "worker.mjs"
+compatibility_date = "2026-11-01"
+
+[triggers]
+crons = ["5 * * * *"]
+
+[vars]
+GITHUB_REF = "main"
+SCHEDULE_ENABLED = "true"
+AVAILABILITY_ENABLED = "true"
+AVAILABILITY_EVERY_HOURS = "1"
+PRICING_ENABLED = "true"
+PRICING_HOUR_UTC = "4"
+
+[[ratelimits]]
+name = "JOB_RATE_LIMITER"
+namespace_id = "3101"
+
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+# Optional runtime schedule editing (PUT /schedule). Create the namespace with
+# `wrangler kv namespace create JOBS_CONFIG` and paste the id here.
+# [[kv_namespaces]]
+# binding = "JOBS_CONFIG"
+# id = "<namespace id>"

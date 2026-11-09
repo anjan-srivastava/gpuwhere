@@ -1,0 +1,155 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GPU Atlas API",
+    "version": "1.0.0",
+    "summary": "Keyed JSON access to the GPU provider catalogue.",
+    "description": "Providers, accelerator SKUs, host packages and the latest observed availability, served from the published static artifact. The unkeyed bulk data remains open under /v1/*; keys gate the query API so it can be rate-limited and attributed.",
+    "license": { "name": "See the catalogue repository" }
+  },
+  "servers": [
+    { "url": "/", "description": "This deployment" }
+  ],
+  "security": [{ "bearerAuth": [] }, { "apiKeyAuth": [] }],
+  "paths": {
+    "/api/v1/index": {
+      "get": {
+        "operationId": "getIndex",
+        "summary": "Counts, artifact timestamp and endpoint map",
+        "responses": {
+          "200": { "description": "Index", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" },
+          "503": { "$ref": "#/components/responses/NotConfigured" }
+        }
+      }
+    },
+    "/api/v1/catalog": {
+      "get": {
+        "operationId": "getCatalog",
+        "summary": "Every resource in one document",
+        "responses": {
+          "200": { "description": "Catalogue", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/v1/providers": {
+      "get": {
+        "operationId": "listProviders",
+        "summary": "Provider identity, regions, access, storage and reliability",
+        "responses": {
+          "200": { "description": "Providers", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/v1/gpus": {
+      "get": {
+        "operationId": "listGpus",
+        "summary": "Accelerator families and variants",
+        "responses": {
+          "200": { "description": "GPUs", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/v1/skus": {
+      "get": {
+        "operationId": "listSkus",
+        "summary": "Host packages, optionally filtered",
+        "parameters": [
+          { "name": "provider", "in": "query", "schema": { "type": "string" }, "example": "e2e-networks" },
+          { "name": "region", "in": "query", "schema": { "type": "string" }, "example": "IN-DEL" },
+          { "name": "gpu", "in": "query", "schema": { "type": "string" }, "example": "H100" },
+          { "name": "shape", "in": "query", "schema": { "type": "string", "enum": ["1x", "2x", "4x", "8x"] } },
+          { "name": "variant", "in": "query", "schema": { "type": "string" }, "example": "standard" },
+          { "name": "status", "in": "query", "schema": { "type": "string", "enum": ["active", "unavailable", "retired"] } },
+          { "name": "pricing_status", "in": "query", "schema": { "type": "string", "enum": ["published", "quote_only"] } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filtered packages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["api_version", "generated_at", "count", "skus"],
+                  "properties": {
+                    "api_version": { "type": "integer", "const": 1 },
+                    "schema_version": { "type": "string" },
+                    "generated_at": { "type": "string", "format": "date-time" },
+                    "count": { "type": "integer" },
+                    "filters": { "type": "object", "additionalProperties": { "type": "string" } },
+                    "skus": { "type": "array", "items": { "type": "object" } }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/v1/availability/latest": {
+      "get": {
+        "operationId": "listLatestAvailability",
+        "summary": "Latest observed free GPUs per provider, region, GPU and shape",
+        "parameters": [
+          { "name": "provider", "in": "query", "schema": { "type": "string" } },
+          { "name": "region", "in": "query", "schema": { "type": "string" } },
+          { "name": "gpu", "in": "query", "schema": { "type": "string" } },
+          { "name": "shape", "in": "query", "schema": { "type": "string" } },
+          { "name": "variant", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Latest observations", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer", "description": "Authorization: Bearer <key>" },
+      "apiKeyAuth": { "type": "apiKey", "in": "header", "name": "X-API-Key" }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message"],
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Missing or invalid key",
+        "headers": { "WWW-Authenticate": { "schema": { "type": "string" } } },
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      },
+      "RateLimited": {
+        "description": "Over the per-key budget",
+        "headers": { "Retry-After": { "schema": { "type": "string" } } },
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      },
+      "NotConfigured": {
+        "description": "No API keys set on this deployment",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      }
+    }
+  }
+}

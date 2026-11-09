@@ -35,7 +35,7 @@ scripts/export_api.py                 # build dist/ for Cloudflare Pages
 scripts/validate.py                   # schema validation
 scripts/check_freshness.py            # operational gate: age of pricing/availability/capacity
 tests/                                # unittest suite: schema, integrity, budgets, scrapers, HTTP
-ops/cloudflare/                       # Worker cron + free-tier Pages setup
+ops/cloudflare/                       # Pages + jobs Worker setup
 GRADES.md                             # living scorecard, evidence per grade
 assets/logos/<provider>.png           # provider logos
 ```
@@ -51,6 +51,16 @@ assets/logos/<provider>.png           # provider logos
 - Pricing: USD canonical, refreshed daily; per GPU and per VM.
 
 ## Quickstart
+
+Everything is wrapped in `make`; `uv` and npm resolve the toolchain on demand.
+
+```bash
+make check                 # schemas, tests (Python + edge worker), build, freshness
+make serve                 # http://127.0.0.1:8080
+make deploy                # build + upload dist/ to Cloudflare Pages
+```
+
+The underlying commands, if you want them directly:
 
 ```bash
 # validate
@@ -71,14 +81,107 @@ python scrapers/discover_providers.py --write
 
 # test: data contract, referential integrity, quality budgets, scraper replay, HTTP surface
 uv run --with jsonschema python -m unittest discover -s tests
+node --test tests/worker.test.mjs
 
 # build the publishable artifact (dist/) for Cloudflare Pages
 python scripts/export_api.py
-
-# serve the SKU/provider comparison UI
-python scripts/serve_catalog.py --data-dir data --assets-dir assets --port 8080
-# open http://127.0.0.1:8080
 ```
+
+## Publish
+
+The release is a static build plus one Pages Function (`dist/_worker.js`). `make deploy`
+downloads wrangler into `.tools/npm/` (nothing global), builds `dist/`, and uploads it directly
+from this directory. Authenticate once with `wrangler login`, or set
+`CLOUDFLARE_API_TOKEN` (Pages:Edit + Account:Read) for CI.
+
+```bash
+make deploy                              # project gpu-atlas, branch main
+CF_PROJECT=gpu-atlas-preview make deploy  # any other Pages project
+make release VERSION=0.2.0               # annotated git tag
+```
+
+The site is `https://gpu-atlas.pages.dev` until a custom domain is attached. The proposed
+production name is **GPU Atlas** (`gpuatlas.io`); `gpus.io` is taken. The name, tagline and
+outbound referral tag are three constants at the bottom of `scripts/serve_catalog.py`, so a
+rename is one edit. RDAP reported `gpuatlas.io` unregistered on 2026-11-09 — confirm at a
+registrar before buying; that is a hint, not a reservation.
+
+### API keys
+
+The bulk artifact at `/v1/*` stays open and cacheable. The query API at `/api/v1/*` requires a
+key — it exists so traffic can be metered and rate-limited, not to keep public data secret.
+
+```bash
+make api-key                       # print a random key
+.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpu-atlas
+```
+
+`API_KEYS` is a comma-separated list: append a new key, deploy, then remove the old one.
+Reference docs live at `/api/docs`, the OpenAPI 3.1 spec at `/api/openapi.json`.
+
+### Rate limits
+
+Every request passes a fixed-window budget in the worker before it reaches data or assets:
+
+| Surface | Budget | Keyed by |
+|---|---|---|
+| Keyed API | 60 / minute | API key (invalid keys fall back to IP) |
+| Pages, assets, docs | 300 / minute | client IP |
+| Analytics beacon (`/a`) | 120 / minute | client IP |
+
+Limits are per Cloudflare location and approximate — the free plan cannot express a strict
+global cap — and return `429` with `Retry-After: 60`. Tune them in `wrangler.toml`
+(`API_RATE_PER_MIN`, `PAGE_RATE_PER_MIN`, `EVENT_RATE_PER_MIN`).
+
+### Analytics
+
+`assets/track.js` sends pageviews, in-app route changes, link clicks and searches to `/a`; the
+worker writes them to Workers Analytics Engine (`gpu_atlas_events`) as
+`event, path, label, target, referrer host, country` plus a random per-tab session id.
+No cookies, no IP storage, DNT/GPC honoured, 90-day retention. Report:
+
+```bash
+export CF_ACCOUNT_ID=... CF_ANALYTICS_TOKEN=...   # Account Analytics:Read
+make analytics DAYS=7
+make analytics LOCAL=1                             # reads .cache/dev-analytics.jsonl
+```
+
+The same SQL is available in the Cloudflare dashboard's Analytics Engine query editor.
+
+### Scraper jobs (separate deployment)
+
+Scraping is not part of the site deployment. `ops/cloudflare/` is a second Worker,
+**`gpu-atlas-jobs`**, whose only job is to start a GitHub Actions run — on demand, and
+optionally on a configurable schedule. The site keeps serving the last published artifact.
+
+```bash
+make deploy-jobs                      # deploy the jobs Worker
+make run-job JOB=pricing              # dispatch a run now
+make run-job JOB=availability
+make jobs                             # latest run per workflow
+make schedule                         # effective schedule
+make job JOB=pricing                  # run locally instead (lock + log in reports/jobs/)
+make job JOB=pricing DRY=1            # local dry-run
+```
+
+Secrets on the jobs Worker: `JOB_TOKEN` (bearer for `/jobs`, `/run`, `/schedule`),
+`GITHUB_TOKEN` (Actions: write) and `GITHUB_REPO`. The schedule is opt-in
+(`SCHEDULE_ENABLED=true`): availability every N hours, pricing daily at a chosen UTC hour.
+Change it in `ops/cloudflare/wrangler.toml`, or bind `JOBS_CONFIG` (KV) and `PUT /schedule`
+to change it without redeploying. There is **no cron in the Pages project**.
+
+**GitHub Actions cost:** free for public repositories (unlimited standard runners);
+private repositories get 2,000 minutes/month free, which these one-minute jobs fit easily.
+Two caveats on free/public: scheduled workflows are disabled after 60 days without repository
+activity, and cron granularity is five minutes with occasional delays — another reason the
+schedule lives in the jobs Worker and on-demand runs are the default. The refresh workflows
+run `make deploy` after committing when `CLOUDFLARE_API_TOKEN` is set, so a job publishes its
+own data; otherwise run `make deploy` yourself.
+
+### Nix
+
+`flake.nix` pins Python 3.12, uv, Node 22, GNU make and wrangler. It is optional:
+`make nix-shell` enters the shell, and every Make target works without it (uv + npm).
 
 ## Current status
 
