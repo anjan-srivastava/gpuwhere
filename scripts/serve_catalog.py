@@ -1665,11 +1665,11 @@ function priceRange(g) {
 function gpuSortVal(g, key) {
   switch (key) {
     case "id": return g.name;
-    case "vram": return g.vram == null ? -1 : g.vram;
-    case "flops": return g.fp16 == null ? -1 : g.fp16;
+    case "vram": return g.vram == null ? null : g.vram;
+    case "flops": return g.fp16 == null ? null : g.fp16;
     case "providers": return g.providerCount;
     case "avail": return g.availObs ? g.availNow : null;
-    case "price": return g.priceMin == null ? Infinity : g.priceMin;
+    case "price": return g.priceMin == null ? null : g.priceMin;
     case "updated": return g.updated;
     default: return "";
   }
@@ -1680,6 +1680,8 @@ function renderGPUs() {
   renderFilterBar("gpus", rows.length, all.length);
   rows.sort((a, b) => {
     const x = gpuSortVal(a, SORT.gpus.key), y = gpuSortVal(b, SORT.gpus.key);
+    // Unknown values (no price, no VRAM, no stock) stay last in both directions.
+    if (x == null || y == null) return (x == null) - (y == null);
     if (typeof x === "number" && typeof y === "number") return (x - y) * SORT.gpus.dir;
     return String(x).localeCompare(String(y)) * SORT.gpus.dir;
   });
