@@ -46,7 +46,7 @@
   "verified_at": "2026-11-07",
   "notes": "No USD price published for this region; `jl gpus --json` INR converted at the ECB reference rate. CLI row has no workload_type.",
   "availability": {
-    "last_observed_at": "2026-11-07T18:10:07Z",
+    "last_observed_at": "2026-11-09T17:09:49Z",
     "available_vms": 0,
     "available_gpus": 0,
     "spot_available_vms": 0,

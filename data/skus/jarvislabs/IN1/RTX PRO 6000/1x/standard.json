@@ -37,7 +37,7 @@
   "pricing_status": "published",
   "price_note": null,
   "availability": {
-    "last_observed_at": "2026-11-07T18:10:07Z",
+    "last_observed_at": "2026-11-09T17:09:49Z",
     "available_vms": 3,
     "available_gpus": 3,
     "spot_available_vms": 3,

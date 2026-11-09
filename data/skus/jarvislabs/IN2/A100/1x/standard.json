@@ -37,11 +37,11 @@
   "pricing_status": "published",
   "price_note": null,
   "availability": {
-    "last_observed_at": "2026-11-07T18:10:07Z",
-    "available_vms": 4,
-    "available_gpus": 4,
-    "spot_available_vms": 4,
-    "spot_available_gpus": 4,
+    "last_observed_at": "2026-11-09T17:09:49Z",
+    "available_vms": 0,
+    "available_gpus": 0,
+    "spot_available_vms": 0,
+    "spot_available_gpus": 0,
     "source": "jl gpus --json (workload=container)"
   },
   "sources": [

@@ -48,7 +48,7 @@
   "verified_at": "2026-11-07",
   "notes": "USD from jarvislabs.ai/pricing; `jl gpus --json` lists ₹41.31/GPU-hr on-demand, ₹27.54 spot.",
   "availability": {
-    "last_observed_at": "2026-11-07T18:10:07Z",
+    "last_observed_at": "2026-11-09T17:09:49Z",
     "available_vms": 0,
     "available_gpus": 0,
     "spot_available_vms": 0,
