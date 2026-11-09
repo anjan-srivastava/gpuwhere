@@ -812,11 +812,17 @@ HTML_TEMPLATE = r"""<!doctype html>
     table.cards .pkg-line, table.cards .prov-sub { text-align: right; }
 
     /* filters: one button, then a bottom sheet */
-    .mobile-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
+    .mobile-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
     .filters-toggle { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--fg); font: 500 13px var(--font); }
     .filters-toggle svg { width: 15px; height: 15px; color: var(--muted); }
     .filters-toggle .fcount { color: var(--accent); }
-    .mobile-count { color: var(--muted); font-size: 12px; }
+    .sort-control { display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
+    .sort-label { font-size: 12px; color: var(--muted); }
+    .sort-control select { height: 40px; max-width: 156px; min-width: 0; border-radius: 999px; padding: 0 10px; }
+    .mobile-count { margin-left: auto; color: var(--muted); font-size: 12px; }
+    .search-trigger { min-width: 0; }
+    .search-trigger span { min-width: 0; }
+    table.cards .prec-compact { white-space: normal; }
     .filters { display: none; }
     .filters.open { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; max-height: 86vh; overflow-y: auto; margin: 0; padding: 16px 18px calc(18px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); border-radius: 16px 16px 0 0; box-shadow: 0 -24px 64px rgba(0, 0, 0, .28); }
     .filters-head { display: flex; align-items: center; justify-content: space-between; margin: 0 0 14px; }
@@ -832,7 +838,14 @@ HTML_TEMPLATE = r"""<!doctype html>
     body.filters-open { overflow: hidden; }
 
     .stats { grid-template-columns: repeat(2, 1fr); }
+    main.wrap { padding: 26px 18px 56px; }
     .wrap { padding: 0 18px; }
+  }
+  @media (max-width: 380px) {
+    .sort-label { display: none; }
+    .filters-toggle { padding: 0 12px; }
+    .sort-control select { max-width: 132px; }
+    .mobile-toolbar { gap: 8px; }
   }
 </style>
 </head>
@@ -863,6 +876,9 @@ HTML_TEMPLATE = r"""<!doctype html>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
         Filters <span class="fcount"></span>
       </button>
+      <label class="sort-control"><span class="sort-label">Sort</span>
+        <select id="sort-gpus" data-sort-select="gpus" aria-label="Sort GPUs"></select>
+      </label>
       <span class="mobile-count" id="mcount-gpus"></span>
     </div>
     <div class="filters" id="filters-gpus"></div>
@@ -894,6 +910,9 @@ HTML_TEMPLATE = r"""<!doctype html>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
         Filters <span class="fcount"></span>
       </button>
+      <label class="sort-control"><span class="sort-label">Sort</span>
+        <select id="sort-providers" data-sort-select="providers" aria-label="Sort providers"></select>
+      </label>
       <span class="mobile-count" id="mcount-providers"></span>
     </div>
     <div class="filters" id="filters-providers"></div>
@@ -951,6 +970,40 @@ const TRACK = window.TRACK || { pageview() {}, click() {}, search() {} };
 let CATALOG = null;
 let VIEW = "gpus";
 let SORT = { gpus: { key: "id", dir: 1 }, providers: { key: "name", dir: 1 } };
+const SORT_LABELS = {
+  id: "GPU", name: "Provider", vram: "VRAM", flops: "FP16 dense",
+  providers: "Providers", avail: "Available now", price: "Price", updated: "Updated",
+  gpus: "GPUs", pindex: "Price vs market", features: "Features",
+  capacity: "Capacity", free: "Available now", sla: "SLA",
+};
+function syncSortSelect(view) {
+  const sel = document.getElementById(`sort-${view}`);
+  if (!sel) return;
+  const value = `${SORT[view].key}:${SORT[view].dir}`;
+  if ([...sel.options].some((o) => o.value === value)) sel.value = value;
+}
+function buildSortSelects() {
+  document.querySelectorAll("[data-sort-select]").forEach((sel) => {
+    const view = sel.dataset.sortSelect;
+    const table = document.querySelector(`#view-${view} table.cards`);
+    if (!table) return;
+    sel.innerHTML = [...table.querySelectorAll("thead th[data-sort]")].flatMap((th) => {
+      const key = th.dataset.sort;
+      const label = SORT_LABELS[key] || (th.textContent || "").replace(/[↑↓]/g, "").trim();
+      return [`<option value="${esc(key)}:1">${esc(label)} ↑</option>`,
+              `<option value="${esc(key)}:-1">${esc(label)} ↓</option>`];
+    }).join("");
+    syncSortSelect(view);
+  });
+}
+document.addEventListener("change", (e) => {
+  const sel = e.target.closest("[data-sort-select]");
+  if (!sel) return;
+  const view = sel.dataset.sortSelect;
+  const [key, dir] = sel.value.split(":");
+  SORT[view] = { key, dir: Number(dir) };
+  view === "gpus" ? renderGPUs() : renderProviders();
+});
 
 /* ---------------- Region & provider-origin scope ----------------
    Two shared filters (both pages): Region = where GPUs physically run (default India);
@@ -1634,6 +1687,7 @@ function renderGPUs() {
   $("count").textContent = `${all.length} GPU SKUs`;
   $("empty-gpus").classList.toggle("hidden", rows.length > 0);
   markArrows("thead-gpus", SORT.gpus);
+  syncSortSelect("gpus");
 
   $("tbody-gpus").innerHTML = rows.map(g => {
     const href = `#/gpu/${encodeURIComponent(g.id)}`;
@@ -2103,6 +2157,7 @@ function renderProviders() {
   $("count").textContent = `${all.length} providers`;
   $("empty-providers").classList.toggle("hidden", rows.length > 0);
   markArrows("thead-providers", SORT.providers);
+  syncSortSelect("providers");
 
   $("tbody-providers").innerHTML = rows.map(r => {
     const p = r.p;
@@ -2701,6 +2756,7 @@ document.querySelectorAll("#thead-providers th.sortable").forEach(th => {
   buildGPUIndex();
   $("footer-count").textContent = `${CATALOG.counts.providers} providers · ${CATALOG.counts.accelerator_variants} GPU SKUs · ${CATALOG.counts.skus} host packages · ${CATALOG.counts.availability_observations} availability observations`;
   if (!location.hash) history.replaceState(null, "", "#/gpus");
+  buildSortSelects();
   route();
 })().catch(err => {
   document.body.insertAdjacentHTML("beforeend", `<pre style="color:#b91c1c;padding:20px">${err}</pre>`);
