@@ -134,24 +134,25 @@ def cloud_report(days: int, limit: int) -> None:
           f" · clicks {int(float(clicks.get('clicks') or 0)):,}"
           f" · sessions {int(float(totals.get('sessions') or 0)):,}"
           f" · events {int(float(totals.get('events') or 0)):,}")
+    print("  pageviews and clicks are events; sessions are distinct per-tab ids (no cookie)")
 
     print("\nPAGEVIEWS BY DAY")
     by_day = q(f"""
         SELECT toDate(timestamp) AS day, sum(_sample_interval) AS views,
-               count(DISTINCT index1) AS visitors
+               count(DISTINCT index1) AS sessions
         FROM {dataset} WHERE blob1 = 'pageview' AND {where}
         GROUP BY day ORDER BY day
     """)
-    print(_table(by_day, ["day", "views", "visitors"]))
+    print(_table(by_day, ["day", "views", "sessions"]))
 
     print("\nTOP PAGES")
     pages = q(f"""
         SELECT blob2 AS path, sum(_sample_interval) AS views,
-               count(DISTINCT index1) AS visitors
+               count(DISTINCT index1) AS sessions
         FROM {dataset} WHERE blob1 = 'pageview' AND {where}
         GROUP BY path ORDER BY views DESC LIMIT {int(limit)}
     """)
-    print(_table(pages, ["path", "views", "visitors"]))
+    print(_table(pages, ["path", "views", "sessions"]))
 
     print("\nREFERRERS")
     refs = q(f"""
@@ -218,14 +219,28 @@ def local_report(days: int, limit: int) -> None:
 
     print(f"GPU Where — last {days} days (local dev log)")
     print(f"  pageviews {len(views):,} · clicks {len(clicks):,} · sessions {len(sessions):,} · events {len(rows):,}")
+    print("  pageviews and clicks are events; sessions are distinct per-tab ids (no cookie)")
 
     print("\nPAGEVIEWS BY DAY")
-    days_count = Counter(r["ts"][:10] for r in views)
-    print(_table([{"day": d, "views": n} for d, n in sorted(days_count.items())], ["day", "views"]))
+    days_count: dict[str, list] = {}
+    for r in views:
+        day = r["ts"][:10]
+        days_count.setdefault(day, [0, set()])
+        days_count[day][0] += 1
+        days_count[day][1].add(r.get("s"))
+    print(_table([{"day": d, "views": v[0], "sessions": len(v[1])}
+                  for d, v in sorted(days_count.items())], ["day", "views", "sessions"]))
 
     print("\nTOP PAGES")
-    pages = Counter(r.get("p", "") for r in views)
-    print(_table([{"path": p, "views": n} for p, n in pages.most_common(limit)], ["path", "views"]))
+    pages: dict[str, list] = {}
+    for r in views:
+        path = r.get("p", "")
+        pages.setdefault(path, [0, set()])
+        pages[path][0] += 1
+        pages[path][1].add(r.get("s"))
+    top = sorted(pages.items(), key=lambda kv: kv[1][0], reverse=True)[:limit]
+    print(_table([{"path": p, "views": v[0], "sessions": len(v[1])} for p, v in top],
+                 ["path", "views", "sessions"]))
 
     print("\nREFERRERS")
     refs = Counter(r.get("r", "") for r in views if r.get("r"))
