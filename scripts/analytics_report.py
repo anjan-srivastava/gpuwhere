@@ -135,6 +135,7 @@ def cloud_report(days: int, limit: int) -> None:
           f" · sessions {int(float(totals.get('sessions') or 0)):,}"
           f" · events {int(float(totals.get('events') or 0)):,}")
     print("  pageviews and clicks are events; sessions are distinct per-tab ids (no cookie)")
+    print("  country is the edge geo-IP of that request, not the GPU region or an identity")
 
     print("\nPAGEVIEWS BY DAY")
     by_day = q(f"""
