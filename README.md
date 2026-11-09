@@ -1,4 +1,6 @@
-# GPU Provider Catalog — India
+# GPU Where — India GPU provider catalogue
+
+**Live:** [gpuwhere.pages.dev](https://gpuwhere.pages.dev) · **API docs:** [/api/docs](https://gpuwhere.pages.dev/api/docs) · **Source:** [github.com/anjan-srivastava/gpuwhere](https://github.com/anjan-srivastava/gpuwhere)
 
 A versioned, machine-readable catalogue of GPU providers in India, built to answer: **what can this provider serve, where, at what price, and how reliably?**
 
