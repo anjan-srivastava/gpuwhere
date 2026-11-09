@@ -1,5 +1,5 @@
 /**
- * GPU Atlas jobs Worker — a separate deployment that runs the Python scrapers
+ * GPU Where jobs Worker — a separate deployment that runs the Python scrapers
  * as on-demand jobs, with an optional configurable schedule.
  *
  * The scrapers themselves run in GitHub Actions (free for public repositories);
@@ -48,12 +48,12 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/health") {
-      return json({ ok: true, service: "gpu-atlas-jobs", jobs: Object.keys(JOBS) }, 200, false);
+      return json({ ok: true, service: "gpuwhere-jobs", jobs: Object.keys(JOBS) }, 200, false);
     }
 
     if (url.pathname === "/" || url.pathname === "") {
       return json({
-        service: "gpu-atlas-jobs",
+        service: "gpuwhere-jobs",
         scheduled: scheduleEnabled(env),
         usage: {
           jobs: "GET /jobs (Authorization: Bearer <JOB_TOKEN>)",
@@ -145,7 +145,7 @@ function github(env, path, init = {}) {
       Authorization: `Bearer ${env.GITHUB_TOKEN}`,
       Accept: "application/vnd.github+json",
       "X-GitHub-Api-Version": "2022-11-28",
-      "User-Agent": "gpu-atlas-jobs",
+      "User-Agent": "gpuwhere-jobs",
       "Content-Type": "application/json",
       ...(init.headers || {}),
     },

@@ -7,7 +7,7 @@ Five free Cloudflare products, two separate deployments, no server:
 | Site, open `/v1` artifact, API docs | **Pages** (direct upload) | unlimited requests, 500 builds/month |
 | Keyed API + analytics ingest (`_worker.js`) | **Pages Functions** | Workers free: 100k requests/day |
 | Event storage | **Workers Analytics Engine** | 100k writes/day, 90-day retention |
-| Jobs control plane | **Workers** (`gpu-atlas-jobs`) | 100k requests/day |
+| Jobs control plane | **Workers** (`gpuwhere-jobs`) | 100k requests/day |
 | Optional schedule | **Worker Cron Triggers** | 5 cron triggers |
 
 The site and the jobs service are deployed separately (`make deploy` vs `make deploy-jobs`).
@@ -32,8 +32,8 @@ Authenticate once:
 export CLOUDFLARE_API_TOKEN=...   # Pages:Edit + Account:Read
 ```
 
-The project is **`gpu-atlas`** → `https://gpu-atlas.pages.dev`. Attach `gpuatlas.io` in
-**Workers & Pages → gpu-atlas → Custom domains** when the domain is bought.
+The project is **`gpuwhere`** → `https://gpuwhere.pages.dev`. Attach `gpuwhere.io` in
+**Workers & Pages → gpuwhere → Custom domains** when the domain is bought.
 
 Pages serves:
 
@@ -59,7 +59,7 @@ consumers and `curl` both work.
 
 ```bash
 make api-key
-.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpu-atlas
+.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpuwhere
 ```
 
 * `API_KEYS` — comma-separated. Rotation: append, deploy, remove, redeploy.
@@ -97,7 +97,7 @@ dashboard's Analytics Engine SQL editor.
 
 ## 4. Jobs Worker (separate deployment)
 
-`gpu-atlas-jobs` is its own Worker. It starts scraper jobs on demand and, optionally, on a
+`gpuwhere-jobs` is its own Worker. It starts scraper jobs on demand and, optionally, on a
 configurable schedule. The scrapers run in GitHub Actions; this Worker is just the control
 plane.
 

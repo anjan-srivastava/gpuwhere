@@ -95,15 +95,15 @@ from this directory. Authenticate once with `wrangler login`, or set
 `CLOUDFLARE_API_TOKEN` (Pages:Edit + Account:Read) for CI.
 
 ```bash
-make deploy                              # project gpu-atlas, branch main
-CF_PROJECT=gpu-atlas-preview make deploy  # any other Pages project
+make deploy                              # project gpuwhere, branch main
+CF_PROJECT=gpuwhere-preview make deploy  # any other Pages project
 make release VERSION=0.2.0               # annotated git tag
 ```
 
-The site is `https://gpu-atlas.pages.dev` until a custom domain is attached. The proposed
-production name is **GPU Atlas** (`gpuatlas.io`); `gpus.io` is taken. The name, tagline and
+The site is `https://gpuwhere.pages.dev` until a custom domain is attached. The proposed
+production name is **GPU Where** (`gpuwhere.io`); `gpus.io` is taken. The name, tagline and
 outbound referral tag are three constants at the bottom of `scripts/serve_catalog.py`, so a
-rename is one edit. RDAP reported `gpuatlas.io` unregistered on 2026-11-09 — confirm at a
+rename is one edit. RDAP reported `gpuwhere.io` unregistered on 2026-11-09 — confirm at a
 registrar before buying; that is a hint, not a reservation.
 
 ### API keys
@@ -113,7 +113,7 @@ key — it exists so traffic can be metered and rate-limited, not to keep public
 
 ```bash
 make api-key                       # print a random key
-.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpu-atlas
+.tools/npm/node_modules/.bin/wrangler pages secret put API_KEYS --project-name gpuwhere
 ```
 
 `API_KEYS` is a comma-separated list: append a new key, deploy, then remove the old one.
@@ -136,7 +136,7 @@ global cap — and return `429` with `Retry-After: 60`. Tune them in `wrangler.t
 ### Analytics
 
 `assets/track.js` sends pageviews, in-app route changes, link clicks and searches to `/a`; the
-worker writes them to Workers Analytics Engine (`gpu_atlas_events`) as
+worker writes them to Workers Analytics Engine (`gpuwhere_events`) as
 `event, path, label, target, referrer host, country` plus a random per-tab session id.
 No cookies, no IP storage, DNT/GPC honoured, 90-day retention. Report:
 
@@ -151,7 +151,7 @@ The same SQL is available in the Cloudflare dashboard's Analytics Engine query e
 ### Scraper jobs (separate deployment)
 
 Scraping is not part of the site deployment. `ops/cloudflare/` is a second Worker,
-**`gpu-atlas-jobs`**, whose only job is to start a GitHub Actions run — on demand, and
+**`gpuwhere-jobs`**, whose only job is to start a GitHub Actions run — on demand, and
 optionally on a configurable schedule. The site keeps serving the last published artifact.
 
 ```bash

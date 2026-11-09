@@ -5,7 +5,7 @@
 #   ./scripts/deploy_cloudflare.sh # upload an existing dist/
 #
 # Options:
-#   --project NAME   Pages project (default: $CF_PROJECT or gpu-atlas)
+#   --project NAME   Pages project (default: $CF_PROJECT or gpuwhere)
 #   --branch NAME    production branch (default: $CF_BRANCH or main)
 #   --check          verify the artifact and authentication, do not upload
 #
@@ -17,7 +17,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PROJECT="${CF_PROJECT:-gpu-atlas}"
+PROJECT="${CF_PROJECT:-gpuwhere}"
 BRANCH="${CF_BRANCH:-main}"
 WRANGLER="${WRANGLER:-$ROOT/.tools/npm/node_modules/.bin/wrangler}"
 WRANGLER_SPEC="${WRANGLER_SPEC:-wrangler@4}"

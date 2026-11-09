@@ -1,4 +1,4 @@
-# GPU Atlas jobs Worker — separate from the Pages site deployment.
+# GPU Where jobs Worker — separate from the Pages site deployment.
 #
 #   make deploy-jobs      deploy this Worker
 #   make run-job JOB=pricing
@@ -14,7 +14,7 @@
 # whether and when a job is dispatched. Bind JOBS_CONFIG (KV) to edit the
 # schedule at runtime with PUT /schedule instead of redeploying.
 
-name = "gpu-atlas-jobs"
+name = "gpuwhere-jobs"
 main = "worker.mjs"
 compatibility_date = "2026-11-01"
 

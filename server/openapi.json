@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "GPU Atlas API",
+    "title": "GPU Where API",
     "version": "1.0.0",
     "summary": "Keyed JSON access to the GPU provider catalogue.",
     "description": "Providers, accelerator SKUs, host packages and the latest observed availability, served from the published static artifact. The unkeyed bulk data remains open under /v1/*; keys gate the query API so it can be rate-limited and attributed.",

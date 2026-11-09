@@ -10,7 +10,7 @@ Cloudflare mode needs two environment variables:
     CF_ACCOUNT_ID          your account id
     CF_ANALYTICS_TOKEN     API token with Account Analytics:Read
 
-Optional: ANALYTICS_DATASET (default gpu_atlas_events).
+Optional: ANALYTICS_DATASET (default gpuwhere_events).
 
 The event schema is fixed in server/api_worker.mjs:
     blob1 event   pageview | click | search
@@ -57,7 +57,7 @@ def query(account: str, token: str, sql: str) -> list[dict]:
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "text/plain",
-            "User-Agent": "gpu-atlas-analytics",
+            "User-Agent": "gpuwhere-analytics",
         },
     )
     try:
@@ -76,7 +76,7 @@ def query(account: str, token: str, sql: str) -> list[dict]:
 def cloud_report(days: int, limit: int) -> None:
     account = os.environ.get("CF_ACCOUNT_ID", "").strip()
     token = os.environ.get("CF_ANALYTICS_TOKEN", "").strip()
-    dataset = os.environ.get("ANALYTICS_DATASET", "gpu_atlas_events").strip()
+    dataset = os.environ.get("ANALYTICS_DATASET", "gpuwhere_events").strip()
     if not account or not token:
         raise SystemExit(
             "Set CF_ACCOUNT_ID and CF_ANALYTICS_TOKEN (Account Analytics:Read),\n"
@@ -104,7 +104,7 @@ def cloud_report(days: int, limit: int) -> None:
         FROM {dataset} WHERE blob1 = 'click' AND {where}
     """)[0]
 
-    print(f"GPU Atlas — last {days} days")
+    print(f"GPU Where — last {days} days")
     print(f"  pageviews {int(float(views.get('views') or 0)):,}"
           f" · clicks {int(float(clicks.get('clicks') or 0)):,}"
           f" · sessions {int(float(totals.get('sessions') or 0)):,}"
@@ -191,7 +191,7 @@ def local_report(days: int, limit: int) -> None:
     clicks = [r for r in rows if r.get("e") == "click"]
     sessions = {r.get("s") for r in rows if r.get("s")}
 
-    print(f"GPU Atlas — last {days} days (local dev log)")
+    print(f"GPU Where — last {days} days (local dev log)")
     print(f"  pageviews {len(views):,} · clicks {len(clicks):,} · sessions {len(sessions):,} · events {len(rows):,}")
 
     print("\nPAGEVIEWS BY DAY")

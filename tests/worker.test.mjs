@@ -66,7 +66,7 @@ function env(extra = {}) {
 function get(path, { key = KEY, method = "GET", body, environment = env(), headers = {} } = {}) {
   const h = { "cf-connecting-ip": "203.0.113.9", ...headers };
   if (key) h.authorization = `Bearer ${key}`;
-  return worker.fetch(new Request(`https://gpuatlas.io${path}`, { method, body, headers: h }), environment, ctx);
+  return worker.fetch(new Request(`https://gpuwhere.io${path}`, { method, body, headers: h }), environment, ctx);
 }
 
 test("no configured keys fails closed with 503", async () => {

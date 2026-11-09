@@ -4,18 +4,18 @@
 # It makes the bindings and vars below the source of truth for the project.
 #
 # Secrets are not stored here:
-#   wrangler pages secret put API_KEYS --project-name gpu-atlas
+#   wrangler pages secret put API_KEYS --project-name gpuwhere
 #
 # The scheduler Worker has its own config in ops/cloudflare/wrangler.toml.
 
-name = "gpu-atlas"
+name = "gpuwhere"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-11-01"
 
 # First-party pageview / click / search events from dist/_worker.js.
 [[analytics_engine_datasets]]
 binding = "ANALYTICS"
-dataset = "gpu_atlas_events"
+dataset = "gpuwhere_events"
 
 [vars]
 # Requests per minute, per Cloudflare location, per key (API) or IP (pages/events).

@@ -1,4 +1,4 @@
-/* First-party, cookieless page analytics for GPU Atlas.
+/* First-party, cookieless page analytics for GPU Where.
  *
  * Posts small JSON events to /a, where the edge worker writes them to Workers
  * Analytics Engine (see server/api_worker.mjs and scripts/analytics_report.py).

@@ -2601,11 +2601,11 @@ async function firstJSON(urls) { let last; for (const u of urls) { try { return 
 
 # Rename the site here, once. Both the dev server and `scripts/export_api.py` render this
 # module's HTML, so the brand, page title and outbound referral tag stay in sync.
-SITE_NAME = "GPU Atlas"
+SITE_NAME = "GPU Where"
 SITE_TAGLINE = "India GPU providers"
-SITE_DOMAIN = "gpuatlas.io"
-# Public source repository. Leave empty to hide the header link; set this before deploying.
-SITE_REPO = ""
+SITE_DOMAIN = "gpuwhere.io"
+# Public source repository. Leave empty to hide the header link.
+SITE_REPO = "https://github.com/anjan-srivastava/gpuwhere"
 
 GITHUB_ICON = (
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'

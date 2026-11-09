@@ -1,5 +1,5 @@
 {
-  description = "GPU Atlas — static GPU provider catalogue, Cloudflare deploy, analytics";
+  description = "GPU Where — static GPU provider catalogue, Cloudflare deploy, analytics";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -20,7 +20,7 @@
             pkgs.cacert
           ];
           shellHook = ''
-            echo "GPU Atlas shell"
+            echo "GPU Where shell"
             echo "  python   $(python3 --version | cut -d' ' -f2)"
             echo "  node     $(node --version)"
             echo "  wrangler $(wrangler --version 2>/dev/null | tail -1)"

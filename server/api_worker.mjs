@@ -1,5 +1,5 @@
 /**
- * GPU Atlas edge worker — Cloudflare Pages advanced mode (`dist/_worker.js`).
+ * GPU Where edge worker — Cloudflare Pages advanced mode (`dist/_worker.js`).
  *
  * Three jobs on the same origin:
  *

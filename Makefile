@@ -1,4 +1,4 @@
-# GPU Atlas — verify, build, publish.
+# GPU Where — verify, build, publish.
 #
 #   make                 list targets
 #   make check           the four gates: schemas, tests, dist/, freshness
@@ -12,7 +12,7 @@
 #
 # Environment:
 #   CLOUDFLARE_API_TOKEN   Pages:Edit + Account:Read (or run `wrangler login` once)
-#   CF_PROJECT             Pages project name       (default gpu-atlas)
+#   CF_PROJECT             Pages project name       (default gpuwhere)
 #   CF_BRANCH              production branch        (default main)
 #   CF_ACCOUNT_ID          analytics reports
 #   CF_ANALYTICS_TOKEN     analytics reports (Account Analytics:Read)
@@ -29,7 +29,7 @@ NPM_DIR  := $(TOOLS)/npm
 WRANGLER := $(shell command -v wrangler 2>/dev/null || echo $(NPM_DIR)/node_modules/.bin/wrangler)
 WRANGLER_SPEC ?= wrangler@4
 
-CF_PROJECT ?= gpu-atlas
+CF_PROJECT ?= gpuwhere
 CF_BRANCH  ?= main
 PORT       ?= 8080
 DAYS       ?= 7
@@ -81,7 +81,7 @@ deploy-jobs: tools ## Deploy the separate jobs Worker (on-demand + schedule)
 
 run-job: ## Trigger a job remotely: make run-job JOB=pricing
 	@test -n "$(JOB)" || { echo "usage: make run-job JOB=pricing"; exit 1; }
-	@test -n "$(JOBS_URL)" || { echo "set JOBS_URL=https://gpu-atlas-jobs.<subdomain>.workers.dev"; exit 1; }
+	@test -n "$(JOBS_URL)" || { echo "set JOBS_URL=https://gpuwhere-jobs.<subdomain>.workers.dev"; exit 1; }
 	@test -n "$(JOB_TOKEN)" || { echo "set JOB_TOKEN"; exit 1; }
 	curl -fsS -X POST "$(JOBS_URL)/run?job=$(JOB)" -H "Authorization: Bearer $(JOB_TOKEN)" | $(PY) -m json.tool
 
@@ -113,7 +113,7 @@ nix-shell: ## Enter the pinned dev shell (requires nix with flakes)
 
 release: ## Tag a release: make release VERSION=0.2.0
 	@test -n "$(VERSION)" || { echo "usage: make release VERSION=0.2.0"; exit 1; }
-	git tag -a "v$(VERSION)" -m "GPU Atlas v$(VERSION)"
+	git tag -a "v$(VERSION)" -m "GPU Where v$(VERSION)"
 	@echo "tagged v$(VERSION) — push with: git push origin v$(VERSION)"
 
 clean: ## Remove dist/, downloaded tools and Python caches
