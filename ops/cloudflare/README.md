@@ -87,13 +87,13 @@ index1           random per-tab session id
 No cookies, no IP stored, DNT/GPC and `navigator.webdriver` respected. Retention is 90 days.
 
 ```bash
-export CF_ACCOUNT_ID=... CF_ANALYTICS_TOKEN=...   # Account Analytics:Read
 make analytics DAYS=7
 ```
 
 `scripts/analytics_report.py` prints pageviews by day, top pages, referrers, countries,
-most-clicked links, searches and a recent click stream. The same dataset is queryable in the
-dashboard's Analytics Engine SQL editor.
+most-clicked links, searches and a recent click stream. It uses `CF_ANALYTICS_TOKEN`
+(Account Analytics:Read) when set, and otherwise the local `wrangler login` token. The same
+dataset is queryable in the dashboard's Analytics Engine SQL editor.
 
 ## 4. Jobs Worker (separate deployment)
 

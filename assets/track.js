@@ -59,7 +59,7 @@
       if (path === lastPath && now - lastAt < 800) return;
       lastPath = path;
       lastAt = now;
-      send("pageview", document.title, "");
+      send("pageview", "", "");
     },
     click: function (label, target) { send("click", label, target); },
     search: function (query) { send("search", "", query); }

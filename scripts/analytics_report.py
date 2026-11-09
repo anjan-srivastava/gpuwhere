@@ -37,6 +37,26 @@ ROOT = Path(__file__).resolve().parents[1]
 LOCAL_LOG = ROOT / ".cache" / "dev-analytics.jsonl"
 SQL_API = "https://api.cloudflare.com/client/v4/accounts/{account}/analytics_engine/sql"
 
+# Public account id; the token is the only secret required.
+DEFAULT_ACCOUNT_ID = "3f39b0def6194f4d9877bc0e6cfce578"
+WRANGLER_CONFIGS = (
+    Path.home() / "Library" / "Preferences" / ".wrangler" / "config" / "default.toml",
+    Path.home() / ".wrangler" / "config" / "default.toml",
+    Path.home() / ".config" / ".wrangler" / "config" / "default.toml",
+)
+
+
+def _wrangler_token() -> str:
+    """Use the local `wrangler login` token when CF_ANALYTICS_TOKEN is unset."""
+    for path in WRANGLER_CONFIGS:
+        try:
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if line.strip().startswith("oauth_token"):
+                    return line.split('"', 2)[1]
+        except (OSError, IndexError):
+            continue
+    return ""
+
 
 def _table(rows: list[dict], columns: list[str], empty: str = "no data") -> str:
     if not rows:
@@ -74,13 +94,18 @@ def query(account: str, token: str, sql: str) -> list[dict]:
 
 
 def cloud_report(days: int, limit: int) -> None:
-    account = os.environ.get("CF_ACCOUNT_ID", "").strip()
+    account = os.environ.get("CF_ACCOUNT_ID", "").strip() or DEFAULT_ACCOUNT_ID
     token = os.environ.get("CF_ANALYTICS_TOKEN", "").strip()
     dataset = os.environ.get("ANALYTICS_DATASET", "gpuwhere_events").strip()
-    if not account or not token:
+    if not token:
+        token = _wrangler_token()
+        if token:
+            print("(using the local wrangler login token; set CF_ANALYTICS_TOKEN to override)",
+                  file=sys.stderr)
+    if not token:
         raise SystemExit(
-            "Set CF_ACCOUNT_ID and CF_ANALYTICS_TOKEN (Account Analytics:Read),\n"
-            "or run with --local to read the development log."
+            "No analytics token. Set CF_ANALYTICS_TOKEN (Account Analytics:Read),\n"
+            "run `wrangler login`, or run with --local to read the development log."
         )
     if not all(ch.isalnum() or ch == "_" for ch in dataset):
         raise SystemExit("ANALYTICS_DATASET must be alphanumeric/underscore")

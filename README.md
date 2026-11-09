@@ -143,10 +143,13 @@ worker writes them to Workers Analytics Engine (`gpuwhere_events`) as
 No cookies, no IP storage, DNT/GPC honoured, 90-day retention. Report:
 
 ```bash
-export CF_ACCOUNT_ID=... CF_ANALYTICS_TOKEN=...   # Account Analytics:Read
 make analytics DAYS=7
-make analytics LOCAL=1                             # reads .cache/dev-analytics.jsonl
+make analytics DAYS=30
+make analytics LOCAL=1        # reads .cache/dev-analytics.jsonl
 ```
+
+`CF_ANALYTICS_TOKEN` (Account Analytics:Read) overrides it; without one, the script
+uses the local `wrangler login` token, so `make analytics` works after `wrangler login`.
 
 The same SQL is available in the Cloudflare dashboard's Analytics Engine query editor.
 
