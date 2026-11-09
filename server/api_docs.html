@@ -94,14 +94,14 @@ X-API-Key: &lt;key&gt;</code></pre>
   </div>
 
   <h2>Quick start</h2>
-  <pre><code>export GPU_ATLAS_KEY="paste-your-key"
+  <pre><code>export GPUWHERE_KEY="paste-your-key"
 
 curl -s https://__SITE_DOMAIN__/api/v1/index \
-  -H "Authorization: Bearer $GPU_ATLAS_KEY"
+  -H "Authorization: Bearer $GPUWHERE_KEY"
 
 # one GPU family, one provider, orderable packages only
 curl -s "https://__SITE_DOMAIN__/api/v1/skus?gpu=H100&provider=e2e-networks&status=active" \
-  -H "X-API-Key: $GPU_ATLAS_KEY"</code></pre>
+  -H "X-API-Key: $GPUWHERE_KEY"</code></pre>
 
   <h2>Endpoints</h2>
   <table>

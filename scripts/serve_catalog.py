@@ -559,6 +559,8 @@ HTML_TEMPLATE = r"""<!doctype html>
   .gh-btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--muted); }
   .gh-btn:hover { color: var(--strong); border-color: var(--faint); }
   .gh-btn svg { width: 16px; height: 16px; }
+  .api-btn { height: 32px; display: inline-flex; align-items: center; padding: 0 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--muted); font: 500 11px/1 var(--mono); letter-spacing: .08em; }
+  .api-btn:hover { color: var(--strong); border-color: var(--faint); }
   .bar { display: flex; align-items: center; gap: 16px; height: 56px; }
   .brand { display: flex; align-items: baseline; gap: 6px; font-size: 15px; white-space: nowrap; }
   .brand b { font-weight: 600; letter-spacing: .02em; }
@@ -803,6 +805,7 @@ HTML_TEMPLATE = r"""<!doctype html>
       <kbd class="kbd">⌘K</kbd>
     </button>
     <div class="count" id="count"></div>
+    <a class="api-btn" href="/api/docs" title="API reference" aria-label="API reference">API</a>
     __REPO_LINK__
     <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle colour theme" title="Theme"></button>
   </div>

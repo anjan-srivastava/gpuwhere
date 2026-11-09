@@ -20,8 +20,10 @@ class Branding(unittest.TestCase):
     def test_ui_uses_the_configured_name_and_domain(self):
         html = serve_catalog.HTML
         self.assertIn(serve_catalog.SITE_NAME, html)
+        self.assertIn('href="/api/docs"', html)
         self.assertNotIn("gpus.io", html)
         self.assertNotIn("__SITE_", html)
+        self.assertNotIn("__REPO_LINK__", html)
 
     def test_docs_render_without_placeholders(self):
         docs = export_api.render_docs()
@@ -29,6 +31,7 @@ class Branding(unittest.TestCase):
         self.assertIn(serve_catalog.SITE_DOMAIN, docs)
         self.assertNotIn("__SITE_", docs)
         self.assertNotIn("__REPO_LINK__", docs)
+        self.assertNotIn("atlas", docs.lower())
 
     def test_source_link_is_conditional(self):
         saved = serve_catalog.SITE_REPO
