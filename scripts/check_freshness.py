@@ -9,11 +9,11 @@ This script answers the other question: *is the data still being refreshed?*
 
 Thresholds (per AGENTS.md cadence):
   pricing      daily   -> fail when the newest verified_at is older than 3 days
-  availability hourly  -> fail when a tracked (collector-backed) series is older than 6 hours
+  availability daily   -> fail when a tracked (collector-backed) series is older than 26 hours
   capacity     weekly  -> fail when the newest as_of/verified_at is older than 14 days
 
 Series recorded by hand (a one-off console check, a burst provider with no collector)
-are reported but not gated: nothing can refresh them on an hourly schedule.
+are reported but not gated: nothing can refresh them on a daily schedule.
 """
 from __future__ import annotations
 
@@ -97,7 +97,7 @@ def check_availability(today):
     detail = f"stalest tracked series {name} {hours:.1f}h old"
     if manual:
         detail += f" ({manual} manual series not gated)"
-    return ("OK" if hours <= 6 else "FAIL"), detail
+    return ("OK" if hours <= 26 else "FAIL"), detail
 
 
 def main() -> int:

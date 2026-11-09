@@ -77,36 +77,36 @@ test("a GitHub failure surfaces as 502", async () => {
 });
 
 test("JOBS_CONFIG is optional and schedule is readable from vars", async () => {
-  const res = await worker.fetch(request("/schedule"), env({
-    AVAILABILITY_EVERY_HOURS: "2",
-    PRICING_HOUR_UTC: "6",
-  }));
+  const res = await worker.fetch(request("/schedule"), env());
   assert.equal(res.status, 200);
   const data = await res.json();
   assert.equal(data.source, "vars");
   assert.equal(data.editable, false);
   assert.equal(data.schedule_enabled, true);
-  assert.deepEqual(data.config.availability, { enabled: true, every_hours: 2 });
-  assert.deepEqual(data.config.pricing, { enabled: true, hour_utc: 6 });
+  assert.equal(data.cron, "0 0 * * *");
+  assert.deepEqual(data.config, { enabled: true, jobs: ["availability", "pricing"] });
 });
 
 test("PUT /schedule fails clearly without KV", async () => {
   const res = await worker.fetch(request("/schedule", {
-    method: "PUT", body: '{"pricing":{"hour_utc":9}}',
+    method: "PUT", body: '{"jobs":["pricing"]}',
   }), env());
   assert.equal(res.status, 409);
   assert.equal((await res.json()).error, "not_editable");
 });
 
-test("scheduled ticks dispatch according to the schedule", async () => {
-  const hour = new Date().getUTCHours();
+test("the daily tick dispatches every configured job", async () => {
   const calls = mockGitHub(() => new Response(null, { status: 204 }));
-  await worker.scheduled({}, env({
-    PRICING_HOUR_UTC: String(hour),
-    AVAILABILITY_EVERY_HOURS: "1",
-  }));
+  await worker.scheduled({}, env());
   const workflows = calls.map((c) => c.url.split("/workflows/")[1].split("/")[0]);
   assert.deepEqual(workflows.sort(), ["refresh-availability.yml", "refresh-pricing.yml"]);
+});
+
+test("DAILY_JOBS narrows the scheduled set", async () => {
+  const calls = mockGitHub(() => new Response(null, { status: 204 }));
+  await worker.scheduled({}, env({ DAILY_JOBS: "pricing" }));
+  assert.deepEqual(calls.map((c) => c.url.split("/workflows/")[1].split("/")[0]),
+    ["refresh-pricing.yml"]);
 });
 
 test("SCHEDULE_ENABLED=false leaves the clock off but /run working", async () => {
@@ -126,7 +126,7 @@ test("a KV guard prevents a duplicate dispatch in the same window", async () => 
     async put(key, value) { store.set(key, value); },
   };
   const calls = mockGitHub(() => new Response(null, { status: 204 }));
-  const e = env({ PRICING_HOUR_UTC: String(new Date().getUTCHours()), JOBS_CONFIG: kv });
+  const e = env({ JOBS_CONFIG: kv });
 
   await worker.scheduled({}, e);
   assert.equal(calls.length, 2);
@@ -147,10 +147,9 @@ test("KV makes the schedule editable at runtime", async () => {
     async put(key, value) { store.set(key, value); },
   };
   const res = await worker.fetch(request("/schedule", {
-    method: "PUT", body: '{"availability":{"every_hours":3},"pricing":{"hour_utc":9}}',
+    method: "PUT", body: '{"enabled":true,"jobs":["pricing"]}',
   }), env({ JOBS_CONFIG: kv }));
   assert.equal(res.status, 200);
   const data = await res.json();
-  assert.equal(data.config.availability.every_hours, 3);
-  assert.equal(data.config.pricing.hour_utc, 9);
+  assert.deepEqual(data.config, { enabled: true, jobs: ["pricing"] });
 });

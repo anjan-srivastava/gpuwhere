@@ -14,13 +14,14 @@
  *   PUT  /schedule               change it at runtime (auth, needs KV)
  *
  * Scheduling is opt-in and configurable:
- *   - by default the schedule comes from vars in wrangler.toml, and an hourly
- *     Cloudflare cron tick decides what to dispatch;
- *   - bind JOBS_CONFIG (KV) to change it at runtime with PUT /schedule;
+ *   - the cron tick is daily at 00:00 UTC (`0 0 * * *`) and dispatches the jobs
+ *     listed in DAILY_JOBS, once per UTC day;
+ *   - bind JOBS_CONFIG (KV) to change the enabled/jobs list at runtime with
+ *     PUT /schedule without redeploying;
  *   - SCHEDULE_ENABLED=false is a kill switch that leaves on-demand runs working.
  *
  * Secrets: JOB_TOKEN, GITHUB_TOKEN (Actions: write), GITHUB_REPO ("owner/repo").
- * Vars: GITHUB_REF, SCHEDULE_ENABLED, AVAILABILITY_*, PRICING_*.
+ * Vars: GITHUB_REF, SCHEDULE_ENABLED, DAILY_JOBS.
  *
  * There is no cron entry in the site's Pages project. This Worker and Pages are
  * deployed separately: `make deploy-jobs` vs `make deploy`.
@@ -38,8 +39,8 @@ const JOBS = {
 };
 
 const DEFAULTS = {
-  availability: { enabled: true, every_hours: 1 },
-  pricing: { enabled: true, hour_utc: 4 },
+  enabled: true,
+  jobs: ["availability", "pricing"],
 };
 
 export default {
@@ -94,20 +95,16 @@ export default {
   },
 
   /**
-   * Cloudflare cron entry point. The tick is hourly; whether anything is
-   * dispatched, and how often, comes from the effective schedule.
+   * Cloudflare cron entry point: once a day at 00:00 UTC. Every configured job
+   * runs once per UTC day; a KV guard stops a retried tick from dispatching twice.
    */
   async scheduled(controller, env) {
     if (!scheduleEnabled(env)) return;
     const config = await effectiveSchedule(env);
-    const now = new Date();
-    const hour = now.getUTCHours();
-
-    if (config.availability.enabled && hour % config.availability.every_hours === 0) {
-      await dispatchOnce(env, "availability", `guard:availability:${now.toISOString().slice(0, 13)}`, 7200);
-    }
-    if (config.pricing.enabled && hour === config.pricing.hour_utc) {
-      await dispatchOnce(env, "pricing", `guard:pricing:${now.toISOString().slice(0, 10)}`, 90000);
+    if (!config.enabled) return;
+    const day = new Date().toISOString().slice(0, 10);
+    for (const name of config.jobs) {
+      await dispatchOnce(env, name, `guard:${name}:${day}`, 90000);
     }
   },
 };
@@ -159,41 +156,25 @@ function scheduleEnabled(env) {
   return String(env.SCHEDULE_ENABLED ?? "true").toLowerCase() !== "false";
 }
 
-function integer(value, min, max, fallback) {
-  const n = Number.parseInt(value, 10);
-  return Number.isInteger(n) && n >= min && n <= max ? n : fallback;
-}
-
 function normalize(raw = {}) {
-  const availability = raw.availability || {};
-  const pricing = raw.pricing || {};
-  return {
-    availability: {
-      enabled: availability.enabled !== false,
-      every_hours: integer(availability.every_hours, 1, 24, DEFAULTS.availability.every_hours),
-    },
-    pricing: {
-      enabled: pricing.enabled !== false,
-      hour_utc: integer(pricing.hour_utc, 0, 23, DEFAULTS.pricing.hour_utc),
-    },
-  };
+  const listed = Array.isArray(raw.jobs)
+    ? raw.jobs
+    : String(raw.jobs ?? DEFAULTS.jobs.join(",")).split(",");
+  const jobs = [...new Set(listed.map((name) => String(name).trim()).filter((name) => JOBS[name]))];
+  return { enabled: raw.enabled !== false, jobs };
 }
 
 async function effectiveSchedule(env) {
   const fromVars = normalize({
-    availability: {
-      enabled: String(env.AVAILABILITY_ENABLED ?? "true").toLowerCase() !== "false",
-      every_hours: env.AVAILABILITY_EVERY_HOURS,
-    },
-    pricing: {
-      enabled: String(env.PRICING_ENABLED ?? "true").toLowerCase() !== "false",
-      hour_utc: env.PRICING_HOUR_UTC,
-    },
+    enabled: scheduleEnabled(env),
+    jobs: String(env.DAILY_JOBS || DEFAULTS.jobs.join(",")).split(","),
   });
   if (!env.JOBS_CONFIG || typeof env.JOBS_CONFIG.get !== "function") return fromVars;
   try {
     const stored = await env.JOBS_CONFIG.get("schedule", "json");
-    return stored ? normalize({ ...fromVars, ...stored }) : fromVars;
+    if (!stored) return fromVars;
+    const merged = normalize({ ...fromVars, ...stored });
+    return { ...merged, enabled: scheduleEnabled(env) && merged.enabled };
   } catch (err) {
     return fromVars;
   }
@@ -201,18 +182,14 @@ async function effectiveSchedule(env) {
 
 async function getSchedule(env) {
   const config = await effectiveSchedule(env);
-  const now = new Date();
-  const hour = now.getUTCHours();
-  const nextAvailability = config.availability.enabled
-    ? (hour + (config.availability.every_hours - (hour % config.availability.every_hours))) % 24
-    : null;
   return json({
     schedule_enabled: scheduleEnabled(env),
     source: env.JOBS_CONFIG ? "kv" : "vars",
     editable: Boolean(env.JOBS_CONFIG),
-    cron: "5 * * * *",
+    cron: "0 0 * * *",
+    timezone: "UTC",
+    runs: "daily at 00:00 UTC",
     config,
-    next_utc_hour: { availability: nextAvailability, pricing: config.pricing.hour_utc },
   });
 }
 

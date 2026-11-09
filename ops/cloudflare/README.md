@@ -122,9 +122,8 @@ PUT  /schedule          edit it at runtime               (bearer, KV bound)
 
 Schedule defaults, in `ops/cloudflare/wrangler.toml`:
 
-* hourly tick `5 * * * *`;
-* availability every `AVAILABILITY_EVERY_HOURS` (default 1) while `AVAILABILITY_ENABLED`;
-* pricing at `PRICING_HOUR_UTC` (default 4) while `PRICING_ENABLED`;
+* cron tick `0 0 * * *` — daily at 00:00 UTC;
+* `DAILY_JOBS="availability,pricing"` — the jobs dispatched on each tick;
 * `SCHEDULE_ENABLED=false` turns the clock off and leaves `/run` working.
 
 For runtime edits, create a KV namespace and bind it as `JOBS_CONFIG`:
@@ -133,9 +132,9 @@ For runtime edits, create a KV namespace and bind it as `JOBS_CONFIG`:
 $WR kv namespace create JOBS_CONFIG      # paste the id into wrangler.toml
 ```
 
-Then `PUT /schedule` with `{"availability":{"every_hours":2},"pricing":{"hour_utc":6}}`
+Then `PUT /schedule` with `{"enabled":true,"jobs":["pricing"]}`
 (no redeploy). Without the binding the endpoint returns `409` and the vars are the source of
-truth. A KV guard key stops two ticks in the same window from dispatching twice.
+truth. A KV guard key stops two ticks on the same UTC day from dispatching twice.
 
 Local alternative: `make job JOB=pricing` runs the same script under a lock and logs to
 `reports/jobs/`.

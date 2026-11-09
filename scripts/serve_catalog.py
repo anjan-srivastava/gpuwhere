@@ -140,7 +140,9 @@ def _api_keys() -> list[str]:
 def _render_api_docs() -> str:
     with open(os.path.join(SERVER_DIR, "api_docs.html"), encoding="utf-8") as fh:
         template = fh.read()
-    return template.replace("__SITE_NAME__", SITE_NAME).replace("__SITE_DOMAIN__", SITE_DOMAIN)
+    return (template.replace("__SITE_NAME__", SITE_NAME)
+                    .replace("__SITE_DOMAIN__", SITE_DOMAIN)
+                    .replace("__REPO_LINK__", docs_repo_link()))
 
 
 def _clean(value, max_len: int) -> str:
@@ -554,6 +556,9 @@ HTML_TEMPLATE = r"""<!doctype html>
   header { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line-soft); }
   .theme-btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--muted); cursor: pointer; font-size: 14px; }
   .theme-btn:hover { color: var(--strong); border-color: var(--faint); }
+  .gh-btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--muted); }
+  .gh-btn:hover { color: var(--strong); border-color: var(--faint); }
+  .gh-btn svg { width: 16px; height: 16px; }
   .bar { display: flex; align-items: center; gap: 16px; height: 56px; }
   .brand { display: flex; align-items: baseline; gap: 6px; font-size: 15px; white-space: nowrap; }
   .brand b { font-weight: 600; letter-spacing: .02em; }
@@ -798,6 +803,7 @@ HTML_TEMPLATE = r"""<!doctype html>
       <kbd class="kbd">⌘K</kbd>
     </button>
     <div class="count" id="count"></div>
+    __REPO_LINK__
     <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle colour theme" title="Theme"></button>
   </div>
 </header>
@@ -2598,11 +2604,41 @@ async function firstJSON(urls) { let last; for (const u of urls) { try { return 
 SITE_NAME = "GPU Atlas"
 SITE_TAGLINE = "India GPU providers"
 SITE_DOMAIN = "gpuatlas.io"
+# Public source repository. Leave empty to hide the header link; set this before deploying.
+SITE_REPO = ""
+
+GITHUB_ICON = (
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
+    '<path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 '
+    '0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 '
+    '1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.68 '
+    '0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 '
+    '3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.41-2.69 5.38-5.25 5.67.41.35.78 '
+    '1.04.78 2.1 0 1.52-.01 2.74-.01 3.11 0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/>'
+    '</svg>'
+)
+
+
+def repo_link() -> str:
+    """The header source link, or nothing when SITE_REPO is unset."""
+    if not SITE_REPO:
+        return ""
+    return (f'<a class="gh-btn" href="{SITE_REPO}" target="_blank" rel="noopener noreferrer" '
+            f'aria-label="Source code on GitHub" title="Source code">{GITHUB_ICON}</a>')
+
+
+def docs_repo_link() -> str:
+    """A plain text source link for the API docs footer."""
+    if not SITE_REPO:
+        return ""
+    return f'<a href="{SITE_REPO}" target="_blank" rel="noopener noreferrer">Source</a>'
+
 
 HTML = (HTML_TEMPLATE
         .replace("__SITE_NAME__", SITE_NAME)
         .replace("__SITE_TAGLINE__", SITE_TAGLINE)
-        .replace("__SITE_DOMAIN__", SITE_DOMAIN))
+        .replace("__SITE_DOMAIN__", SITE_DOMAIN)
+        .replace("__REPO_LINK__", repo_link()))
 
 
 def main() -> None:

@@ -19,15 +19,12 @@ main = "worker.mjs"
 compatibility_date = "2026-11-01"
 
 [triggers]
-crons = ["5 * * * *"]
+crons = ["0 0 * * *"]
 
 [vars]
 GITHUB_REF = "main"
 SCHEDULE_ENABLED = "true"
-AVAILABILITY_ENABLED = "true"
-AVAILABILITY_EVERY_HOURS = "1"
-PRICING_ENABLED = "true"
-PRICING_HOUR_UTC = "4"
+DAILY_JOBS = "availability,pricing"
 
 [[ratelimits]]
 name = "JOB_RATE_LIMITER"

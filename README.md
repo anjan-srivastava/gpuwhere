@@ -8,7 +8,7 @@ See `AGENTS.md` for the contributor/agent contract.
 
 ## Why
 
-GPU pricing and availability in India are opaque and change weekly. The same provider has shown three different H200 prices across three surfaces, and capacity frequently reads zero. This catalogue normalises providers, SKUs, pricing modes, networking, storage, incidents, and hourly availability.
+GPU pricing and availability in India are opaque and change weekly. The same provider has shown three different H200 prices across three surfaces, and capacity frequently reads zero. This catalogue normalises providers, SKUs, pricing modes, networking, storage, incidents, and availability snapshots.
 
 ## Structure
 
@@ -25,7 +25,7 @@ data/providers/*.json                 # identity, capability, reliability summar
 data/gpus/<supplier>/<family>.json    # accelerator SKUs: VRAM, FLOPS, precision, MIG
 data/skus/<provider>/<region>/<gpu>/<shape>[/<variant>].json  # host packages sold by providers
 data/incidents/<provider>.json        # curated incident history
-data/availability/<provider>.jsonl    # hourly snapshots of free GPUs, on-demand + spot
+data/availability/<provider>.jsonl    # periodic snapshots of free GPUs, on-demand + spot
 data/capacity/<provider>.json         # deployed fleet, allocation split, facility MW
 data/channels/*.json                  # subsidy/marketplace channels (IndiaAI), not providers
 
@@ -47,7 +47,7 @@ assets/logos/<provider>.png           # provider logos
 - **Host package** is what a provider sells: accelerator SKU + 1/2/4/8 GPUs + vCPU + host RAM + disk + price. A provider can sell one accelerator in several packages.
 - **FLOPS basis:** dense FP16 TFLOPS is the common comparison number. Native precision support is listed per accelerator; FP8/FP4 rates stay in the per-precision table and are not converted into FP16 equivalents.
 - **Capacity** is the deployed fleet: `total_gpus` split into `rented_gpus`, `committed_gpus` and `free_gpus`, plus optional pool and facility `power_mw`. It is a stock, not a live signal.
-- **Availability** is the observed free signal: per provider × region × GPU × shape, on-demand and spot, hourly. It is a flow/observation, not installed capacity.
+- **Availability** is the observed free signal: per provider × region × GPU × shape, on-demand and spot, captured on each check. It is a flow/observation, not installed capacity.
 - Pricing: USD canonical, refreshed daily; per GPU and per VM.
 
 ## Quickstart
@@ -72,7 +72,7 @@ python scrapers/jarvislabs_availability.py --out data/availability/jarvislabs.js
 # daily pricing refresh from official sources (dry-run; add --write [--retire-superseded])
 python scrapers/pricing_refresh.py
 
-# hourly availability (free GPUs per SKU) and weekly installed capacity (dry-run; add --write)
+# availability (free GPUs per SKU) and weekly installed capacity (dry-run; add --write)
 python scrapers/availability_refresh.py
 python scrapers/capacity_refresh.py
 
@@ -166,9 +166,11 @@ make job JOB=pricing DRY=1            # local dry-run
 
 Secrets on the jobs Worker: `JOB_TOKEN` (bearer for `/jobs`, `/run`, `/schedule`),
 `GITHUB_TOKEN` (Actions: write) and `GITHUB_REPO`. The schedule is opt-in
-(`SCHEDULE_ENABLED=true`): availability every N hours, pricing daily at a chosen UTC hour.
-Change it in `ops/cloudflare/wrangler.toml`, or bind `JOBS_CONFIG` (KV) and `PUT /schedule`
-to change it without redeploying. There is **no cron in the Pages project**.
+(`SCHEDULE_ENABLED=true`) and **daily at 00:00 UTC** (`0 0 * * *`), dispatching the jobs
+listed in `DAILY_JOBS` (`availability,pricing` by default). Change it in
+`ops/cloudflare/wrangler.toml`, or bind `JOBS_CONFIG` (KV) and `PUT /schedule`
+to change the enabled flag or job list without redeploying. There is **no cron in the
+Pages project**.
 
 **GitHub Actions cost:** free for public repositories (unlimited standard runners);
 private repositories get 2,000 minutes/month free, which these one-minute jobs fit easily.
@@ -194,7 +196,7 @@ own data; otherwise run `make deploy` yourself.
 - **Self-serve vs sales:** a package the provider lists but cannot actually be ordered online (NxtGen's H200, Leapswitch's H200/RTX PRO 6000, Cyfuture's B300/H200/RTX PRO 6000) is tagged **sales only**, keeps its price for audit, and is excluded from "from" prices and the market index — clicking a provider link should not land you somewhere the SKU does not exist.
 - **Spot:** where a provider publishes a spot/preemptible rate, it appears as a small green line under the on-demand price on the GPU and provider pages (`spot $0.80 · −82%`). Verda publishes one; Nebius' is dynamic and read from its public spot-price API.
 - **Storage (model weights):** capability first, price second. Each provider page has a Storage section stating whether block/file storage can be attached to a GPU VM, whether it can be shared across nodes, and whether it outlives the instance — with anything unverified named explicitly rather than guessed. The providers page shows `Block/File` and `Shared FS` chips and filters on mountable storage. Prices per GB-month are shown as quiet secondary metadata. GPU detail lists accelerator specs and precision support, one provider row per package summary, and an exact host-package table with vCPU/RAM; provider detail lists exact host packages plus a capacity section at `#/provider/<id>/inventory` and a separate live-availability section. Capacity and availability are deliberately not the same number: capacity is installed fleet, availability is what is free right now.
-- **Availability:** hourly observations for 2 of 21 providers (JarvisLabs, NxtGen), 102 records so far; the other 12 are listed in `NO_PUBLIC_SIGNAL` with the exact blocker (account validation, console-only stock, or blocked automated clients). These are **free** GPUs observed, not installed capacity; no provider has published fleet totals or GPU-fleet MW yet, so capacity files are explicitly unknown rather than inferred from availability.
+- **Availability:** daily observations for 2 of 21 providers (JarvisLabs, NxtGen), 102 records so far; the other 12 are listed in `NO_PUBLIC_SIGNAL` with the exact blocker (account validation, console-only stock, or blocked automated clients). These are **free** GPUs observed, not installed capacity; no provider has published fleet totals or GPU-fleet MW yet, so capacity files are explicitly unknown rather than inferred from availability.
 - **E2E availability blocker:** the console and API return empty GPU plans while the account is unvalidated (`is_approved: false`). Customer validation must complete before E2E capacity can be collected.
 - **Confidence:** 177 high / 258 medium host packages (no low); 8 providers high, 12 medium, 1 low. Grades, gates and known gaps live in `GRADES.md`.
 - **Deferred:** continuous uptime/latency telemetry, supply-chain analysis.

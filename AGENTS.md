@@ -8,7 +8,7 @@ Maintain a trustworthy, versioned, machine-readable catalogue of GPU providers i
 
 1. **Capability** — what GPU shapes they offer, where, at what price.
 2. **Reliability evidence** — SLA, incident history, capacity notes.
-3. **Availability over time** — hourly snapshots per shape, on-demand and spot, so graphs can be built and placement decisions made from evidence.
+3. **Availability over time** — daily snapshots per shape, on-demand and spot, so graphs can be built and placement decisions made from evidence.
 
 It is a **provider catalogue**, not a monitoring system. Continuous uptime/latency telemetry is out of scope for now; incidents and availability history are in scope.
 
@@ -35,7 +35,7 @@ It is a **provider catalogue**, not a monitoring system. Continuous uptime/laten
 
 | Data | Cadence |
 |---|---|
-| Availability (on-demand + spot, per shape) | **hourly** |
+| Availability (on-demand + spot, per shape) | **daily** |
 | Pricing | **daily** |
 | Incidents | on observation |
 | Reliability summary | weekly |
@@ -106,7 +106,7 @@ The providers page shows the check age under **Available now**, the provider pag
 Two different numbers. Never collapse them.
 
 - `data/capacity/<provider>.json` is **installed capacity**: `total_gpus` split into `rented_gpus`, `committed_gpus` and `free_gpus`, with an optional `power_mw` per pool and a `facility` block. It is a stock snapshot and carries `as_of`, `verified_at` and `confidence`.
-- `data/availability/<provider>.jsonl` is **observed free capacity**: hourly `available_gpus` / `available_vms` per shape. It answers "can I get one now?", not "how big is the fleet?".
+- `data/availability/<provider>.jsonl` is **observed free capacity**: `available_gpus` / `available_vms` per shape, one observation per check. It answers "can I get one now?", not "how big is the fleet?".
 - Never label observed free GPUs as capacity in the API or UI. If a provider does not publish fleet size, leave `total_gpus` null and say so; do not infer total capacity from availability.
 - `power_mw` means power allocated to the GPU fleet unless `facility.power_mw` is explicitly the whole campus. Do not derive MW from a GPU TDP.
 
@@ -198,7 +198,7 @@ Rules:
 ## Scrapers and probes
 
 - Scrapers read official feeds/APIs and append/normalise data. They must be idempotent per run and must not fabricate fields.
-- `scrapers/availability_refresh.py` is the hourly availability loop. Collectors (`scrapers/availability_<provider>.py`) return free GPUs per region/GPU/shape/variant keyed like SKU ids; `--write` appends to `data/availability/<provider>.jsonl` (skips a second run in the same UTC hour) and copies the latest values into each SKU's `availability` block. Only JarvisLabs (`jl gpus --json`) exposes a usable stock signal today; every other provider needs a customer account/API, listed in `NO_PUBLIC_SIGNAL` with the reason. `scrapers/jarvislabs_availability.py` is a shim for old cron jobs.
+- `scrapers/availability_refresh.py` is the availability loop. Collectors (`scrapers/availability_<provider>.py`) return free GPUs per region/GPU/shape/variant keyed like SKU ids; `--write` appends to `data/availability/<provider>.jsonl` (skips a second run in the same UTC hour) and copies the latest values into each SKU's `availability` block. Only JarvisLabs (`jl gpus --json`) exposes a usable stock signal today; every other provider needs a customer account/API, listed in `NO_PUBLIC_SIGNAL` with the reason. `scrapers/jarvislabs_availability.py` is a shim for old cron jobs.
 - `scrapers/capacity_refresh.py` is the weekly installed-capacity loop. It also stores the official IndiaAI empanelled-GPU counts per provider as `indiaai_empanelled` (offered under the tender, not installed fleet; never summed into `total_gpus`), parsed by `scrapers/indiaai_common.py`. It scripts only first-party or government sources (E2E investor presentation PDF, shakticloud.ai fleet claim, IndiaAI allocation table) and keeps the quoted phrase in each pool's `notes`; extractors fail loudly when wording changes. Press-reported fleet sizes are not scripted.
 - `scrapers/pricing_refresh.py` is the daily pricing loop. One module per source (`scrapers/pricing_<provider>.py`) returns host packages exactly as published; `pricing_common.py` normalises them into SKU files. Dry-run by default; `--write` updates `data/skus/` and writes `reports/pricing-refresh-<date>.md`, where every pricing/confidence change is tagged REVIEW. `--retire-superseded` marks stale SKUs `status: "retired"` only when the run covers the same region/GPU/shape; other stale SKUs are listed for a human. Retired SKUs are not served.
 - Scraped providers: E2E (feed), JarvisLabs (`jl` CLI + page), Azure (Retail Prices API), AWS (public pricing JSON), Krutrim (docs + GPU page), OVHcloud (public catalogue API), Nebius/Verda/Hyperstack (pricing pages), AceCloud, Yotta (pricing page; its calculator JSON disagrees and is only a cross-check), Neysa, NxtGen, Leapswitch, Cyfuture (pages), Tata (PDF; needs `pdftotext`). Their SKUs are scraper-owned: fix the scraper, not the file. NeevCloud and Utho return HTTP 403 to automated clients and CtrlS, Sify and Jio publish no rate card; those stay hand-curated.

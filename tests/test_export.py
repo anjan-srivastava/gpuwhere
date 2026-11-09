@@ -28,6 +28,19 @@ class Branding(unittest.TestCase):
         self.assertIn(serve_catalog.SITE_NAME, docs)
         self.assertIn(serve_catalog.SITE_DOMAIN, docs)
         self.assertNotIn("__SITE_", docs)
+        self.assertNotIn("__REPO_LINK__", docs)
+
+    def test_source_link_is_conditional(self):
+        self.assertEqual(serve_catalog.repo_link(), "")
+        saved = serve_catalog.SITE_REPO
+        try:
+            serve_catalog.SITE_REPO = "https://github.com/example/gpu-atlas"
+            link = serve_catalog.repo_link()
+            self.assertIn("github.com/example/gpu-atlas", link)
+            self.assertIn('aria-label="Source code on GitHub"', link)
+            self.assertIn("example/gpu-atlas", serve_catalog.docs_repo_link())
+        finally:
+            serve_catalog.SITE_REPO = saved
 
 
 class Artifact(unittest.TestCase):

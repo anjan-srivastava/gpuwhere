@@ -33,8 +33,9 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
 
-from serve_catalog import (HTML, SITE_DOMAIN, SITE_NAME, _latest_availability,  # noqa: E402
-                           _load_availability, _load_gpus, _load_json_dir, _load_skus)
+from serve_catalog import (HTML, SITE_DOMAIN, SITE_NAME, docs_repo_link,  # noqa: E402
+                           _latest_availability, _load_availability, _load_gpus,
+                           _load_json_dir, _load_skus)
 
 SCHEMA_VERSION = "1"
 
@@ -120,7 +121,9 @@ HEADERS = """# Cloudflare Pages headers. Keep CORS open: this is a public catalo
 def render_docs() -> str:
     """The API reference page, with the site name/domain substituted in."""
     template = (ROOT / "server" / "api_docs.html").read_text(encoding="utf-8")
-    return template.replace("__SITE_NAME__", SITE_NAME).replace("__SITE_DOMAIN__", SITE_DOMAIN)
+    return (template.replace("__SITE_NAME__", SITE_NAME)
+                    .replace("__SITE_DOMAIN__", SITE_DOMAIN)
+                    .replace("__REPO_LINK__", docs_repo_link()))
 
 
 def main() -> int:
