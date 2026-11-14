@@ -48,7 +48,7 @@
     ]
   },
   "availability": {
-    "last_observed_at": "2026-11-13T00:00:17Z",
+    "last_observed_at": "2026-11-14T00:00:17Z",
     "available_vms": 0,
     "available_gpus": 0,
     "spot_available_vms": null,
