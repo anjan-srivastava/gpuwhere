@@ -65,6 +65,20 @@ class PureHelpers(unittest.TestCase):
         self.assertAlmostEqual(od["usd_per_gpu_hr"], 10.0, places=2)
         self.assertEqual(90.0, od["native"]["fx_usd_inr"])
 
+    def test_refresh_keeps_sales_note_on_non_self_serve_package(self):
+        old = {"self_serve": False, "price_note": "sales enquiry required"}
+        new = {"self_serve": None, "price_note": None}
+        merged = pc.merge(old, new)
+        self.assertFalse(merged["self_serve"])
+        self.assertEqual("sales enquiry required", merged["price_note"])
+
+    def test_refresh_clears_sales_note_when_package_becomes_self_serve(self):
+        old = {"self_serve": False, "price_note": "sales enquiry required"}
+        new = {"self_serve": True, "price_note": None}
+        merged = pc.merge(old, new)
+        self.assertTrue(merged["self_serve"])
+        self.assertIsNone(merged["price_note"])
+
 
 class ScraperReplay(unittest.TestCase):
     """Run each scraper against its newest cached snapshot; assert it still parses."""

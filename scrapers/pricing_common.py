@@ -487,6 +487,11 @@ def merge(old: dict | None, new: dict) -> dict:
         if new[k] is None and k in KEEP_IF_NONE:
             continue
         merged[k] = new[k]
+    # A hand-curated "not self-serve" note must survive a price-only refresh:
+    # self_serve=false without a price_note fails the data contract. Keep the old
+    # note until the scraper supplies one or the package becomes self-serve.
+    if merged.get("self_serve") is False and not merged.get("price_note") and old.get("price_note"):
+        merged["price_note"] = old["price_note"]
     if merged.get("interconnect", {}).get("type") is None and "interconnect" in old:
         merged["interconnect"] = old["interconnect"]
     return {k: v for k, v in merged.items() if not (k == "notes" and v is None)}
