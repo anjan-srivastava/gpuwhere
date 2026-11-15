@@ -20,15 +20,15 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 4.88,
-      "usd_per_vm_hr": 19.5
+      "usd_per_gpu_hr": 3.9,
+      "usd_per_vm_hr": 15.6,
+      "native": {
+        "published_month_usd": 11386.0,
+        "published_per": "vm",
+        "derivation": "monthly/730h"
+      }
     },
     "committed": [
-      {
-        "term_months": 1,
-        "usd_per_gpu_hr": 3.9,
-        "usd_per_vm_hr": 15.6
-      },
       {
         "term_months": 6,
         "usd_per_gpu_hr": 3.7,
@@ -53,17 +53,17 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h200-nvl/",
       "kind": "page",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-08",
+  "verified_at": "2026-11-15",
   "form_factor": "nvl",
   "gpu_variant": "h200-nvl",
   "pricing_status": "published",
   "price_note": "AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
-  "notes": "Provider plan: N.H200.96.768. AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
-  "billing_model": "hourly",
+  "notes": "Provider plan: N.H200.96.768. Hourly billing not offered for this flavour in Noida. AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
+  "billing_model": "monthly",
   "residency": "india",
   "self_serve": false
 }

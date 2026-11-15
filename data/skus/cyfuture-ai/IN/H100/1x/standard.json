@@ -20,30 +20,30 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.5,
-      "usd_per_vm_hr": 3.5,
+      "usd_per_gpu_hr": 3.49,
+      "usd_per_vm_hr": 3.49,
       "native": {
         "inr_per_vm_hr": 329.0,
         "inr_per_gpu_hr": 329.0,
-        "fx_usd_inr": 93.9225,
-        "fx_date": "2026-11-06"
+        "fx_usd_inr": 94.2431,
+        "fx_date": "2026-11-13"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 3.15,
-        "usd_per_vm_hr": 3.15
+        "usd_per_gpu_hr": 3.14,
+        "usd_per_vm_hr": 3.14
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.8,
-        "usd_per_vm_hr": 2.8
+        "usd_per_gpu_hr": 2.79,
+        "usd_per_vm_hr": 2.79
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.33,
-        "usd_per_vm_hr": 2.33
+        "usd_per_gpu_hr": 2.32,
+        "usd_per_vm_hr": 2.32
       }
     ]
   },
@@ -59,11 +59,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",

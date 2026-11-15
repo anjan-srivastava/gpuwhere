@@ -20,35 +20,35 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.79,
-      "usd_per_vm_hr": 7.58,
+      "usd_per_gpu_hr": 6.23,
+      "usd_per_vm_hr": 12.47,
       "native": {
-        "inr_per_vm_hr": 712.0,
-        "inr_per_gpu_hr": 356.0,
-        "fx_usd_inr": 93.9225,
-        "fx_date": "2026-11-06"
+        "inr_per_vm_hr": 1175.0,
+        "inr_per_gpu_hr": 587.5,
+        "fx_usd_inr": 94.2431,
+        "fx_date": "2026-11-13"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 3.03,
-        "usd_per_vm_hr": 6.07
+        "usd_per_gpu_hr": 5.62,
+        "usd_per_vm_hr": 11.24
       },
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 2.94,
-        "usd_per_vm_hr": 5.89
+        "usd_per_gpu_hr": 5.45,
+        "usd_per_vm_hr": 10.9
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.88,
-        "usd_per_vm_hr": 5.77
+        "usd_per_gpu_hr": 5.34,
+        "usd_per_vm_hr": 10.68
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.79,
-        "usd_per_vm_hr": 5.58
+        "usd_per_gpu_hr": 5.17,
+        "usd_per_vm_hr": 10.34
       }
     ]
   },
@@ -64,16 +64,16 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",
   "price_note": "No self-serve GPU ordering: this provider sells through sales, so the published rate is a reference only. Excluded from minimum prices and the price-vs-market index.",
-  "notes": "Provider plan: VM – 2 x H100 On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹381,514/month for the 1-month term; page lists ₹416,100 (page used).",
+  "notes": "Provider plan: VM – 2 x H100 On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹381,514/month for the 1-month term; page lists ₹773,070 (page used).",
   "billing_model": "hourly",
   "residency": "india",
   "self_serve": false

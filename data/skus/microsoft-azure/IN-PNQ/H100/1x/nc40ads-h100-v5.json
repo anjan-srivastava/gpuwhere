@@ -45,16 +45,16 @@
     {
       "url": "https://prices.azure.com/api/retail/prices",
       "kind": "api",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     },
     {
       "url": "https://azure.microsoft.com/pricing/details/virtual-machines/linux/#centralindia",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: Standard_NC40ads_H100_v5. Azure region centralindia. Linux pay-as-you-go; spot is evictable; reservations are 1/3-year totals. vCPU from the size name; host RAM not in the price API.",
   "availability": {
     "last_observed_at": null,

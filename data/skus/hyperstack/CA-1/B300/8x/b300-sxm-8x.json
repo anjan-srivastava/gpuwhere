@@ -31,11 +31,11 @@
     {
       "url": "https://www.hyperstack.cloud/gpu-pricing",
       "kind": "page",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "low",
-  "verified_at": "2026-11-08",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: B300-SXM 8x. Not on the public price list: $7.4/GPU-hour is read from the signed-in console deploy page (2026-11-09) and needs re-checking. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
   "availability": {
     "last_observed_at": null,

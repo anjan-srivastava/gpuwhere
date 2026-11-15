@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 1.28,
-      "usd_per_vm_hr": 10.22,
+      "usd_per_gpu_hr": 1.27,
+      "usd_per_vm_hr": 10.19,
       "native": {
         "inr_per_vm_hr": 960.0,
         "inr_per_gpu_hr": 120.0,
-        "fx_usd_inr": 93.9225,
-        "fx_date": "2026-11-06"
+        "fx_usd_inr": 94.2431,
+        "fx_date": "2026-11-13"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 0.75,
-        "usd_per_vm_hr": 6.03
+        "usd_per_vm_hr": 6.01
       },
       {
         "term_months": 6,
         "usd_per_gpu_hr": 0.68,
-        "usd_per_vm_hr": 5.46
+        "usd_per_vm_hr": 5.44
       },
       {
         "term_months": 12,
         "usd_per_gpu_hr": 0.61,
-        "usd_per_vm_hr": 4.91
+        "usd_per_vm_hr": 4.89
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: 8L40S.64v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 64 vCPU / 2048 GB; the table lists 64 vCPU / 1536 GB (table used). Provider lists 192 GB VRAM per GPU; accelerator spec l40s-pcie is 48 GB.",
   "availability": {
     "last_observed_at": null,

@@ -21,15 +21,15 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 1.5,
-      "usd_per_vm_hr": 1.5,
-      "native": {
-        "published_month_usd": 1092.0,
-        "published_per": "vm",
-        "derivation": "monthly/730h"
-      }
+      "usd_per_gpu_hr": 1.87,
+      "usd_per_vm_hr": 1.87
     },
     "committed": [
+      {
+        "term_months": 1,
+        "usd_per_gpu_hr": 1.5,
+        "usd_per_vm_hr": 1.5
+      },
       {
         "term_months": 6,
         "usd_per_gpu_hr": 1.42,
@@ -56,14 +56,14 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-l40s-48gb/",
       "kind": "page",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-08",
+  "verified_at": "2026-11-15",
   "form_factor": "pcie",
-  "notes": "Provider plan: N.L40S.64. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
-  "billing_model": "monthly",
+  "notes": "Provider plan: N.L40S.64.",
+  "billing_model": "hourly",
   "residency": "india",
   "self_serve": true
 }

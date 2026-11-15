@@ -27,21 +27,21 @@
       }
     },
     "spot": {
-      "usd_per_gpu_hr": 0.94,
-      "usd_per_vm_hr": 0.94,
+      "usd_per_gpu_hr": 0.93,
+      "usd_per_vm_hr": 0.93,
       "notice_sec": null,
       "native": {
         "inr_per_vm_hr": 88.0,
         "inr_per_gpu_hr": 88.0,
-        "fx_usd_inr": 93.9225,
-        "fx_date": "2026-11-06"
+        "fx_usd_inr": 94.2431,
+        "fx_date": "2026-11-13"
       }
     },
     "committed": [
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 4.93,
-        "usd_per_vm_hr": 4.93
+        "usd_per_gpu_hr": 4.91,
+        "usd_per_vm_hr": 4.91
       }
     ]
   },
@@ -57,16 +57,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-h200",
       "kind": "page",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-08",
+  "verified_at": "2026-11-15",
   "form_factor": "sxm",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",

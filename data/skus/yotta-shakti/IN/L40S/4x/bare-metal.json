@@ -18,29 +18,29 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 2.53,
-      "usd_per_vm_hr": 10.14,
+      "usd_per_vm_hr": 10.1,
       "native": {
         "inr_per_vm_hr": 952.0,
         "inr_per_gpu_hr": 238.0,
-        "fx_usd_inr": 93.9225,
-        "fx_date": "2026-11-06"
+        "fx_usd_inr": 94.2431,
+        "fx_date": "2026-11-13"
       }
     },
     "committed": [
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.13,
-        "usd_per_vm_hr": 8.52
+        "usd_per_gpu_hr": 2.12,
+        "usd_per_vm_hr": 8.49
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 1.93,
-        "usd_per_vm_hr": 7.71
+        "usd_per_gpu_hr": 1.92,
+        "usd_per_vm_hr": 7.68
       },
       {
         "term_months": 24,
         "usd_per_gpu_hr": 1.72,
-        "usd_per_vm_hr": 6.9
+        "usd_per_vm_hr": 6.88
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: 4 x L40S (192 GB GPU Memory). Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹98/GPU-hr; page lists ₹238 (page used).",
   "availability": {
     "last_observed_at": null,

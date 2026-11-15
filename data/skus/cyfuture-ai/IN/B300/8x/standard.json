@@ -23,18 +23,18 @@
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 6.07,
-        "usd_per_vm_hr": 48.55
+        "usd_per_gpu_hr": 6.05,
+        "usd_per_vm_hr": 48.39
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 5.82,
-        "usd_per_vm_hr": 46.53
+        "usd_per_gpu_hr": 5.8,
+        "usd_per_vm_hr": 46.37
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 5.56,
-        "usd_per_vm_hr": 44.5
+        "usd_per_gpu_hr": 5.54,
+        "usd_per_vm_hr": 44.35
       }
     ]
   },
@@ -45,11 +45,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: 8B300.256v.2046m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 256 vCPU / 2046 GB; the table lists 256 vCPU / 2048 GB (table used).",
   "availability": {
     "last_observed_at": null,

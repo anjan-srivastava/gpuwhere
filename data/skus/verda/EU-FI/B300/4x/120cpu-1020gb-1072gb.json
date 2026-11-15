@@ -17,12 +17,12 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 11.69,
-      "usd_per_vm_hr": 46.76
+      "usd_per_gpu_hr": 12.41,
+      "usd_per_vm_hr": 49.64
     },
     "spot": {
-      "usd_per_gpu_hr": 5.84,
-      "usd_per_vm_hr": 23.38,
+      "usd_per_gpu_hr": 6.21,
+      "usd_per_vm_hr": 24.82,
       "notice_sec": null
     },
     "committed": []
@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-08"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-08",
+  "verified_at": "2026-11-15",
   "notes": "Provider plan: 4x B300 SXM6 268GB (4B300.120V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 1072 GB VRAM per GPU; accelerator spec b300-sxm is 288 GB.",
   "availability": {
     "last_observed_at": null,

@@ -46,11 +46,11 @@
     {
       "url": "https://neysa.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-07"
+      "fetched_at": "2026-11-15"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-07",
+  "verified_at": "2026-11-15",
   "form_factor": "sxm",
   "notes": "Page lists total node GPU memory as 640 GB.",
   "billing_model": null,
