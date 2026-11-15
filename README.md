@@ -72,7 +72,8 @@ uv run --with jsonschema python scripts/validate.py
 python scrapers/jarvislabs_availability.py --out data/availability/jarvislabs.jsonl
 
 # daily pricing refresh from official sources (dry-run; add --write [--retire-superseded])
-# needs `jl` (pip install jarvislabs) and `pdftotext` (poppler-utils) for JarvisLabs and Tata
+# needs `jl` (pip install jarvislabs), a JarvisLabs key (`jl setup` locally,
+# `JL_API_KEY` repo secret in CI) and `pdftotext` (poppler-utils) for JarvisLabs and Tata
 python scrapers/pricing_refresh.py
 
 # availability (free GPUs per SKU) and weekly installed capacity (dry-run; add --write)

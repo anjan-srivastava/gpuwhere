@@ -24,6 +24,8 @@ jobs:
       - name: Install scraper dependencies
         run: pip install -r requirements.txt
       - name: Collect free GPUs (providers with a public signal)
+        env:
+          JL_API_KEY: ${{ secrets.JL_API_KEY }}
         run: python scrapers/availability_refresh.py --write
       - name: Freshness gate for availability
         run: python scripts/check_freshness.py --warn-only
