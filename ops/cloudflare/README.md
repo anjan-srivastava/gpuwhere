@@ -24,6 +24,10 @@ make whoami          # which account is wrangler using
 Git integration or build image to configure. `wrangler.toml` at the repo root is the source of
 truth (project name, `pages_build_output_dir`, the `ANALYTICS` binding, rate-limit vars).
 
+In GitHub Actions, `deploy.yml` deploys every push to `main` after `ci` passes, and can be
+started by hand with `gh workflow run deploy.yml`. The refresh workflows deploy their own bot
+commits directly. Both paths need the repository secret `CLOUDFLARE_API_TOKEN`.
+
 Authenticate once:
 
 ```bash

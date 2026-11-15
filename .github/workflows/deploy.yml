@@ -1,0 +1,42 @@
+name: deploy
+
+# Deploy main to Cloudflare Pages after CI passes, or on demand.
+#
+# The refresh workflows deploy their own bot commits directly: those commits are
+# pushed with GITHUB_TOKEN and do not trigger CI (GitHub suppresses recursive
+# runs), so this workflow covers human pushes only.
+on:
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build and deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_PROJECT: gpuwhere
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN}" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN is not set; data is deployed only by the refresh workflows once the secret exists."
+            exit 0
+          fi
+          make deploy

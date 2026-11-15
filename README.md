@@ -103,6 +103,9 @@ CF_PROJECT=gpuwhere-preview make deploy  # any other Pages project
 make release VERSION=0.2.0               # annotated git tag
 ```
 
+`deploy.yml` also deploys every push to `main` after CI passes once the
+`CLOUDFLARE_API_TOKEN` secret is set; the refresh workflows deploy their own bot commits.
+
 The site is `https://gpuwhere.pages.dev` until a custom domain is attached. The proposed
 production name is **GPU Where** (`gpuwhere.io`); `gpus.io` is taken. The name, tagline and
 outbound referral tag are three constants at the bottom of `scripts/serve_catalog.py`, so a
