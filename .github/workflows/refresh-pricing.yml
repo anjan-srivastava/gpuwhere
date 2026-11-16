@@ -9,15 +9,21 @@ on:
 permissions:
   contents: write
 
+# One writer at a time. refresh-pricing and refresh-availability both commit to
+# main, and the daily tick dispatches them a second apart; sharing this group
+# makes them queue so neither checks out a commit the other is about to replace.
 concurrency:
-  group: refresh-pricing
+  group: catalog-write
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      # Full history: the commit step rebases over a moved main when a push loses a race.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -36,18 +42,7 @@ jobs:
         run: make test
       - name: Commit changes
         id: commit
-        run: |
-          git config user.name  "catalogue-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add data reports
-          if git diff --cached --quiet; then
-            echo "no changes"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "pricing refresh $(date -u +%F)"
-            git push
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+        run: scripts/bot_commit_push.sh "pricing refresh $(date -u +%F)" data reports
       - name: Publish to Cloudflare Pages
         if: ${{ steps.commit.outputs.changed == 'true' }}
         env:

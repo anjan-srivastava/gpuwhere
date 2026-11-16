@@ -9,15 +9,20 @@ on:
 permissions:
   contents: write
 
+# One writer at a time. Shared with refresh-pricing so the two bot commits to
+# main queue instead of racing (the daily tick dispatches both a second apart).
 concurrency:
-  group: refresh-availability
+  group: catalog-write
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      # Full history: the commit step rebases over a moved main when a push loses a race.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -31,18 +36,7 @@ jobs:
         run: python scripts/check_freshness.py --warn-only
       - name: Commit observations
         id: commit
-        run: |
-          git config user.name  "catalogue-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add data/availability data/skus
-          if git diff --cached --quiet; then
-            echo "no changes"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "availability $(date -u +%FT%H:%MZ)"
-            git push
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
+        run: scripts/bot_commit_push.sh "availability $(date -u +%FT%H:%MZ)" data
       - name: Publish to Cloudflare Pages
         if: ${{ steps.commit.outputs.changed == 'true' }}
         env:
