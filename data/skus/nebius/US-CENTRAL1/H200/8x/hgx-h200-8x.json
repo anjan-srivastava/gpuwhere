@@ -46,7 +46,7 @@
   ],
   "confidence": "high",
   "verified_at": "2026-11-16",
-  "notes": "Provider plan: NVIDIA HGX H200 8x. Per GPU-hour on-demand; vCPU/RAM are per GPU. Region and shape list from the signed-in capacity dashboard (2026-11-09); the price list is per platform. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 2.48 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-16T17:20:43.519267Z); preemptible and dynamic — an observation, not a rate card.",
+  "notes": "Provider plan: NVIDIA HGX H200 8x. Per GPU-hour on-demand; vCPU/RAM are per GPU. Region and shape list from the signed-in capacity dashboard (2026-11-09); the price list is per platform. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 2.48 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-16T17:26:00.735177Z); preemptible and dynamic — an observation, not a rate card.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,
