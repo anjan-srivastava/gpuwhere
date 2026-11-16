@@ -20,9 +20,12 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
-      # Full history: the commit step rebases over a moved main when a push loses a race.
+      # Start from the head of main, not the sha the dispatch was recorded against:
+      # a queued run would otherwise begin from a tree the previous run replaced.
+      # Full history lets the commit step rebase if main still moves mid-run.
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
