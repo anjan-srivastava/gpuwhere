@@ -18,12 +18,12 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 1.3,
-      "usd_per_vm_hr": 2.6,
+      "usd_per_vm_hr": 2.61,
       "native": {
         "inr_per_vm_hr": 245.0,
         "inr_per_gpu_hr": 122.5,
-        "fx_usd_inr": 94.2431,
-        "fx_date": "2026-11-13"
+        "fx_usd_inr": 93.9277,
+        "fx_date": "2026-11-16"
       }
     },
     "committed": [
@@ -40,7 +40,7 @@
       {
         "term_months": 12,
         "usd_per_gpu_hr": 0.63,
-        "usd_per_vm_hr": 1.25
+        "usd_per_vm_hr": 1.26
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: 2L40S.32v.512m. Rates are INR per instance-hour; USD at the ECB reference rate.",
   "availability": {
     "last_observed_at": null,

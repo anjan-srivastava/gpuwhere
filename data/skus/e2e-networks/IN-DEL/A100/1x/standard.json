@@ -33,8 +33,8 @@
       "native": {
         "inr_per_vm_hr": 66.0,
         "inr_per_gpu_hr": 66.0,
-        "fx_usd_inr": 94.2431,
-        "fx_date": "2026-11-13"
+        "fx_usd_inr": 93.9277,
+        "fx_date": "2026-11-16"
       }
     },
     "committed": []
@@ -51,16 +51,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-a100-80gb",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "form_factor": "sxm",
   "gpu_variant": "a100-sxm4-80gb",
   "pricing_status": "published",

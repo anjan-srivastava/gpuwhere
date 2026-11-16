@@ -21,8 +21,8 @@
       "usd_per_vm_hr": 115.2
     },
     "spot": {
-      "usd_per_gpu_hr": 6.32,
-      "usd_per_vm_hr": 50.56,
+      "usd_per_gpu_hr": 14.32,
+      "usd_per_vm_hr": 114.56,
       "notice_sec": null
     },
     "committed": []
@@ -36,17 +36,17 @@
     {
       "url": "https://nebius.com/prices",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     },
     {
       "url": "https://api.nebius.cloud/billing/v1alpha1/spot-price?pageSize=100",
       "kind": "api",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
-  "notes": "Provider plan: NVIDIA RTX PRO 6000 8x. Per GPU-hour on-demand; vCPU/RAM are per GPU. Region and shape list from the signed-in capacity dashboard (2026-11-09); the price list is per platform. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 0.79 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-15T21:45:42.938078Z); preemptible and dynamic — an observation, not a rate card.",
+  "verified_at": "2026-11-16",
+  "notes": "Provider plan: NVIDIA RTX PRO 6000 8x. Per GPU-hour on-demand; vCPU/RAM are per GPU. Region and shape list from the signed-in capacity dashboard (2026-11-09); the price list is per platform. Outside India: no India data residency; consider only for burst/non-regulated workloads. Spot 1.79 USD/GPU-hr from Nebius' public spot-price API (snapshot 2026-11-16T17:20:43.519267Z); preemptible and dynamic — an observation, not a rate card.",
   "availability": {
     "last_observed_at": null,
     "available_vms": null,

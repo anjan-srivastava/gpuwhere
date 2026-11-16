@@ -40,11 +40,11 @@
     {
       "url": "https://neysa.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "form_factor": "pcie",
   "notes": "NVIDIA RTX Pro 6000 managed VM; pricing on request.",
   "billing_model": null,

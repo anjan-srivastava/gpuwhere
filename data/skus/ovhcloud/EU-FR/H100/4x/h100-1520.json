@@ -17,20 +17,20 @@
   "disk_type": "nvme",
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.09,
-      "usd_per_vm_hr": 12.38,
+      "usd_per_gpu_hr": 3.08,
+      "usd_per_vm_hr": 12.34,
       "native": {
         "eur_per_vm_hr": 11.2,
         "eur_per_gpu_hr": 2.8,
-        "fx_eur_usd": 1.1052,
-        "fx_date": "2026-11-13"
+        "fx_eur_usd": 1.1014,
+        "fx_date": "2026-11-16"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.94,
-        "usd_per_vm_hr": 11.76
+        "usd_per_gpu_hr": 2.93,
+        "usd_per_vm_hr": 11.72
       }
     ]
   },
@@ -42,16 +42,16 @@
     {
       "url": "https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=IE",
       "kind": "api",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     },
     {
       "url": "https://www.ovhcloud.com/en-ie/public-cloud/prices/",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: h100-1520. OVHcloud Public Cloud (Europe; also offered in other OVH regions). EUR excl. VAT, converted at the ECB reference rate. Outside India: no India data residency.",
   "availability": {
     "last_observed_at": null,

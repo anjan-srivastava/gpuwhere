@@ -28,11 +28,11 @@
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-a40.md",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "vCPU/RAM for this configuration are not published.",
   "availability": {
     "last_observed_at": null,

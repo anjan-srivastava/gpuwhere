@@ -17,12 +17,12 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 9.51,
-      "usd_per_vm_hr": 76.06
+      "usd_per_gpu_hr": 9.6,
+      "usd_per_vm_hr": 76.82
     },
     "spot": {
-      "usd_per_gpu_hr": 4.75,
-      "usd_per_vm_hr": 38.03,
+      "usd_per_gpu_hr": 4.8,
+      "usd_per_vm_hr": 38.41,
       "notice_sec": null
     },
     "committed": []
@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: 8x B200 SXM6 180GB (8B200.240V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Provider warning: Blackwell: Use \"Ubuntu 24.04 + CUDA 12.8 Open\" image type or install NVIDIA open drivers manually Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 1440 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
   "availability": {
     "last_observed_at": null,

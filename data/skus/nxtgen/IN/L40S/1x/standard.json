@@ -20,25 +20,25 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 1.56,
-      "usd_per_vm_hr": 1.56,
+      "usd_per_gpu_hr": 1.57,
+      "usd_per_vm_hr": 1.57,
       "native": {
         "inr_per_vm_hr": 147.0,
         "inr_per_gpu_hr": 147.0,
-        "fx_usd_inr": 94.2431,
-        "fx_date": "2026-11-13"
+        "fx_usd_inr": 93.9277,
+        "fx_date": "2026-11-16"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 1.25,
-        "usd_per_vm_hr": 1.25
+        "usd_per_gpu_hr": 1.26,
+        "usd_per_vm_hr": 1.26
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 1.25,
-        "usd_per_vm_hr": 1.25
+        "usd_per_gpu_hr": 1.26,
+        "usd_per_vm_hr": 1.26
       },
       {
         "term_months": 12,
@@ -59,16 +59,16 @@
     {
       "url": "https://speedcloud.nxtgen.com/aiinstances.html",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     },
     {
       "url": "https://speedcloud.nxtgen.com/",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "form_factor": "pcie",
   "gpu_variant": "l40s-pcie",
   "pricing_status": "published",

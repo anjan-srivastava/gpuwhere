@@ -29,16 +29,16 @@
     {
       "url": "https://prices.azure.com/api/retail/prices",
       "kind": "api",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     },
     {
       "url": "https://azure.microsoft.com/pricing/details/virtual-machines/linux/#jioindiacentral",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: Standard_NC80adis_H100_v5. Azure region jioindiacentral. Linux pay-as-you-go; spot is evictable; reservations are 1/3-year totals. vCPU from the size name; host RAM not in the price API. Azure Jio India region (in Jio data centres; access aimed at Jio-partnership customers); no spot or reservation rates are listed.",
   "availability": {
     "last_observed_at": null,

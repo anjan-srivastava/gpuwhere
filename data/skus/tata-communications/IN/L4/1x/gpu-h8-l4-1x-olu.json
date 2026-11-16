@@ -22,8 +22,8 @@
       "native": {
         "inr_per_vm_hr": 97.0,
         "inr_per_gpu_hr": 97.0,
-        "fx_usd_inr": 94.2431,
-        "fx_date": "2026-11-13"
+        "fx_usd_inr": 93.9277,
+        "fx_date": "2026-11-16"
       }
     },
     "committed": [
@@ -44,8 +44,8 @@
       },
       {
         "term_months": 36,
-        "usd_per_gpu_hr": 0.74,
-        "usd_per_vm_hr": 0.74
+        "usd_per_gpu_hr": 0.75,
+        "usd_per_vm_hr": 0.75
       },
       {
         "term_months": 48,
@@ -60,11 +60,11 @@
     {
       "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: GPU.H8.L4.1X.OLU. VM. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
   "availability": {
     "last_observed_at": null,

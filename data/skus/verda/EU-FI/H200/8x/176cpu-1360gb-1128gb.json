@@ -17,12 +17,12 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 6.7,
-      "usd_per_vm_hr": 53.61
+      "usd_per_gpu_hr": 6.77,
+      "usd_per_vm_hr": 54.14
     },
     "spot": {
-      "usd_per_gpu_hr": 3.35,
-      "usd_per_vm_hr": 26.8,
+      "usd_per_gpu_hr": 3.38,
+      "usd_per_vm_hr": 27.07,
       "notice_sec": null
     },
     "committed": []
@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: 8x H200 SXM5 141GB (8H200.141S.176V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 1128 GB VRAM per GPU; accelerator spec h200-sxm is 141 GB.",
   "availability": {
     "last_observed_at": null,

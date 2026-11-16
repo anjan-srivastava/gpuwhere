@@ -31,11 +31,11 @@
     {
       "url": "https://www.hyperstack.cloud/gpu-pricing",
       "kind": "page",
-      "fetched_at": "2026-11-15"
+      "fetched_at": "2026-11-16"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-15",
+  "verified_at": "2026-11-16",
   "notes": "Provider plan: NVIDIA A6000 2x. Billed per GPU-hour ($0.5); the 2x package is 2 × that rate. Region and shapes from the signed-in console (2026-11-09); the price list is global. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
   "availability": {
     "last_observed_at": null,
