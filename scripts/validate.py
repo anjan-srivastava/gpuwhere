@@ -46,6 +46,8 @@ def main() -> int:
         "capacity": load(os.path.join(root, "schema/capacity.schema.json")),
         "gpu": load(os.path.join(root, "schema/gpu.schema.json")),
         "inventory": load(os.path.join(root, "schema/inventory.schema.json")),
+        "price_observation": load(os.path.join(root, "schema/price_observation.schema.json")),
+        "refresh_run": load(os.path.join(root, "schema/refresh_run.schema.json")),
     }
 
     errors = 0
@@ -80,6 +82,16 @@ def main() -> int:
 
     for path in iter_files(root, ".jsonl"):
         rel = os.path.relpath(path, root)
+        if "/price-history/" in path:
+            kind = "price_observation"
+        elif "/runs/" in path:
+            kind = "refresh_run"
+        elif "/availability/" in path:
+            kind = "availability"
+        else:
+            print(f"FAIL {rel}: no schema for this .jsonl directory")
+            errors += 1
+            continue
         with open(path, "r", encoding="utf-8") as fh:
             for n, line in enumerate(fh, 1):
                 line = line.strip()
@@ -91,7 +103,7 @@ def main() -> int:
                     errors += 1
                     print(f"FAIL {rel}:{n}: invalid JSON: {exc}")
                     continue
-                check(obj, schemas["availability"], f"{rel}:{n}")
+                check(obj, schemas[kind], f"{rel}:{n}")
 
     print(f"\nchecked {checked} records, {errors} errors")
     return 1 if errors else 0

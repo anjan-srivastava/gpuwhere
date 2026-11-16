@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-catalog.local/schema/price_observation.schema.json",
+  "title": "PriceObservation",
+  "description": "One observed price for one host package. Appended only when the economic terms change; unchanged refreshes are represented by data/runs/refresh.jsonl.",
+  "type": "object",
+  "required": [
+    "ts",
+    "sku_id",
+    "provider",
+    "region",
+    "gpu",
+    "shape",
+    "pricing",
+    "pricing_status",
+    "confidence",
+    "source",
+    "verified_at",
+    "origin"
+  ],
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this observation was recorded, ISO-8601 UTC."
+    },
+    "sku_id": {
+      "type": "string",
+      "description": "Host-package id, matching the SKU file id."
+    },
+    "provider": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "gpu": {
+      "type": "string"
+    },
+    "gpu_variant": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shape": {
+      "enum": [
+        "1x",
+        "2x",
+        "4x",
+        "8x"
+      ]
+    },
+    "variant": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pricing": {
+      "type": "object",
+      "required": [
+        "on_demand"
+      ],
+      "properties": {
+        "on_demand": {
+          "$ref": "#/$defs/price"
+        },
+        "spot": {
+          "$ref": "#/$defs/spot"
+        },
+        "committed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/committed"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pricing_status": {
+      "enum": [
+        "published",
+        "quote_only",
+        "not_published",
+        "unavailable"
+      ]
+    },
+    "billing_model": {
+      "enum": [
+        "hourly",
+        "monthly",
+        null
+      ]
+    },
+    "self_serve": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "beta",
+        "deprecated",
+        "retired",
+        "unavailable"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "description": "Primary URL the price was observed at."
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "origin": {
+      "enum": [
+        "scrape",
+        "backfill",
+        "manual"
+      ],
+      "description": "scrape = produced by a refresh run; backfill = seeded from an existing SKU file; manual = hand-recorded."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "price": {
+      "type": "object",
+      "required": [
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "usd_per_gpu_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "usd_per_vm_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "native": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "spot": {
+      "type": "object",
+      "required": [
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "usd_per_gpu_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "usd_per_vm_hr": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "notice_sec": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "native": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "committed": {
+      "type": "object",
+      "required": [
+        "term_months",
+        "usd_per_gpu_hr",
+        "usd_per_vm_hr"
+      ],
+      "properties": {
+        "term_months": {
+          "type": "integer"
+        },
+        "usd_per_gpu_hr": {
+          "type": "number"
+        },
+        "usd_per_vm_hr": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

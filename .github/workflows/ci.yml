@@ -14,11 +14,13 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install deps
-        run: pip install jsonschema
+        run: pip install jsonschema duckdb
       - name: Schema validation
         run: make validate
       - name: Build the published artifact
         run: make build
+      - name: Build the history warehouse
+        run: python scripts/build_warehouse.py
       - name: Tests (data contract, scrapers, API, edge worker, HTTP surface)
         run: make test
       - name: Freshness (informational on PRs)

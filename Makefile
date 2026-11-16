@@ -37,6 +37,7 @@ DAYS       ?= 7
 JOBS_URL   ?=
 JOB_TOKEN  ?=
 JOB        ?=
+PARQUET    ?=
 
 .PHONY: help tools validate test build freshness check serve deploy deploy-jobs run-job jobs schedule job whoami analytics api-key nix-shell release clean
 
@@ -67,6 +68,9 @@ build: ## Build the publishable site/API into dist/
 
 freshness: ## Fail if pricing/availability/capacity are stale
 	$(RUN) scripts/check_freshness.py
+
+warehouse: ## Build the DuckDB price/availability history warehouse
+	$(if $(UV),$(UV) run --with duckdb python,$(PY)) scripts/build_warehouse.py $(if $(PARQUET),--parquet $(PARQUET),)
 
 check: validate test build freshness ## All four gates (what CI runs)
 	@echo "all gates passed"

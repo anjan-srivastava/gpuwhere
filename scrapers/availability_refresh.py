@@ -18,11 +18,13 @@ import datetime as dt
 import importlib
 import json
 import sys
+import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import price_history  # noqa: E402
 from pricing_common import Context, dump, utc_today  # noqa: E402
 
 COLLECTORS = {"jarvislabs": "availability_jarvislabs", "nxtgen": "availability_nxtgen"}
@@ -72,12 +74,17 @@ def main() -> int:
 
     for pid in args.provider or (list(COLLECTORS) + list(NO_PUBLIC_SIGNAL)):
         if pid in NO_PUBLIC_SIGNAL:
+            # Documented in the source, not logged hourly: a skipped check is not an observation.
             print(f"[{pid}] no collector: {NO_PUBLIC_SIGNAL[pid]}")
             continue
+        started = time.monotonic()
         try:
             obs = importlib.import_module(COLLECTORS[pid]).collect(ctx)
         except Exception as exc:
             print(f"[{pid}] FAILED: {exc}", file=sys.stderr)
+            if args.write:
+                price_history.record_run(root, job="availability", provider=pid, status="failed",
+                                         duration_sec=time.monotonic() - started, error=str(exc))
             rc = 1
             continue
         out = data / "availability" / f"{pid}.jsonl"
@@ -119,6 +126,13 @@ def main() -> int:
             out.parent.mkdir(parents=True, exist_ok=True)
             with out.open("a", encoding="utf-8") as fh:
                 fh.write("\n".join(lines) + "\n")
+        if args.write:
+            price_history.record_run(
+                root, job="availability", provider=pid, status="ok",
+                duration_sec=time.monotonic() - started,
+                counts={"observations": len(obs), "matched_skus": matched, "unmatched": unmatched,
+                        "skipped": skipped, "written": 1 if lines else 0},
+            )
         print(f"[{pid}] observations={len(obs)} matched_skus={matched} unmatched={unmatched} "
               f"skipped_same_hour={skipped}{' (written)' if args.write else ' (dry-run)'}")
     return rc

@@ -14,6 +14,7 @@ import datetime as dt
 import json
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -23,6 +24,7 @@ import jsonschema
 
 from helpers import CACHE, ROOT, schemas  # noqa: E402
 
+import price_history  # noqa: E402
 import pricing_common as pc  # noqa: E402
 import pricing_refresh as pr  # noqa: E402
 
@@ -159,6 +161,87 @@ class ScraperReplay(unittest.TestCase):
                 checked += 1
         if checked == 0:
             self.skipTest("no provider snapshot could be replayed offline")
+
+
+class PriceLedger(unittest.TestCase):
+    ts = "2026-11-16T10:00:00Z"
+
+    def sku(self, **overrides):
+        sku = {
+            "id": "example/IN/H100/1x/standard",
+            "provider": "example",
+            "region": "IN",
+            "gpu": "H100",
+            "gpu_variant": "h100-sxm5",
+            "shape": "1x",
+            "variant": "standard",
+            "pricing": {"on_demand": {"usd_per_gpu_hr": 2.5, "usd_per_vm_hr": 2.5},
+                        "committed": []},
+            "pricing_status": "published",
+            "billing_model": "hourly",
+            "self_serve": True,
+            "status": "active",
+            "confidence": "high",
+            "sources": [{"url": "https://example.test/pricing", "kind": "page"}],
+            "verified_at": "2026-11-16",
+        }
+        sku.update(overrides)
+        return sku
+
+    def test_append_only_when_terms_change(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            first = price_history.append_observations(root, "example", [self.sku()], self.ts)
+            again = price_history.append_observations(root, "example", [self.sku()], self.ts)
+            changed = price_history.append_observations(
+                root, "example",
+                [self.sku(pricing={"on_demand": {"usd_per_gpu_hr": 2.25, "usd_per_vm_hr": 2.25},
+                                   "committed": []})],
+                "2026-11-17T10:00:00Z")
+            self.assertEqual(1, first["price_rows"])
+            self.assertEqual(0, again["price_rows"])
+            self.assertEqual(1, changed["price_rows"])
+            rows = price_history.read_observations(root / "data/price-history/example.jsonl")
+            self.assertEqual(2, len(rows))
+            self.assertEqual(2.25, rows[-1]["pricing"]["on_demand"]["usd_per_gpu_hr"])
+
+    def test_fx_only_movement_is_not_a_price_change(self):
+        def priced(inr, usd, fx):
+            return self.sku(pricing={"on_demand": {
+                "usd_per_gpu_hr": usd, "usd_per_vm_hr": usd,
+                "native": {"inr_per_gpu_hr": inr, "inr_per_vm_hr": inr,
+                           "fx_usd_inr": fx, "fx_date": "2026-11-16"},
+            }, "committed": []})
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            price_history.append_observations(root, "example", [priced(900, 10.0, 90.0)], self.ts)
+            fx_moved = price_history.append_observations(
+                root, "example", [priced(900, 9.47, 95.0)], "2026-11-17T10:00:00Z")
+            native_moved = price_history.append_observations(
+                root, "example", [priced(950, 10.0, 95.0)], "2026-11-18T10:00:00Z")
+            self.assertEqual(0, fx_moved["price_rows"])
+            self.assertEqual(1, native_moved["price_rows"])
+
+    def test_confidence_change_is_history(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            price_history.append_observations(root, "example", [self.sku()], self.ts)
+            stats = price_history.append_observations(
+                root, "example", [self.sku(confidence="medium")], "2026-11-17T10:00:00Z")
+            self.assertEqual(1, stats["price_rows"])
+
+    def test_observation_and_run_match_their_schemas(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            price_history.append_observations(root, "example", [self.sku()], self.ts)
+            price_history.record_run(root, job="pricing", provider="example", status="ok",
+                                     duration_sec=1.2, counts={"packages": 1, "price_rows": 1})
+            sch = schemas()
+            row = price_history.read_observations(root / "data/price-history/example.jsonl")[0]
+            jsonschema.validate(row, sch["price_observation"])
+            run = price_history.read_observations(root / "data/runs/refresh.jsonl")[0]
+            jsonschema.validate(run, sch["refresh_run"])
 
 
 if __name__ == "__main__":
