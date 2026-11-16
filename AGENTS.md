@@ -49,13 +49,15 @@ schedule, and on-demand runs always work.
 ```
 gpu-catalog/
   AGENTS.md  README.md  GRADES.md  requirements.txt
-  schema/                     7 JSON Schemas, additionalProperties:false
+  schema/                     10 JSON Schemas, additionalProperties:false
   data/
     providers/<provider>.json
     gpus/<supplier>/<family>.json
     skus/<provider>/<region>/<gpu>/<shape>[/<variant>].json
     incidents/<provider>.json
-    availability/<provider>.jsonl   append-only
+    availability/<provider>.jsonl   append-only free-GPU observations
+    price-history/<provider>.jsonl  append-only price changes
+    runs/refresh.jsonl              append-only refresh-run log
     capacity/<provider>.json
     inventory/<provider>.json      logged-in stock-check status (one file per Indian provider)
     channels/<channel>.json
@@ -63,6 +65,8 @@ gpu-catalog/
   scripts/
     serve_catalog.py          dev server; serves /api/* and the /v1 artifact
     export_api.py             builds dist/ for Cloudflare Pages
+    build_warehouse.py        builds the derived DuckDB read model from the ledgers
+    backfill_price_history.py seeds the price ledger from existing SKUs
     validate.py               schema validation
     check_freshness.py        operational gate (pricing/availability/capacity age)
   tests/                      unittest suite: data contract, integrity, scrapers, HTTP
@@ -191,6 +195,24 @@ Rules:
 - `total_gpus` is optional; use it only if the provider publishes capacity.
 - Never rewrite history. Append only. Correct mistakes with a new line plus a note.
 
+## Price history and refresh runs
+
+`data/skus/` is current state, not history. Two append-only ledgers keep the time series:
+
+- `data/price-history/<provider>.jsonl` — one line per price **change** (and the first sight of a package).
+- `data/runs/refresh.jsonl` — one line per provider per refresh run (`ok | failed | skipped`), including failures.
+
+A price observation copies the SKU's `pricing` block verbatim, plus `sku_id`, `ts`, `verified_at`, `source`, `confidence`, `status`, `pricing_status`, `billing_model`, `self_serve` and `origin` (`scrape | backfill | manual`). Rules:
+
+- Append only when the economic terms change: `pricing`, `pricing_status`, `billing_model`, `self_serve`, `status`, `confidence`, `gpu_variant`. `verified_at` and `sources[].fetched_at` move on every successful refresh even when the price is identical, so they never create a row. FX-only movement is not a price change: an INR-only package is compared on its native amount, because the ECB rate moving does not change what the provider charges.
+- `ts` is when the observation was recorded; `verified_at` is when the price was last checked. Do not conflate them.
+- An unchanged refresh appends no price row, but it does append a run line. That is how "price stayed the same" stays distinguishable from "we never looked".
+- Every row carries `source` and `confidence`. Never invent a price, and never rewrite a row; correct a mistake with a new observation plus `notes`.
+- The durable history is the JSONL in git. `scripts/backfill_price_history.py` seeds an empty ledger from existing SKUs (`origin: "backfill"`, dated at each SKU's `verified_at`); use `--write --append-missing` after adding a hand-curated SKU so the coverage test stays green.
+- DuckDB is a **derived** read model, never the source of truth and never committed. `make warehouse` (or `python scripts/build_warehouse.py`) builds `.cache/warehouse/gpu-catalog.duckdb` from both ledgers plus current SKUs/providers/capacity/inventory; `--parquet DIR` also exports portable files. Delete the `.duckdb` and rebuild it at any time.
+
+Warehouse views: `price_latest`, `price_change`, `price_daily` (forward-filled, with `last_observed_on`), `availability_latest`, `availability_daily`, `refresh_health`, `sku_price_now`.
+
 ## Incidents
 
 `data/incidents/<provider>.json` — human-curated, sparse, with count and details. `scope ∈ {gpu, region, api, storage, network}`. Include `source` and `confidence`. Incidents are the primary reliability hint until real telemetry exists.
@@ -198,9 +220,9 @@ Rules:
 ## Scrapers and probes
 
 - Scrapers read official feeds/APIs and append/normalise data. They must be idempotent per run and must not fabricate fields.
-- `scrapers/availability_refresh.py` is the availability loop. Collectors (`scrapers/availability_<provider>.py`) return free GPUs per region/GPU/shape/variant keyed like SKU ids; `--write` appends to `data/availability/<provider>.jsonl` (skips a second run in the same UTC hour) and copies the latest values into each SKU's `availability` block. Only JarvisLabs (`jl gpus --json`) exposes a usable stock signal today; every other provider needs a customer account/API, listed in `NO_PUBLIC_SIGNAL` with the reason. `scrapers/jarvislabs_availability.py` is a shim for old cron jobs.
+- `scrapers/availability_refresh.py` is the availability loop. Collectors (`scrapers/availability_<provider>.py`) return free GPUs per region/GPU/shape/variant keyed like SKU ids; `--write` appends to `data/availability/<provider>.jsonl` (skips a second run in the same UTC hour), copies the latest values into each SKU's `availability` block and writes a run line to `data/runs/refresh.jsonl`. Only JarvisLabs (`jl gpus --json`) exposes a usable stock signal today; every other provider needs a customer account/API, listed in `NO_PUBLIC_SIGNAL` with the reason. `scrapers/jarvislabs_availability.py` is a shim for old cron jobs.
 - `scrapers/capacity_refresh.py` is the weekly installed-capacity loop. It also stores the official IndiaAI empanelled-GPU counts per provider as `indiaai_empanelled` (offered under the tender, not installed fleet; never summed into `total_gpus`), parsed by `scrapers/indiaai_common.py`. It scripts only first-party or government sources (E2E investor presentation PDF, shakticloud.ai fleet claim, IndiaAI allocation table) and keeps the quoted phrase in each pool's `notes`; extractors fail loudly when wording changes. Press-reported fleet sizes are not scripted.
-- `scrapers/pricing_refresh.py` is the daily pricing loop. One module per source (`scrapers/pricing_<provider>.py`) returns host packages exactly as published; `pricing_common.py` normalises them into SKU files. Dry-run by default; `--write` updates `data/skus/` and writes `reports/pricing-refresh-<date>.md`, where every pricing/confidence change is tagged REVIEW. `--retire-superseded` marks stale SKUs `status: "retired"` only when the run covers the same region/GPU/shape; other stale SKUs are listed for a human. Retired SKUs are not served.
+- `scrapers/pricing_refresh.py` is the daily pricing loop. One module per source (`scrapers/pricing_<provider>.py`) returns host packages exactly as published; `pricing_common.py` normalises them into SKU files. Dry-run by default; `--write` updates `data/skus/`, appends changed prices to `data/price-history/<provider>.jsonl` (via `scrapers/price_history.py`), writes a run line to `data/runs/refresh.jsonl` and writes `reports/pricing-refresh-<date>.md`, where every pricing/confidence change is tagged REVIEW. `--retire-superseded` marks stale SKUs `status: "retired"` only when the run covers the same region/GPU/shape; other stale SKUs are listed for a human. Retired SKUs are not served.
 - Scraped providers: E2E (feed), JarvisLabs (`jl` CLI + page), Azure (Retail Prices API), AWS (public pricing JSON), Krutrim (docs + GPU page), OVHcloud (public catalogue API), Nebius/Verda/Hyperstack (pricing pages), AceCloud, Yotta (pricing page; its calculator JSON disagrees and is only a cross-check), Neysa, NxtGen, Leapswitch, Cyfuture (pages), Tata (PDF; needs `pdftotext`). Their SKUs are scraper-owned: fix the scraper, not the file. NeevCloud and Utho return HTTP 403 to automated clients and CtrlS, Sify and Jio publish no rate card; those stay hand-curated.
 - **Spot prices.** Verda publishes spot on its pricing page (≈50% below on-demand) and it is scraped per package. Nebius publishes no spot rate card but a public, unauthenticated spot-price API (`https://api.nebius.cloud/billing/v1alpha1/spot-price`, see `docs.nebius.com/signup-billing/spot-prices`); `pricing_eu_pages.Nebius` reads it and stores the value as a `spot` observation with the API's snapshot time. Nebius spot is dynamic — it can change every 15 minutes — so the stored number is an observation, not a rate. OVHcloud, Hyperstack and JarvisLabs EU1 publish no spot rate and record none.
 - Provider-published USD is used when the source publishes it; INR-only prices are converted at the ECB daily reference rate, recorded in `pricing.*.native`. Monthly-only prices are converted at 730 h and say so in `notes`.
@@ -219,6 +241,9 @@ uv run --with jsonschema python -m unittest discover -s tests   # data contract 
 python scripts/export_api.py                               # build dist/ (Cloudflare Pages)
 python scripts/check_freshness.py                          # age of pricing / availability / capacity
 ```
+
+The derived warehouse is a separate, optional build (it needs `duckdb`): `make warehouse`.
+The four commands above remain the merge gate.
 
 The dev server exposes:
 - `GET /` — SKU and provider comparison tables with exact per-SKU pricing, deployed capacity, and live free availability.
@@ -252,7 +277,8 @@ churn the CDN or git.
 - **Capacity:** 21 files, `total_gpus` null on every one (no provider publishes its fleet), availability kept separate and never inferred from it.
 - **Availability:** 2 of 21 providers (JarvisLabs, NxtGen), 102 observations; 12 more are documented in `NO_PUBLIC_SIGNAL` with their blocker, and the global burst providers have no availability collector yet.
 - **Pricing freshness:** 16 providers scraped from official sources, 5 hand-curated (NeevCloud, Utho, CtrlS, Sify, Jio).
-- **Gates:** strict schema validation, 30-test suite (data contract, integrity, quality budgets, scraper replay, HTTP surface), freshness check, static `/v1` export — all green and wired into CI.
+- **History:** 529 seeded price observations (one per SKU at its `verified_at`) and the existing availability series; the refresh-run log is wired into both loops and stays empty until the next `--write` run. Queryable through `make warehouse` (DuckDB/Parquet).
+- **Gates:** strict schema validation, test suite (data contract, integrity, price history, quality budgets, scraper replay, warehouse, HTTP surface), freshness check, static `/v1` export — all green and wired into CI.
 - **Published API:** `dist/` artifact with `schema_version`, `generated_at`, CORS/ETag/HEAD, plus the schemas themselves; Cloudflare Pages + jobs-Worker setup documented in `ops/cloudflare/`.
 - **Grades** and known gaps live in `GRADES.md` and are updated with the evidence in the same commit.
 

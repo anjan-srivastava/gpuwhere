@@ -23,12 +23,14 @@ import datetime as dt
 import importlib
 import json
 import sys
+import time
 import traceback
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
+import price_history  # noqa: E402
 from pricing_common import (Context, assign_variants, diff, dump, mark_sales_only,  # noqa: E402
                             merge, package_to_sku, provider_provisioning, retire, sku_path, utc_today)
 
@@ -82,7 +84,8 @@ def main() -> int:
     report = [f"# Pricing refresh {today}", "",
               f"Mode: {'write' if args.write else 'dry-run'}. "
               "Pricing and confidence changes need human review (AGENTS.md).", ""]
-    totals = {"new": 0, "changed": 0, "unchanged": 0, "stale": 0, "retired": 0, "failed": 0}
+    totals = {"new": 0, "changed": 0, "unchanged": 0, "stale": 0, "retired": 0, "failed": 0,
+              "price_rows": 0}
 
     for pid in providers:
         if pid in MANUAL:
@@ -93,17 +96,23 @@ def main() -> int:
             return 2
         mod = importlib.import_module(SCRAPERS[pid])
         report += [f"## {pid}", ""]
+        started = time.monotonic()
+        before = dict(totals)
         try:
             res = mod.scrape(ctx)
         except Exception as exc:  # one provider failing must not stop the rest
             totals["failed"] += 1
             report += [f"**FAILED**: `{exc}`", "", "```", traceback.format_exc(limit=3).strip(), "```", ""]
             print(f"[{pid}] FAILED: {exc}", file=sys.stderr)
+            if args.write:
+                price_history.record_run(root, job="pricing", provider=pid, status="failed",
+                                         duration_sec=time.monotonic() - started, error=str(exc))
             continue
 
         priced = res.packages
         produced = set()
         covered = set()
+        ledger_skus = []
         lines = []
         fx = ctx.fx if any(_needs_fx(p) for p in priced) else None
         for pkg, variant in assign_variants(priced):
@@ -115,6 +124,7 @@ def main() -> int:
             covered.add((sku["region"], sku["gpu"], sku["shape"]))
             old = json.loads(path.read_text()) if path.exists() else None
             new = merge(old, sku)
+            ledger_skus.append(new)
             changes = diff(old, new)
             if changes == ["NEW"]:
                 totals["new"] += 1
@@ -142,7 +152,9 @@ def main() -> int:
                 reason = (f"superseded by the {pid} scraper's {key[1]} {key[2]} package(s) from the current "
                           "official source.")
                 if args.write and args.retire_superseded:
-                    s.write_text(dump(retire(old, today, reason)))
+                    retired = retire(old, today, reason)
+                    s.write_text(dump(retired))
+                    ledger_skus.append(retired)
                     totals["retired"] += 1
                     lines.append(f"- RETIRED `{rel}` — {reason}")
                 else:
@@ -153,6 +165,16 @@ def main() -> int:
                 lines.append(f"- STALE `{rel}` — no current source covers {key[1]} {key[2]}; left for human review")
         if fx:
             lines.insert(0, f"- FX: USD/INR {fx.usd_inr} ({fx.date}, ECB reference rate)")
+        if args.write:
+            ledger = price_history.append_observations(root, pid, ledger_skus, price_history.utc_now_iso())
+            totals["price_rows"] += ledger["price_rows"]
+            if ledger["price_rows"]:
+                lines.append(f"- Price history: {ledger['price_rows']} changed observation(s) appended "
+                             f"to `data/price-history/{pid}.jsonl`")
+            counts = {k: totals[k] - before[k] for k in totals}
+            counts["packages"] = len(priced)
+            price_history.record_run(root, job="pricing", provider=pid, status="ok",
+                                     duration_sec=time.monotonic() - started, counts=counts)
         report += lines or ["- no changes"]
         for w in res.warnings:
             report.append(f"- WARNING: {w}")

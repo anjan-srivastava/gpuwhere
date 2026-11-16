@@ -24,6 +24,8 @@ SCHEMA_FILES = {
     "incident": "incident.schema.json",
     "channel": "channel.schema.json",
     "availability": "availability.schema.json",
+    "price_observation": "price_observation.schema.json",
+    "refresh_run": "refresh_run.schema.json",
 }
 
 
@@ -69,7 +71,19 @@ def availability_files() -> list[Path]:
     return sorted((DATA / "availability").glob("*.jsonl"))
 
 
-def availability_rows(path: Path) -> list[dict]:
+def price_history_files() -> list[Path]:
+    return sorted((DATA / "price-history").glob("*.jsonl"))
+
+
+def run_files() -> list[Path]:
+    return sorted((DATA / "runs").glob("*.jsonl"))
+
+
+def availability_rows(path: Path) -> list[tuple[int, dict]]:
+    return jsonl_rows(path)
+
+
+def jsonl_rows(path: Path) -> list[tuple[int, dict]]:
     rows = []
     with open(path, encoding="utf-8") as fh:
         for n, line in enumerate(fh, 1):
@@ -87,9 +101,12 @@ def iter_records():
     ):
         for f in files:
             yield kind, f, load_json(f)
-    for f in availability_files():
-        for n, row in availability_rows(f):
-            yield "availability", f, row
+    for kind, files in (("availability", availability_files()),
+                        ("price_observation", price_history_files()),
+                        ("refresh_run", run_files())):
+        for f in files:
+            for n, row in jsonl_rows(f):
+                yield kind, f, row
 
 
 def rel(path: Path) -> str:

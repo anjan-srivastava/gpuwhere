@@ -7,11 +7,11 @@ Last reviewed: **2026-11-09** · schema_version `1`
 
 | Area | Grade | Evidence | What moves it up |
 |---|---|---|---|
-| Data model / schemas | **B** | 7 schemas, all `additionalProperties:false`; enums for status/shape/form factor/residency/confidence/pricing_status; shared vocabulary duplicated per file | Extract a `common.schema.json` + `$ref`; add region vocabulary and `format: date` validation |
+| Data model / schemas | **B** | 10 schemas, all `additionalProperties:false`; enums for status/shape/form factor/residency/confidence/pricing_status; shared vocabulary duplicated per file | Extract a `common.schema.json` + `$ref`; add region vocabulary and `format: date` validation |
 | Data quality | **B** | 528 packages (482 active, 41 retired, 5 unavailable), 21 providers, 29 accelerator variants; 100% have sources; vCPU 88%, disk 11%, capacity 0%, availability 8/21 | Fill capacity and availability; reduce vCPU gaps; keep quality budgets green |
 | Scrapers | **B−** | 26 modules; 16 providers scraped for pricing, 5 hand-curated; availability covers 8 of 21; 15 inventory checks recorded (3 visible, 2 empty, 4 not-exposed, 6 unverified); replay tests parse every cached snapshot; no scheduler running yet | Run the cron for a week without a failure; add fixtures from each provider's page |
 | Serving API | **B+** | Static `/v1/*` export with `schema_version` + `generated_at`; keyed `/api/v1/*` with filtering, OpenAPI 3.1, HTML docs at `/api/docs`, CORS/ETag/HEAD and edge rate limits; first-party analytics ingest; 1.05 MB catalog | Deploy to Pages and attach the domain; keep the keyed API green for a week |
-| Versioning / ops | **C** | Git repository with tags; CI on push; refresh workflows for pricing/availability; freshness gate | One green week of scheduled runs; run ledger of last-success per provider |
+| Versioning / ops | **C** | Git repository with tags; CI on push; refresh workflows for pricing/availability; freshness gate; append-only price ledger and per-provider run log, with a rebuildable DuckDB read model | One green week of scheduled runs; alert on failed runs in the ledger |
 
 ## Gates that enforce the grades
 
@@ -22,6 +22,7 @@ Last reviewed: **2026-11-09** · schema_version `1`
 | Scraper replay (parsers still work) | same suite, `.cache/scrape` present | CI (skips when no snapshots) |
 | Freshness | `python scripts/check_freshness.py` | end of each refresh workflow |
 | Artifact build | `python scripts/export_api.py` | CI and Pages |
+| History warehouse | `python scripts/build_warehouse.py` | CI |
 
 ## Known gaps (deliberately not graded away)
 

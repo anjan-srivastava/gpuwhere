@@ -18,6 +18,8 @@ GPU pricing and availability in India are opaque and change weekly. The same pro
 schema/provider.schema.json
 schema/sku.schema.json
 schema/availability.schema.json
+schema/price_observation.schema.json
+schema/refresh_run.schema.json
 schema/incident.schema.json
 schema/channel.schema.json
 schema/capacity.schema.json
@@ -28,12 +30,16 @@ data/gpus/<supplier>/<family>.json    # accelerator SKUs: VRAM, FLOPS, precision
 data/skus/<provider>/<region>/<gpu>/<shape>[/<variant>].json  # host packages sold by providers
 data/incidents/<provider>.json        # curated incident history
 data/availability/<provider>.jsonl    # periodic snapshots of free GPUs, on-demand + spot
+data/price-history/<provider>.jsonl   # append-only price changes (the time series)
+data/runs/refresh.jsonl               # append-only refresh-run log, including failures
 data/capacity/<provider>.json         # deployed fleet, allocation split, facility MW
 data/channels/*.json                  # subsidy/marketplace channels (IndiaAI), not providers
 
 scrapers/                             # official feed/API ingestion (16 providers) + refresh loops
 scripts/serve_catalog.py              # dev server: UI + /api/* + /v1 artifact
 scripts/export_api.py                 # build dist/ for Cloudflare Pages
+scripts/build_warehouse.py            # derived DuckDB/Parquet query layer over the ledgers
+scripts/backfill_price_history.py     # seed the price ledger from existing SKUs
 scripts/validate.py                   # schema validation
 scripts/check_freshness.py            # operational gate: age of pricing/availability/capacity
 tests/                                # unittest suite: schema, integrity, budgets, scrapers, HTTP
@@ -58,6 +64,7 @@ Everything is wrapped in `make`; `uv` and npm resolve the toolchain on demand.
 
 ```bash
 make check                 # schemas, tests (Python + edge worker), build, freshness
+make warehouse             # DuckDB history warehouse in .cache/warehouse/
 make serve                 # http://127.0.0.1:8080
 make deploy                # build + upload dist/ to Cloudflare Pages
 ```
@@ -89,7 +96,64 @@ node --test tests/worker.test.mjs
 
 # build the publishable artifact (dist/) for Cloudflare Pages
 python scripts/export_api.py
+
+# price history: seed empty ledgers, or add a new hand-curated SKU
+python scripts/backfill_price_history.py --write
+python scripts/backfill_price_history.py --write --append-missing
+
+# derived DuckDB/Parquet history (needs duckdb)
+python scripts/build_warehouse.py --parquet reports/parquet
 ```
+
+## History
+
+The catalogue keeps two append-only ledgers, both plain JSONL:
+
+- `data/price-history/<provider>.jsonl` — one row per price **change** (and the first sight of a package).
+  Seeded from the existing SKUs and committed from the start.
+- `data/runs/refresh.jsonl` — one row per provider per refresh run, including failures. Created by
+  the first `--write` refresh; a missing file reads as zero runs.
+
+`data/skus/` is the current state. A refresh that finds the same price appends no price row but
+does append a run row, so "unchanged" never looks like "we did not check". FX-only movement is
+not a price change: an INR-only package is compared on its native amount, so the ECB rate
+moving does not create a fake history row. The JSONL is the source of truth: it diffs in
+review, survives a crashed job, and needs no server.
+
+DuckDB is a derived read model, rebuilt from those files:
+
+```bash
+make warehouse                          # .cache/warehouse/gpu-catalog.duckdb
+make warehouse PARQUET=reports/parquet  # also export portable Parquet files
+```
+
+```sql
+-- every package's latest observed price
+SELECT sku_id, on_demand_usd_per_gpu_hr, spot_usd_per_gpu_hr, latest_observed_at
+FROM price_latest ORDER BY provider, sku_id;
+
+-- actual price moves (change rows only)
+SELECT ts, sku_id, on_demand_usd_per_gpu_hr, on_demand_delta
+FROM price_change WHERE on_demand_delta IS NOT NULL
+ORDER BY ts DESC LIMIT 20;
+
+-- forward-filled daily price; last_observed_on says when it was actually seen
+SELECT day, sku_id, on_demand_usd_per_gpu_hr, last_observed_on
+FROM price_daily
+WHERE sku_id = 'e2e-networks/IN-DEL/H100/1x/standard'
+ORDER BY day;
+
+-- last free-GPU snapshot per series and per UTC day
+SELECT * FROM availability_latest;
+SELECT * FROM availability_daily WHERE day = current_date - 1;
+
+-- did the refreshes run, and did any fail?
+SELECT * FROM refresh_health WHERE failures > 0 ORDER BY day DESC;
+```
+
+`price_daily` is forward-filled: `last_observed_on` is the real observation date, so a gap in
+the refresh schedule is visible instead of being smoothed away. `origin` on a price row says
+`scrape`, `backfill` (seeded from an existing SKU at its `verified_at`) or `manual`.
 
 ## Publish
 

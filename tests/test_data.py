@@ -18,8 +18,11 @@ from pathlib import Path
 import jsonschema
 
 from helpers import (DATA, ROOT, availability_files, availability_rows, capacity_files,
-                     channel_files, gpu_files, incident_files, iter_records, load_json,
-                     provider_files, rel, schemas, sku_files)
+                     channel_files, gpu_files, incident_files, iter_records, jsonl_rows,
+                     load_json, price_history_files, provider_files, rel, run_files,
+                     schemas, sku_files)
+
+import price_history
 
 
 class SchemaContract(unittest.TestCase):
@@ -190,6 +193,78 @@ class AvailabilityIntegrity(unittest.TestCase):
                 if (r.get("provider"), r.get("region"), norm(r.get("gpu")), r.get("shape")) not in skus:
                     bad.append(f"{rel(f)}:{n} {r.get('provider')}/{r.get('region')}/{r.get('gpu')}/{r.get('shape')}")
         self.assertEqual([], bad[:10], f"{len(bad)} observations without a matching SKU")
+
+
+class PriceHistoryIntegrity(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.skus = {s["id"]: s for s in (load_json(p) for p in sku_files())}
+
+    def test_rows_are_ordered_and_unique(self):
+        bad = []
+        for f in price_history_files():
+            seen = set()
+            last = ""
+            for n, r in jsonl_rows(f):
+                ts = r.get("ts", "")
+                if ts < last:
+                    bad.append(f"{rel(f)}:{n} out of order ({ts} < {last})")
+                last = ts
+                key = (ts, r.get("sku_id"))
+                if key in seen:
+                    bad.append(f"{rel(f)}:{n} duplicate observation {key}")
+                seen.add(key)
+        self.assertEqual([], bad)
+
+    def test_sku_references_exist(self):
+        bad = []
+        for f in price_history_files():
+            for n, r in jsonl_rows(f):
+                if r.get("sku_id") not in self.skus:
+                    bad.append(f"{rel(f)}:{n} unknown sku_id={r.get('sku_id')}")
+        self.assertEqual([], bad)
+
+    def test_rows_are_appended_only_when_terms_change(self):
+        """A refresh that finds the same price must not append a row; the run log proves it ran."""
+        bad = []
+        for f in price_history_files():
+            latest = {}
+            for n, r in jsonl_rows(f):
+                fp = price_history.fingerprint(r)
+                if latest.get(r["sku_id"]) == fp:
+                    bad.append(f"{rel(f)}:{n} repeated terms for {r['sku_id']}")
+                latest[r["sku_id"]] = fp
+        self.assertEqual([], bad)
+
+    def test_every_active_sku_has_at_least_one_observation(self):
+        """New hand-curated SKUs need `backfill_price_history.py --append-missing`."""
+        seen = {r["sku_id"] for f in price_history_files() for _, r in jsonl_rows(f)}
+        missing = sorted(sid for sid, s in self.skus.items() if s.get("status") == "active" and sid not in seen)
+        self.assertEqual([], missing[:20], f"{len(missing)} active SKUs have no price observation")
+
+    def test_timestamps_are_utc(self):
+        bad = [f"{rel(f)}:{n} ts={r.get('ts')}"
+               for f in price_history_files() for n, r in jsonl_rows(f)
+               if not str(r.get("ts", "")).endswith("Z")]
+        self.assertEqual([], bad)
+
+
+class RefreshRunIntegrity(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.providers = {load_json(p)["id"] for p in provider_files()}
+
+    def test_runs_reference_known_providers(self):
+        bad = [f"{rel(f)}:{n} {r.get('provider')}"
+               for f in run_files() for n, r in jsonl_rows(f)
+               if r.get("provider") not in self.providers]
+        self.assertEqual([], bad)
+
+    def test_timestamps_are_utc(self):
+        bad = [f"{rel(f)}:{n} ts={r.get('ts')}"
+               for f in run_files() for n, r in jsonl_rows(f)
+               if not str(r.get("ts", "")).endswith("Z")]
+        self.assertEqual([], bad)
 
 
 class QualityBudgets(unittest.TestCase):
