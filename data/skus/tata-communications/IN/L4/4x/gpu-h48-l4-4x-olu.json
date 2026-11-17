@@ -60,11 +60,11 @@
     {
       "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: GPU.H48.L4.4X.OLU. VM. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
   "availability": {
     "last_observed_at": null,

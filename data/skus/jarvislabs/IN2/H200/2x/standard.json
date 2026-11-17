@@ -36,16 +36,16 @@
     {
       "url": "jl gpus --json",
       "kind": "api",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     },
     {
       "url": "https://jarvislabs.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "USD from jarvislabs.ai/pricing; `jl gpus --json` lists ₹434.97/GPU-hr on-demand, ₹217.08 spot.",
   "availability": {
     "last_observed_at": "2026-11-17T00:00:22Z",

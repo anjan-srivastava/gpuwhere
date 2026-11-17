@@ -51,16 +51,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-a100-80gb",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "form_factor": "sxm",
   "gpu_variant": "a100-sxm4-80gb",
   "pricing_status": "published",

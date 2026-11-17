@@ -64,11 +64,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",

@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: 8L40S.64v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 64 vCPU / 2048 GB; the table lists 64 vCPU / 1536 GB (table used). Provider lists 192 GB VRAM per GPU; accelerator spec l40s-pcie is 48 GB.",
   "availability": {
     "last_observed_at": null,

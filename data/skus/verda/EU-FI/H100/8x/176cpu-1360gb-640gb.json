@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: 8x H100 SXM5 80GB (8H100.80S.176V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Provider warning: H100: Use Nvidia driver 535 or higher for best performance Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 640 GB VRAM per GPU; accelerator spec h100-sxm5 is 80 GB.",
   "availability": {
     "last_observed_at": null,

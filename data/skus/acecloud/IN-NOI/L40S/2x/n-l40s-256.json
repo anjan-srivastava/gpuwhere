@@ -44,11 +44,11 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-l40s-48gb/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: N.L40S.256. AceCloud's rate card lists this package, but the console flavour list (/api/v1/cloud/flavors, checked 2026-11-09) does not offer it, so it is not self-serve. No stock counts are published for any AceCloud GPU.",
   "availability": {
     "last_observed_at": null,

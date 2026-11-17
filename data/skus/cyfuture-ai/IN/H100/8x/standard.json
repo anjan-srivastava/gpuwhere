@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: 8H100.128v.2048m SXM. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 128 vCPU / 1536 GB (table used).",
   "availability": {
     "last_observed_at": null,

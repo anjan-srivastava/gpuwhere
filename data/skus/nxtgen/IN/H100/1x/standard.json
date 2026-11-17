@@ -59,16 +59,16 @@
     {
       "url": "https://speedcloud.nxtgen.com/aiinstances.html",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     },
     {
       "url": "https://speedcloud.nxtgen.com/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "form_factor": "nvl",
   "gpu_variant": "h100-nvl",
   "pricing_status": "published",

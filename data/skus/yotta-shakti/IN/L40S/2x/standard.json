@@ -55,11 +55,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: VM – 2 x L40S On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹148,001/month for the 1-month term; page lists ₹348,210 (page used).",
   "availability": {
     "last_observed_at": null,

@@ -51,11 +51,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: 1RTX PRO 6000.16v.128m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 16 vCPU / 128 GB; the table lists 32 vCPU / 64 GB (table used).",
   "availability": {
     "last_observed_at": null,

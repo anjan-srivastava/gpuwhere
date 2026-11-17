@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: 2xA100.32v.512m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 32 vCPU / 512 GB; the table lists 16 vCPU / 128 GB (table used). Form factor not published; SXM assumed.",
   "availability": {
     "last_observed_at": null,

@@ -47,11 +47,11 @@
     {
       "url": "https://leapswitch.com/gpu-cloud/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "form_factor": "pcie",
   "notes": "Price per GPU per month, excl. GST. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "gpu_variant": "rtx-pro-6000-blackwell",

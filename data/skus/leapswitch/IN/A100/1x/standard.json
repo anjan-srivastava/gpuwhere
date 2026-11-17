@@ -47,11 +47,11 @@
     {
       "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "form_factor": "pcie",
   "notes": "Provider plan: A100 VM. Cart plan 'A100 VM' (AMD EPYC); price per VM per month, excl. GST; 10 TB bandwidth. Cart lists GPU RAM as '80 GB GDDR6 (Per GPU)' (A100 80GB uses HBM2e); form factor not published, PCIe assumed for a single-GPU VM. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "gpu_variant": "a100-pcie-80gb",

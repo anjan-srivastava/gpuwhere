@@ -42,16 +42,16 @@
     {
       "url": "https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=IE",
       "kind": "api",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     },
     {
       "url": "https://www.ovhcloud.com/en-ie/public-cloud/prices/",
       "kind": "page",
-      "fetched_at": "2026-11-16"
+      "fetched_at": "2026-11-17"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-16",
+  "verified_at": "2026-11-17",
   "notes": "Provider plan: a100-180. OVHcloud Public Cloud (Europe; also offered in other OVH regions). EUR excl. VAT, converted at the ECB reference rate. Outside India: no India data residency.",
   "availability": {
     "last_observed_at": null,
