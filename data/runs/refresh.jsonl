@@ -1,0 +1,2 @@
+{"counts":{"matched_skus":28,"observations":28,"skipped":0,"unmatched":0,"written":1},"duration_sec":2.56,"error":null,"job":"availability","provider":"jarvislabs","status":"ok","ts":"2026-11-17T00:00:25Z"}
+{"counts":{"matched_skus":6,"observations":6,"skipped":0,"unmatched":0,"written":1},"duration_sec":2.94,"error":null,"job":"availability","provider":"nxtgen","status":"ok","ts":"2026-11-17T00:00:28Z"}
