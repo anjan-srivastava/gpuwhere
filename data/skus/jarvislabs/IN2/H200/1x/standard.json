@@ -34,7 +34,7 @@
     "committed": []
   },
   "availability": {
-    "last_observed_at": "2026-11-18T00:00:24Z",
+    "last_observed_at": "2026-11-19T00:00:29Z",
     "available_vms": 2,
     "available_gpus": 2,
     "spot_available_vms": 2,
