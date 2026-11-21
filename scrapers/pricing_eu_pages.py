@@ -120,13 +120,18 @@ class Nebius:
                         notes.append(f"Spot {sp.amount:.2f} USD/GPU-hr from Nebius' public spot-price API "
                                      f"(snapshot {snapshot}); preemptible and dynamic — an observation, not a "
                                      "rate card.")
+                        if sp.amount > per_gpu:
+                            notes.append("At this snapshot the preemptible price is above on-demand: Nebius "
+                                         "spot is a live auction, not a discount rate.")
                     else:
                         notes.append("No spot price for this platform in this region at the last snapshot; spot "
                                      "prices are dynamic and read from the official spot-price API.")
                     res.packages.append(Package(
                         provider=cls.PROVIDER, region=region, accel=accel(variant), gpus=n,
-                        on_demand=Price(per_gpu * n, "USD", per="gpu"),
-                        spot=(Price(sp.amount * n, "USD", per="gpu") if sp is not None else None),
+                        # Both the page rate and the spot API quote USD per GPU-hour; Price(per="gpu")
+                        # converts once to a per-VM amount, so do not multiply by n here.
+                        on_demand=Price(per_gpu, "USD", per="gpu"),
+                        spot=(Price(sp.amount, "USD", per="gpu") if sp is not None else None),
                         flavour=f"{name} {n}x",
                         variant=re.sub(r"[^a-z0-9]+", "-", f"{name} {n}x".lower().replace("nvidia ", "")).strip("-"),
                         vcpus=(vcpu1 * n) if vcpu1 else None, ram_gb=(ram1 * n) if ram1 else None,
