@@ -34,11 +34,11 @@
     "committed": []
   },
   "availability": {
-    "last_observed_at": "2026-11-20T00:00:24Z",
-    "available_vms": 2,
-    "available_gpus": 2,
-    "spot_available_vms": 2,
-    "spot_available_gpus": 2,
+    "last_observed_at": "2026-11-21T00:00:23Z",
+    "available_vms": 1,
+    "available_gpus": 1,
+    "spot_available_vms": 1,
+    "spot_available_gpus": 1,
     "source": "jl gpus --json (workload=vm)"
   },
   "sources": [
