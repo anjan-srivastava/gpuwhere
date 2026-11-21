@@ -18,29 +18,29 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 0.56,
-      "usd_per_vm_hr": 4.45,
+      "usd_per_vm_hr": 4.51,
       "native": {
         "inr_per_vm_hr": 418.0,
         "inr_per_gpu_hr": 52.25,
-        "fx_usd_inr": 93.9277,
-        "fx_date": "2026-11-16"
+        "fx_usd_inr": 92.6752,
+        "fx_date": "2026-11-20"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 0.5,
-        "usd_per_vm_hr": 3.96
+        "usd_per_vm_hr": 4.01
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 0.43,
-        "usd_per_vm_hr": 3.47
+        "usd_per_gpu_hr": 0.44,
+        "usd_per_vm_hr": 3.52
       },
       {
         "term_months": 12,
         "usd_per_gpu_hr": 0.39,
-        "usd_per_vm_hr": 3.09
+        "usd_per_vm_hr": 3.13
       }
     ]
   },
@@ -51,11 +51,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-17"
+      "fetched_at": "2026-11-21"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-17",
+  "verified_at": "2026-11-21",
   "notes": "Provider plan: 8V100.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Form factor not published; SXM assumed.",
   "availability": {
     "last_observed_at": null,
