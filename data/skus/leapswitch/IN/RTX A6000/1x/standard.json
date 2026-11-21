@@ -17,13 +17,13 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 0.46,
-      "usd_per_vm_hr": 0.46,
+      "usd_per_gpu_hr": 0.47,
+      "usd_per_vm_hr": 0.47,
       "native": {
         "inr_per_vm_hr": 43.42,
         "inr_per_gpu_hr": 43.42,
-        "fx_usd_inr": 93.9277,
-        "fx_date": "2026-11-16",
+        "fx_usd_inr": 92.6752,
+        "fx_date": "2026-11-20",
         "published_month_inr": 31700.0,
         "published_per": "vm",
         "derivation": "monthly/730h"
@@ -38,11 +38,11 @@
     {
       "url": "https://service.leapswitch.com/cart/gpu-cloud-servers-inr",
       "kind": "page",
-      "fetched_at": "2026-11-17"
+      "fetched_at": "2026-11-21"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-17",
+  "verified_at": "2026-11-21",
   "notes": "Provider plan: A6000 VM. Cart plan 'A6000 VM' (AMD EPYC); price per VM per month, excl. GST; 10 TB bandwidth. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "availability": {
     "last_observed_at": null,

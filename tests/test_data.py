@@ -120,6 +120,11 @@ class PricingMathematics(unittest.TestCase):
                     bad.append(f"{s['id']} committed {c.get('term_months')}mo={v}")
         self.assertEqual([], bad)
 
+    # Nebius' preemptible price is a live auction, not a discount rate card: the
+    # clearing price can exceed on-demand. The catalogue stores the observation
+    # as published, so this one source is exempt from the discount invariant.
+    DYNAMIC_SPOT_SOURCES = {"https://api.nebius.cloud/billing/v1alpha1/spot-price"}
+
     def test_discounts_never_exceed_on_demand(self):
         bad = []
         for s in self.skus:
@@ -127,9 +132,11 @@ class PricingMathematics(unittest.TestCase):
             od = (p.get("on_demand") or {}).get("usd_per_gpu_hr")
             if od is None:
                 continue
+            dynamic_spot = any((src.get("url") or "").split("?")[0] in self.DYNAMIC_SPOT_SOURCES
+                               for src in s.get("sources") or [])
             for mode in ("spot",):
                 v = (p.get(mode) or {}).get("usd_per_gpu_hr")
-                if v is not None and v > od * 1.05:
+                if v is not None and v > od * 1.05 and not (mode == "spot" and dynamic_spot):
                     bad.append(f"{s['id']} {mode} {v} > on-demand {od}")
             for c in p.get("committed") or []:
                 v = c.get("usd_per_gpu_hr")
