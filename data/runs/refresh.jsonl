@@ -72,3 +72,5 @@
 {"counts":{"changed":22,"failed":0,"new":0,"packages":24,"price_rows":22,"retired":0,"stale":0,"unchanged":2},"duration_sec":1.14,"error":null,"job":"pricing","provider":"nebius","status":"ok","ts":"2026-11-22T00:04:58Z"}
 {"counts":{"changed":0,"failed":0,"new":0,"packages":39,"price_rows":0,"retired":0,"stale":0,"unchanged":39},"duration_sec":1.02,"error":null,"job":"pricing","provider":"verda","status":"ok","ts":"2026-11-22T00:04:59Z"}
 {"counts":{"changed":0,"failed":0,"new":0,"packages":28,"price_rows":0,"retired":0,"stale":0,"unchanged":28},"duration_sec":0.76,"error":null,"job":"pricing","provider":"hyperstack","status":"ok","ts":"2026-11-22T00:05:00Z"}
+{"counts":{"matched_skus":28,"observations":28,"skipped":0,"unmatched":0,"written":1},"duration_sec":1.48,"error":null,"job":"availability","provider":"jarvislabs","status":"ok","ts":"2026-11-22T00:06:15Z"}
+{"counts":{"matched_skus":6,"observations":6,"skipped":0,"unmatched":0,"written":1},"duration_sec":3.11,"error":null,"job":"availability","provider":"nxtgen","status":"ok","ts":"2026-11-22T00:06:18Z"}
