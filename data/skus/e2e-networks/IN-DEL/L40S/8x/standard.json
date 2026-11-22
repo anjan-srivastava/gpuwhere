@@ -28,11 +28,11 @@
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-l40s.md",
       "kind": "page",
-      "fetched_at": "2026-11-21"
+      "fetched_at": "2026-11-22"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-21",
+  "verified_at": "2026-11-22",
   "notes": "vCPU/RAM for this configuration are not published.",
   "availability": {
     "last_observed_at": null,

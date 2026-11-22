@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-21"
+      "fetched_at": "2026-11-22"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-21",
+  "verified_at": "2026-11-22",
   "notes": "Provider plan: 2MI300.32v.512m. Rates are INR per instance-hour; USD at the ECB reference rate.",
   "availability": {
     "last_observed_at": null,

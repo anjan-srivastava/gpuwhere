@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-21"
+      "fetched_at": "2026-11-22"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-21",
+  "verified_at": "2026-11-22",
   "notes": "Provider plan: 2x H200 SXM5 141GB (2H200.141S.88V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 282 GB VRAM per GPU; accelerator spec h200-sxm is 141 GB.",
   "availability": {
     "last_observed_at": null,

@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-21"
+      "fetched_at": "2026-11-22"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-21",
+  "verified_at": "2026-11-22",
   "notes": "Provider plan: 2x B200 SXM6 180GB (2B200.60V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Provider warning: Blackwell: Use \"Ubuntu 24.04 + CUDA 12.8 Open\" image type or install NVIDIA open drivers manually Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 360 GB VRAM per GPU; accelerator spec b200-sxm is 192 GB.",
   "availability": {
     "last_observed_at": null,

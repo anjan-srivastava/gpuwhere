@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-21"
+      "fetched_at": "2026-11-22"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-21",
+  "verified_at": "2026-11-22",
   "notes": "Provider plan: 8xMI325.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 128 vCPU / 1536 GB (table used). Provider lists 192 GB VRAM per GPU; accelerator spec mi325x-oam is 256 GB.",
   "availability": {
     "last_observed_at": null,
