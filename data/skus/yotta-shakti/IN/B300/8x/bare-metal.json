@@ -54,11 +54,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "notes": "Provider plan: 8 x HGX B300. Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately.",
   "availability": {
     "last_observed_at": null,

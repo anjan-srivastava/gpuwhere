@@ -40,16 +40,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-l40s",
       "kind": "page",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "form_factor": "pcie",
   "gpu_variant": "l40s-pcie",
   "pricing_status": "published",

@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "notes": "Provider plan: 1x A100 SXM4 80GB (1A100.22V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads.",
   "availability": {
     "last_observed_at": null,

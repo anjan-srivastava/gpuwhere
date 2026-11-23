@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "notes": "Provider plan: 8xGaudi2.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 152 vCPU / 2304 GB (table used).",
   "availability": {
     "last_observed_at": null,

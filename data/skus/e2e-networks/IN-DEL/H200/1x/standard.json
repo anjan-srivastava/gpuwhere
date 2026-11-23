@@ -57,16 +57,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-h200",
       "kind": "page",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "form_factor": "sxm",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",

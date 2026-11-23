@@ -50,11 +50,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-22"
+      "fetched_at": "2026-11-23"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-22",
+  "verified_at": "2026-11-23",
   "notes": "Provider plan: 4 x L40S (192 GB GPU Memory). Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹98/GPU-hr; page lists ₹238 (page used).",
   "availability": {
     "last_observed_at": null,
