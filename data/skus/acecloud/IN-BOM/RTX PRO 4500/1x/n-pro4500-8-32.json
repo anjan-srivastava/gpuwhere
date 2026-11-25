@@ -44,11 +44,11 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/mumbai/rtx-pro-4500/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: N.PRO4500.8.32.",
   "availability": {
     "last_observed_at": null,

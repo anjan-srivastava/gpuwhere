@@ -40,11 +40,11 @@
     {
       "url": "https://speedcloud.nxtgen.com/aiinstances.html",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "sxm",
   "notes": "Modelled on the 8x shape (one HGX node) so the offering is visible; not separately rentable.",
   "billing_model": null,

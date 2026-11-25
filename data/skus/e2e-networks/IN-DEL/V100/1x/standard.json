@@ -43,11 +43,11 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "sxm",
   "notes": "E2E publishes USD and INR as independent price lists (not an FX conversion); INR list price ₹100/hr. INR is E2E's billing currency. E2E does not publish the form factor; SXM assumed.",
   "billing_model": "hourly",

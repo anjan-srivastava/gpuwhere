@@ -17,12 +17,12 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 0.93,
-      "usd_per_vm_hr": 3.73
+      "usd_per_gpu_hr": 0.94,
+      "usd_per_vm_hr": 3.77
     },
     "spot": {
       "usd_per_gpu_hr": 0.47,
-      "usd_per_vm_hr": 1.87,
+      "usd_per_vm_hr": 1.88,
       "notice_sec": null
     },
     "committed": []
@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: 4x RTX A6000 48GB (4A6000.40V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 192 GB VRAM per GPU; accelerator spec rtx-a6000-pcie is 48 GB.",
   "availability": {
     "last_observed_at": null,

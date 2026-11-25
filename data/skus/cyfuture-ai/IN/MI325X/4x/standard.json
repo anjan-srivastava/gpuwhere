@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.15,
-      "usd_per_vm_hr": 12.59,
+      "usd_per_gpu_hr": 3.14,
+      "usd_per_vm_hr": 12.56,
       "native": {
         "inr_per_vm_hr": 1167.0,
         "inr_per_gpu_hr": 291.75,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 2.27,
-        "usd_per_vm_hr": 9.09
+        "usd_per_vm_hr": 9.06
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 1.87,
-        "usd_per_vm_hr": 7.48
+        "usd_per_gpu_hr": 1.86,
+        "usd_per_vm_hr": 7.46
       },
       {
         "term_months": 12,
         "usd_per_gpu_hr": 1.54,
-        "usd_per_vm_hr": 6.17
+        "usd_per_vm_hr": 6.16
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: 4xMI325.64v.1024m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 64 vCPU / 1024 GB; the table lists 64 vCPU / 768 GB (table used). Provider lists 192 GB VRAM per GPU; accelerator spec mi325x-oam is 256 GB.",
   "availability": {
     "last_observed_at": null,

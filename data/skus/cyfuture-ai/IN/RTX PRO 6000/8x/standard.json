@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.77,
-      "usd_per_vm_hr": 22.14,
+      "usd_per_gpu_hr": 2.76,
+      "usd_per_vm_hr": 22.08,
       "native": {
         "inr_per_vm_hr": 2052.0,
         "inr_per_gpu_hr": 256.5,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 2.61,
-        "usd_per_vm_hr": 20.91
+        "usd_per_vm_hr": 20.86
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.46,
-        "usd_per_vm_hr": 19.68
+        "usd_per_gpu_hr": 2.45,
+        "usd_per_vm_hr": 19.63
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.31,
-        "usd_per_vm_hr": 18.45
+        "usd_per_gpu_hr": 2.3,
+        "usd_per_vm_hr": 18.4
       }
     ]
   },
@@ -51,11 +51,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: 8RTX PRO 6000.128v.1024m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 1024 GB; the table lists 256 vCPU / 512 GB (table used).",
   "availability": {
     "last_observed_at": null,

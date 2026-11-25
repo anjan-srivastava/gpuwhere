@@ -25,8 +25,8 @@
       "native": {
         "inr_per_vm_hr": 183.01,
         "inr_per_gpu_hr": 183.01,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20",
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24",
         "published_month_inr": 133600.0,
         "published_per": "gpu",
         "derivation": "monthly/730h"
@@ -47,11 +47,11 @@
     {
       "url": "https://leapswitch.com/gpu-cloud/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "pcie",
   "notes": "Price per GPU per month, excl. GST. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "gpu_variant": "rtx-pro-6000-blackwell",

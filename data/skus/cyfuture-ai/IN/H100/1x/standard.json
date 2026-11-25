@@ -20,13 +20,13 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.55,
-      "usd_per_vm_hr": 3.55,
+      "usd_per_gpu_hr": 3.54,
+      "usd_per_vm_hr": 3.54,
       "native": {
         "inr_per_vm_hr": 329.0,
         "inr_per_gpu_hr": 329.0,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
@@ -37,8 +37,8 @@
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.84,
-        "usd_per_vm_hr": 2.84
+        "usd_per_gpu_hr": 2.83,
+        "usd_per_vm_hr": 2.83
       },
       {
         "term_months": 12,
@@ -59,11 +59,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",

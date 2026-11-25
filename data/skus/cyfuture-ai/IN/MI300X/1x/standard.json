@@ -17,13 +17,13 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.96,
-      "usd_per_vm_hr": 2.96,
+      "usd_per_gpu_hr": 2.95,
+      "usd_per_vm_hr": 2.95,
       "native": {
         "inr_per_vm_hr": 274.0,
         "inr_per_gpu_hr": 274.0,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
@@ -34,13 +34,13 @@
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.13,
-        "usd_per_vm_hr": 2.13
+        "usd_per_gpu_hr": 2.12,
+        "usd_per_vm_hr": 2.12
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 1.77,
-        "usd_per_vm_hr": 1.77
+        "usd_per_gpu_hr": 1.76,
+        "usd_per_vm_hr": 1.76
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: 1MI300.16v.256m. Rates are INR per instance-hour; USD at the ECB reference rate.",
   "availability": {
     "last_observed_at": null,

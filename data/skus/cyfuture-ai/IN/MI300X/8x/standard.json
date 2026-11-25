@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.87,
-      "usd_per_vm_hr": 22.93,
+      "usd_per_gpu_hr": 2.86,
+      "usd_per_vm_hr": 22.87,
       "native": {
         "inr_per_vm_hr": 2125.0,
         "inr_per_gpu_hr": 265.62,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.27,
-        "usd_per_vm_hr": 18.14
+        "usd_per_gpu_hr": 2.26,
+        "usd_per_vm_hr": 18.09
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.02,
-        "usd_per_vm_hr": 16.14
+        "usd_per_gpu_hr": 2.01,
+        "usd_per_vm_hr": 16.1
       },
       {
         "term_months": 12,
         "usd_per_gpu_hr": 1.66,
-        "usd_per_vm_hr": 13.3
+        "usd_per_vm_hr": 13.27
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: 8MI300.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 128 vCPU / 1536 GB (table used).",
   "availability": {
     "last_observed_at": null,

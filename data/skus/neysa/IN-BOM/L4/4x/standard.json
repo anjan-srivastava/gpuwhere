@@ -34,11 +34,11 @@
     {
       "url": "https://neysa.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "'Starts at' per-GPU rate; 100 GB disk included (50 GB OS + 50 GB data).",
   "availability": {
     "last_observed_at": null,

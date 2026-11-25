@@ -20,35 +20,35 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 6.31,
-      "usd_per_vm_hr": 25.25,
+      "usd_per_gpu_hr": 6.3,
+      "usd_per_vm_hr": 25.18,
       "native": {
         "inr_per_vm_hr": 2340.0,
         "inr_per_gpu_hr": 585.0,
-        "fx_usd_inr": 92.6752,
-        "fx_date": "2026-11-20"
+        "fx_usd_inr": 92.9189,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 5.68,
-        "usd_per_vm_hr": 22.74
+        "usd_per_gpu_hr": 5.67,
+        "usd_per_vm_hr": 22.68
       },
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 5.51,
-        "usd_per_vm_hr": 22.05
+        "usd_per_gpu_hr": 5.5,
+        "usd_per_vm_hr": 22.0
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 5.4,
-        "usd_per_vm_hr": 21.6
+        "usd_per_gpu_hr": 5.39,
+        "usd_per_vm_hr": 21.54
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 5.23,
-        "usd_per_vm_hr": 20.92
+        "usd_per_gpu_hr": 5.22,
+        "usd_per_vm_hr": 20.86
       }
     ]
   },
@@ -64,11 +64,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",

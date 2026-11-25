@@ -53,11 +53,11 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-h200-nvl/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "form_factor": "nvl",
   "gpu_variant": "h200-nvl",
   "pricing_status": "published",

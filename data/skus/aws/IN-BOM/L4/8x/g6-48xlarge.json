@@ -29,16 +29,16 @@
     {
       "url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/Asia%20Pacific%20%28Mumbai%29/Linux/index.json",
       "kind": "feed",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     },
     {
       "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: g6.48xlarge. AWS Asia Pacific (Mumbai), Linux on-demand (shared tenancy). Memory converted from GiB. Spot and Savings Plans not included from this source.",
   "availability": {
     "last_observed_at": null,

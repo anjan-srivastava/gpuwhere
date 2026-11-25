@@ -18,19 +18,19 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 0.82,
-      "usd_per_vm_hr": 1.65,
+      "usd_per_vm_hr": 1.64,
       "native": {
         "eur_per_vm_hr": 1.5,
         "eur_per_gpu_hr": 0.75,
-        "fx_eur_usd": 1.099,
-        "fx_date": "2026-11-20"
+        "fx_eur_usd": 1.0963,
+        "fx_date": "2026-11-24"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 0.81,
-        "usd_per_vm_hr": 1.63
+        "usd_per_vm_hr": 1.62
       }
     ]
   },
@@ -42,16 +42,16 @@
     {
       "url": "https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=IE",
       "kind": "api",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     },
     {
       "url": "https://www.ovhcloud.com/en-ie/public-cloud/prices/",
       "kind": "page",
-      "fetched_at": "2026-11-23"
+      "fetched_at": "2026-11-25"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-23",
+  "verified_at": "2026-11-25",
   "notes": "Provider plan: l4-180. OVHcloud Public Cloud (Europe; also offered in other OVH regions). EUR excl. VAT, converted at the ECB reference rate. Outside India: no India data residency.",
   "availability": {
     "last_observed_at": null,
