@@ -36,11 +36,11 @@
     {
       "url": "https://api.verda.com/v1/instance-types",
       "kind": "api",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "notes": "Provider plan: 4x RTX 6000 Ada 48GB (4RTX6000ADA.40V). Verda bills per instance-hour (10-minute granularity); the per-GPU rate is the instance price divided by the GPU count. Spot is interruptible. Provider warning: RTX6000 Ada: Make sure your VM is running Nvidia driver 525.105.17 or newer Outside India: no India data residency; consider only for burst/non-regulated workloads. Provider lists 192 GB VRAM per GPU; accelerator spec rtx-6000-ada-pcie is 48 GB.",
   "availability": {
     "last_observed_at": null,

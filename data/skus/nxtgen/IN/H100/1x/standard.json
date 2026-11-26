@@ -20,30 +20,30 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.66,
-      "usd_per_vm_hr": 2.66,
+      "usd_per_gpu_hr": 2.68,
+      "usd_per_vm_hr": 2.68,
       "native": {
         "inr_per_vm_hr": 247.0,
         "inr_per_gpu_hr": 247.0,
-        "fx_usd_inr": 92.9189,
-        "fx_date": "2026-11-24"
+        "fx_usd_inr": 92.235,
+        "fx_date": "2026-11-25"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.13,
-        "usd_per_vm_hr": 2.13
+        "usd_per_gpu_hr": 2.15,
+        "usd_per_vm_hr": 2.15
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.13,
-        "usd_per_vm_hr": 2.13
+        "usd_per_gpu_hr": 2.15,
+        "usd_per_vm_hr": 2.15
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 1.7,
-        "usd_per_vm_hr": 1.7
+        "usd_per_gpu_hr": 1.71,
+        "usd_per_vm_hr": 1.71
       }
     ]
   },
@@ -59,16 +59,16 @@
     {
       "url": "https://speedcloud.nxtgen.com/aiinstances.html",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     },
     {
       "url": "https://speedcloud.nxtgen.com/",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "form_factor": "nvl",
   "gpu_variant": "h100-nvl",
   "pricing_status": "published",

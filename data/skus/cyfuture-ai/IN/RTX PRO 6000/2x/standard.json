@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.76,
-      "usd_per_vm_hr": 5.52,
+      "usd_per_gpu_hr": 2.78,
+      "usd_per_vm_hr": 5.56,
       "native": {
         "inr_per_vm_hr": 513.0,
         "inr_per_gpu_hr": 256.5,
-        "fx_usd_inr": 92.9189,
-        "fx_date": "2026-11-24"
+        "fx_usd_inr": 92.235,
+        "fx_date": "2026-11-25"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.61,
-        "usd_per_vm_hr": 5.21
+        "usd_per_gpu_hr": 2.63,
+        "usd_per_vm_hr": 5.25
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.45,
-        "usd_per_vm_hr": 4.91
+        "usd_per_gpu_hr": 2.47,
+        "usd_per_vm_hr": 4.94
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.3,
-        "usd_per_vm_hr": 4.6
+        "usd_per_gpu_hr": 2.32,
+        "usd_per_vm_hr": 4.63
       }
     ]
   },
@@ -51,11 +51,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "notes": "Provider plan: 2RTX PRO 6000.32v.256m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 32 vCPU / 256 GB; the table lists 64 vCPU / 128 GB (table used).",
   "availability": {
     "last_observed_at": null,

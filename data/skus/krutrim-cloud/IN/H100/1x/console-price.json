@@ -29,16 +29,16 @@
     {
       "url": "https://www.olakrutrim.com/gpu-services",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     },
     {
       "url": "https://docs.cloud.olakrutrim.com/basics/pricing/cpu-and-gpu.md",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "notes": "Self-serve: console, Python SDK and Terraform provider. Multi-GPU and bare-metal sizes are offered but not published; form factor not published, SXM assumed.",
   "availability": {
     "last_observed_at": null,

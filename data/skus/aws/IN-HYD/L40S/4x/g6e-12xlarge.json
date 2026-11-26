@@ -29,16 +29,16 @@
     {
       "url": "https://b0.p.awsstatic.com/pricing/2.0/meteredUnitMaps/ec2/USD/current/ec2-ondemand-without-sec-sel/Asia%20Pacific%20%28Hyderabad%29/Linux/index.json",
       "kind": "feed",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     },
     {
       "url": "https://aws.amazon.com/ec2/pricing/on-demand/",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "notes": "Provider plan: g6e.12xlarge. AWS Asia Pacific (Hyderabad), Linux on-demand (shared tenancy). Memory converted from GiB. Spot and Savings Plans not included from this source.",
   "availability": {
     "last_observed_at": null,

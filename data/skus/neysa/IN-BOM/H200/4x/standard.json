@@ -43,11 +43,11 @@
     {
       "url": "https://neysa.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-25"
+      "fetched_at": "2026-11-26"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-25",
+  "verified_at": "2026-11-26",
   "form_factor": "sxm",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",
