@@ -44,11 +44,11 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-l40s-48gb/",
       "kind": "page",
-      "fetched_at": "2026-11-26"
+      "fetched_at": "2026-11-27"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-26",
+  "verified_at": "2026-11-27",
   "notes": "Provider plan: N.L40S.128.",
   "availability": {
     "last_observed_at": null,

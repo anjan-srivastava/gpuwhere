@@ -17,45 +17,45 @@
   "disk_type": "data",
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 5.13,
-      "usd_per_vm_hr": 41.03,
+      "usd_per_gpu_hr": 5.12,
+      "usd_per_vm_hr": 40.93,
       "native": {
         "inr_per_vm_hr": 3784.0,
         "inr_per_gpu_hr": 473.0,
-        "fx_usd_inr": 92.235,
-        "fx_date": "2026-11-25"
+        "fx_usd_inr": 92.4501,
+        "fx_date": "2026-11-26"
       }
     },
     "committed": [
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 5.13,
-        "usd_per_vm_hr": 41.03
+        "usd_per_gpu_hr": 5.12,
+        "usd_per_vm_hr": 40.93
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 5.13,
-        "usd_per_vm_hr": 41.03
+        "usd_per_gpu_hr": 5.12,
+        "usd_per_vm_hr": 40.93
       },
       {
         "term_months": 24,
-        "usd_per_gpu_hr": 5.13,
-        "usd_per_vm_hr": 41.03
+        "usd_per_gpu_hr": 5.12,
+        "usd_per_vm_hr": 40.93
       },
       {
         "term_months": 36,
-        "usd_per_gpu_hr": 4.1,
-        "usd_per_vm_hr": 32.79
+        "usd_per_gpu_hr": 4.09,
+        "usd_per_vm_hr": 32.71
       },
       {
         "term_months": 48,
-        "usd_per_gpu_hr": 3.43,
-        "usd_per_vm_hr": 27.41
+        "usd_per_gpu_hr": 3.42,
+        "usd_per_vm_hr": 27.34
       },
       {
         "term_months": 60,
         "usd_per_gpu_hr": 3.02,
-        "usd_per_vm_hr": 24.2
+        "usd_per_vm_hr": 24.14
       }
     ]
   },
@@ -65,11 +65,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-26"
+      "fetched_at": "2026-11-27"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-26",
+  "verified_at": "2026-11-27",
   "notes": "Provider plan: 8 x HGX B200. Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹194/GPU-hr; page lists ₹473 (page used).",
   "availability": {
     "last_observed_at": null,

@@ -41,11 +41,11 @@
     {
       "url": "https://leapswitch.com/gpu-cloud/",
       "kind": "page",
-      "fetched_at": "2026-11-26"
+      "fetched_at": "2026-11-27"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-26",
+  "verified_at": "2026-11-27",
   "form_factor": "pcie",
   "notes": "L4 is offered via CloudPe; price not listed on the Leapswitch GPU page.",
   "billing_model": null,

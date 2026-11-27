@@ -18,29 +18,29 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 1.06,
-      "usd_per_vm_hr": 8.51,
+      "usd_per_vm_hr": 8.49,
       "native": {
         "inr_per_vm_hr": 785.0,
         "inr_per_gpu_hr": 98.12,
-        "fx_usd_inr": 92.235,
-        "fx_date": "2026-11-25"
+        "fx_usd_inr": 92.4501,
+        "fx_date": "2026-11-26"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 0.85,
-        "usd_per_vm_hr": 6.78
+        "usd_per_vm_hr": 6.76
       },
       {
         "term_months": 6,
         "usd_per_gpu_hr": 0.71,
-        "usd_per_vm_hr": 5.71
+        "usd_per_vm_hr": 5.7
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 0.61,
-        "usd_per_vm_hr": 4.85
+        "usd_per_gpu_hr": 0.6,
+        "usd_per_vm_hr": 4.84
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-26"
+      "fetched_at": "2026-11-27"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-26",
+  "verified_at": "2026-11-27",
   "notes": "Provider plan: 8xGaudi2.128v.2048m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 152 vCPU / 2304 GB (table used).",
   "availability": {
     "last_observed_at": null,

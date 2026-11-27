@@ -18,29 +18,29 @@
   "pricing": {
     "on_demand": {
       "usd_per_gpu_hr": 2.1,
-      "usd_per_vm_hr": 8.41,
+      "usd_per_vm_hr": 8.39,
       "native": {
         "inr_per_vm_hr": 776.0,
         "inr_per_gpu_hr": 194.0,
-        "fx_usd_inr": 92.235,
-        "fx_date": "2026-11-25"
+        "fx_usd_inr": 92.4501,
+        "fx_date": "2026-11-26"
       }
     },
     "committed": [
       {
         "term_months": 1,
         "usd_per_gpu_hr": 2.06,
-        "usd_per_vm_hr": 8.24
+        "usd_per_vm_hr": 8.22
       },
       {
         "term_months": 6,
         "usd_per_gpu_hr": 2.01,
-        "usd_per_vm_hr": 8.06
+        "usd_per_vm_hr": 8.04
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 1.93,
-        "usd_per_vm_hr": 7.71
+        "usd_per_gpu_hr": 1.92,
+        "usd_per_vm_hr": 7.69
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-26"
+      "fetched_at": "2026-11-27"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-26",
+  "verified_at": "2026-11-27",
   "notes": "Provider plan: 4xA100.64v.1024m. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 64 vCPU / 1024 GB; the table lists 32 vCPU / 256 GB (table used). Form factor not published; SXM assumed.",
   "availability": {
     "last_observed_at": null,
