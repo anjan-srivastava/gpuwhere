@@ -27,21 +27,21 @@
       }
     },
     "spot": {
-      "usd_per_gpu_hr": 0.76,
-      "usd_per_vm_hr": 0.76,
+      "usd_per_gpu_hr": 0.75,
+      "usd_per_vm_hr": 0.75,
       "notice_sec": null,
       "native": {
         "inr_per_vm_hr": 70.0,
         "inr_per_gpu_hr": 70.0,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 3.76,
-        "usd_per_vm_hr": 3.76
+        "usd_per_gpu_hr": 3.74,
+        "usd_per_vm_hr": 3.74
       }
     ]
   },
@@ -57,16 +57,16 @@
     {
       "url": "https://www.e2enetworks.com/pricing.json",
       "kind": "feed",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     },
     {
       "url": "https://www.e2enetworks.com/gpus/nvidia-h100",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "form_factor": "sxm",
   "gpu_variant": "h100-sxm5",
   "pricing_status": "published",

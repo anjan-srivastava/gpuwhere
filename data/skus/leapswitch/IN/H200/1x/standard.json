@@ -20,13 +20,13 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 4.37,
-      "usd_per_vm_hr": 4.37,
+      "usd_per_gpu_hr": 4.35,
+      "usd_per_vm_hr": 4.35,
       "native": {
         "inr_per_vm_hr": 404.38,
         "inr_per_gpu_hr": 404.38,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26",
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27",
         "published_month_inr": 295200.0,
         "published_per": "gpu",
         "derivation": "monthly/730h"
@@ -47,11 +47,11 @@
     {
       "url": "https://leapswitch.com/gpu-cloud/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "form_factor": "sxm",
   "notes": "Price per GPU per month, excl. GST. Form factor not published; SXM assumed. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "gpu_variant": "h200-sxm",

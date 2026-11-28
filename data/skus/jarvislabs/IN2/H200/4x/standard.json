@@ -45,16 +45,16 @@
     {
       "url": "jl gpus --json",
       "kind": "api",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     },
     {
       "url": "https://jarvislabs.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "high",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "form_factor": "sxm",
   "gpu_variant": "h200-sxm",
   "pricing_status": "published",

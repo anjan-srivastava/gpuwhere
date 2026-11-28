@@ -17,30 +17,30 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.45,
-      "usd_per_vm_hr": 27.6,
+      "usd_per_gpu_hr": 3.43,
+      "usd_per_vm_hr": 27.44,
       "native": {
         "inr_per_vm_hr": 2552.0,
         "inr_per_gpu_hr": 319.0,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 3.07,
-        "usd_per_vm_hr": 24.59
+        "usd_per_gpu_hr": 3.05,
+        "usd_per_vm_hr": 24.44
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.7,
-        "usd_per_vm_hr": 21.61
+        "usd_per_gpu_hr": 2.69,
+        "usd_per_vm_hr": 21.48
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.23,
-        "usd_per_vm_hr": 17.8
+        "usd_per_gpu_hr": 2.21,
+        "usd_per_vm_hr": 17.7
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: 8H100.128v.2048m SXM. Rates are INR per instance-hour; USD at the ECB reference rate. Plan name implies 128 vCPU / 2048 GB; the table lists 128 vCPU / 1536 GB (table used).",
   "availability": {
     "last_observed_at": null,

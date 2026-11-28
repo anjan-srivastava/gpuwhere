@@ -23,28 +23,28 @@
     "committed": [
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 11.42,
-        "usd_per_vm_hr": 91.38
+        "usd_per_gpu_hr": 11.35,
+        "usd_per_vm_hr": 90.84
       },
       {
         "term_months": 24,
-        "usd_per_gpu_hr": 9.35,
-        "usd_per_vm_hr": 74.76
+        "usd_per_gpu_hr": 9.29,
+        "usd_per_vm_hr": 74.32
       },
       {
         "term_months": 36,
-        "usd_per_gpu_hr": 7.27,
-        "usd_per_vm_hr": 58.15
+        "usd_per_gpu_hr": 7.23,
+        "usd_per_vm_hr": 57.8
       },
       {
         "term_months": 48,
-        "usd_per_gpu_hr": 5.19,
-        "usd_per_vm_hr": 41.54
+        "usd_per_gpu_hr": 5.16,
+        "usd_per_vm_hr": 41.29
       },
       {
         "term_months": 60,
-        "usd_per_gpu_hr": 4.11,
-        "usd_per_vm_hr": 32.88
+        "usd_per_gpu_hr": 4.09,
+        "usd_per_vm_hr": 32.69
       }
     ]
   },
@@ -54,11 +54,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: 8 x HGX B300. Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately.",
   "availability": {
     "last_observed_at": null,

@@ -17,35 +17,35 @@
   "disk_type": "root",
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 3.21,
-      "usd_per_vm_hr": 6.41,
+      "usd_per_gpu_hr": 3.19,
+      "usd_per_vm_hr": 6.38,
       "native": {
         "inr_per_vm_hr": 593.0,
         "inr_per_gpu_hr": 296.5,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.58,
-        "usd_per_vm_hr": 5.16
+        "usd_per_gpu_hr": 2.56,
+        "usd_per_vm_hr": 5.13
       },
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 2.5,
-        "usd_per_vm_hr": 5.0
+        "usd_per_gpu_hr": 2.49,
+        "usd_per_vm_hr": 4.97
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.45,
-        "usd_per_vm_hr": 4.9
+        "usd_per_gpu_hr": 2.44,
+        "usd_per_vm_hr": 4.87
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 2.37,
-        "usd_per_vm_hr": 4.75
+        "usd_per_gpu_hr": 2.36,
+        "usd_per_vm_hr": 4.72
       }
     ]
   },
@@ -55,11 +55,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: VM – 2 x L40S On Demand. On-demand is the published hourly VM rate. Unlimited ingress/egress. Committed terms are the Dedicated VM monthly prices (include 500 GB root disk). Calculator JSON lists ₹148,001/month for the 1-month term; page lists ₹348,210 (page used).",
   "availability": {
     "last_observed_at": null,

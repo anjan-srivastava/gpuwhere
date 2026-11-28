@@ -17,40 +17,40 @@
   "disk_type": null,
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 5.57,
-      "usd_per_vm_hr": 44.59,
+      "usd_per_gpu_hr": 5.54,
+      "usd_per_vm_hr": 44.32,
       "native": {
         "inr_per_vm_hr": 4122.0,
         "inr_per_gpu_hr": 515.25,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 3,
-        "usd_per_gpu_hr": 5.42,
-        "usd_per_vm_hr": 43.33
+        "usd_per_gpu_hr": 5.38,
+        "usd_per_vm_hr": 43.07
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 4.81,
-        "usd_per_vm_hr": 38.45
+        "usd_per_gpu_hr": 4.78,
+        "usd_per_vm_hr": 38.22
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 4.27,
-        "usd_per_vm_hr": 34.18
+        "usd_per_gpu_hr": 4.25,
+        "usd_per_vm_hr": 33.98
       },
       {
         "term_months": 36,
-        "usd_per_gpu_hr": 4.05,
-        "usd_per_vm_hr": 32.39
+        "usd_per_gpu_hr": 4.02,
+        "usd_per_vm_hr": 32.19
       },
       {
         "term_months": 48,
-        "usd_per_gpu_hr": 3.85,
-        "usd_per_vm_hr": 30.76
+        "usd_per_gpu_hr": 3.82,
+        "usd_per_vm_hr": 30.58
       }
     ]
   },
@@ -60,11 +60,11 @@
     {
       "url": "https://www.tatacommunications.com/hubfs/library/documents/Tata%20Communications%20Vayu%20AI%20Cloud%20GPU%20as%20a%20Service.pdf",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: GPU.BM.D192.H200NVL.8X.OLU. Bare metal. Price list is INR per instance-hour; USD at the ECB reference rate. vCPU count read from the plan name; RAM is not in the price list.",
   "availability": {
     "last_observed_at": null,

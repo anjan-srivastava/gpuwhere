@@ -17,30 +17,30 @@
   "disk_type": "data",
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 4.63,
-      "usd_per_vm_hr": 37.04,
+      "usd_per_gpu_hr": 4.6,
+      "usd_per_vm_hr": 36.82,
       "native": {
         "inr_per_vm_hr": 3424.0,
         "inr_per_gpu_hr": 428.0,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 4.11,
-        "usd_per_vm_hr": 32.88
+        "usd_per_gpu_hr": 4.09,
+        "usd_per_vm_hr": 32.69
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 3.81,
-        "usd_per_vm_hr": 30.46
+        "usd_per_gpu_hr": 3.78,
+        "usd_per_vm_hr": 30.28
       },
       {
         "term_months": 24,
-        "usd_per_gpu_hr": 3.4,
-        "usd_per_vm_hr": 27.17
+        "usd_per_gpu_hr": 3.38,
+        "usd_per_vm_hr": 27.01
       }
     ]
   },
@@ -50,11 +50,11 @@
     {
       "url": "https://shakticloud.ai/pricing/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: 8 x HGX H100 (640 GB GPU Memory). Bare metal. Price is ₹ per GPU-hour by term; no hourly on-demand bare metal. Ingress/egress and BlueField-3 DPU included; InfiniBand charged separately. on_demand is the monthly-term rate (shortest term offered). Calculator JSON sales_price implies ₹200/GPU-hr; page lists ₹428 (page used).",
   "availability": {
     "last_observed_at": null,

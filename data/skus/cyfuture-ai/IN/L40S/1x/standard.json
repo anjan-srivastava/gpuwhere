@@ -20,13 +20,13 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 1.34,
-      "usd_per_vm_hr": 1.34,
+      "usd_per_gpu_hr": 1.33,
+      "usd_per_vm_hr": 1.33,
       "native": {
         "inr_per_vm_hr": 124.0,
         "inr_per_gpu_hr": 124.0,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
@@ -37,8 +37,8 @@
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 0.74,
-        "usd_per_vm_hr": 0.74
+        "usd_per_gpu_hr": 0.73,
+        "usd_per_vm_hr": 0.73
       },
       {
         "term_months": 12,
@@ -59,11 +59,11 @@
     {
       "url": "https://cyfuture.ai/pricing",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "form_factor": "pcie",
   "gpu_variant": "l40s-pcie",
   "pricing_status": "published",

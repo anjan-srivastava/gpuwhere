@@ -20,30 +20,30 @@
   },
   "pricing": {
     "on_demand": {
-      "usd_per_gpu_hr": 2.71,
-      "usd_per_vm_hr": 2.71,
+      "usd_per_gpu_hr": 2.7,
+      "usd_per_vm_hr": 2.7,
       "native": {
         "inr_per_vm_hr": 251.0,
         "inr_per_gpu_hr": 251.0,
-        "fx_usd_inr": 92.4501,
-        "fx_date": "2026-11-26"
+        "fx_usd_inr": 93.0036,
+        "fx_date": "2026-11-27"
       }
     },
     "committed": [
       {
         "term_months": 1,
-        "usd_per_gpu_hr": 2.17,
-        "usd_per_vm_hr": 2.17
+        "usd_per_gpu_hr": 2.16,
+        "usd_per_vm_hr": 2.16
       },
       {
         "term_months": 6,
-        "usd_per_gpu_hr": 2.17,
-        "usd_per_vm_hr": 2.17
+        "usd_per_gpu_hr": 2.16,
+        "usd_per_vm_hr": 2.16
       },
       {
         "term_months": 12,
-        "usd_per_gpu_hr": 1.74,
-        "usd_per_vm_hr": 1.74
+        "usd_per_gpu_hr": 1.73,
+        "usd_per_vm_hr": 1.73
       }
     ]
   },
@@ -59,16 +59,16 @@
     {
       "url": "https://speedcloud.nxtgen.com/aiinstances.html",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     },
     {
       "url": "https://speedcloud.nxtgen.com/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "form_factor": "generic",
   "gpu_variant": "mi325x-oam",
   "pricing_status": "published",

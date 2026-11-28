@@ -44,11 +44,11 @@
     {
       "url": "https://acecloud.ai/pricing/linux/usd/noida/nvidia-rtx-6000-ada-48gb/",
       "kind": "page",
-      "fetched_at": "2026-11-27"
+      "fetched_at": "2026-11-28"
     }
   ],
   "confidence": "medium",
-  "verified_at": "2026-11-27",
+  "verified_at": "2026-11-28",
   "notes": "Provider plan: N.RTX6000ADA.128. Hourly billing not offered for this flavour in Noida. No hourly rate published; on_demand is derived from the published monthly price (monthly/730h) and is not directly comparable with true hourly rates.",
   "availability": {
     "last_observed_at": null,
